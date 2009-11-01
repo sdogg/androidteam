@@ -1,5 +1,4 @@
-
 = Meeting Minutes  =
+MEMO: _会议应包括上周每人完成的工作或加深的理解，以及接下来每人要完成的工作或努力方向及日程安排_
 
-Add your content here.
-
+Add Meeting Minutes here.
