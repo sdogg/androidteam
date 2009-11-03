@@ -1,7 +1,7 @@
-Google Android官方开源网站(http://source.android.com/)现在已经撞墙。 
+Google Android官方开源网站(http://source.android.com/ )现在已经撞墙。 
 
 
-现在介绍一个不用代理访问http://source.android.com/的方法，而且还很方便，那就是修改一下hosts文件： 
+现在介绍一个不用代理访问http://source.android.com/ 的方法，而且还很方便，那就是修改一下hosts文件： 
 
 
 对于Windows操作系统: 
