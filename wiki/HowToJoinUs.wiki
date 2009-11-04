@@ -1,0 +1,8 @@
+= 如何加入我们的团队? =
+
+= Welcome to be our Team Member. =
+ * == [https://www.google.com/accounts/Login 申请google帐户] ==
+ * == 让this project owner知道您的帐户,可以通过添加评论留下您的google帐号或者发邮件告知您的google帐号; ==
+ * == this project owner会将您添加为team member,(根据您的活跃程度和作出的贡献您的权限会被调整) ==
+ * == 点击首页右上部的五星号'Star this project' ==
+ * == 经常登陆this project撰写wiki,提出/回复Issues,乃至commit your source code. ==
