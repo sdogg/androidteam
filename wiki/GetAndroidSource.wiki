@@ -33,3 +33,32 @@ sw2@sw2-desktop:~$ curl http://android.git.kernel.org/repo >~/bin/repo
 100 17211    0 17211    0     0   4662      0 --:--:--  0:00:03 --:--:-- 17736
 sw2@sw2-desktop:~$ chmod a+x ~/bin/repo
 }}}
+ * Initializing a Repo client
+{{{
+sw2@sw2-desktop:~$ mkdir mydroid
+sw2@sw2-desktop:~$ cd mydroid
+sw2@sw2-desktop:~/mydroid$ repo init -u git://android.git.kernel.org/platform/manifest.git
+gpg: keyring `/home/sw2/.repoconfig/gnupg/secring.gpg' created
+gpg: keyring `/home/sw2/.repoconfig/gnupg/pubring.gpg' created
+gpg: /home/sw2/.repoconfig/gnupg/trustdb.gpg: trustdb created
+gpg: key 920F5C65: public key "Repo Maintainer <repo@android.kernel.org>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+
+Getting repo ...
+...   #省略大量输出信息
+Your Name  [sw2]: #输出您的名字
+Your Email [sw2@sw2-desktop.(none)]: 输入您的google账号
+
+Your identity is: 您的名字 <您的google账号>
+is this correct [yes/no]? yes
+
+Testing colorized output (for 'repo diff', 'repo status'):
+  black    red      green    yellow   blue     magenta   cyan     white 
+  bold     dim      ul       reverse 
+Enable color display in this user account (y/n)? y
+
+repo initialized in /home/sw2/mydroid
+
+
+}}}
