@@ -145,3 +145,9 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 4340 D135 70EF 945E 8381  0964 E8AD 3F81 9AB1 0E78
 
 }}}
+若是没有签署者的公钥，会报告类似下面这样的错误：
+{{{
+gpg: Signature made Wed Sep 13 02:08:25 2006 PDT using DSA key ID F3119B9A
+gpg: Can't check signature: public key not found
+error: could not verify the tag 'tagname'
+}}}
