@@ -25,4 +25,11 @@ sw2@sw2-desktop:~$ gedit .bashrc
 sw2@sw2-desktop:~$ echo $PATH
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/sw2/bin
 #从上面可以看到/home/sw2/bin已经在PATH目录中了
+
+#下载repo
+sw2@sw2-desktop:~$ curl http://android.git.kernel.org/repo >~/bin/repo
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 17211    0 17211    0     0   4662      0 --:--:--  0:00:03 --:--:-- 17736
+sw2@sw2-desktop:~$ chmod a+x ~/bin/repo
 }}}
