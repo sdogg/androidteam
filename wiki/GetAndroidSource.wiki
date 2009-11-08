@@ -9,5 +9,10 @@ sw2@sw2-desktop:~$ sudo apt-get install git-core gnupg sun-java5-jdk flex bison 
 #一个开发工具，可以帮助找出memory leaks, stack corruption, array bounds overflows, etc.
 sw2@sw2-desktop:~$ sudo apt-get install valgrind
 ...
-
+#为什么lib32readline5-dev不存在？？？
+sw2@sw2-desktop:~$ sudo apt-get install lib32readline5-dev
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+E: Couldn't find package lib32readline5-dev
 }}}
