@@ -69,4 +69,9 @@ fatal: unable to connect a socket(connection refused)的问题，原因是您所
 {{{
 sw2@sw2-desktop:~/mydroid$ repo sync
 #需要很长时间的下载过程
+...
+Syncing work tree: 100% (142/142), done.  
+
+sw2@sw2-desktop:~/mydroid$ 
+
 }}}
