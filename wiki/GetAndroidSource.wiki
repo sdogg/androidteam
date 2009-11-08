@@ -154,3 +154,8 @@ gpg: Signature made Wed Sep 13 02:08:25 2006 PDT using DSA key ID F3119B9A
 gpg: Can't check signature: public key not found
 error: could not verify the tag 'tagname'
 }}}
+ * Building the code
+{{{
+sw2@sw2-desktop:~$ cd mydroid/
+sw2@sw2-desktop:~/mydroid$ make
+}}}
