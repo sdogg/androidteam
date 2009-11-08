@@ -1,0 +1,10 @@
+#labels GetAndroidSource
+
+= Step by step,Get Android Source based on VMware Player 2.5.2 & Ubuntu 8.04 Image  =
+ * set up your Linux development environment
+{{{
+sw2@sw2-desktop:~$ sudo apt-get install git-core gnupg sun-java5-jdk flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential zip curl libncurses5-dev zlib1g-dev
+
+}}}
+
+
