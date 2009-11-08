@@ -158,6 +158,17 @@ error: could not verify the tag 'tagname'
 {{{
 sw2@sw2-desktop:~$ cd mydroid/
 sw2@sw2-desktop:~/mydroid$ make
+...
+target SharedLib: libwnndict (out/target/product/generic/obj/SHARED_LIBRARIES/libwnndict_intermediates/LINKED/libwnndict.so)
+target Non-prelinked: libwnndict (out/target/product/generic/symbols/system/lib/libwnndict.so)
+target Strip: libwnndict (out/target/product/generic/obj/lib/libwnndict.so)
+Generated: (out/target/product/generic/android-info.txt)
+Target system fs image: out/target/product/generic/obj/PACKAGING/systemimage_unopt_intermediates/system.img
+Install system fs image: out/target/product/generic/system.img
+Target ram disk: out/target/product/generic/ramdisk.img
+Target userdata fs image: out/target/product/generic/userdata.img
+Installed file list: out/target/product/generic/installed-files.txt
+sw2@sw2-desktop:~/mydroid$ 
 }}}
  * [http://www.eoeandroid.com/thread-1174-1-1.html Android编译后的文件结构]
 几个以img为结尾的文件是几个目标映像文件，其中ramdisk是作为内存盘的根文件系统映像，system.img是主要文件系统的映像，这是一个比较大的文件，data.img是数据内容映像。这几个image文件是运行时真正需要的文件。
