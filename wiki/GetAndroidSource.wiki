@@ -62,7 +62,7 @@ repo initialized in /home/sw2/mydroid
 
 
 }}}
-= 获取源代码文件 =
+ * 获取源代码文件
 {{{
 sw2@sw2-desktop:~/mydroid$ repo sync
 #需要很长时间的下载过程
