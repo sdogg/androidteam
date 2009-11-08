@@ -1,5 +1,5 @@
 #labels GetAndroidSource
-= Step by step,Get Android Source based on VMware Player 2.5.2 & Ubuntu 8.04 Image  =
+= Step by step,Get Android Source based on [http://code.google.com/p/vmware-ubuntu/ VMware Player 2.5.2 & Ubuntu 8.04 Image]  =
 首先，你要确认您的VMware Player 2.5.2 & Ubuntu 8.04 Image运行之后可以正常连接互联网。然后再执行以下步骤。
  * set up your Linux development environment
 {{{
