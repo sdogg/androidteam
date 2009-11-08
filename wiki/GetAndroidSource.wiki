@@ -16,3 +16,13 @@ Building dependency tree
 Reading state information... Done
 E: Couldn't find package lib32readline5-dev
 }}}
+ * Installing Repo
+{{{
+sw2@sw2-desktop:~$ cd ~
+sw2@sw2-desktop:~$ mkdir bin
+sw2@sw2-desktop:~$ gedit .bashrc
+#在.bashrc文件末尾加上export PATH=$PATH:/home/sw2/bin然后保存，并重新打开shell控制窗口
+sw2@sw2-desktop:~$ echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/sw2/bin
+#从上面可以看到/home/sw2/bin已经在PATH目录中了
+}}}
