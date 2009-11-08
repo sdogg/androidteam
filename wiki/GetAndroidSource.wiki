@@ -112,7 +112,10 @@ EXzeoxcdoafxqf6gZlJZlACgkWF7wi2YLW3Oa+jv2QSTlrx4KLM=
 gpg: key 9AB10E78: public key "The Android Open Source Project <initial-contribution@android.com>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1
+#
+#After importing the keys, you can verify any tag with   $ git tag -v tagname
 #验证development目录下的tagname:android-1.5
+#
 sw2@sw2-desktop:~/mydroid/frameworks$ cd ../development/
 sw2@sw2-desktop:~/mydroid/development$ git tag
 android-1.0
