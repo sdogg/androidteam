@@ -3,6 +3,11 @@
 首先，你要确认您的VMware Player 2.5.2 & Ubuntu 8.04 Image运行之后可以正常连接互联网。然后再执行以下步骤。
  * set up your Linux development environment
 {{{
+#必备的开发环境和工具
 sw2@sw2-desktop:~$ sudo apt-get install git-core gnupg sun-java5-jdk flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential zip curl libncurses5-dev zlib1g-dev
+...
+#一个开发工具，可以帮助找出memory leaks, stack corruption, array bounds overflows, etc.
+sw2@sw2-desktop:~$ sudo apt-get install valgrind
+...
 
 }}}
