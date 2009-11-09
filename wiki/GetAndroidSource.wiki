@@ -17,6 +17,7 @@ Reading state information... Done
 E: Couldn't find package lib32readline5-dev
 }}}
  * Installing Repo
+*修改.bashrc文件后需要重新打开shell窗口才会生效*
 {{{
 sw2@sw2-desktop:~$ cd ~
 sw2@sw2-desktop:~$ mkdir bin
