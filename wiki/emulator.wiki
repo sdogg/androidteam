@@ -1,7 +1,8 @@
-#labels Emulator
-
+#labels Emulator,emulator
 = How to use Android Emulator? =
 
 Add your content here.
 
 
+= References =
+ * [GetAndroidSource Get Android source and build it]
