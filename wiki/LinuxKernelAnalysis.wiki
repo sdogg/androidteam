@@ -6,7 +6,7 @@
 
 = Start Pointers =
 
- * [LinuxMakefileAnalysi 找到Linux源代码中所有的makefile，分析它们的功能、相互关系。] 
+ * [LinuxMakefileAnalysis 找到Linux源代码中所有的makefile，分析它们的功能、相互关系。] 
 
 = References =
  * [http://code.google.com/p/vmware-ubuntu/  Linux虚拟机环境搭建资源与方法(VMware Player 2.5.2 & Ubuntu 8.04 Image)] 
