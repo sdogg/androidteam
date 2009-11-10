@@ -174,3 +174,6 @@ sw2@sw2-desktop:~/mydroid$
  * [http://www.eoeandroid.com/thread-1174-1-1.html Android编译后的文件结构]
 几个以img为结尾的文件是几个目标映像文件，其中ramdisk是作为内存盘的根文件系统映像，system.img是主要文件系统的映像，这是一个比较大的文件，data.img是数据内容映像。这几个image文件是运行时真正需要的文件。
 命令行中输入[emulator] -options 进入[emulator 模拟器]。
+
+== Next Step ==
+ * [emulator How to use Android Emulator?]
