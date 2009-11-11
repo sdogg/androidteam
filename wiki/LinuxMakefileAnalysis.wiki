@@ -3,7 +3,7 @@
 
 = Linux内核源代码中的Makefile分析 =
 
- * (1)入口点的问题
+== (1)入口点的问题 ==
 
 默认的Makefile的入口点是第一条规则。而Linux内核的Makefile的第一条规则是这样的：
 
