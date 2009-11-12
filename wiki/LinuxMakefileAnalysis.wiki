@@ -6,11 +6,11 @@
 == 概述 ==
 Makefile包括五部分：
 
-　　* 　Makefile                 顶层Makefile文件
-　　* 　.config                  内核配置文件
-　　* 　arch/$(ARCH)/Makefile    机器体系Makefile文件
-　　* 　scripts/Makefile.*       所有内核Makefiles共用规则
-　　* 　kbuild Makefiles         其它Makefile文件
+　　* 　Makefile　顶层Makefile文件
+　　* 　.config　内核配置文件
+　　* 　arch/$(ARCH)/Makefile　机器体系Makefile文件
+　　* 　scripts/Makefile.*　所有内核Makefiles共用规则
+　　* 　kbuild Makefiles　其它Makefile文件
 
 通过内核配置操作产生.config文件，顶层Makefile文件读取该文件的配置。
 
