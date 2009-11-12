@@ -3,7 +3,24 @@
 
 = Linux内核源代码中的Makefile分析 =
 
-== (1)入口点的问题 ==
+== 概述 ==
+Makefile包括五部分：
+
+　* Makefile                 顶层Makefile文件
+　* .config                  内核配置文件
+　* arch/$(ARCH)/Makefile    机器体系Makefile文件
+　* scripts/Makefile.*       所有内核Makefiles共用规则
+　* kbuild Makefiles         其它Makefile文件
+
+通过内核配置操作产生.config文件，顶层Makefile文件读取该文件的配置。
+
+顶层Makefile文件负责产生两个主要的程序：vmlinux (内核image)和模块。顶层Makefile文件根据内核配置，通过递归编译内核代码树子目录建立这两个文件。顶层Makefile文件文本一个名为 arch/$(ARCH)/Makefile的机器体系Makefile文件。机器体系Makefile文件为顶层Makefile文件提供与机器相关的信息。
+
+每一个子目录有一个Makefile文件，子目录Makefile文件根据上级目录Makefile文件命令启动编译。这些Makefile使用.config文件配置数据构建各种文件列表，并使用这些文件列表编译内嵌或模块目标文件。
+
+scripts/Makefile.*包含了所有的定义和规则，与Makefile文件一起编译出内核程序。
+
+== 入口点的问题 ==
 
 默认的Makefile的入口点是第一条规则。而Linux内核的Makefile的第一条规则是这样的：
 
