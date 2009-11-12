@@ -2,7 +2,7 @@
 #Linux Kernel Makefile Analysis.
 
 = Linux内核源代码中的Makefile分析 =
-/Documentation/kbuild/makefiles.txt - This document describes the Linux kernel Makefiles.
+/Documentation/kbuild/makefiles.txt - This document describes the Linux kernel Makefiles.[http://hi.baidu.com/wjq_qust/blog/item/97ddbdfdfb2e541309244d30.html 中文译稿]
 == 概述 ==
 Makefile包括五部分：
 
