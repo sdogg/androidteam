@@ -31,7 +31,19 @@ scripts/Makefile.*包含了所有的定义和规则，与Makefile文件一起编
 
  * 内核开发者 内核开发者关注内核编译系统本身。他们需要清楚内核Makefile文件的所有方面。
 
-
+== 编译时Makefile将按照以下大概步骤执行 == 
+ * 1) 配置内核 => 产生 .config文件 
+ * 2) 保存内核版本到include/linux/version.h文件中 
+ * 3) 符号链接include/asm to include/asm-$(ARCH) 
+ * 4) 更新所有目标对象的其它前提文件
+    - 附加前提文件定义在arch/$(ARCH)/Makefile文件中 
+ * 5) 递归进入init-* core* drivers-* net-* libs-*中的所有子目录和编译所有的目标对象
+    - 上面变量值都引用到arch/$(ARCH)/Makefile文件。 
+ * 6) 链接所有的object文件生成vmlinux文件，vmlinux文件放在代码树根目录下。
+    - 最开始链接的几个object文件列举在arch/$(ARCH)/Makefile文件的head-y变量中。
+ * 7) 最后体系Makefile文件定义编译后期处理规则和建立最终的引导映像bootimage。
+    - 包括创建引导记录
+    - 准备initrd映像和相关处理
 
 == 入口点的问题 ==
 
