@@ -9,4 +9,5 @@
  * [LinuxMakefileAnalysis 找到Linux源代码中所有的makefile，分析它们的功能、相互关系。] 
 
 = References =
- * Linux虚拟机环境[http://code.google.com/p/vmware-ubuntu/  (VMware Player 2.5.2 & Ubuntu 8.04 Image)] 
+ * Linux虚拟机环境[http://code.google.com/p/vmware-ubuntu/  (VMware Player 2.5.2 & Ubuntu 8.04 Image)]
+ * [http://androidteam.googlecode.com/files/GNU-tools-Introduction.pdf GNU-tools-Introduction.pdf]
