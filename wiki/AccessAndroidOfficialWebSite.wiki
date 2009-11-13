@@ -1,3 +1,15 @@
+#labels android.com
+== 方法二(代理不稳定) ==
+
+不知何时，连source.android.com和developer.android.com都不能访问了。看最新的android文档和下载最新的android sdk/source，可以通过下面appspot代理(图片链接)访问android网站
+
+[https://unblock4myspace.appspot.com/developer.android.com/index.html https://unblock4myspace.appspot.com/developer.android.com/assets/images/bg_logo.png]
+[http://androidappdocs.appspot.com/index.html http://androidappdocs.appspot.com/assets/images/home/android_adc.png]
+
+[https://unblock4myspace.appspot.com/source.android.com/download https://unblock4myspace.appspot.com/source.android.com/_/rsrc/1226370697531/config/app/images/customLogo/customLogo.gif?revision=5]
+
+== 方法一(似乎已经不能用了) ==
+
 Google Android官方开源网站(http://source.android.com/ )现在已经撞墙。 
 
 
