@@ -107,7 +107,8 @@ a:
 
 真正的入口点是:
 {{{
-
+# If building an external module we do not care about the all: rule
+# but instead _all depend on modules
 ifeq ($(KBUILD_EXTMOD),)
 _all: all
 else
