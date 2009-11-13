@@ -2,6 +2,9 @@
 #Linux Kernel Makefile Analysis.
 
 = Linux内核源代码中的Makefile分析 =
+
+Edit by Morning,2009/11/13
+
 /Documentation/kbuild/makefiles.txt - This document describes the Linux kernel Makefiles.[http://hi.baidu.com/wjq_qust/blog/item/97ddbdfdfb2e541309244d30.html 中文译稿]
 
 linux-2.6.26内核原代码中共有大约2170个Makefile文件,大约110个Kbuild文件,大约990个Kconfig文件.
