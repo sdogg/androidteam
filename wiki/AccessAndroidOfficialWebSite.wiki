@@ -1,7 +1,7 @@
 #labels android.com
 = 欢迎提供更多,更好用的方法来访问source.android.com和developer.android.com =
 
-== 方法二(代理不稳定) ==
+== 方法二(代理不稳定,图片能显示则说明可以使用) ==
 
 不知何时，连source.android.com和developer.android.com都不能访问了。看最新的android文档和下载最新的android sdk/source，可以通过下面appspot代理(图片链接)访问android网站
 
