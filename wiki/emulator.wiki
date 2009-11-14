@@ -1,6 +1,6 @@
 #labels Emulator,emulator
 = How to use Android Emulator? =
-
+http://docs.google.com/View?id=dfn92jnc_09g95fshp
 当android源码编译完成后，需要进行相应的环境配置才可以顺利启动模拟器,
 在终端里输入：gedit ~/.bashrc
 在打开的文档末尾添加如下环境参数：
