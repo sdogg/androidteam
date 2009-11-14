@@ -39,6 +39,12 @@ sw2@sw2-desktop:~$ chmod a+x ~/bin/repo
 sw2@sw2-desktop:~$ mkdir mydroid
 sw2@sw2-desktop:~$ cd mydroid
 sw2@sw2-desktop:~/mydroid$ repo init -u git://android.git.kernel.org/platform/manifest.git
+#
+#后面加上–b cupcake选项后 
+#可以全速下载！（我的2M带宽的电信ADSL不到一个小时下完） -cupcake是下载 
+#cupcake版本，如果不加的话，下载的是master版本，master版本属于开发测试版 
+#本，很多功能还不稳定。完全下载下来解压后是1.8G,比master版本小一点。master版本大约2.1G
+#
 gpg: keyring `/home/sw2/.repoconfig/gnupg/secring.gpg' created
 gpg: keyring `/home/sw2/.repoconfig/gnupg/pubring.gpg' created
 gpg: /home/sw2/.repoconfig/gnupg/trustdb.gpg: trustdb created
