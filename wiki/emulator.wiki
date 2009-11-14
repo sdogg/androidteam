@@ -19,5 +19,5 @@ sw2@sw2-desktop:~/mydroid/out/target/product/generic$ emulator -ramdisk ramdisk.
 }}}
 
 = References =
- * [GetAndroidSource Get Android source and build it]
- * issue 3
+ * [GetAndroidSource Get Android source and build it] issue 3
+ * How to use Android Emulator? issue 4
