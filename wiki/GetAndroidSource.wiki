@@ -72,7 +72,7 @@ repo initialized in /home/sw2/mydroid
  * 获取源代码文件
 可能下载过程中会遇到git://android.git.kernel.org.............: errno=Connection refused
 ....
-fatal: unable to connect a socket(connection refused)的问题，原因是您所在的intranet封掉了Git的端口。[http://blog.csdn.net/truewell/archive/2009/08/19/4462225.aspx  解决方法...]
+fatal: unable to connect a socket(connection refused)的问题，原因是您所在的intranet封掉了Git的端口。直接使用电信或移动的宽带接入则不会出现该问题。出现该问题有一些[http://blog.csdn.net/truewell/archive/2009/08/19/4462225.aspx  解决方法...]
 {{{
 sw2@sw2-desktop:~/mydroid$ repo sync
 #需要很长时间的下载过程
