@@ -79,3 +79,7 @@ _all:
 }}}
 是整个文件的第一条规则，正真入口点处的规则便会被当成默认规则被执行。
 文章出处：[http://www.diybl.com/course/6_system/linux/Linuxjs/200896/139654.html DIY部落]
+
+== References ==
+
+ * [LinuxMakefileAnalysis Linux内核源代码中的Makefile分析] 
