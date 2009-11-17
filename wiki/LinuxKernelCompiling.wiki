@@ -1,9 +1,255 @@
 #labels Kernel,Makefile
 = Linux内核（v2.6.26）Makefile编译生成内核目标文件的过程 =
 
-[LinuxKernelMakefileStartPoint 入口点]为line502：
+先找到[LinuxKernelMakefileStartPoint 入口点]为：
+编译内核line502：
 {{{
-all: vmlinux
+# The all: target is the default when no target is given on the
+# command line.
+# This allow a user to issue only 'make' to build a kernel including modules
+# Defaults vmlinux but it is usually overridden in the arch makefile
+all: vmlinux  ###编译内核line502
+
+...
+
+# Force gcc to behave correct even for buggy distributions
+# Arch Makefiles may override this setting
+KBUILD_CFLAGS += $(call cc-option, -fno-stack-protector)
+
+include $(srctree)/arch/$(SRCARCH)/Makefile ###include体系结构目下的Makefile，$(head-y)在这里，line518
+
+...
+
+# Default kernel image to build when no specific target is given.
+# KBUILD_IMAGE may be overruled on the command line or
+# set in the environment
+# Also any assignments in arch/$(ARCH)/Makefile take precedence over
+# this default value
+export KBUILD_IMAGE ?= vmlinux
+
+#
+# INSTALL_PATH specifies where to place the updated kernel and system map
+# images. Default is /boot, but you can set it to other values
+export	INSTALL_PATH ?= /boot
+
+#
+# INSTALL_MOD_PATH specifies a prefix to MODLIB for module directory
+# relocations required by build roots.  This is not defined in the
+# makefile but the argument can be passed to make if needed.
+#
+
+MODLIB	= $(INSTALL_MOD_PATH)/lib/modules/$(KERNELRELEASE)
+export MODLIB
+
+#
+#  INSTALL_MOD_STRIP, if defined, will cause modules to be
+#  stripped after they are installed.  If INSTALL_MOD_STRIP is '1', then
+#  the default option --strip-debug will be used.  Otherwise,
+#  INSTALL_MOD_STRIP will used as the options to the strip command.
+
+ifdef INSTALL_MOD_STRIP
+ifeq ($(INSTALL_MOD_STRIP),1)
+mod_strip_cmd = $(STRIP) --strip-debug
+else
+mod_strip_cmd = $(STRIP) $(INSTALL_MOD_STRIP)
+endif # INSTALL_MOD_STRIP=1
+else
+mod_strip_cmd = true
+endif # INSTALL_MOD_STRIP
+export mod_strip_cmd
+
+
+ifeq ($(KBUILD_EXTMOD),)
+core-y		+= kernel/ mm/ fs/ ipc/ security/ crypto/ block/
+
+vmlinux-dirs	:= $(patsubst %/,%,$(filter %/, $(init-y) $(init-m) \
+		     $(core-y) $(core-m) $(drivers-y) $(drivers-m) \
+		     $(net-y) $(net-m) $(libs-y) $(libs-m)))
+
+vmlinux-alldirs	:= $(sort $(vmlinux-dirs) $(patsubst %/,%,$(filter %/, \
+		     $(init-n) $(init-) \
+		     $(core-n) $(core-) $(drivers-n) $(drivers-) \
+		     $(net-n)  $(net-)  $(libs-n)    $(libs-))))
+
+init-y		:= $(patsubst %/, %/built-in.o, $(init-y)) ###启动相关部分，start_kernel,line621
+core-y		:= $(patsubst %/, %/built-in.o, $(core-y))
+drivers-y	:= $(patsubst %/, %/built-in.o, $(drivers-y))
+net-y		:= $(patsubst %/, %/built-in.o, $(net-y))
+libs-y1		:= $(patsubst %/, %/lib.a, $(libs-y))
+libs-y2		:= $(patsubst %/, %/built-in.o, $(libs-y))
+libs-y		:= $(libs-y1) $(libs-y2)
+
+# Build vmlinux
+# ---------------------------------------------------------------------------
+# vmlinux is built from the objects selected by $(vmlinux-init) and
+# $(vmlinux-main). Most are built-in.o files from top-level directories
+# in the kernel tree, others are specified in arch/$(ARCH)/Makefile.
+# Ordering when linking is important, and $(vmlinux-init) must be first.
+#
+# vmlinux
+#   ^
+#   |
+#   +-< $(vmlinux-init)
+#   |   +--< init/version.o + more
+#   |
+#   +--< $(vmlinux-main)
+#   |    +--< driver/built-in.o mm/built-in.o + more
+#   |
+#   +-< kallsyms.o (see description in CONFIG_KALLSYMS section)
+#
+# vmlinux version (uname -v) cannot be updated during normal
+# descending-into-subdirs phase since we do not yet know if we need to
+# update vmlinux.
+# Therefore this step is delayed until just before final link of vmlinux -
+# except in the kallsyms case where it is done just before adding the
+# symbols to the kernel.
+#
+# System.map is generated to document addresses of all kernel symbols
+
+vmlinux-init := $(head-y) $(init-y) ###$(head-y)在体系结构目录下的Makefile里，line656
+vmlinux-main := $(core-y) $(libs-y) $(drivers-y) $(net-y)
+vmlinux-all  := $(vmlinux-init) $(vmlinux-main)
+vmlinux-lds  := arch/$(SRCARCH)/kernel/vmlinux.lds
+export KBUILD_VMLINUX_OBJS := $(vmlinux-all)
+
+# Rule to link vmlinux - also used during CONFIG_KALLSYMS
+# May be overridden by arch/$(ARCH)/Makefile
+quiet_cmd_vmlinux__ ?= LD      $@
+      cmd_vmlinux__ ?= $(LD) $(LDFLAGS) $(LDFLAGS_vmlinux) -o $@ \
+      -T $(vmlinux-lds) $(vmlinux-init)                          \
+      --start-group $(vmlinux-main) --end-group                  \
+      $(filter-out $(vmlinux-lds) $(vmlinux-init) $(vmlinux-main) vmlinux.o FORCE ,$^)
+
+# Generate new vmlinux version
+quiet_cmd_vmlinux_version = GEN     .version
+      cmd_vmlinux_version = set -e;                     \
+	if [ ! -r .version ]; then			\
+	  rm -f .version;				\
+	  echo 1 >.version;				\
+	else						\
+	  mv .version .old_version;			\
+	  expr 0$$(cat .old_version) + 1 >.version;	\
+	fi;						\
+	$(MAKE) $(build)=init
+
+# Generate System.map
+quiet_cmd_sysmap = SYSMAP
+      cmd_sysmap = $(CONFIG_SHELL) $(srctree)/scripts/mksysmap
+
+# Link of vmlinux
+# If CONFIG_KALLSYMS is set .version is already updated
+# Generate System.map and verify that the content is consistent
+# Use + in front of the vmlinux_version rule to silent warning with make -j2
+# First command is ':' to allow us to use + in front of the rule
+define rule_vmlinux__
+	:
+	$(if $(CONFIG_KALLSYMS),,+$(call cmd,vmlinux_version))
+
+	$(call cmd,vmlinux__)
+	$(Q)echo 'cmd_$@ := $(cmd_vmlinux__)' > $(@D)/.$(@F).cmd
+
+	$(Q)$(if $($(quiet)cmd_sysmap),                                      \
+	  echo '  $($(quiet)cmd_sysmap)  System.map' &&)                     \
+	$(cmd_sysmap) $@ System.map;                                         \
+	if [ $$? -ne 0 ]; then                                               \
+		rm -f $@;                                                    \
+		/bin/false;                                                  \
+	fi;
+	$(verify_kallsyms)
+endef
+
+
+ifdef CONFIG_KALLSYMS
+# Generate section listing all symbols and add it into vmlinux $(kallsyms.o)
+# It's a three stage process:
+# o .tmp_vmlinux1 has all symbols and sections, but __kallsyms is
+#   empty
+#   Running kallsyms on that gives us .tmp_kallsyms1.o with
+#   the right size - vmlinux version (uname -v) is updated during this step
+# o .tmp_vmlinux2 now has a __kallsyms section of the right size,
+#   but due to the added section, some addresses have shifted.
+#   From here, we generate a correct .tmp_kallsyms2.o
+# o The correct .tmp_kallsyms2.o is linked into the final vmlinux.
+# o Verify that the System.map from vmlinux matches the map from
+#   .tmp_vmlinux2, just in case we did not generate kallsyms correctly.
+# o If CONFIG_KALLSYMS_EXTRA_PASS is set, do an extra pass using
+#   .tmp_vmlinux3 and .tmp_kallsyms3.o.  This is only meant as a
+#   temporary bypass to allow the kernel to be built while the
+#   maintainers work out what went wrong with kallsyms.
+
+ifdef CONFIG_KALLSYMS_EXTRA_PASS
+last_kallsyms := 3
+else
+last_kallsyms := 2
+endif
+
+kallsyms.o := .tmp_kallsyms$(last_kallsyms).o
+
+define verify_kallsyms
+	$(Q)$(if $($(quiet)cmd_sysmap),                                      \
+	  echo '  $($(quiet)cmd_sysmap)  .tmp_System.map' &&)                \
+	  $(cmd_sysmap) .tmp_vmlinux$(last_kallsyms) .tmp_System.map
+	$(Q)cmp -s System.map .tmp_System.map ||                             \
+		(echo Inconsistent kallsyms data;                            \
+		 echo Try setting CONFIG_KALLSYMS_EXTRA_PASS;                \
+		 rm .tmp_kallsyms* ; /bin/false )
+endef
+
+# Update vmlinux version before link
+# Use + in front of this rule to silent warning about make -j1
+# First command is ':' to allow us to use + in front of this rule
+cmd_ksym_ld = $(cmd_vmlinux__)
+define rule_ksym_ld
+	: 
+	+$(call cmd,vmlinux_version)
+	$(call cmd,vmlinux__)
+	$(Q)echo 'cmd_$@ := $(cmd_vmlinux__)' > $(@D)/.$(@F).cmd
+endef
+
+# Generate .S file with all kernel symbols
+quiet_cmd_kallsyms = KSYM    $@
+      cmd_kallsyms = $(NM) -n $< | $(KALLSYMS) \
+                     $(if $(CONFIG_KALLSYMS_ALL),--all-symbols) > $@
+
+.tmp_kallsyms1.o .tmp_kallsyms2.o .tmp_kallsyms3.o: %.o: %.S scripts FORCE
+	$(call if_changed_dep,as_o_S)
+
+.tmp_kallsyms%.S: .tmp_vmlinux% $(KALLSYMS)
+	$(call cmd,kallsyms)
+
+}}}
+编译模块line1037：
+{{{
+ifdef CONFIG_MODULES
+
+# By default, build modules as well
+
+all: modules
+
+#	Build modules
+#
+#	A module can be listed more than once in obj-m resulting in
+#	duplicate lines in modules.order files.  Those are removed
+#	using awk while concatenating to the final file.
+}}}
+然后继续找vmlinux目标line806：
+{{{
+# vmlinux image - including updated kernel symbols
+vmlinux: $(vmlinux-lds) $(vmlinux-init) $(vmlinux-main) vmlinux.o $(kallsyms.o) FORCE
+ifdef CONFIG_HEADERS_CHECK
+	$(Q)$(MAKE) -f $(srctree)/Makefile headers_check
+endif
+ifdef CONFIG_SAMPLES
+	$(Q)$(MAKE) $(build)=samples
+endif
+	$(call vmlinux-modpost)
+	$(call if_changed_rule,vmlinux__)
+	$(Q)rm -f .old_version
+
+# build vmlinux.o first to catch section mismatch errors early
+ifdef CONFIG_KALLSYMS
+.tmp_vmlinux1: vmlinux.o
+endif
 }}}
 
 
