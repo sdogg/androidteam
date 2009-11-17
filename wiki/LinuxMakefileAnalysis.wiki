@@ -19,8 +19,10 @@ Makefile包括五部分：
  * kbuild Makefiles　其它Makefile文件
 
 在make menuconfig进行内核配置操作时，所显示的Menu list是由各层Kconfig组成的。最底层Kconfig存放在 ~/arch/i386/Kconfig. 以此为头，它会一层层使用source来把需要加入的各个目录中Keconfig添加近来。例如：source "drivers/Kconfig",则将~/drivers/Kconfig添加进Menu list中。通过内核配置操作产生.config文件.
+
 顶层Makefile文件读取该文件的配置。顶层Makefile文件负责产生两个主要的程序：vmlinux (内核image)和模块。顶层Makefile文件根据内核配置，通过递归编译内核代码树子目录建立这两个文件。顶层Makefile文件文本一个名为 arch/$(ARCH)/Makefile的机器体系结构Makefile文件。机器体系结构Makefile文件为顶层Makefile文件提供与机器相关的信息。每一个子目录有一个Makefile文件，子目录Makefile文件根据上级目录Makefile文件命令启动编译。这些Makefile使用.config文件配置数据构建各种文件列表，并使用这些文件列表编译内核或模块的目标文件。
 
+详细信息参考：/Documentation/kbuild/makefiles.txt - This document describes the Linux kernel Makefiles.[http://hi.baidu.com/wjq_qust/blog/item/97ddbdfdfb2e541309244d30.html 中文译稿]
 == 人们与内核Makefile存在四种不同的关系 ==
  * 用户 用户使用"make menuconfig"或"make"命令编译内核。他们通常不读或编辑内核Makefile文件或其他源文件。
  * 普通开发者 普通开发者维护设备驱动程序、文件系统和网络协议代码，他们维护相关子系统的Makefile文件，因此他们需要内核Makefile文件整体性的一般知识和关于kbuild公共接口的详细知识。
