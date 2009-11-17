@@ -1,12 +1,15 @@
 #labels Kernel,Makefile
 = Linux内核（v2.6.26）Makefile编译生成内核目标文件的过程 =
 
+[LinuxKernelMakefileStartPoint 入口点]为line502：
+{{{
+all: vmlinux
+}}}
 
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+= References =
+ * [LinuxMakefileAnalysis Linux内核源代码中的Makefile分析] 
+ * /Documentation/kbuild/makefiles.txt - This document describes the Linux kernel Makefiles.[http://hi.baidu.com/wjq_qust/blog/item/97ddbdfdfb2e541309244d30.html 中文译稿]
+ * [LinuxKernelConfig 配置内核过程]
+ * [LinuxKernelMakefileStartPoint 入口点的问题]
+ * [LinuxKernelCompiling 编译生成内核目标文件的过程]
