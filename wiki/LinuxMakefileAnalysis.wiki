@@ -3,9 +3,6 @@
 
 = Linux内核源代码中的Makefile分析 =
 
-Edit by Morning,2009/11/13
-
-/Documentation/kbuild/makefiles.txt - This document describes the Linux kernel Makefiles.[http://hi.baidu.com/wjq_qust/blog/item/97ddbdfdfb2e541309244d30.html 中文译稿]
 
 linux-2.6.26内核原代码中共有大约2170个Makefile文件,大约110个Kbuild文件,大约990个Kconfig文件.
 
@@ -60,4 +57,6 @@ scripts/Makefile.*包含了所有的定义和规则，与Makefile文件一起编
     - 包括创建引导记录
     - 准备initrd映像和相关处理
 
-== [LinuxKernelMakefileStartPoint 入口点的问题] ==
+= References =
+ * [LinuxKernelMakefileStartPoint 入口点的问题]
+ * /Documentation/kbuild/makefiles.txt - This document describes the Linux kernel Makefiles.[http://hi.baidu.com/wjq_qust/blog/item/97ddbdfdfb2e541309244d30.html 中文译稿]
