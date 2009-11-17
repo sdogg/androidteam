@@ -29,20 +29,18 @@ Makefile包括五部分：
  * 体系开发者 体系开发者关注一个整体的体系架构，比如sparc或者ia64。体系开发者既需要掌握关于体系的Makefile文件，也要熟悉内核Makefile文件。
  * 内核开发者 内核开发者关注内核编译系统本身。他们需要清楚内核Makefile文件的所有方面。
 
-== 编译内核（v2.6.26）时Makefile执行步骤 == 
- * 1) 配置内核 => 产生 .config文件 
- * 2) 保存内核版本到include/linux/version.h文件中 
- * 3) 符号链接include/asm to include/asm-$(ARCH) 
- * 4) 更新所有目标对象的其它前提文件
-    - 附加前提文件定义在arch/$(ARCH)/Makefile文件中 
- * 5) 递归进入init-* core* drivers-* net-* libs-*中的所有子目录和编译所有的目标对象
-    - 上面变量值都引用到arch/$(ARCH)/Makefile文件。 
- * 6) 链接所有的object文件生成vmlinux文件，vmlinux文件放在代码树根目录下。
-    - 最开始链接的几个object文件列举在arch/$(ARCH)/Makefile文件的head-y变量中。
- * 7) 最后体系Makefile文件定义编译后期处理规则和建立最终的引导映像bootimage。
-    - 包括创建引导记录
-    - 准备initrd映像和相关处理
+== 编译内核（v2.6.26）时Makefile的执行步骤 == 
+编译内核（v2.6.26）时Makefile的执行步骤包括两个过程：一是*[LinuxKernelConfig 配置内核过程]*；二是*[LinuxKernelCompiling 编译生成内核目标文件的过程]*，稍微具体一点大致分为以下几步：
+ * 1) 配置内核 => 产生 .config文件；
+ * 2) 保存内核版本到include/linux/version.h文件中；
+ * 3) 符号链接include/asm to include/asm-$(ARCH)； 
+ * 4) 更新所有目标对象的其它前提文件，附加前提文件定义在arch/$(ARCH)/Makefile文件中；
+ * 5) 递归进入init- core- drivers- net- libs-中的所有子目录和编译所有的目标对象，上面变量值都引用到arch/$(ARCH)/Makefile文件中；
+ * 6) 链接所有的object文件生成vmlinux文件，vmlinux文件放在代码树根目录下。最开始链接的几个object文件列举在arch/$(ARCH)/Makefile文件的head-y变量中；
+ * 7) 最后体系Makefile文件定义编译后期处理规则和建立最终的引导映像bootimage。包括创建引导记录，准备initrd映像和相关处理。
 
 = References =
- * [LinuxKernelMakefileStartPoint 入口点的问题]
  * /Documentation/kbuild/makefiles.txt - This document describes the Linux kernel Makefiles.[http://hi.baidu.com/wjq_qust/blog/item/97ddbdfdfb2e541309244d30.html 中文译稿]
+ * [LinuxKernelConfig 配置内核过程]
+ * [LinuxKernelMakefileStartPoint 入口点的问题]
+ * [LinuxKernelCompiling 编译生成内核目标文件的过程]
