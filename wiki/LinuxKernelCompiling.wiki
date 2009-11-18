@@ -1,11 +1,14 @@
 #labels Kernel,Makefile
+# LinuxKernelCompiling 
 = Linux内核（v2.6.26）Makefile编译生成内核目标文件的过程 =
 
 
 先找到入口点为：
 
 编译内核line502：
+
 {{{
+
 # The all: target is the default when no target is given on the
 # command line.
 # This allow a user to issue only 'make' to build a kernel including modules
@@ -222,6 +225,7 @@ quiet_cmd_kallsyms = KSYM    $@
 }}}
 编译模块line1037：
 {{{
+
 ifdef CONFIG_MODULES
 
 # By default, build modules as well
