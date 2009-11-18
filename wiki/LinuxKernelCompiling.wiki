@@ -1,5 +1,4 @@
 #labels Kernel,Makefile
-
 = Linux内核（v2.6.26）Makefile编译生成内核目标文件的过程 =
 
 
@@ -11,7 +10,7 @@
 # command line.
 # This allow a user to issue only 'make' to build a kernel including modules
 # Defaults vmlinux but it is usually overridden in the arch makefile
-all: vmlinux  ###编译内核line502
+all: vmlinux  ## 编译内核line502
 
 ...
 
@@ -19,7 +18,7 @@ all: vmlinux  ###编译内核line502
 # Arch Makefiles may override this setting
 KBUILD_CFLAGS += $(call cc-option, -fno-stack-protector)
 
-include $(srctree)/arch/$(SRCARCH)/Makefile ###include体系结构目下的Makefile，$(head-y)在这里，line518
+include $(srctree)/arch/$(SRCARCH)/Makefile ## include体系结构目下的Makefile，$(head-y)在这里，line518
 
 ...
 
@@ -74,7 +73,7 @@ vmlinux-alldirs	:= $(sort $(vmlinux-dirs) $(patsubst %/,%,$(filter %/, \
 		     $(core-n) $(core-) $(drivers-n) $(drivers-) \
 		     $(net-n)  $(net-)  $(libs-n)    $(libs-))))
 
-init-y		:= $(patsubst %/, %/built-in.o, $(init-y)) ###启动相关部分，start_kernel,line621
+init-y		:= $(patsubst %/, %/built-in.o, $(init-y)) ## 启动相关部分，start_kernel,line621
 core-y		:= $(patsubst %/, %/built-in.o, $(core-y))
 drivers-y	:= $(patsubst %/, %/built-in.o, $(drivers-y))
 net-y		:= $(patsubst %/, %/built-in.o, $(net-y))
@@ -109,7 +108,7 @@ libs-y		:= $(libs-y1) $(libs-y2)
 #
 # System.map is generated to document addresses of all kernel symbols
 
-vmlinux-init := $(head-y) $(init-y) ###$(head-y)在体系结构目录下的Makefile里，line656
+vmlinux-init := $(head-y) $(init-y) ## $(head-y)在体系结构目录下的Makefile里，line656
 vmlinux-main := $(core-y) $(libs-y) $(drivers-y) $(net-y)
 vmlinux-all  := $(vmlinux-init) $(vmlinux-main)
 vmlinux-lds  := arch/$(SRCARCH)/kernel/vmlinux.lds
