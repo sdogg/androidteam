@@ -1,5 +1,4 @@
 #labels Kernel,Makefile
-
 = Linux内核（v2.6.26）Makefile编译生成内核目标文件的过程 =
 
 
@@ -15,8 +14,8 @@
 # Defaults vmlinux but it is usually overridden in the arch makefile
 all: vmlinux  ## 编译内核line502
 
-...
 }}}
+
 编译模块line1037：
 {{{
 
