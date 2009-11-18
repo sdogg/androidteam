@@ -1,16 +1,16 @@
 #labels Kernel,Makefile
+#based on v2.6.26 kernel
+= Linux内核Makefile编译生成内核目标文件的过程 =
 
-= Linux内核v2.6.26 Makefile编译生成内核目标文件的过程 =
 
-
-先找到入口点为：
+先找到入口点为
 {{{
 #编译内核line502
 all: vmlinux  
 #编译模块line1037：
 all: modules
 }}}
-然后继续找vmlinux目标line806：
+然后继续找vmlinux目标line806
 {{{
 # vmlinux image - including updated kernel symbols
 vmlinux: $(vmlinux-lds) $(vmlinux-init) $(vmlinux-main) vmlinux.o $(kallsyms.o) FORCE
