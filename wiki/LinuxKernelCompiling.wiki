@@ -1,29 +1,14 @@
 #labels Kernel,Makefile
-== Linux内核（v2.6.26）Makefile编译生成内核目标文件的过程 ==
+
+== Linux内核v2.6.26Makefile编译生成内核目标文件的过程 ==
 
 
 先找到入口点为：
-
-编译内核line502：
-
 {{{
+#编译内核line502
 all: vmlinux  
-}}}
-
-编译模块line1037：
-{{{
-
-ifdef CONFIG_MODULES
-
-# By default, build modules as well
-
+#编译模块line1037：
 all: modules
-
-#	Build modules
-#
-#	A module can be listed more than once in obj-m resulting in
-#	duplicate lines in modules.order files.  Those are removed
-#	using awk while concatenating to the final file.
 }}}
 然后继续找vmlinux目标line806：
 {{{
