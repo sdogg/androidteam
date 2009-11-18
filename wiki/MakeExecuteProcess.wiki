@@ -1,5 +1,4 @@
 #labels make,MakeExecuteProcess
-
 = GNU make的执行过程 =
 
  * 1.读取变量"MAKEFILES"定义的makefile文件列表 (不知是干什么用的?但是应该和我们写的makefile没有关系,先不管它)
@@ -14,3 +13,4 @@
 
 = 结论 =
  * 变量的定义位置与目标的定义位置之间的前后关系*没有关系*
+ * 目标的执行过程大概是*深度优先遍历*执行
