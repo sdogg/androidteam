@@ -8,7 +8,7 @@
 
 {{{
 
-all: vmlinux  ## 编译内核line502
+all: vmlinux  
 
 }}}
 
