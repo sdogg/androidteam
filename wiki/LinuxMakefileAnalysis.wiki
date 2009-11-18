@@ -40,6 +40,7 @@ Makefile包括五部分：
  * 7) 最后体系Makefile文件定义编译后期处理规则和建立最终的引导映像bootimage。包括创建引导记录，准备initrd映像和相关处理。
 
 = References =
+ * [MakeExecuteProcess Make的执行过程]
  * [LinuxMakefileAnalysis Linux内核源代码中的Makefile分析] 
  * /Documentation/kbuild/makefiles.txt - This document describes the Linux kernel Makefiles.[http://hi.baidu.com/wjq_qust/blog/item/97ddbdfdfb2e541309244d30.html 中文译稿]
  * [LinuxKernelConfig 配置内核过程]
