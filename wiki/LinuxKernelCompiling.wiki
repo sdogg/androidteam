@@ -2,33 +2,21 @@
 #based on v2.6.26 kernel
 = Linux内核Makefile编译生成内核目标文件的过程 =
 
-
-先找到入口点为
+直接执行make的编译过程
+ * 1.先找到入口点([LinuxKernelMakefileStartPoint 入口点问题])
 {{{
-#编译内核line502
+#编译内核line502,直接执行make默认编译此项
 all: vmlinux  
-#编译模块line1037：
+#编译模块line1037,选择编译模块的话会到这里,另外还有其他许多all:target存在,为什么默认执行all: vmlinux ?
 all: modules
 }}}
-然后继续找vmlinux目标line806
+ * 2.继续找vmlinux目标
 {{{
 # vmlinux image - including updated kernel symbols
+# vmlinux目标在line806
 vmlinux: $(vmlinux-lds) $(vmlinux-init) $(vmlinux-main) vmlinux.o $(kallsyms.o) FORCE
-ifdef CONFIG_HEADERS_CHECK
-	$(Q)$(MAKE) -f $(srctree)/Makefile headers_check
-endif
-ifdef CONFIG_SAMPLES
-	$(Q)$(MAKE) $(build)=samples
-endif
-	$(call vmlinux-modpost)
-	$(call if_changed_rule,vmlinux__)
-	$(Q)rm -f .old_version
-
-# build vmlinux.o first to catch section mismatch errors early
-ifdef CONFIG_KALLSYMS
-.tmp_vmlinux1: vmlinux.o
-endif
 }}}
+ * 3.理解$(vmlinux-lds) $(vmlinux-init) $(vmlinux-main)这个变量的作用
 
 
 = References =
