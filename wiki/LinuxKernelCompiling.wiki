@@ -15,8 +15,16 @@ all: modules
 # vmlinux image - including updated kernel symbols
 # vmlinux目标在line806
 vmlinux: $(vmlinux-lds) $(vmlinux-init) $(vmlinux-main) vmlinux.o $(kallsyms.o) FORCE
+# FORCE是伪目标，make假定伪目标的时间戳总是最新的，即总是被修改过，因此以它为“依赖”的“目标”“vmlinux”在每次make的时候都会被编译。
 }}}
  * 3.理解$(vmlinux-lds) $(vmlinux-init) $(vmlinux-main)这个变量的作用
+{{{
+# line656
+vmlinux-init := $(head-y) $(init-y)
+vmlinux-main := $(core-y) $(libs-y) $(drivers-y) $(net-y)
+vmlinux-all  := $(vmlinux-init) $(vmlinux-main)
+vmlinux-lds  := arch/$(SRCARCH)/kernel/vmlinux.lds # SRCARCH为体系结构名,这里我们使用x86
+}}}
 
 
 = References =
