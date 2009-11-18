@@ -7,9 +7,7 @@
 编译内核line502：
 
 {{{
-
 all: vmlinux  
-
 }}}
 
 编译模块line1037：
