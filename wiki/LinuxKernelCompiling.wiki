@@ -1,5 +1,5 @@
 #labels Kernel,Makefile
-= Linux内核（v2.6.26）Makefile编译生成内核目标文件的过程 =
+== Linux内核（v2.6.26）Makefile编译生成内核目标文件的过程 ==
 
 
 先找到入口点为：
