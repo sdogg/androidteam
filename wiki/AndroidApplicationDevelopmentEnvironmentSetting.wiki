@@ -1,0 +1,33 @@
+#labels AndroidSDK
+
+= Android开发环境的搭建 =
+
+在开始之前，你需要先准备以下作业环境以及程序：
+ * 1，操作系统：Microsoft Windows XP/Microsoft Windows Vista操作系统或Mac OS X 10.4.8或更新
+的版本（硬件必须是x86的版本）或Linux
+我是在Windows XP上安装的，下面的安装步骤也都是基于此安装的。。。
+ * 2，Ａｎｄｒｉｏｄ插件：Android SDK 1.0r2以上（可以在Ｄｏｗｎｌｏａｄｓ里面下载），在download
+里面下载android-sdk-windows-1.5_r3.zip，解压
+ * 3，Java Development Kit（JDK）v6.0以上（我已经安装），并设置环境变量。
+ * 4，在download里面下载eclipse-java-europa-winter-win32.zip，解压
+ * 5，打开eclipse，在help中，点软件更新，然后find and install，then search for new features 
+to install，then new romote site，enter Android Plugin for name，https://dl-
+ssl.google.com/android/eclipse/  for URL，then OK。
+ * 6，勾上Android Plugin，此下两个（即ADT和DDMS）同时被勾上，然后安装即可。
+
+ * 7，补充：我以前配置Ｊ２ＭＥ的环境的时候装过j2sdk-1_4_2_19-windows-i586-p.exe，我一开始用的是
+自己下载的eclipse 3.3，弄了两天，在连上插件的网址以后，总是提示安装错误，显示提示需要
+org.eclipse.gef，我下载了解压放到相应目录下以后，又提示缺少org.eclipse.wst.sse.core我又下载
+安装了以后，结果还是一个提示需要这个，我重启eclipse和电脑之后，都无果。
+我当时也在Downloads里面下了ADT-0.9.1.zip，本地安装，和用网址链接安装提示错误一样。。。不
+知道其他人是不是也是这个。。
+我就用在Downloads里面下
+载的eclipse-java-europa-winter-win32.zip，解压以后，提示j2sdk-1_4_2_19版本太低，不支持，我
+就把j2sdk-1_4_2_19删了，把环境变量也一起删了，然后用eclipse-java-europa-winter-win32中的
+eclipse，重复上述安装插件的步骤，再安装，就成功了。
+    昨天我弄完去吃饭了，还没有跑hello，昨天试了一下新建一个Anriod Project的时候让输入
+Min SDK version,这个不知道从哪儿查看，所以也没有hello一下试试。
+每个人的机子装的软件不同，可能会有细微的差异。
+
+如果觉得我说的不够清楚，这儿有一个视频，大家可以参考按这个装，
+http://www.boobooke.com/v/bbk2635/
