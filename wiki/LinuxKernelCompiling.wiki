@@ -51,6 +51,7 @@ head-y += arch/x86/kernel/init_task.o
 }}}
 接下来我们看看对vmlinux映像的后续处理部分的Makefile,首先要找到起点:
 {{{
+# line200 of /arch/x86/Makefile
 ####
 # boot loader support. Several targets are kept for legacy purposes
 
