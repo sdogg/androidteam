@@ -69,6 +69,21 @@ repo initialized in /home/sw2/mydroid
 
 
 }}}
+ * Repo configuration changes for Android Dev Phone
+
+Note: the download of the kernel source files is only needed if you want to compile the kernel by your own. You can also skip this configuration change and use the prebuilt kernel which is part of the dream-open project. It is possible that this prebuilt kernel is not the latest version
+
+It is possible to download the source at this point, but we need to make some changes to retrieve specific source for the Android Dev Phone (internally called Dream).
+
+Inside the .repo directory (within mydroid) you need to create a local_manifest.xml. This file containsa description of the three extra project needed for the Dev Phone. The contents of the local_manifest.xml
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+ <manifest>
+  <project path="kernel" name="kernel/msm" revision="refs/heads/android-msm-2.6.27"/>
+ </manifest>
+}}}
+With the local_manifest.xml in place it is time to get the source code. 
+
  * 获取源代码文件
 可能下载过程中会遇到git://android.git.kernel.org.............: errno=Connection refused
 ....
@@ -183,3 +198,5 @@ sw2@sw2-desktop:~/mydroid$
 
 == Next Step ==
  * [emulator How to use Android Emulator?]
+== References ==
+ * [http://www.johandekoning.nl/index.php/2009/06/07/building-android-15-getting-the-source/ building-android-15-getting-the-source(include Kernel source)
