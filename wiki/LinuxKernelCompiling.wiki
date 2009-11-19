@@ -96,7 +96,9 @@ zImage bzImage: vmlinux
 
 compressed: zImage
 }}}
+= What's the Next? =
 
+ * vmlinux映像的后续处理并生成zImage bzImage,会大量涉及linux启动的部分,我们在[KernelStartUp linux启动分析]中来具体介绍.
 
 = References =
  * [LinuxMakefileAnalysis Linux内核源代码中的Makefile分析] 
