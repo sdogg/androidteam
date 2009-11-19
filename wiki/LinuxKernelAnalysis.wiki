@@ -7,6 +7,9 @@
 = Start Pointers =
 
  * [LinuxMakefileAnalysis Linux源代码中的makefile分析] 
+  * [LinuxKernelConfig 配置内核过程]
+  * [LinuxKernelMakefileStartPoint 入口点的问题]
+  * [LinuxKernelCompiling 编译生成内核目标文件的过程]
  * [KernelStartUp linux启动分析]
 
 = References =
