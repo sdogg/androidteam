@@ -27,7 +27,20 @@ vmlinux-all  := $(vmlinux-init) $(vmlinux-main)
 vmlinux-lds  := arch/$(SRCARCH)/kernel/vmlinux.lds # SRCARCH为体系结构名,这里我们使用x86
 }}}
 生成的vmlinux.lds目标文件是链接生成vmlinux映像的[LinkerDescrpitonScript 链接描述文件ld script],从该文件中我们大致可以知道vmlinux映像的头部是$(head-y) $(init-y),vmlinux映像的主体部分是$(core-y) $(libs-y) $(drivers-y) $(net-y)等.具体我们可以仔细研究[LDScrpitKernelI386 ld script to make i386 Linux kernel].
- * 找出$(head-y) $(init-y)包含那些文件
+ * 找出$(vmlinux-init)或者说$(head-y) $(init-y)包含那些文件
+在根目录下的Makefile文件中我们找不到head-y的定义,那么head-y肯定在某个被包含(include)进来的文件中.
+通过搜索include我们发现head-y可能在/arch/x86/Makefile中.
+{{{
+# line431
+include $(srctree)/arch/$(SRCARCH)/Makefile
+}}}
+果然,在/arch/x86/Makefile中
+{{{
+# line161
+head-y := arch/x86/kernel/head_$(BITS).o ## BITS是CPU处理的位数的定义,我们使用的32位CPU,这里直接使用32来代替,文件也就是head_32.o
+head-y += arch/x86/kernel/head$(BITS).o # head32.o
+head-y += arch/x86/kernel/init_task.o
+}}}
 {{{
 # line452
 init-y		:= init/
