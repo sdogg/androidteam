@@ -16,3 +16,4 @@
  * Linux虚拟机环境[http://code.google.com/p/vmware-ubuntu/  (VMware Player 2.5.2 & Ubuntu 8.04 Image)]
  * [http://androidteam.googlecode.com/files/GNU-tools-Introduction.pdf GNU-tools-Introduction.pdf]
  * [MakeExecuteProcess Make的执行过程]
+ * [LinkerDescrpitonScript 链接描述文件ld script]
