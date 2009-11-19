@@ -32,8 +32,9 @@ vmlinux-lds  := arch/$(SRCARCH)/kernel/vmlinux.lds # SRCARCH为体系结构名,�
 # line452
 init-y		:= init/
 # line621
-init-y		:= $(patsubst %/, %/built-in.o, $(init-y)) ## 表示将$(init-y)列表中"/"替换为"%/built-in.o",也就是最终init-y == init/built-in.o
+init-y		:= $(patsubst %/, %/built-in.o, $(init-y)) ## 表示将$(init-y)列表中"/"替换为"/built-in.o",也就是最终init-y == init/built-in.o
 }}}
+init/built-in.o目标在init目录下生成,其中包含start_kernel函数,这个函数是从启动代码进入linux kernel的点.
 
 = References =
  * [LinuxMakefileAnalysis Linux内核源代码中的Makefile分析] 
