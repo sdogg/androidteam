@@ -25,9 +25,8 @@ vmlinux-init := $(head-y) $(init-y)
 vmlinux-main := $(core-y) $(libs-y) $(drivers-y) $(net-y)
 vmlinux-all  := $(vmlinux-init) $(vmlinux-main)
 vmlinux-lds  := arch/$(SRCARCH)/kernel/vmlinux.lds # SRCARCH为体系结构名,这里我们使用x86
-# 生成的vmlinux.lds目标文件是链接生成vmlinux映像的[LinkerDescrpitonScript 链接描述文件ld script],从该文件中我们大致可以知道vmlinux映像的头部是$(head-y) $(init-y),vmlinux映像的主体部分是$(core-y) $(libs-y) $(drivers-y) $(net-y)等.具体我们可以仔细研究[LDScrpitKernelI386 ld script to make i386 Linux kernel].
 }}}
-
+生成的vmlinux.lds目标文件是链接生成vmlinux映像的[LinkerDescrpitonScript 链接描述文件ld script],从该文件中我们大致可以知道vmlinux映像的头部是$(head-y) $(init-y),vmlinux映像的主体部分是$(core-y) $(libs-y) $(drivers-y) $(net-y)等.具体我们可以仔细研究[LDScrpitKernelI386 ld script to make i386 Linux kernel].
 
 = References =
  * [LinuxMakefileAnalysis Linux内核源代码中的Makefile分析] 
