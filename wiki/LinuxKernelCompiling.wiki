@@ -36,6 +36,7 @@ init-y		:= init/
 init-y		:= $(patsubst %/, %/built-in.o, $(init-y)) ## 表示将$(init-y)列表中"/"替换为"/built-in.o",也就是最终init-y == init/built-in.o
 }}}
 init/built-in.o目标在init目录下生成,其中包含start_kernel函数,这个函数是从启动代码进入linux kernel的点.
+
 在根目录下的Makefile文件中我们找不到head-y的定义,那么head-y肯定在某个被包含(include)进来的文件中.
 通过搜索include我们发现head-y可能在/arch/x86/Makefile中.
 {{{
