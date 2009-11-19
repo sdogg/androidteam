@@ -60,7 +60,15 @@ head-y += arch/x86/kernel/head$(BITS).o # head32.o
 head-y += arch/x86/kernel/init_task.o
 }}}
  * vmlinux映像生成的一般规则综述
-???
+通过以上分析路径
+{{{
+all --> vmlinux --> $(vmlinux-lds) $(vmlinux-init) --> $(head-y) $(init-y) --
+--> built-in.o head32.o head_32.o init_task.o --> *.c *.S
+}}}
+我们可以有了一个大致的概念,那就是通过内核配置信息,我们有了xxxx-y的目标列表,通过深度遍历依次去生成这些目标,并最终生成了vmlinux.
+
+至于内核配置信息与xxxx-y的目标列表以及依然的目录文件等,是如何映射匹配的,还需要更仔细的分析.
+
  * bzimage - 对vmlinux映像的后续处理
 并且在/arch/x86/Makefile中我们还可以发现对vmlinux映像的后续处理部分,后续处理之后的bzimage将会是
 {{{
