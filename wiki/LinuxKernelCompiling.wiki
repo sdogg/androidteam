@@ -28,6 +28,14 @@ vmlinux-lds  := arch/$(SRCARCH)/kernel/vmlinux.lds # SRCARCH为体系结构名,�
 }}}
 生成的vmlinux.lds目标文件是链接生成vmlinux映像的[LinkerDescrpitonScript 链接描述文件ld script],从该文件中我们大致可以知道vmlinux映像的头部是$(head-y) $(init-y),vmlinux映像的主体部分是$(core-y) $(libs-y) $(drivers-y) $(net-y)等.具体我们可以仔细研究[LDScrpitKernelI386 ld script to make i386 Linux kernel].
  * 找出$(vmlinux-init)或者说$(head-y) $(init-y)包含那些文件
+先找init-y,轻易搞定如下:
+{{{
+# line452
+init-y		:= init/
+# line621
+init-y		:= $(patsubst %/, %/built-in.o, $(init-y)) ## 表示将$(init-y)列表中"/"替换为"/built-in.o",也就是最终init-y == init/built-in.o
+}}}
+init/built-in.o目标在init目录下生成,其中包含start_kernel函数,这个函数是从启动代码进入linux kernel的点.
 在根目录下的Makefile文件中我们找不到head-y的定义,那么head-y肯定在某个被包含(include)进来的文件中.
 通过搜索include我们发现head-y可能在/arch/x86/Makefile中.
 {{{
@@ -41,6 +49,9 @@ head-y := arch/x86/kernel/head_$(BITS).o ## BITS是CPU处理的位数的定义,�
 head-y += arch/x86/kernel/head$(BITS).o # head32.o
 head-y += arch/x86/kernel/init_task.o
 }}}
+ * vmlinux映像生成的一般规则综述
+???
+ * bzimage - 对vmlinux映像的后续处理
 并且在这个文件中我们还可以发现对vmlinux映像的后续处理部分,后续处理之后的bzimage将会是
 {{{
 ####################################################
@@ -74,13 +85,7 @@ zImage bzImage: vmlinux
 
 compressed: zImage
 }}}
-{{{
-# line452
-init-y		:= init/
-# line621
-init-y		:= $(patsubst %/, %/built-in.o, $(init-y)) ## 表示将$(init-y)列表中"/"替换为"/built-in.o",也就是最终init-y == init/built-in.o
-}}}
-init/built-in.o目标在init目录下生成,其中包含start_kernel函数,这个函数是从启动代码进入linux kernel的点.
+
 
 = References =
  * [LinuxMakefileAnalysis Linux内核源代码中的Makefile分析] 
