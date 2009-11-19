@@ -34,12 +34,44 @@ vmlinux-lds  := arch/$(SRCARCH)/kernel/vmlinux.lds # SRCARCH为体系结构名,�
 # line431
 include $(srctree)/arch/$(SRCARCH)/Makefile
 }}}
-果然,在/arch/x86/Makefile中
+果然,在/arch/x86/Makefile中找到head-y,
 {{{
 # line161
 head-y := arch/x86/kernel/head_$(BITS).o ## BITS是CPU处理的位数的定义,我们使用的32位CPU,这里直接使用32来代替,文件也就是head_32.o
 head-y += arch/x86/kernel/head$(BITS).o # head32.o
 head-y += arch/x86/kernel/init_task.o
+}}}
+并且在这个文件中我们还可以发现对vmlinux映像的后续处理部分,后续处理之后的bzimage将会是
+{{{
+####################################################
+#         #                  #                     #
+#  Setup  #  uncompress code #  compressed vmlinux #
+#         #                  #                     #
+####################################################
+}}}
+接下来我们看看对vmlinux映像的后续处理部分的Makefile,首先要找到起点:
+{{{
+####
+# boot loader support. Several targets are kept for legacy purposes
+
+boot := arch/x86/boot
+
+PHONY += zImage bzImage compressed zlilo bzlilo \
+         zdisk bzdisk fdimage fdimage144 fdimage288 isoimage install
+
+# Default kernel to build
+all: bzImage
+
+# KBUILD_IMAGE specify target image being built
+                    KBUILD_IMAGE := $(boot)/bzImage
+zImage zlilo zdisk: KBUILD_IMAGE := arch/x86/boot/zImage
+
+zImage bzImage: vmlinux
+	$(Q)$(MAKE) $(build)=$(boot) $(KBUILD_IMAGE) ## 进入arch/x86/boot目录执行其Makefile
+	$(Q)mkdir -p $(objtree)/arch/$(UTS_MACHINE)/boot
+	$(Q)ln -fsn ../../x86/boot/bzImage $(objtree)/arch/$(UTS_MACHINE)/boot/bzImage
+
+compressed: zImage
 }}}
 {{{
 # line452
