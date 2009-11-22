@@ -7,9 +7,9 @@ Most of these don't make sense to build unless the board has defined a link scri
 
 ～/mydroid/build/target/board目录存放的是特定目标板的配置文件，其中有3个目录emulator,generic,sim是google提供的3个不同的目标平台，前两个都是虚拟的，不对应真是硬件平台。（sim好像是HTC的一个平台？），这些目录下面都会有一个平台配置文件BoardConfig.mk，其中定义TARGET_NO_BOOTLOADER := true说明在这个平台下编译出来的android不带bootloader。
 另外，从该目录下的Android.mk文件中可以看出：
-ifneq ($(strip $(TARGET_NO_BOOTLOADER)),true) 
-  INSTALLED_BOOTLOADER_MODULE := $(PRODUCT_OUT)/bootloader 
-  ifeq ($(strip $(TARGET_BOOTLOADER_IS_2ND)),true) 
+'ifneq ($(strip $(TARGET_NO_BOOTLOADER)),true) '
+'  INSTALLED_BOOTLOADER_MODULE := $(PRODUCT_OUT)/bootloader '
+'  ifeq ($(strip $(TARGET_BOOTLOADER_IS_2ND)),true) '
     INSTALLED_2NDBOOTLOADER_TARGET := $(PRODUCT_OUT)/2ndbootloader 
   else 
     INSTALLED_2NDBOOTLOADER_TARGET := 
