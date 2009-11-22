@@ -1,5 +1,5 @@
 #labels android,bootloader
-=Android bootloader=
+=Android bootloader初探=
 _#lizhijie86su ，mail:lzj86825@163.com_
 
 /media/disk/mydroid/bootable/bootloader/legacy/Anroid.mk中如此描述：
