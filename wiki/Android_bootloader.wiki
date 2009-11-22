@@ -1,11 +1,10 @@
 =Android bootloader=
-_#lizhijie86su_
-_#mail:lzj86825@163.com_
+_#lizhijie86su ，mail:lzj86825@163.com_
 
 /media/disk/mydroid/bootable/bootloader/legacy/Anroid.mk中如此描述：
 Most of these don't make sense to build unless the board has defined a link script.（大多数情况下编译bootloader是没有意义的除非目标板定义了一个链接脚本（这个链接脚本指什么？））
 
-～/mydroid/build/target/board目录存放的是特定目标板的配置文件，其中有3个目录emulator,generic,sim是google提供的3个不同的目标平台，前两个都是虚拟的，不对应真是硬件平台。（sim不知道是什么平台？），这些目录下面都会有一个平台配置文件BoardConfig.mk，其中定义＊TARGET_NO_BOOTLOADER := true＊说明在这个平台下编译出来的android不带bootloader。
+～/mydroid/build/target/board目录存放的是特定目标板的配置文件，其中有3个目录emulator,generic,sim是google提供的3个不同的目标平台，前两个都是虚拟的，不对应真是硬件平台。（sim不知道是什么平台？），这些目录下面都会有一个平台配置文件BoardConfig.mk，其中定义 TARGET_NO_BOOTLOADER := true 指明编译出来的这个平台下的android不带bootloader。
 另外，从该目录下的Android.mk文件中可以看出：
 {{{
 ifneq ($(strip $(TARGET_NO_BOOTLOADER)),true) 
