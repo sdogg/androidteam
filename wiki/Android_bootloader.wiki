@@ -1,3 +1,4 @@
+#labels android,bootloader
 =Android bootloader=
 _#lizhijie86su ，mail:lzj86825@163.com_
 
