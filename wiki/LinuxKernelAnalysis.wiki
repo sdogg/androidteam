@@ -11,6 +11,24 @@
   * [LinuxKernelMakefileStartPoint 入口点的问题]
   * [LinuxKernelCompiling 编译生成内核目标文件的过程]
  * [KernelStartUp linux启动分析]
+= 作业 =
+ * 第一次作业包含： 
+   * 1.ppt最后的作业:
+{{{
+C语言中堆栈的作用是什么？
+为什么要有内核态与用户态的区别？
+}}}
+   * GNU Tools (pdf文件中)
+{{{
+使用nm 列出可执行文件test 的符号，与test.o 进行比较
+能否查看源代码？
+找到Linux 中所有的makefile，分析它们的功能、相互关系。
+比较hello
+找到Linux 中的链接描述文件并分析.
+}}}
+= 实验分组 =
+ * 小组一: 软设三班    黎超 SA09225394  嵌入式三班  张晓东 SA09225488  软设二班   朱勇洪 SA09225174
+ * 小组二: 孙 哲 SA09225482  孙 华 SA09225360 廖福荣 SA09225411
 
 = References =
  * Linux虚拟机环境[http://code.google.com/p/vmware-ubuntu/  (VMware Player 2.5.2 & Ubuntu 8.04 Image)]
