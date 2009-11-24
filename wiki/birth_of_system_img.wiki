@@ -1,7 +1,8 @@
 #labels system.img
 ＝system.img分析＝
 _lizhijie86su,;mail:lzj86825@163.com_
-＊从结果找原因，从system.img开始＊
+
+===从结果找原因，从system.img开始===
 {{{
 # The installed image, which may be optimized or unoptimized.
 #
