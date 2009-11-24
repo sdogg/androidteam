@@ -48,7 +48,7 @@ BUILT_SYSTEMIMAGE_UNOPT := $(systemimage_unopt_intermediates)/system.img
 
 这里的system.img不是/generic目录下面我们看到的那个system.img，而是另一个中间目录下的，但是是同一个文件。一开始看到的复制就是把/media/disk/mydroid/out/target/product/generic/obj/PACKAGING/systemimage_unopt_intermediates目录下面的system.img复制到/generic目录下。
 
-＊现在，知道了system.img的来历，然后要分析它是一个什么东西，里面包含什么？？＊
+===现在，知道了system.img的来历，然后要分析它是一个什么东西，里面包含什么？？===
 Makefile line624
 {{{
 $(BUILT_SYSTEMIMAGE_UNOPT): $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_MKUSERFS)
