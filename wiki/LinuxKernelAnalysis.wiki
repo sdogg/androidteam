@@ -11,7 +11,7 @@
   * [LinuxKernelMakefileStartPoint 入口点的问题]
   * [LinuxKernelCompiling 编译生成内核目标文件的过程]
  * [KernelStartUp linux启动分析]
-= 作业 =
+= 作业及实验Project =
  * 第一次作业包含： 
    * 1.ppt最后的作业:
 {{{
