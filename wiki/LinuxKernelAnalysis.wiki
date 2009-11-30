@@ -42,6 +42,7 @@ C语言中堆栈的作用是什么？
  * 小组五: 於锦涛：SA09225369 软件设计3班 苏丁：　SA09225492 软件设计3班 孙宏亮：SA09225448 软件设计3班 王家庆：SA09225421 嵌入式3班 段振兴：SA09925457 软件设计3班
  * 小组六: SG09225048 尹宗仁；SA09225124 王瑞；SA09225057 田童媛；SA09225046 董玮
  * 小组七: 朱勇SA09225455 吕晓勇SA09225185 黄波 SA09225458
+ * 小组八: 俞帆SA09225358   朱斌SA09225338 杨洁SA09225055  张静SA09225190  
 = References =
  * Linux虚拟机环境[http://code.google.com/p/vmware-ubuntu/  (VMware Player 2.5.2 & Ubuntu 8.04 Image)]
  * [http://androidteam.googlecode.com/files/GNU-tools-Introduction.pdf GNU-tools-Introduction.pdf]
