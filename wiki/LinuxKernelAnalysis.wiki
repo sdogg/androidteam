@@ -1,5 +1,5 @@
 #labels Linux,Kernel,OS
-= Introduction =
+= Linux操作系统分析课程(2009秋)=
 
 这是与[http://staff.ustc.edu.cn/~xlanchen XiangLan Chen （陈香兰）]老师主讲的Linux操作系统分析(2009秋)课程相关的一些资料.
 
