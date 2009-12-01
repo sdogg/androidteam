@@ -25,7 +25,7 @@ GDT和LDT将被装入,处理器初始化完毕,设置好内存页面,最终调�
 
 [系统开始运行]
 linux kernel 最早的C代码从汇编标记startup_32开始执行
-
+{{{
 startup_32:
 start_kernel
 lock_kernel
@@ -94,7 +94,7 @@ cpu_idle
 ?kernel_thread [arch/i386/kernel/process.c]
 ?unlock_kernel [include/asm/smplock.h]
 ?cpu_idle [arch/i386/kernel/process.c]
-
+}}}
 start_kernel( )程序用于初始化系统内核的各个部分,包括：
 
 *设置内存边界,调用paging_init( )初始化内存页面。
@@ -117,7 +117,7 @@ start_kernel( )程序用于初始化系统内核的各个部分,包括：
 
 [init]
 init是第一个进程,或者说内核线程
-
+{{{
 init
 lock_kernel
 do_basic_setup
@@ -132,11 +132,7 @@ prepare_namespace
 free_initmem
 unlock_kernel
 execve
-
-[目录]
-
---------------------------------------------------------------------------------
-
+}}}
 
 启动步骤
 
@@ -204,4 +200,4 @@ setup.S完成在实模式下版本检查,并将硬盘,鼠标,内存参数写入�
 
 第八步
 操作系统的初始化。
-http://blog.163.com/tianyin_pang/blog/static/64459248200981494855566/
+来源：http://blog.163.com/tianyin_pang/blog/static/64459248200981494855566/
