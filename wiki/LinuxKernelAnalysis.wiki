@@ -49,6 +49,8 @@ C语言中堆栈的作用是什么？
  * Group10: SA09225036 刘道伟 SA09225049 张颖 SA09225250 刘颖 SA09225143 张敏
  * Group11: 胡晓亮SA09225454 罗葳SA09225408 於锦涛SA09225369
  * Group12: SA09225223   雷双红   软设2班   SA09225004   刘磊     软设1班   SA09225005   陶海成   软设1班   SA09225216   田琨玮   软设2班
+ * Group13: 吴勇辛 SA09225304 童锁   SA09225343 张炳恋 SA09225038 李伟   SA09225168
+
 
 = References =
  * Linux虚拟机环境[http://code.google.com/p/vmware-ubuntu/  (VMware Player 2.5.2 & Ubuntu 8.04 Image)]
