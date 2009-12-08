@@ -19,11 +19,18 @@
  * [KernelStartUp linux启动分析]
 = 作业及实验Project =
 共交3～4次作业（手写）;Project分组3～4人一组,每组每个project提交一份实验报告（参照给定格式）.
+ * Project-4，以下六选一(6 syscall.ppt文件中) 
+   * 分析中断、异常和系统调用的代码(三个题目)，提交分析报告
+   * 采用某种方法截获一个中断，例如键盘中断
+   * 采用某种方法制造缺页异常
+   * 自己编写一个系统调用
  * 作业二:提交时间2009年12月14日
 {{{
+(3.ppt文件中)
 i386实模式下是如何解决20位地址空间和16位段寄存器之间的不匹配问题的？
 i386保护模式下的段寄存器的内容与实模式下段寄存器的内容一样么？如何解释？
 __USER_CS、 __USER_DS的值分别是多少？它们分别对应GDT表中的哪一项？RPL分别是多少，对应Linux的哪个级别（用户级还是内核级）？
+(4.3 task.ppt文件中)
 Linux为什么要引入pidhash表？
 在传统的UNIX系统中，创建子进程时会复制父进程的所有资源，代价比较高，现代UNIX系统中引入了哪几项技术来解决这个问题？
 Linux2.4.18中，名词解释：
@@ -33,15 +40,17 @@ Linux2.6.26中，名词解释：
 CFS
 Linux2.6.17中，名词解释：
 双队列
+(5 interrupt.ppt文件中)
+名词解释：故障和陷阱
 }}}
- * Project-3，进程的创建 
+ * Project-3，进程的创建 (4.2 task.ppt文件中)
   * 使用C语言编写一段用户程序，调用fork创建一个子进程，然后让子进程和父进程分别输出fork的返回值。目的：从用户态体验进程的创建.[http://staff.ustc.edu.cn/~mengning/ulk/fork.tar.gz 参考代码(tar.gz格式)]
   * 对Linux中进程的创建进行分析，提交分析报告.参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project3_GroupX_V1.0.0_20091207.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project3_GroupX_V1.0.0_20091207.pdf pdf格式文件]
- * Project-2，对Linux2.6.26的进程切换过程进行分析，提交分析报告.参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project2_GroupX_V1.0.0_20091201.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project2_GroupX_V1.0.0_20091201.pdf pdf格式文件]
+ * Project-2，对Linux2.6.26的进程切换过程进行分析(4.1 task.ppt文件中)，提交分析报告.参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project2_GroupX_V1.0.0_20091201.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project2_GroupX_V1.0.0_20091201.pdf pdf格式文件]
  * Project-1(提交时间2009/12/06):基于x86体系结构分析linux-2.6.26的启动过程,参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project1_GroupX_V1.0.0_20091201.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project1_GroupX_V1.0.0_20091201.pdf pdf格式文件]
    * 仅考虑32位体系结构 
    * 不考虑多核多处理器 
- * ~第一次作业(提交时间2009/11/30)包含：~ 
+ * ~第一次作业(提交时间2009/11/30)包含~ ：
    * 1.ppt最后的作业:([ULKHomework1 参考答案])
 {{{
 C语言中堆栈的作用是什么？
