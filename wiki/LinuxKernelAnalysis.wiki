@@ -17,6 +17,7 @@
   * [LinuxKernelMakefileStartPoint 入口点的问题]
   * [LinuxKernelCompiling 编译生成内核目标文件的过程]
  * [KernelStartUp linux启动分析]
+ * [http://androidteam.googlecode.com/files/Linux2.6.X_compile_procedure_v0.9.pdf Linux2.6.X内核编译移植过程指南v0.9（pdf file）］
 = 作业及实验Project =
 共交3～4次作业（手写）;Project分组3～4人一组,每组每个project提交一份实验报告（参照给定格式）.
  * Project-4，以下六选一(6 syscall.ppt文件中) 
