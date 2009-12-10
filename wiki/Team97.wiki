@@ -12,6 +12,7 @@ Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 [http://blog.csdn.net/jnstone3/archive/2008/10/27/3160133.aspx 自己编译Google Android内核的Linux源码]
 
 [http://blog.csdn.net/jnstone3/archive/2008/10/27/3160357.aspx google android内核编译方法(往S3C2410上移植)]
+
 [http://blog.csdn.net/vrix/archive/2009/06/23/4289435.aspx Ubuntu下编译android的linux内核 ]
 
 
