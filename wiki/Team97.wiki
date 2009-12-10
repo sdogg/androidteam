@@ -7,10 +7,11 @@ Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 
 ==Android-Linux内核相关网站（测试)==
 ===内核下载网站：===
-[http://code.google.com/p/android/downloads/list?can=1&q=]
-==编译内核经验总结网站：==
-[http://blog.csdn.net/jnstone3/archive/2008/10/27/3160133.aspx]
-http://hi.baidu.com/kanisbaby/blog/item/171cd98d989d6c1ab21bba77.html
+[http://code.google.com/p/android/downloads/list?can=1&q= Android内核下载]
+
+[http://blog.csdn.net/jnstone3/archive/2008/10/27/3160133.aspx 编译内核经验总结]
+
+[http://hi.baidu.com/kanisbaby/blog/item/171cd98d989d6c1ab21bba77.html 编译内核经验总结]
 
 
 = Details =
