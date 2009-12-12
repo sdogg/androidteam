@@ -7,6 +7,8 @@ Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 
 [http://code.google.com/p/androidteam/wiki/YangHomePage?ts=1260603946&updated=YangHomePage 杨扬's HomePage]
 
+[http://code.google.com/p/androidteam/wiki/LiuXiaohuiHomePage?ts=1260608543&updated=LiuXiaohuiHomePage 刘晓辉的主页]
+
 ==Android-Linux内核相关网站（测试)==
 
 [http://code.google.com/p/android/downloads/list?can=1&q= Android内核下载]
