@@ -1,6 +1,6 @@
 = Get Android Source Code =
 
-for detailed information, refer to [http://source.android.com/download Android Open Source Project ---> Get source]
+* *for detailed information, refer to [http://source.android.com/download Android Open Source Project ---> Get source]*
 
  * *系统环境: Ubuntu 9.10, Kernel 2.6.31-14-generic, i686*
  * *网络环境: 学生公寓B区 中国电信宽带接入*
