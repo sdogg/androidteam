@@ -13,6 +13,8 @@ Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 
 [http://code.google.com/p/androidteam/wiki/wuqiudong?ts=1260628778&updated=wuqiudong 吴秋冬的主页]
 
+[http://code.google.com/p/androidteam/wiki/liuyangboyman?ts=1260628859&updated=liuyangboyman 刘洋的主页]
+
 ==Android-Linux内核相关网站（测试)==
 
 [http://code.google.com/p/android/downloads/list?can=1&q= Android内核下载]
