@@ -139,5 +139,5 @@ EXzeoxcdoafxqf6gZlJZlACgkWF7wi2YLW3Oa+jv2QSTlrx4KLM=
 END
 
 
- * for other platforms, such asUbuntu Linux (64-bit x86), Mac OS, and Other Linux see
+ * for other platforms, such asUbuntu Linux (64-bit x86), Mac OS, and Other Linux see,
  [http://source.android.com/download Android Open Source Project ---> Get source]
