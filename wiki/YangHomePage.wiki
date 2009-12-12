@@ -1,13 +1,3 @@
 #summary My Footprint on Android
 
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+[http://code.google.com/p/androidteam/wiki/AndroidSourceCodeDownload?ts=1260620626&updated=AndroidSourceCodeDownload 12/12/2009: Get Android Source Code]
