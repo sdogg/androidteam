@@ -78,7 +78,7 @@ $chmod +x ~/bin/repo
 $cd ~
 $mkdir yangdroid; cd yangdroid
 }}}
- 安装Repo，下列命令下载Android master version
+ 安装Repo，下列命令将下载Android master version
 {{{
 $repo init -u git://android.git.kernel.org/platform/manifest.git
 }}}
