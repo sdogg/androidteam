@@ -90,6 +90,7 @@ $repo init -u git://android.git.kernel.org/platform/manifest.git -b cupcake
 
 ==== 下载Android源码 ====
 
+ 输入
 {{{
 $repo sync
 }}}
@@ -97,6 +98,7 @@ $repo sync
 
 === Verifying Git Tags ===
 
+ 输入
 {{{
 $gpg --import
 }}}
