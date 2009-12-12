@@ -1,5 +1,7 @@
 = Get Android Source Code =
 
+for detailed information, refer to [http://source.android.com/download Android Open Source Project ---> Get source]
+
  * *系统环境: Ubuntu 9.10, Kernel 2.6.31-14-generic, i686*
  * *网络环境: 学生公寓B区 中国电信宽带接入*
  * *Date： 12/12/2009*
@@ -71,6 +73,7 @@ $chmod +x ~/bin/repo
 
 ==== 初始化Repo客户端 ====
 
+ 输入
 {{{
 $cd ~
 $mkdir yangdroid; cd yangdroid
@@ -90,7 +93,7 @@ $repo init -u git://android.git.kernel.org/platform/manifest.git -b cupcake
 {{{
 $repo sync
 }}}
-下载完后，Android源码将存放于~/yangdroid目录。
+ 下载完后，Android源码将存放于~/yangdroid目录。
 
 === Verifying Git Tags ===
 
@@ -98,7 +101,6 @@ $repo sync
 $gpg --import
 }}}
  粘贴下列Key至终端，回车并按Ctrl-D将Key导入GnuPG key database。
- *key 9AB10E78: "The Android Open Source Project <initial-contribution@android.com>"*
 {{{
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v1.4.2.2 (GNU/Linux)
@@ -135,6 +137,5 @@ EXzeoxcdoafxqf6gZlJZlACgkWF7wi2YLW3Oa+jv2QSTlrx4KLM=
 END
 
 
- * 主要参考资料
-
+ * for other platforms, such asUbuntu Linux (64-bit x86), Mac OS, and Other Linux see
  [http://source.android.com/download Android Open Source Project ---> Get source]
