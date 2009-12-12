@@ -51,7 +51,7 @@ $sudo apt-get install lib32readline5-dev
 }}}
  本机源无此Package, and Android Open Source Project says: 'Intrepid (8.10) users may need a newer version of libreadline'.
  在网上只搜到了用于amd64平台的lib32readline5-dev.deb包。
- [http://packages.debian.org/zh-cn/source/etch/readline5 这里有readline5的源代码，]可以编译出lib32readline5-dev，有兴趣的可以试一下。笔者目前没有装lib32readline5-dev。
+ [http://packages.debian.org/zh-cn/source/etch/readline5 这里有readline5的源代码]，可以编译出lib32readline5-dev，有兴趣的可以试一下。笔者目前没有装lib32readline5-dev。
 
 === 安装Repo ===
 
