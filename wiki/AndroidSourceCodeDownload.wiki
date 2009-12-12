@@ -1,0 +1,72 @@
+= Get Android Source Code =
+
+ * *系统环境: Ubuntu 9.10, Kernel 2.6.31-14-generic, i686*
+ * *网络环境: 学生公寓B区 中国电信宽带接入*
+ * *Date： 12/12/2009*
+
+=== 安装必要的软件包 ===
+
+ * 安装git-core, gnupg, sun-java5-jdk, flex, bison, gperf, libsdl-dev, libesd0-dev, libwxgtk2.6-dev, build-essential, zip, curl, libncurses5-dev, zlib1g-dev
+{{{
+$sudo apt-get install git-core gnupg sun-java5-jdk flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential zip curl libncurses5-dev zlib1g-dev
+}}}
+ 本机当前源没有Package: sun-java5-jdk，为安装sun-java5-jdk，将当前源替换为以下Ubuntu 9.04的源
+{{{
+deb http://run.hit.edu.cn/ubuntu/ jaunty main restricted universe multiverse
+deb-src http://run.hit.edu.cn/ubuntu/ jaunty main restricted universe multiverse
+deb http://run.hit.edu.cn/ubuntu/ jaunty-updates main restricted universe multiverse
+deb-src http://run.hit.edu.cn/ubuntu/ jaunty-updates main restricted universe multiverse
+deb http://run.hit.edu.cn/ubuntu/ jaunty-backports main restricted universe multiverse
+deb-src http://run.hit.edu.cn/ubuntu/ jaunty-backports main restricted universe multiverse
+deb http://run.hit.edu.cn/ubuntu/ jaunty-security main restricted universe multiverse
+deb-src http://run.hit.edu.cn/ubuntu/ jaunty-security main restricted universe multiverse
+}}}
+ 然后
+{{{
+$sudo apt-get update
+$sudo apt-get install sun-java5-jdk
+}}}
+ 安装sun-java5-jdk后，换回Ubuntu 9.10的源。
+ 若希望系统使用sun-java5-jdk，首先获得root权限并使用命令
+{{{
+#update-alternatives --config java
+}}}
+ 然后，选择"/usr/lib/jvm/java-1.5.0-sun/jre/bin/java"这一项，使系统使用sun-java5-jdk。
+ 可以用命令
+{{{
+$java -version
+}}}
+ 查看系统当前使用的java版本
+
+ * 安装Valgrind: a tool that will help you find memory leaks, stack corruption, array bounds overflows, etc. 
+{{{
+$sudo apt-get install valgrind
+}}}
+
+ * 安装新版libreadline
+{{{
+$sudo apt-get install lib32readline5-dev
+}}}
+ 本机源无此Package, and Android Open Source Project says: 'Intrepid (8.10) users may need a newer version of libreadline'.
+ 在网上只搜到了用于amd64平台的lib32readline5-dev.deb包。
+ [http://packages.debian.org/zh-cn/source/etch/readline5 这里有readline5的源代码，]可以编译出lib32readline5-dev，有兴趣的可以试一下。笔者目前没有装lib32readline5-dev。
+
+
+= Introduction =
+
+Add your content here.
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
+
+
+== Subheading ==
+=== Level 3 ===
+==== Level 4 ====
+===== Level 5 =====
+====== Level 6 ======
