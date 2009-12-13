@@ -24,10 +24,7 @@ Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 [http://blog.csdn.net/jnstone3/archive/2008/10/27/3160357.aspx google android内核编译方法(往S3C2410上移植)]
 
 [http://blog.csdn.net/vrix/archive/2009/06/23/4289435.aspx Ubuntu下编译android的linux内核 ]
-===关于<<深入理解Linux内核>>相关网站===
-[http://www.kerneltravel.net/  Linux内核之旅]
 
-[http://www.lupaworld.com/26540/viewspace-140270.html Linux内核动态跟踪—SYstemTap]
 
 = Details =
 
