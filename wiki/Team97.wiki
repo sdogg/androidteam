@@ -1,5 +1,5 @@
+#summary Android开源项目向博创2410实验箱上的移植.
 #labels Android,kernel
-#Android开源项目向博创2410实验箱上的移植.
 
 = Android开源项目向博创2410实验箱上的移植 =
 
