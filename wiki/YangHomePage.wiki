@@ -1,3 +1,5 @@
 #summary My Footprint on Android
 
+12/14/2009: Android Compilation, and Running in its Emulator
+
 [http://code.google.com/p/androidteam/wiki/AndroidSourceCodeDownload?ts=1260620626&updated=AndroidSourceCodeDownload 12/12/2009: Get Android Source Code]
