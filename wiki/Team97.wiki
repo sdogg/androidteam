@@ -7,7 +7,6 @@
 
 [http://code.google.com/p/androidteam/wiki/YangHomePage?ts=1260603946&updated=YangHomePage 杨扬]  [http://code.google.com/p/androidteam/wiki/LiuXiaohuiHomePage?ts=1260608543&updated=LiuXiaohuiHomePage 刘晓辉]  [http://code.google.com/p/androidteam/wiki/zhaoruijia?ts=1260628694&updated=zhaoruijia 赵瑞甲]  [http://code.google.com/p/androidteam/wiki/wuqiudong?ts=1260628778&updated=wuqiudong 吴秋冬]  [http://code.google.com/p/androidteam/wiki/liuyangboyman?ts=1260628859&updated=liuyangboyman 刘洋]
 
-
 == 16周任务安排 ==
  # 每个人需要把Android源码下载下来编译通过在模拟器上运行起来,给自己点新鲜感
  # 注意搜集关于Android linux内核相关信息，确定移植哪个版本linux内核，如果有谁找到关于Android linux2.6.27的内核请更新本页上内核下载方面的信息。
@@ -15,9 +14,6 @@
  # 周六或周日下午2点（待定）集体去嵌入式实验室完成2方面工作：
    * 确定一下ubuntu与博创开发板连接是否正常，确定开发平台和可执行策略
    * 尝试将编译好的内核下载到板子上，受受刺激
-
-
-
 
 = Reference =
 
