@@ -1,9 +1,7 @@
-#summary Android开源项目向博创2410实验箱上的移植.
+#summary Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 #labels Android,kernel
 
 = Android开源项目向博创2410实验箱上的移植 =
-
-Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 
 == 我们的主页 ==
 
