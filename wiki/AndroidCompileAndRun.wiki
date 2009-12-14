@@ -1,4 +1,4 @@
-#summary have a feeling on Android
+#summary Have a feeling on Android
 
 = Android Compilation and Running in its Emulator =
 
