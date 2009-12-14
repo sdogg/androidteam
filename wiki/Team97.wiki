@@ -5,15 +5,9 @@
 
 Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 
-[http://code.google.com/p/androidteam/wiki/YangHomePage?ts=1260603946&updated=YangHomePage 杨扬的主页]
+== 我们的主页 ==
 
-[http://code.google.com/p/androidteam/wiki/LiuXiaohuiHomePage?ts=1260608543&updated=LiuXiaohuiHomePage 刘晓辉的主页]
-
-[http://code.google.com/p/androidteam/wiki/zhaoruijia?ts=1260628694&updated=zhaoruijia 赵瑞甲的主页]
-
-[http://code.google.com/p/androidteam/wiki/wuqiudong?ts=1260628778&updated=wuqiudong 吴秋冬的主页]
-
-[http://code.google.com/p/androidteam/wiki/liuyangboyman?ts=1260628859&updated=liuyangboyman 刘洋的主页]
+[http://code.google.com/p/androidteam/wiki/YangHomePage?ts=1260603946&updated=YangHomePage 杨扬]  [http://code.google.com/p/androidteam/wiki/LiuXiaohuiHomePage?ts=1260608543&updated=LiuXiaohuiHomePage 刘晓辉]  [http://code.google.com/p/androidteam/wiki/zhaoruijia?ts=1260628694&updated=zhaoruijia 赵瑞甲]  [http://code.google.com/p/androidteam/wiki/wuqiudong?ts=1260628778&updated=wuqiudong 吴秋冬]  [http://code.google.com/p/androidteam/wiki/liuyangboyman?ts=1260628859&updated=liuyangboyman 刘洋]
 
 
 == 16周任务安排 ==
@@ -27,15 +21,21 @@ Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 
 
 
+= Reference =
+
 ==Android-Linux内核相关网站（测试)==
 
-[http://code.google.com/p/android/downloads/list?can=1&q= Android内核下载]
+ * [http://code.google.com/p/android/downloads/list?can=1&q= Android内核下载]
+
 ===编译Android内核经验汇总===
-[http://blog.csdn.net/jnstone3/archive/2008/10/27/3160133.aspx 自己编译Google Android内核的Linux源码]
 
-[http://blog.csdn.net/jnstone3/archive/2008/10/27/3160357.aspx google android内核编译方法(往S3C2410上移植)]
+ * [http://www.williamhua.com/2009/04/30/how-to-build-android-15-kernel-image/ 构建Android 1.5 Linux内核映像]
 
-[http://blog.csdn.net/vrix/archive/2009/06/23/4289435.aspx Ubuntu下编译android的linux内核 ]
+ * [http://blog.csdn.net/jnstone3/archive/2008/10/27/3160133.aspx 自己编译Google Android内核的Linux源码]
+
+ * [http://blog.csdn.net/jnstone3/archive/2008/10/27/3160357.aspx google android内核编译方法(往S3C2410上移植)]
+
+ * [http://blog.csdn.net/vrix/archive/2009/06/23/4289435.aspx Ubuntu下编译android的linux内核 ]
 
 
 
