@@ -15,17 +15,6 @@ Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 
 [http://code.google.com/p/androidteam/wiki/liuyangboyman?ts=1260628859&updated=liuyangboyman 刘洋的主页]
 
-==Android-Linux内核相关网站（测试)==
-
-[http://code.google.com/p/android/downloads/list?can=1&q= Android内核下载]
-===编译Android内核经验汇总===
-[http://blog.csdn.net/jnstone3/archive/2008/10/27/3160133.aspx 自己编译Google Android内核的Linux源码]
-
-[http://blog.csdn.net/jnstone3/archive/2008/10/27/3160357.aspx google android内核编译方法(往S3C2410上移植)]
-
-[http://blog.csdn.net/vrix/archive/2009/06/23/4289435.aspx Ubuntu下编译android的linux内核 ]
-
-
 = 16周任务安排 =
 *1、每个人需要把Android源码下载下来编译通过在模拟器上运行起来,给自己点新鲜感
 
@@ -38,4 +27,17 @@ Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
        * 确定一下ubuntu与博创开发板连接是否正常，确定开发平台和可执行策略
        
        * 尝试将编译好的内核下载到板子上，受受刺激
+
+==Android-Linux内核相关网站（测试)==
+
+[http://code.google.com/p/android/downloads/list?can=1&q= Android内核下载]
+===编译Android内核经验汇总===
+[http://blog.csdn.net/jnstone3/archive/2008/10/27/3160133.aspx 自己编译Google Android内核的Linux源码]
+
+[http://blog.csdn.net/jnstone3/archive/2008/10/27/3160357.aspx google android内核编译方法(往S3C2410上移植)]
+
+[http://blog.csdn.net/vrix/archive/2009/06/23/4289435.aspx Ubuntu下编译android的linux内核 ]
+
+
+
        
