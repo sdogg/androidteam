@@ -13,7 +13,7 @@
 {{{
 export JAVA_HOME=/usr/lib/jvm/java-1.5.0-sun-1.5.0.19
 }}}
- 至~/.bashrc。我的~/.bashrc中还有以下与java相关的两句，是以前配置eclipse时加上的，不知编译Android需不需要。
+ 至~/.bashrc。我的~/.bashrc中还有以下与java相关的两行，是以前配置eclipse时加上的，不知编译Android需不需要。
 {{{
 export PATH=$PATH:$JAVA_HOME/bin
 export CLASSPATH=$JAVA_HOME/lib
