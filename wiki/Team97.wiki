@@ -15,6 +15,7 @@ Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 
 [http://code.google.com/p/androidteam/wiki/liuyangboyman?ts=1260628859&updated=liuyangboyman 刘洋的主页]
 
+
 = 16周任务安排 =
 *1、每个人需要把Android源码下载下来编译通过在模拟器上运行起来,给自己点新鲜感
 
@@ -27,6 +28,8 @@ Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
        * 确定一下ubuntu与博创开发板连接是否正常，确定开发平台和可执行策略
        
        * 尝试将编译好的内核下载到板子上，受受刺激
+
+
 
 ==Android-Linux内核相关网站（测试)==
 
