@@ -7,7 +7,7 @@
 
 === 编译环境准备 ===
 
- 这里只说java环境的准备。
+ 这里强调java环境的准备。
  * 首先，安装sun-java5-jdk。用$sudo apt-get install sun-java5-jdk 或者[http://java.sun.com/javase/downloads/index_jdk5.jsp 从SUN下载]后安装均可。
  * 然后，添加
 {{{
