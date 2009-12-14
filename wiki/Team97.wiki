@@ -26,9 +26,16 @@ Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 [http://blog.csdn.net/vrix/archive/2009/06/23/4289435.aspx Ubuntu下编译android的linux内核 ]
 
 
-= Details =
+= 16周任务安排 =
+*1、每个人需要把Android源码下载下来编译通过在模拟器上运行起来,给自己点新鲜感
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+*2、注意搜集关于Android linux内核相关信息，确定移植哪个版本linux内核，如果有谁找到关于Android linux2.6.27的内核请更新本页上内核下载方面的信息。
+
+*3、完成关于内核编译知识积累工作，主要参考香兰姐的课件。
+
+*4、本周六或周日下午2点（待定）集体去嵌入式实验室完成2方面工作：
+       
+       * 确定一下ubuntu与博创开发板连接是否正常，确定开发平台和可执行策略
+       
+       * 尝试将编译好的内核下载到板子上，受受刺激
+       
