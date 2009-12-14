@@ -34,7 +34,7 @@ $cd ~/yangdroid
 $make
 }}}
 
- about 2 hours later ......
+ about 2 hours later......
 
 === 在模拟器上运行Android ===
 
@@ -102,6 +102,6 @@ emulator: can't connect to ADB server: Connection refused
 emulator: ping program: /home/yang/yangdroid/out/host/linux-x86/bin/ddms
 emulator: ping command: /home/yang/yangdroid/out/host/linux-x86/bin/ddms ping emulator 1.12
 }}}
- 这个信息显示了emulator加载Android用到的镜像的位置，及配置参数等。通过这个我们可以大致了解运行Android需要哪些文件。:)
+ 这个debug info显示了emulator加载Android所用到镜像的位置和配置参数等信息。通过这个我们可以大致了解运行Android需要哪些文件...... :)
 
 === END ===
