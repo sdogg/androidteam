@@ -34,7 +34,6 @@
 == Android初探 ==
 
  * [http://code.google.com/p/androidteam/wiki/AndroidSourceCodeDownload?ts=1260620626&updated=AndroidSourceCodeDownload Android源码下载]
-
  * [http://code.google.com/p/androidteam/wiki/AndroidCompileAndRun?ts=1260772618&updated=AndroidCompileAndRun 感受Android: Android编译并在模拟器上运行]
 
 == Android内核 ==
@@ -60,13 +59,6 @@
 === 编译Android内核经验汇总 ===
 
  * [http://www.williamhua.com/2009/04/30/how-to-build-android-15-kernel-image/ 构建Android 1.5 Linux内核映像]
-
  * [http://blog.csdn.net/jnstone3/archive/2008/10/27/3160133.aspx 自己编译Google Android内核的Linux源码]
-
  * [http://blog.csdn.net/jnstone3/archive/2008/10/27/3160357.aspx google android内核编译方法(往S3C2410上移植)]
-
- * [http://blog.csdn.net/vrix/archive/2009/06/23/4289435.aspx Ubuntu下编译android的linux内核 ]
-
-
-
-       
+ * [http://blog.csdn.net/vrix/archive/2009/06/23/4289435.aspx Ubuntu下编译android的linux内核 ]     
