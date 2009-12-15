@@ -2,7 +2,7 @@
 #labels Android,kernel
 
 = Android开源项目向博创2410实验箱上的移植 =
- * Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
+Team Members: 赵瑞甲  杨扬  刘晓辉  吴秋冬  刘洋
 == 我们的主页 ==
 [http://code.google.com/p/androidteam/wiki/YangHomePage?ts=1260603946&updated=YangHomePage 杨扬]  [http://code.google.com/p/androidteam/wiki/LiuXiaohuiHomePage?ts=1260608543&updated=LiuXiaohuiHomePage 刘晓辉]  [http://code.google.com/p/androidteam/wiki/zhaoruijia?ts=1260628694&updated=zhaoruijia 赵瑞甲]  [http://code.google.com/p/androidteam/wiki/wuqiudong?ts=1260628778&updated=wuqiudong 吴秋冬]  [http://code.google.com/p/androidteam/wiki/liuyangboyman?ts=1260628859&updated=liuyangboyman 刘洋]
 
