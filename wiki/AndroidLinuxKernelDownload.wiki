@@ -1,5 +1,5 @@
+#summary How to get Android linux kernel 2.6.27
 #labels Android,Kernel,2.6.27
-#How to get Android linux kernel 2.6.27
 
 = How to get Android-linux kernel 2.6.27 =
 
