@@ -1,5 +1,5 @@
+#summary My Android Tour
 #labels Linux,Android
-#My Android Tour
 
 = Introduction =
 
