@@ -19,6 +19,7 @@
 
 ==Android-Linux内核相关网站（测试)==
 
+ * [http://code.google.com/p/androidteam/wiki/AndroidLinuxKernelDownload?ts=1260848549&updated=AndroidLinuxKernelDownload  How to get Android-linux kernel 2.6.27]
  * [http://code.google.com/p/android/downloads/list?can=1&q= Android内核下载]
 
 ===编译Android内核经验汇总===
