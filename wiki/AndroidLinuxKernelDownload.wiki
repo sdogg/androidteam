@@ -29,7 +29,7 @@ Resolving deltas: 100% (1141248/1141248), done.
 Checking out files: 100% (24451/24451), done.
 zhaoruijia@zhaoruijia-ubuntu:~$
 }}}
- # 下载后查看makefile发现获得内核为2.6.27内核，与我们所下载sourcecode相对应，内核编译方面的文档可以参考*README*里面的方法
+ # 下载后查看makefile发现获得内核为2.6.27内核，与我们所下载sourcecode相对应，内核编译方面的文档可以参考_*README*_里面的方法
 
 ==遗留问题==
 
