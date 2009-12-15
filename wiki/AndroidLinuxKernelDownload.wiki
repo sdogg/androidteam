@@ -1,3 +1,4 @@
+#labels Android,Kernel,2.6.27
 #How to get Android linux kernel 2.6.27
 
 = How to get Android-linux kernel 2.6.27 =
@@ -33,4 +34,3 @@ zhaoruijia@zhaoruijia-ubuntu:~$
 ==遗留问题==
 
  如果要往模拟器上移植听说需要下载goldfish版本内核才可以，本人没有实验
-
