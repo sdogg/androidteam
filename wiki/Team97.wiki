@@ -14,10 +14,10 @@
  # 周六或周日下午2点（待定）集体去嵌入式实验室完成2方面工作：
    * 确定一下ubuntu与博创开发板连接是否正常，确定开发平台和可执行策略
    * 尝试将编译好的内核下载到板子上，受受刺激
-=== Team主页管理建议 from 杨扬 ===
- * 各小组成员请将自己关于本项目的学习历程、学习心得、参考资料和其它相关信息写成wiki放到自己的主页里，然后由主页维护人员在Team主页里创建适当链接到各位写的wiki上。
- * 为保证项目文档的完整性，麻烦晓辉同学将开题报告相关内容(项目开题和项目进度规划)进行整理并写成wiki放在自己的主页里，然后Team主页维护人员会在Team主页中建立相应链接。
- * 现将Team主页格式改为这样。
+Team主页管理相关
+ * 各小组成员请将自己关于本项目的学习历程、学习心得、参考资料和其它相关信息写成wiki放到自己的主页里；
+ * 为保证项目文档的完整性，麻烦晓辉同学将开题报告相关内容(项目开题和项目进度规划)进行整理并写成wiki放在自己的主页里；
+ * 大家主页里的wiki由Team主页管理人员或小组成员自己选择合适的链接到Team主页上；
  * 大家如有其它建议和意见，可以写在公告栏，或者在此页回复。:)
 
 = 项目历程 =
@@ -29,6 +29,7 @@
  * [http://code.google.com/p/androidteam/wiki/AndroidCompileAndRun?ts=1260772618&updated=AndroidCompileAndRun 感受Android：Android编译并在模拟器上运行]
 === Android内核 ===
  * [http://code.google.com/p/androidteam/wiki/AndroidLinuxKernelDownload?ts=1260848549&updated=AndroidLinuxKernelDownload Android内核源码下载]
+ * [http://code.google.com/p/androidteam/wiki/AndroidKernelCompileAndRun?ts=1260947187&updated=AndroidKernelCompileAndRun 熟悉Android内核编译：Android内核编译和运行]
 === Android文件系统 ===
  * _add the content here_
 === Android驱动 ===
