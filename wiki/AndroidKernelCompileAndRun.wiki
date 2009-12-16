@@ -6,7 +6,7 @@
 
 === 准备工作 ===
  * 下载Android内核源码及交叉工具链
- 打开终端，进入用户主目录($cd ~)并输入
+ 打开终端，进入用户主目录($ cd ~)并输入
 {{{
 $ git clone git://android.git.kernel.org/kernel/common.git
 }}}
@@ -16,7 +16,7 @@ $ git clone git://android.git.kernel.org/kernel/platform/prebuilt.git
 }}}
  下载交叉编译工具链。下载完成后，交叉编译工具链将位于~/prebuilt目录下。(cupcake版本的Android源码已经包含交叉工具链，位于源码根目录的prebuilt目录下。如果下载了cupcake版本的Android，此步可以省略)
  * Build SDK
- 进入Android源码根目录，输入$make sdk即可。本机为：
+ 进入Android源码根目录，输入$ make sdk即可。本机为：
 {{{
 $ cd ~/yangdroid
 $ make sdk
