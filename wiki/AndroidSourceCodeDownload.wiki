@@ -12,7 +12,7 @@
 
  * 安装git-core, gnupg, sun-java5-jdk, flex, bison, gperf, libsdl-dev, libesd0-dev, libwxgtk2.6-dev, build-essential, zip, curl, libncurses5-dev, zlib1g-dev
 {{{
-$sudo apt-get install git-core gnupg sun-java5-jdk flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential zip curl libncurses5-dev zlib1g-dev
+$ sudo apt-get install git-core gnupg sun-java5-jdk flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential zip curl libncurses5-dev zlib1g-dev
 }}}
  本机当前源没有Package: sun-java5-jdk，为安装sun-java5-jdk，将当前源替换为以下Ubuntu 9.04的源
 {{{
@@ -27,29 +27,29 @@ deb-src http://run.hit.edu.cn/ubuntu/ jaunty-security main restricted universe m
 }}}
  然后
 {{{
-$sudo apt-get update
-$sudo apt-get install sun-java5-jdk
+$ sudo apt-get update
+$ sudo apt-get install sun-java5-jdk
 }}}
  安装sun-java5-jdk后，换回Ubuntu 9.10的源。
  若希望系统使用sun-java5-jdk，首先获得root权限并使用命令
 {{{
-#update-alternatives --config java
+# update-alternatives --config java
 }}}
  然后，选择"/usr/lib/jvm/java-1.5.0-sun/jre/bin/java"这一项，使系统使用sun-java5-jdk。
  可以用命令
 {{{
-$java -version
+$ java -version
 }}}
  查看系统当前使用的java版本
 
  * 安装Valgrind: a tool that will help you find memory leaks, stack corruption, array bounds overflows, etc. 
 {{{
-$sudo apt-get install valgrind
+$ sudo apt-get install valgrind
 }}}
 
  * 安装新版libreadline
 {{{
-$sudo apt-get install lib32readline5-dev
+$ sudo apt-get install lib32readline5-dev
 }}}
  本机源无此Package, and Android Open Source Project says: 'Intrepid (8.10) users may need a newer version of libreadline'.
  在网上只搜到了用于amd64平台的lib32readline5-dev.deb包。
@@ -60,33 +60,33 @@ $sudo apt-get install lib32readline5-dev
  For more information about Repo, see [http://source.android.com/download/using-repo Using Repo and Git]. 
  * 在用户主目录新建bin目录。
 {{{
-$cd ~
-$mkdir bin
+$ cd ~
+$ mkdir bin
 }}}
  * 将该目录添加进PATH环境变量(在~/.bashrc末添加一行"PTAH=$PATH:$HOME/bin"，重新开个终端即可)
  * 下载Repo脚本(下载完后可以用编辑器打开这个脚本爽一下)
 {{{
-$curl http://android.git.kernel.org/repo >~/bin/repo
+$ curl http://android.git.kernel.org/repo >~/bin/repo
 }}}
  * 给Repo脚本加上可执行权限
 {{{
-$chmod +x ~/bin/repo
+$ chmod +x ~/bin/repo
 }}}
 
 ==== 初始化Repo客户端 ====
 
  输入
 {{{
-$cd ~
-$mkdir yangdroid; cd yangdroid
+$ cd ~
+$ mkdir yangdroid; cd yangdroid
 }}}
  下载Repo，下列命令将在"下载Android源码阶段"下载Android master version
 {{{
-$repo init -u git://android.git.kernel.org/platform/manifest.git
+$ repo init -u git://android.git.kernel.org/platform/manifest.git
 }}}
  下载其他版本的Android用-b选项，如
 {{{
-$repo init -u git://android.git.kernel.org/platform/manifest.git -b cupcake
+$ repo init -u git://android.git.kernel.org/platform/manifest.git -b cupcake
 }}}
  在提示符后输入用户名和Email(推荐使用gmail)。
 
@@ -94,7 +94,7 @@ $repo init -u git://android.git.kernel.org/platform/manifest.git -b cupcake
 
  输入
 {{{
-$repo sync
+$ repo sync
 }}}
  下载完后，Android源码将存放于~/yangdroid目录。
 
@@ -102,7 +102,7 @@ $repo sync
 
  输入
 {{{
-$gpg --import
+$ gpg --import
 }}}
  粘贴下列Key至终端，回车并按Ctrl-D将Key导入GnuPG key database。
 {{{
