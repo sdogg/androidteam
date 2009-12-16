@@ -113,7 +113,7 @@ Do you wish to create a custom hardware profile [no]
 Created AVD 'yangAVD01' based on Android AOSP (Preview), with the following hardware config:
 hw.lcd.density=160
 }}}
- 使用$ yang@FallenAngel:~$ android list avd可以查看AVD的信息，如下：
+ 使用$ android list avd可以查看AVD的信息，如下：
 {{{
 yang@FallenAngel:~$ android list avd
 Available Android Virtual Devices:
