@@ -8,7 +8,7 @@
 === 编译环境准备 ===
 
  这里强调java环境的准备。
- * 首先，安装sun-java5-jdk。用$sudo apt-get install sun-java5-jdk 或者[http://java.sun.com/javase/downloads/index_jdk5.jsp 从SUN下载]后安装均可。
+ * 首先，安装sun-java5-jdk。用$ sudo apt-get install sun-java5-jdk 或者[http://java.sun.com/javase/downloads/index_jdk5.jsp 从SUN下载]后安装均可。
  * 然后，添加
 {{{
 export JAVA_HOME=/usr/lib/jvm/java-1.5.0-sun-1.5.0.19
@@ -18,20 +18,20 @@ export JAVA_HOME=/usr/lib/jvm/java-1.5.0-sun-1.5.0.19
 export PATH=$PATH:$JAVA_HOME/bin
 export CLASSPATH=$JAVA_HOME/lib
 }}}
- * 用$java -version查看系统使用的java版本，本机为
+ * 用$ java -version查看系统使用的java版本，本机为
 {{{
 java version "1.5.0_19"
 Java(TM) 2 Runtime Environment, Standard Edition (build 1.5.0_19-b02)
 Java HotSpot(TM) Client VM (build 1.5.0_19-b02, mixed mode, sharing)
 }}}
- 若不是java version "1.5.x_xx"，可用#update-alternatives --config java更改之。
+ 若不是java version "1.5.x_xx"，可用# update-alternatives --config java更改之。
 
 === 编译Android ===
 
- 进入Andriod源码根目录，$make即可。本机为
+ 进入Andriod源码根目录，$ make即可。本机为
 {{{
-$cd ~/yangdroid
-$make
+$ cd ~/yangdroid
+$ make
 }}}
 
  about 2 hours later......
@@ -52,7 +52,7 @@ emulator -debug-init
 
 exit 0
 }}}
- 保存并加上可执行权限($chmod +x androidemu)。打开终端输入$androidemu即可启动Android模拟器。
+ 保存并加上可执行权限($ chmod +x androidemu)。打开终端输入$ androidemu即可启动Android模拟器。
 
  * debug info from Android emulator
 {{{
