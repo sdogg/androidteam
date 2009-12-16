@@ -77,7 +77,7 @@ $ make ARCH=arm CROSS_COMPILE=arm-eabi- menuconfig
 {{{
 $ make ARCH=arm CROSS_COMPILE=arm-eabi-
 }}}
- 编译Android内核。这次编译比较快，大概10分钟。默认配置文件里只保留了很小一部分的内核特性。编译完成后将在"common/arch/arm/boot"目录下生成内核镜像zImage，这个就是要用模拟器加载并运行的内核。
+ 编译Android内核。这个编译得比较快，大概10分钟。默认配置文件里只保留了很小一部分的内核特性。编译完成后将在"common/arch/arm/boot"目录下生成内核镜像zImage，这个就是要用模拟器加载并运行的内核。
 
 === 建立AVD(Android Virtual Devices) ===
  * for more information about AVD, refer to [http://androidappdocs.appspot.com/guide/developing/tools/avd.html Android Developers](Android官网和Android Developers用正常途径又上不了了！)
