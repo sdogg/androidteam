@@ -4,7 +4,8 @@
 
 Team Members:秦国利 魏  巍 李  伟 杨绍文
 
-Add your content here.
+Homepage for Team Members:
+[http://code.google.com/p/androidteam/wiki/WEIWEI 魏巍]
 
 
 = Details =
