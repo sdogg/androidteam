@@ -70,6 +70,9 @@ cfs就是通过追踪这个vruntime来进行任务调度的。它总是选 vrunt
 CFS抛弃了active/expire数组，而使用红黑树选取下一个被调度进程。所有状态为RUNABLE的进程都被插入红黑树。在每个调度点，CFS调度器都会选择红黑树的最左边的叶子节点作为下一个将获得cpu的进程。这样总是选 vruntime最小的进程来运行。
 }}}
  * Linux2.6.17中，名词解释：双队列
+{{{
+采用双队列分成active/expire两个数组，分别按照优先级组队。
+}}}
 == References ==
  * [http://www.chinaitpower.com/A200507/2005-07-27/174010.html Intel X86系列的寻址方式总结]
  * [http://www.ibm.com/developerworks/cn/linux/l-cn-scheduler/ Linux调度器发展简述]
