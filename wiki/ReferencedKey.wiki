@@ -59,7 +59,11 @@ DPL都是3，对应linux的用户级。
 每个进程被创建时都被赋予一个时间片。时钟中断递减当前运行进程的时间片，当进程的时间片被用完时，它必须等待重新赋予时间片才能有机会运行。
 Linux2.4 调度器保证只有当所有 RUNNING 进程的时间片都被用完之后，才对所有进程重新分配时间片。
 这段时间被称为一个 epoch。这种设计保证了每个进程都有机会得到执行。
-refer to [http://www.ibm.com/developerworks/cn/linux/l-cn-scheduler/ Linux 调度器发展简述]
+(Linux调度器发展简述 http://www.ibm.com/developerworks/cn/linux/l-cn-scheduler/ )
+每个进程有一个基本时间片，通过nice计算,时间片/epoch到期时，计算新时间片.
+通常，基本时间片的值 为6，由于时钟中断大约10ms左右，因此基本时间片的长度大约60ms
 }}}
+
+
 == References ==
  * [http://www.chinaitpower.com/A200507/2005-07-27/174010.html Intel X86系列的寻址方式总结]
