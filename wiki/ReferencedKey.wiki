@@ -36,6 +36,11 @@ __USER_DS=0x2b
 他们分别对应GDT表中的用户代码段和用户数据段
 DPL都是3，对应linux的用户级。
 }}}
+ * Linux为什么要引入pidhash表？
+{{{
+在一些情况下，内核必须能从进程的PID得出对应的进程描述符指针。例如kill系统调用
+为了加速查找，引入了pid_hash散列表
+}}}
 
 == References ==
  * [http://www.chinaitpower.com/A200507/2005-07-27/174010.html Intel X86系列的寻址方式总结]
