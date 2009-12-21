@@ -65,7 +65,9 @@ Linux2.4 调度器保证只有当所有 RUNNING 进程的时间片都被用完�
 }}}
  * Linux2.6.26中，名词解释：CFS
 {{{
-
+理想的调度，所有的任务都是公平的。等速度的运行每个任务。 
+cfs就是通过追踪这个vruntime来进行任务调度的。它总是选 vruntime最小的进程来运行。
+CFS抛弃了active/expire数组，而使用红黑树选取下一个被调度进程。所有状态为RUNABLE的进程都被插入红黑树。在每个调度点，CFS调度器都会选择红黑树的最左边的叶子节点作为下一个将获得cpu的进程。这样总是选 vruntime最小的进程来运行。
 }}}
 == References ==
  * [http://www.chinaitpower.com/A200507/2005-07-27/174010.html Intel X86系列的寻址方式总结]
