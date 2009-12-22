@@ -13,5 +13,5 @@
 
 
 == 参考链接 ==
- *[http://hi.baidu.com/zkheartboy/blog/category/Embedded Embedded技术相关]
- *[http://hi.baidu.com/zjsxycli/blog/category/%C7%B6%C8%EB%CA%BDlinux 嵌入式linux]
+ * [http://hi.baidu.com/zkheartboy/blog/category/Embedded Embedded技术相关]
+ * [http://hi.baidu.com/zjsxycli/blog/category/%C7%B6%C8%EB%CA%BDlinux 嵌入式linux]
