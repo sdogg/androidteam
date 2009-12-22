@@ -4,7 +4,8 @@
  
   记录下工程实践的经历
 
-
+== Detail ==
+ * [http://www.yuanma.org/data/2007/0313/article_2419.htm S3C2410 bootloader vivi阅读笔记]
 
  
 == Reference ==
