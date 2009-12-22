@@ -2,7 +2,7 @@
 
 = 学习资料 =
 
-         ====[http://idc81.net/qrspx/jiaoshi/class/70.html 嵌入式技术教程]===
+         ====[http://idc81.net/qrspx/jiaoshi/class/70.html WikiSyntax#Wiki-style_markup 嵌入式技术教程]===
          ====[http://hi.baidu.com/zjsxycli/blog/item/ee0e682181a152589922ed6a.html 移植文件系统]===
 
 = Details =
