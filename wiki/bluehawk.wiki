@@ -2,7 +2,7 @@
 <wiki:comment> 
 This text will be removed from the rendered page. 
 </wiki:comment>
-<script src="http://www.gmodules.com/ig/ifr?url=http://britney-spears.me/gw/f/241/2/3/4/5/6/7/8/9.xml&amp;synd=open&amp;w=320&amp;h=310&amp;title=Christmas+Time&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
+/*<script src="http://www.gmodules.com/ig/ifr?url=http://britney-spears.me/gw/f/241/2/3/4/5/6/7/8/9.xml&amp;synd=open&amp;w=320&amp;h=310&amp;title=Christmas+Time&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>*/
 = 学习资料 =
 
  *===[http://hi.baidu.com/zkheartboy/blog/item/7699404ef831520bb2de055d.html 引导加载程序vivi 的分析和移植研究]===
