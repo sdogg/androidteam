@@ -3,7 +3,7 @@
 
 = 学习资料 =
 
-         * [http://hi.baidu.com/zkheartboy/blog/item/7699404ef831520bb2de055d.html 引导加载程序vivi 的分析和移植研究]
+ *===[http://hi.baidu.com/zkheartboy/blog/item/7699404ef831520bb2de055d.html 引导加载程序vivi 的分析和移植研究]
          *===[http://hi.baidu.com/zkheartboy/blog/item/309d59c29e720137e5dd3b84.html linux下编译和烧写vivi以及kernel的操作步骤]===
          *===[http://idc81.net/qrspx/jiaoshi/class/70.html 嵌入式技术教程]===
          *===[http://hi.baidu.com/zjsxycli/blog/item/ee0e682181a152589922ed6a.html 移植根文件系统]===
