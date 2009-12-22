@@ -2,11 +2,11 @@
 
 = Introduction =
  
-  #记录下工程实践的经历
+  记录下工程实践的经历
 
 
 = Details =
  
 = Reference =
 
-  #鸟哥的 Linux 与 ADSL 私房菜 
+  鸟哥的 Linux 与 ADSL 私房菜 
