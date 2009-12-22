@@ -1,4 +1,4 @@
-#杨绍文的页面  #   [http://code.google.com/p/androidteam/wiki/Team96 返回Team96]        
+杨绍文的页面 [http://code.google.com/p/androidteam/wiki/Team96 返回Team96]        
 == 学习资料 ==
 
  * [http://hi.baidu.com/zkheartboy/blog/item/7699404ef831520bb2de055d.html 引导加载程序vivi 的分析和移植研究]
