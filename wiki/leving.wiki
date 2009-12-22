@@ -1,12 +1,12 @@
 #summary Project
 
-= Introduction =
+== Introduction ==
  
   记录下工程实践的经历
 
 
-= Details =
+
  
-= Reference =
+== Reference ==
 
  *[http://code.google.com/p/androidteam/wiki/UbuntuGrubStart  鸟哥的 Linux 私房菜]
