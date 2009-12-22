@@ -1,4 +1,5 @@
-杨绍文的页面        <wiki:gadget url="http://example.com/gadget.xml" height="200" border="0" /> 
+杨绍文的页面        
+<wiki:gadget url="http://example.com/gadget.xml" height="200" border="0" /> 
 
 = 学习资料 =
 
