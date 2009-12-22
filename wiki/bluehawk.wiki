@@ -1,7 +1,4 @@
 杨绍文的页面        
-<wiki:gadget url="http://example.com/gadget.xml" height="100" border="0" /> 
-
-
 
 
 
