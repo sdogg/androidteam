@@ -1,4 +1,7 @@
 杨绍文的页面        
+{{{<wiki:gadget url="http://example.com/gadget.xml" height="100" border="0" /> }}}
+
+{{{<script src="http://www.gmodules.com/ig/ifr?url=http://igwidgets.com/gw/f/95/2/3/4/5/6/7/8/98.xml&amp;synd=open&amp;w=320&amp;h=215&amp;title=Bruce+Lee+Tips&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>}}}
 
 
 
