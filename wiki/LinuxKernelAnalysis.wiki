@@ -20,7 +20,7 @@
  * [http://androidteam.googlecode.com/files/Linux2.6.X_compile_procedure_v0.9.pdf Linux2.6.X内核编译移植过程指南v0.9（pdf file）]
 = 作业及实验Project =
 共交3～4次作业（手写）;Project分组3～4人一组,每组每个project提交一份实验报告（参照给定格式）.
- * Project-5，定时器。
+ * Project-5(提交时间2009/12/27前)，定时器。
    * 在用户态编写一个程序，该程序设定一个定时器，在时间到期的时候做出某种可观察的响应（方法不限）
    * 分析你的程序的实际执行借助了内核的哪些机制
    * 提交实验与分析报告
