@@ -9,4 +9,4 @@
  
 == Reference ==
 
- * [http://code.google.com/p/androidteam/wiki/UbuntuGrubStart  鸟哥的 Linux 私房菜]
+ * [http://linux-vbird.bluedata.org/  鸟哥的 Linux 私房菜]
