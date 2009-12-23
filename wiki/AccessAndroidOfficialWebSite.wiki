@@ -1,5 +1,5 @@
 #labels android.com
-= http://source.android.com和http://developer.android.com可以正常访问！ =
+= [http://source.android.com]和[http://developer.android.com]可以正常访问！ =
 
 == 方法二(代理不稳定,图片能显示则说明可以使用) ==
 
