@@ -1,5 +1,5 @@
 #labels android.com
-= 欢迎提供更多,更好用的方法来访问source.android.com和developer.android.com =
+= http://source.android.com和http://developer.android.com可以正常访问！ =
 
 == 方法二(代理不稳定,图片能显示则说明可以使用) ==
 
