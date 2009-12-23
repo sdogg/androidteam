@@ -23,7 +23,7 @@
 = 项目历程 =
 === 项目启动 ===
  * 项目开题
- * 项目进度规划
+ * [http://code.google.com/p/androidteam/wiki/ProjectSchedule?ts=1261553685&updated=ProjectSchedule 项目进度(每周更新)]
 === Android初探 ===
  * [http://code.google.com/p/androidteam/wiki/AndroidSourceCodeDownload?ts=1260620626&updated=AndroidSourceCodeDownload Android源码下载]
  * [http://code.google.com/p/androidteam/wiki/AndroidCompileAndRun?ts=1260772618&updated=AndroidCompileAndRun 感受Android：Android编译并在模拟器上运行]
