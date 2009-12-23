@@ -7,16 +7,11 @@
 [http://code.google.com/p/androidteam/wiki/YangHomePage?ts=1260603946&updated=YangHomePage 杨扬]  [http://code.google.com/p/androidteam/wiki/LiuXiaohuiHomePage?ts=1260608543&updated=LiuXiaohuiHomePage 刘晓辉]  [http://code.google.com/p/androidteam/wiki/zhaoruijia?ts=1260628694&updated=zhaoruijia 赵瑞甲]  [http://code.google.com/p/androidteam/wiki/wuqiudong?ts=1260628778&updated=wuqiudong 吴秋冬]  [http://code.google.com/p/androidteam/wiki/liuyangboyman?ts=1260628859&updated=liuyangboyman 刘洋]
 
 = 公告栏 =
-=== 16周任务安排 ===
- # 每个人需要把Android源码下载下来编译通过在模拟器上运行起来,给自己点新鲜感
- # 注意搜集关于Android linux内核相关信息，确定移植哪个版本linux内核，如果有谁找到关于Android linux2.6.27的内核请更新本页上内核下载方面的信息。
- # 完成关于内核编译知识积累工作，主要参考香兰姐的课件。
- # 周六或周日下午2点（待定）集体去嵌入式实验室完成2方面工作：
-   * 确定一下ubuntu与博创开发板连接是否正常，确定开发平台和可执行策略
-   * 尝试将编译好的内核下载到板子上，受受刺激
+ * [http://code.google.com/p/androidteam/wiki/ProjectSchedule?ts=1261553685&updated=ProjectSchedule 项目进度]已更新，请大家关注:)
+=== 项目第二周(2009-12-21~2009-12-27)任务安排 ===
+  本周比较忙，目前没任务
 === Team主页管理相关 ===
  * 各小组成员请将自己关于本项目的学习历程、学习心得、参考资料和其它相关信息写成wiki放到自己的主页里；
- * 为保证项目文档的完整性，麻烦晓辉同学将开题报告相关内容(项目开题和项目进度规划)进行整理并写成wiki放在自己的主页里；
  * 大家主页里的wiki由Team主页维护人员或小组成员自己选择合适的链接到Team主页上；
  * 大家如有其它建议和意见，可以写在公告栏，或者在此页回复。:)
 
