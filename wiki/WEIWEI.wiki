@@ -4,9 +4,6 @@
 == Android Project ==
 
 *[http://photo.163.com/photo/hgwei1/?u=hgwei1#m=2&ai=193680364&pi=5625753618&p=1 项目安排Gannt图：]
-
-*[http://code.google.com/p/androidteam/wiki/AndroidSourceCodeDownload
-ts=1260620626&updated=AndroidSourceCodeDownload   Android源码下载]
  
 
 == Ubuntu相关 ==
