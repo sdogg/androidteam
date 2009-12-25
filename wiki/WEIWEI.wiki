@@ -3,6 +3,8 @@
 
 == Android Project ==
 
+项目安排Gannt图：
+
 
 
 
@@ -11,4 +13,4 @@
 *[http://code.google.com/p/androidteam/wiki/UbuntuGrubStart  WUBI安装ubuntu GRUB手动引导启动方法]
 
 
-== Linux学习 ==
+== Linux内核学习 ==
