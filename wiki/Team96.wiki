@@ -2,6 +2,8 @@
 
 = Android开源项目向博创2410实验箱上的移植 =
 
+== 小组成员 ==
+
 Team Members:秦国利 魏  巍 李  伟 杨绍文
 
 Homepage for Team Members:
@@ -9,9 +11,15 @@ Homepage for Team Members:
 [http://code.google.com/p/androidteam/wiki/bluehawk 杨绍文]
 [http://code.google.com/p/androidteam/wiki/leving 李伟]
 
-= Details =
+== 项目进度 ==
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+2009年12月7日——12月12日   项目开题阶段，对项目进行调研，撰写开题报告。
+  
+
+2009年12月14日——12月19日  项目启动，知识储备阶段，熟悉并建立Android相关的开发环境。
+
+
+== 项目计划安排 ==
+
+项目进度安排Gannt图
+
