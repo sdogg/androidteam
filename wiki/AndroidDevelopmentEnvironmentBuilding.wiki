@@ -57,6 +57,6 @@ id: 4 or "android-5"
 {{{
 android create avd --target 2 --name my_avd
 }}}
-创建一个名字为my_avd的应用Android 1.5 platform的虚拟设备（提示你是否创建custom hardware profile默认选择NO即可）。一切大功告成，接下来我们就做第一个Android的工程吧。
+  创建一个名字为my_avd的应用Android 1.5 platform的虚拟设备（提示你是否创建custom hardware profile默认选择NO即可）。一切大功告成，接下来我们就做第一个Android的工程吧。
 === 六、 创建一个Android工程 ===
-  运行Elipse，选择File->new->project，选择Android project，在跳出的对话框中做以下输入。Project name:HelloAndroid; Application name:Hello,Android; Package name:org.example.hello; Create Activity:Hello。注意，不知是不是我eclipse版本的问题，中间选择Build Target的部分只显示了一小部分，只能通过鼠标拖拽选择Android 1.5。一切OK就选择Finish。然后在左侧的Package Explorer中右键单击HelloAndroid项目，选择Run AS->Android Applicatio，然后就可以等待Android模拟器启动并显示你的程序了，虽然等待的时间不短，但看到Hello，Android的出现，是不是很开心呢：）
+  运行Elipse，选择File->new->project，选择Android project，在跳出的对话框中做以下输入。Project name:HelloAndroid; Application name:Hello,Android; Package name:org.example.hello; Create Activity:Hello。注意，不知是不是我eclipse版本的问题，中间选择Build Target的部分只显示了一小部分，只能通过鼠标拖拽选择Android 1.5。一切OK就选择Finish。然后在左侧的Package Explorer中右键单击HelloAndroid项目，选择Run AS->Android Applicatio，然后就可以等待Android模拟器启动并显示你的程序了，虽然等待的时间不短，但看到Hello，Android的出现，是不是很开心呢:)
