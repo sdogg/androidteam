@@ -20,7 +20,7 @@ export PATH=$PATH:/home/liuxiaohui/work/android-sdk-linux_86/tools
 }}}
 === 四、 安装ADT（Android Development Tools）插件===
   运行Eclipse，选择help->Install New Software,在跳出的对话框中选择Add，在Add Site中Name：ADT，Location:https://dl-ssl.google.com/Android/eclipse ，点击OK，选择出现的软件，点next，接受协议直到安装成功。这时Eclipse会建议你重启，重启即可。重启之后，选择Windows Preference，在Android选项中设置SDK Location为SDK的安装目录：/home/liuxiaohui/work/android-sdk-linux_86/tools。
-=== 创建AVD（Android Virtual Device）===
+=== 五、 创建AVD（Android Virtual Device）===
    打开一个新的终端，切换到/home/liuxiaohui/work/android-sdk-linux_86/tools路径下，先执行
 {{{
 $android list
