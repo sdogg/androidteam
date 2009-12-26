@@ -30,7 +30,7 @@
 === Android驱动 ===
  * _add the content here_
 === Android应用开发 ===
- * _add the content here_
+ * _[http://code.google.com/p/androidteam/wiki/AndroidDevelopmentEnvironmentBuilding?ts=1261846479&updated=AndroidDevelopmentEnvironmentBuilding&update= Android开发环境搭建]_
 
 = Reference =
 === Android-Linux内核相关网站 ===
