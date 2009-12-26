@@ -1,9 +1,7 @@
 #labels Android,Linux
 #The way to study Android.
 
-= Summary =
+=== Summary ===
 
-[http://code.google.com/p/androidteam/wiki/AndroidDevelopmentEnvironmentBuilding?ts=1261846479&updated=AndroidDevelopmentEnvironmentBuilding&update= Building the Android development environment]
-
-
+  [http://code.google.com/p/androidteam/wiki/AndroidDevelopmentEnvironmentBuilding?ts=1261846479&updated=AndroidDevelopmentEnvironmentBuilding&update= Building the Android development environment]
 
