@@ -1,14 +1,9 @@
-#summary One-sentence summary of this page.
 #labels Android,Linux
+#The way to study Android.
 
-= Introduction =
+= Summary =
 
-Add your content here.
+[http://code.google.com/p/androidteam/wiki/AndroidDevelopmentEnvironmentBuilding?ts=1261846479&updated=AndroidDevelopmentEnvironmentBuilding&update= Building the Android development environment]
 
 
-= Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
