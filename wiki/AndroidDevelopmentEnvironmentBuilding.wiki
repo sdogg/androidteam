@@ -12,7 +12,7 @@
 {{{
 tar -xzvf eclipse-java-galileo-SR1-linux-gtk.tar.gz
 }}}
-解压生成eclipse文件夹，打开文件夹双击eclipse可执行文件就可以直接使用，但这样每次使用都需要到该路径下，为了方便可以将它加至菜单项中：点击 系统->首选项->主菜单，在对话框中选择新建项目，在新的对话框中名称自取，命令选择选择eclipse可执行文件即可，这样到eclipse的快捷方式就出现在应用程序的编程选项中了，为了更加方便可以将该快捷方式拖至桌面。
+  解压生成eclipse文件夹，打开文件夹双击eclipse可执行文件就可以直接使用，但这样每次使用都需要到该路径下，为了方便可以将它加至菜单项中：点击 系统->首选项->主菜单，在对话框中选择新建项目，在新的对话框中名称自取，命令选择选择eclipse可执行文件即可，这样到eclipse的快捷方式就出现在应用程序的编程选项中了，为了更加方便可以将该快捷方式拖至桌面。
 === 三、安装SDK ===
   点击以下网址：[http://androidappdocs.appspot.com/sdk/index.html] 进入下载页面，选择Linux对应的android-sdk_r04-linux_86.tgz下载，如至/home/liuxiaohui/work下，仍然在该路径下用tar -xzvf命令解压，则在该路径下解压出android-sdk-linux_86文件夹（之前我曾将SDK解压至usr/local下，但后来用eclipse安装ADT插件时会出错，是因为安装过程中所需要自动下载的Android API会被写入SDK的安装目录中，而eclipse是没有权限往usr/local下写数据的，所以会一直无法安装成功，不注意看还不会发现这些API没有装上，但后面我以为都安装完成后创建工程会一直报An SDK Target must be specified.的错误，郁闷阿）。然后为了能使用android-sdk-linux_86/tools下的工具，我们要在~/.bashrc中将该路径加入到环境变量PATH中。
 {{{
@@ -25,7 +25,7 @@ export PATH=$PATH:/home/liuxiaohui/work/android-sdk-linux_86/tools
 {{{
 $android list
 }}}
-会出现
+  会出现
 {{{
 Available Android targets:
 id: 1 or "android-2"
@@ -53,7 +53,7 @@ id: 4 or "android-5"
      Revision: 1
      Skins: WQVGA400, HVGA (default), WVGA854, WQVGA432, WVGA800, QVGA
 }}}
-然后执行 
+  然后执行 
 {{{
 android create avd --target 2 --name my_avd
 }}}
