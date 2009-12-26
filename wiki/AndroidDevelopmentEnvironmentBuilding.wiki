@@ -2,7 +2,7 @@
 #The way to build the Android development environment.
 
 = Android开发环境搭建 =
-**系统环境：Ubuntu 9.04,Kernel 2.6.28-11-generic,i686*
+* *系统环境：Ubuntu 9.04,Kernel 2.6.28-11-generic,i686*
 
 
 === 一、 JDK ===
