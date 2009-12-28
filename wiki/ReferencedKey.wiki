@@ -73,6 +73,14 @@ CFS抛弃了active/expire数组，而使用红黑树选取下一个被调度进�
 {{{
 采用双队列分成active/expire两个数组，分别按照优先级组队。
 }}}
+{{{
+对于处理器探测异常，根据异常时保存在内核堆栈中的eip的值可以进一步分为：
+故障(fault)：eip=引起故障的指令的地址
+通常可以纠正，处理完异常时，该指令被重新执行
+例如缺页异常
+陷阱(trap)：eip=随后要执行的指令的地址。
+
+}}}
 == References ==
  * [http://www.chinaitpower.com/A200507/2005-07-27/174010.html Intel X86系列的寻址方式总结]
  * [http://www.ibm.com/developerworks/cn/linux/l-cn-scheduler/ Linux调度器发展简述]
