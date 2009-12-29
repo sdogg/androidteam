@@ -67,7 +67,7 @@ Linux2.6.17中，名词解释：
  * Project-1(提交时间2009/12/06):基于x86体系结构分析linux-2.6.26的启动过程,参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project1_GroupX_V1.0.0_20091201.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project1_GroupX_V1.0.0_20091201.pdf pdf格式文件]
    * 仅考虑32位体系结构 
    * 不考虑多核多处理器 
- * ~~第一次作业(提交时间2009/11/30)包含~~ (批改完成) ：
+ * ~~第一次作业(提交时间2009/11/30)包含~~ (批改完成，未交作业同学名单：孙俊 亢晓江 袁萌萌 顾俊 张葛) ：
    * 1.ppt最后的作业:([ULKHomework1 参考答案])
 {{{
 C语言中堆栈的作用是什么？
