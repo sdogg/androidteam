@@ -44,7 +44,8 @@ Linux如何描述进程的地址空间？
 (3.ppt文件中)
 i386实模式下是如何解决20位地址空间和16位段寄存器之间的不匹配问题的？
 i386保护模式下的段寄存器的内容与实模式下段寄存器的内容一样么？如何解释？
-__USER_CS、 __USER_DS的值分别是多少？它们分别对应GDT表中的哪一项？RPL(课件中可能错了，应该是DPL)分别是多少，对应Linux的哪个级别（用户级还是内核级）？
+__USER_CS、 __USER_DS的值分别是多少？它们分别对应GDT表中的哪一项？RPL分别是多少，对应Linux的哪个级别（用户级还是内核级）？
+供参考：DPL：Descriptor Privilege Level,CPL:Current Privilege Level,RPL:Requested Privilege Level;RPL保存在段选择子最后2位，DPL保存在段描述符中2位，如果段选择子放入%CS字段中，则称为CPL。（感谢陈昊同学）
 (4.3 task.ppt文件中)
 Linux为什么要引入pidhash表？
 在传统的UNIX系统中，创建子进程时会复制父进程的所有资源，代价比较高，现代UNIX系统中引入了哪几项技术来解决这个问题？
