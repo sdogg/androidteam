@@ -21,7 +21,7 @@
  * [http://staff.ustc.edu.cn/~mengning/ulk/ppt_review.doc ppt review(课件概要)]
 = 作业及实验Project =
 共交3～4次作业（手写）;Project分组3～4人一组,每组每个project提交一份实验报告（参照给定格式）.
- * 作业三(提交时间2009年12月29日)
+ * 作业三(提交时间2009年12月29日)[ReferencedKey3 参考答案]
 {{{
 (8 memory.ppt)
 Linux的页框管理采用什么算法？简述该算法。
