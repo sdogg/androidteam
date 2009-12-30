@@ -2,18 +2,18 @@
 
 === 一、Android的总体系统架构 ===
   
-  应用程序层：主程序、联系人、电话、浏览器、其他应用程序
-  应用程序框架层：活动管理器、窗口管理器、内容提供者、视图系统、通知管理器、软件包管理器、电话管理器、资源管理器、位置管理器、传感器管理器
-  库和Android运行时：（库）界面管理器、媒体框架、SQLite、OpenGL|ES、FreeType、WebKit、SGL、SSL、libc、（运行时）核心库、Dalvik虚拟机
-  Linux内核：显示驱动、相机驱动、蓝牙驱动、闪存卡驱动、Binder(IPC)驱动、USB驱动、键盘驱动、WiFi驱动、音频驱动、电源管理
+  * 应用程序层：主程序、联系人、电话、浏览器、其他应用程序
+  * 应用程序框架层：活动管理器、窗口管理器、内容提供者、视图系统、通知管理器、软件包管理器、电话管理器、资源管理器、位置管理器、传感器管理器
+  * 库和Android运行时：（库）界面管理器、媒体框架、SQLite、OpenGL|ES、FreeType、WebKit、SGL、SSL、libc、（运行时）核心库、Dalvik虚拟机
+  * Linux内核：显示驱动、相机驱动、蓝牙驱动、闪存卡驱动、Binder(IPC)驱动、USB驱动、键盘驱动、WiFi驱动、音频驱动、电源管理
 === 二、Linux内核 ===
   Linux为Android提供了硬件抽象层，以便能把Android移植到更多的平台上。Android使用Linux完成其内存管理、进程管理、网络和其他操作系统服务工作。
 === 三、本机库 ===
    Android的本机库是用*C或C++语言*编写的，并且针对使用的硬件架构进行编译。其中比较重要的库有:
   * 界面管理器：Android使用和Vista类似的组合窗口管理器，但更简单一些，它并不是将显示内容直接绘制到屏幕缓冲区中，而是将绘制命令传递给屏幕外的位图，然后将该位图与其他位图组合起来，形成用户看到的显示内容。
-  *媒体编码器：*Android可播放视频内容，并可用各种格式录制和播放音频，这些格式包括AAC、AVC、H.263、MP3和MPEG-4。
-  *SQL数据库：*Android提供了轻量级的SQLite数据库引擎，Firefox和苹果的iPhone中使用的也是该数据库引擎。使用该引擎可在应用程序中持续存储。
-  *浏览器引擎：*为保证快速显示HTML内容，Android使用了WebKit库。Google Chrome浏览器、苹果的Safari浏览器、苹果的iPhone浏览器和诺基亚的S60平台都使用了该引擎。
+  * 媒体编码器：Android可播放视频内容，并可用各种格式录制和播放音频，这些格式包括AAC、AVC、H.263、MP3和MPEG-4。
+  * SQL数据库：Android提供了轻量级的SQLite数据库引擎，Firefox和苹果的iPhone中使用的也是该数据库引擎。使用该引擎可在应用程序中持续存储。
+  * 浏览器引擎：为保证快速显示HTML内容，Android使用了WebKit库。Google Chrome浏览器、苹果的Safari浏览器、苹果的iPhone浏览器和诺基亚的S60平台都使用了该引擎。
 === 四、Android运行时 ===
   该层包括Dalvik虚拟机和Java核心库。Dalvik虚拟机是Google的Java实现，专门针对移动设备进行了优化，为Android编写的所有代码使用的都是Java语言，这些代码都在虚拟机中运行。
   Dalvik和传统Java虚拟机的不同之处体现在以下两点：
