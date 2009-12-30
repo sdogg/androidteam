@@ -18,7 +18,7 @@
   该层包括Dalvik虚拟机和Java核心库。Dalvik虚拟机是Google的Java实现，专门针对移动设备进行了优化，为Android编写的所有代码使用的都是Java语言，这些代码都在虚拟机中运行。
   Dalvik和传统Java虚拟机的不同之处体现在以下两点：
   * Dalvik VM运行.dex文件，即编译时会将标准的.class和.jar文件转换为.dex文件。.dex文件比类文件更加紧凑并且更加高效，这是针对运行Android的设备内存有限且通过电池供电的特点所作出的重要改进。
-  *Android附带的Java核心库与Java SE库和Java ME库不尽相同，但是，他们之间有很大一部分还是相同的。具体细节请稍等。
+  * Android附带的Java核心库与Java SE库和Java ME库不尽相同，但是，他们之间有很大一部分还是相同的。Android中各种Java包请查看 [http://www.mtrend.net.cn/bbs/redirect.php?fid=35&tid=407&goto=nextoldset]
 === 五、应用程序框架 ===
   该层提供了在创建应用程序时需要使用的高级构建快，该框架已随Android一同安装，但开发人员也可以根据需要使用自己的组件扩展该框架。Android独特且强大的特性之一，就是所有应用程序一律平等。也就是说，系统级应用程序使用的公共API，与你开发的应用程序使用的API完全相同。如果需要，甚至可以让Android用你的应用程序替换标准的应用程序。
 === 六、应用程序 ===
