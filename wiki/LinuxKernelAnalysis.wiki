@@ -35,7 +35,8 @@ Linux如何描述进程的地址空间？
    * 在用户态编写一个程序，该程序设定一个定时器，在时间到期的时候做出某种可观察的响应（方法不限）
    * 分析你的程序的实际执行借助了内核的哪些机制
    * 提交实验与分析报告
- * Project-4(提交时间2009/12/21前)，以下六选一(6 syscall.ppt文件中) *（注意：不管选择哪一个都需要提交pdf或doc文档用来说明您的分析结果或者实验编程过程和结果，如有代码等资料可打包(打包文件命名参照pdf或doc文档的命名格式)，但pdf或doc文档不得打包，谢谢配合）* 参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project4_GroupX_V1.0.0_20091214.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project4_GroupX_V1.0.0_20091214.pdf pdf格式文件]
+ * Project-4(提交时间2009/12/21前)，（未提交报告的小组：无）
+    * 以下六选一(6 syscall.ppt文件中) *（注意：不管选择哪一个都需要提交pdf或doc文档用来说明您的分析结果或者实验编程过程和结果，如有代码等资料可打包(打包文件命名参照pdf或doc文档的命名格式)，但pdf或doc文档不得打包，谢谢配合）* 参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project4_GroupX_V1.0.0_20091214.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project4_GroupX_V1.0.0_20091214.pdf pdf格式文件]
     * 分析中断、异常和系统调用的代码(三个题目)，提交分析报告
     * 采用某种方法截获一个中断，例如键盘中断
     * 采用某种方法制造缺页异常
