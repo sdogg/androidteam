@@ -22,6 +22,7 @@
 = 作业及实验Project =
 共交3～4次作业（手写）;Project分组3～4人一组,每组每个project提交一份实验报告（参照给定格式）.
  * Project-6(提交时间2010/01/09前)参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project6_GroupX_V1.0.0_20091214.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project6_GroupX_V1.0.0_20091214.pdf pdf格式文件]
+   * 陈老师课上讲的题目，具体我还没看到那个PPT，等陈老师回复我后我更新上来，有同学有那次的PPT的麻烦发送给我，谢谢
  * 作业三(提交时间2009年12月29日)[ReferencedKey3 参考答案]
 {{{
 (8 memory.ppt)
