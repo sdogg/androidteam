@@ -23,7 +23,7 @@
 共交3～4次作业（手写）;Project分组3～4人一组,每组每个project提交一份实验报告（参照给定格式）.
  * Project-6(提交时间2010/01/09前)参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project6_GroupX_V1.0.0_20091214.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project6_GroupX_V1.0.0_20091214.pdf pdf格式文件]
    * 课件中insmod char_dev.o应该为insmod char_dev.ko
-   * 虚拟字符驱动   [http://staff.ustc.edu.cn/~mengning/ulk/virtual_char_device.rar.tgz 课堂举例的参考]，
+   * 虚拟字符驱动   [http://staff.ustc.edu.cn/~mengning/ulk/virtual_char_device.rar.tgz 课堂举例的参考]，[http://staff.ustc.edu.cn/~mengning/ulk/virtual_char_device.tar.gz tar.gz文件］
 {{{
 模拟一个字符设备，提供字符设备驱动
 在Linux 2.6环境中，动态加载虚拟字符驱动模块
