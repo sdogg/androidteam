@@ -74,7 +74,7 @@ Linux2.6.17中，名词解释：
   * 进程的创建 (4.2 task.ppt文件中)
   * 使用C语言编写一段用户程序，调用fork创建一个子进程，然后让子进程和父进程分别输出fork的返回值。目的：从用户态体验进程的创建.[http://staff.ustc.edu.cn/~mengning/ulk/fork.tar.gz 参考代码(tar.gz格式)](需要修改make.h中的路径以成功编译)
   * 对Linux中进程的创建进行分析，提交分析报告.参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project3_GroupX_V1.0.0_20091207.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project3_GroupX_V1.0.0_20091207.pdf pdf格式文件]
- * Project-2(提交时间2009/12/18前)，（未提交报告的小组：Group6，Group24）
+ * Project-2(提交时间2009/12/18前)，（未提交报告的小组：Group24）
    * 对Linux2.6.26的进程切换过程进行分析(4.1 task.ppt文件中)，提交分析报告.参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project2_GroupX_V1.0.0_20091201.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project2_GroupX_V1.0.0_20091201.pdf pdf格式文件]
  * Project-1(提交时间2009/12/06)（未提交报告的小组：Group2，Group24，另外Group14文件损坏）
    * 基于x86体系结构分析linux-2.6.26的启动过程,参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project1_GroupX_V1.0.0_20091201.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project1_GroupX_V1.0.0_20091201.pdf pdf格式文件]
