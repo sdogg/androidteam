@@ -21,7 +21,7 @@
  * [http://staff.ustc.edu.cn/~mengning/ulk/ppt_review.doc ppt review(课件概要)]
 = 作业及实验Project =
 共交3～4次作业（手写）;Project分组3～4人一组,每组每个project提交一份实验报告（参照给定格式）.
- * Project-6(提交时间2010/01/09前)参照模板 [http://staff.ustc.edu.cn/~mengning/ulk/Project6_GroupX_V1.0.0_20091214.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project6_GroupX_V1.0.0_20091214.pdf pdf格式文件]  （未提交报告的小组：Group11，Group17，Group20，Group21，Group25）
+ * Project-6(提交时间2010/01/09前)参照模板 [http://staff.ustc.edu.cn/~mengning/ulk/Project6_GroupX_V1.0.0_20091214.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project6_GroupX_V1.0.0_20091214.pdf pdf格式文件]  （未提交报告的小组：Group11，Group17，Group20，Group25）
    * 课件中insmod char_dev.o应该为insmod char_dev.ko
    * 虚拟字符驱动   [http://staff.ustc.edu.cn/~mengning/ulk/virtual_char_device.rar.tgz 课堂举例的参考]，[http://staff.ustc.edu.cn/~mengning/ulk/virtual_char_device.tar.gz tar.gz文件]
 {{{
