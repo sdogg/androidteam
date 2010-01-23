@@ -1,0 +1,14 @@
+#labels ext2
+#Ext2FileSystem
+
+= Ext2 File System=
+
+== 创建一个ext2文件系统 ==
+在磁盘上创建文件系统通常有两个步骤：
+ * 格式化磁盘,Linux中使用命令：superformat或者fdformat
+ * 创建文件系统，Ext2：mke2fs 
+ * mke2fs的缺省参数
+   * 磁盘块大小：1024字节
+   * 分片：目前不支持，因此与磁盘块一样
+   * 分配inode的个数：1/8192B
+   * 永久保留的块的个数：5％
