@@ -71,7 +71,7 @@ Linux2.6.17中，名词解释：
 (5 interrupt.ppt文件中)
 名词解释：故障和陷阱
 }}}
- * Project-3(提交时间2009/12/18前)，（未提交报告的小组：Group24）
+ * Project-3(提交时间2009/12/18前)，（未提交报告的小组：Group24 袁萌萌 张葛）
   * 进程的创建 (4.2 task.ppt文件中)
   * 使用C语言编写一段用户程序，调用fork创建一个子进程，然后让子进程和父进程分别输出fork的返回值。目的：从用户态体验进程的创建.[http://staff.ustc.edu.cn/~mengning/ulk/fork.tar.gz 参考代码(tar.gz格式)](需要修改make.h中的路径以成功编译)
   * 对Linux中进程的创建进行分析，提交分析报告.参照模板[http://staff.ustc.edu.cn/~mengning/ulk/Project3_GroupX_V1.0.0_20091207.doc doc格式文件],[http://staff.ustc.edu.cn/~mengning/ulk/Project3_GroupX_V1.0.0_20091207.pdf pdf格式文件]
