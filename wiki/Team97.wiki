@@ -9,12 +9,12 @@
 = 公告栏 =
  * [http://code.google.com/p/androidteam/wiki/ProjectSchedule?ts=1261553685&updated=ProjectSchedule 项目进度]已更新，请大家关注 :)
 === 项目第12周(2012-3-1~2010-3-7)任务安排 ===
-  各小组成员：
+  各 小组成员：
   * 搜集Android/Linux内核移植相关资料，弄清Android/Linux内核移植需修改的文件和移植步骤；
   * 根据[http://code.google.com/p/androidteam/wiki/AndroidKernelCompileAndRun?ts=1260947187&updated=AndroidKernelCompileAndRun 这篇文章]及其它资料，熟悉Android/Linux内核编译步骤，并亲手编译Android/Linux内核（版本不限）；
   * 本周六上午9：30进入实验室，熟悉Linux内核烧写步骤并获取硬件平台相关资料。
 === Team主页管理相关 ===
- * 各小组成员请将自己关于本项目的学习历程、学习心得、参考资料和其它相关信息写成wiki放到自己的主页里；
+ * 各 小组成员请将自己关于本项目的学习历程、学习心得、参考资料和其它相关信息写成wiki放到自己的主页里；
  * 大家主页里的wiki由Team主页维护人员或小组成员自己选择合适的链接到Team主页上；
  * 大家如有其它建议和意见，可以写在公告栏，或者在此页回复。:)
 
