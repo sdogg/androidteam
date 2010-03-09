@@ -1,5 +1,7 @@
 #summary My Footprint on Android
 
+[http://code.google.com/p/androidteam/wiki/NANDFlashPartition?ts=1268148180&updated=NANDFlashPartition 03/09/2010: NANDFlash Partition]
+
 [http://code.google.com/p/androidteam/wiki/AndroidKernelCompileAndRun?ts=1260947187&updated=AndroidKernelCompileAndRun 12/16/2009: Android Kernel Compile And Run]
 
 [http://code.google.com/p/androidteam/wiki/AndroidCompileAndRun?ts=1260772618&updated=AndroidCompileAndRun 12/14/2009: Android Compilation and Running in its Emulator]
