@@ -7,7 +7,7 @@
 
 === 为何重分区 ===
 
-博创实验箱默认bootloader的MTD分区表默认为：
+博创实验箱bootloader的MTD分区表默认为：
 {{{
 mtdpart info. (6 partitions)
 name              offset        size        flag
@@ -30,7 +30,7 @@ NANDFlash的BON分区表默认值同上。
 
 === 修改编译vivi ===
 
- * 修改vivi根目录下的Makefile。为该文件的LINUX_INCLUDE_DIR、CROSS_COMPILE和ARM_GCC_LIBS变量赋上相应的值。这三个变量一次代表：linux头文件目录，检查编译器目录和公共名称、arm的C库目录。这三个目录为本机交叉编译工具链自带，分别为：
+ * 修改vivi根目录下的Makefile。为该文件的LINUX_INCLUDE_DIR、CROSS_COMPILE和ARM_GCC_LIBS变量赋上相应的值。这三个变量依次代表：linux头文件目录，交叉编译器目录及其公共名称、arm的C库目录。这三个目录为本机交叉编译工具链自带，分别为：
 {{{
 LINUX_INCLUDE_DIR = /opt/host/armv4l/include/
 CROSS_COMPILE = /opt/host/armv4l/bin/armv4l-unknown-linux-
@@ -44,7 +44,7 @@ ARM_GCC_LIBS = /opt/host/armv4l/lib/gcc-lib/armv4l-unknown-linux/2.95.2
 === 分区的正确性验证 ===
 
  * *非专业验证，仅通过使用vivi引导内核并启动根文件系统来验证。*
- * 使用JTAG仿真器将编译好的vivi烧写至NANDFlash0x00000000地址处，用串口链接PC机和试验箱，打开超级终端并配置（115200bps,8N1,no flow control）。打开试验箱在超级终端上有如下输出：
+ * 使用JTAG仿真器将编译好的vivi烧写至NANDFlash0x00000000地址处，用串口链接PC机和试验箱，打开超级终端并配置(115200bps, 8N1, no flow control)。打开试验箱在超级终端上有如下输出：
 {{{
 VIVI version 0.1.4 (root@BC) (gcc version 2.95.2 20000516 (release) [Rebel.com])
  #0.1.4 二 3月 9 18:36:09 CST 2010
@@ -190,5 +190,7 @@ Enter 'help' for a list of built-in commands.
 runing /etc/profile ok
 [/mnt/yaffs]cd /
 }}}
+启动引导成功，此时可以运行一些linux命令以测试。
 
  * 该版本的vivi不支持tftp，只能用串口下载数据，下载速度慢得惊人。
+ * 还有其他它法以扩充分区容量，笔者采用了一种比较直观的方法。
