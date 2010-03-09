@@ -1,4 +1,4 @@
-#summary Rearrange Flash Partition to Fit in the Kernel
+#summary Rearrange Flash Partition to Fit the Kernel
 
 = NANDFlash Partition =
  * *系统环境: Redhat 9.0, Windows XP sp3*
