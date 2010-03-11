@@ -44,4 +44,5 @@
  * [http://www.williamhua.com/2009/04/30/how-to-build-android-15-kernel-image/ 构建Android 1.5 Linux内核映像]
  * [http://blog.csdn.net/jnstone3/archive/2008/10/27/3160133.aspx 自己编译Google Android内核的Linux源码]
  * [http://blog.csdn.net/jnstone3/archive/2008/10/27/3160357.aspx google android内核编译方法(往S3C2410上移植)]
- * [http://blog.csdn.net/vrix/archive/2009/06/23/4289435.aspx Ubuntu下编译android的linux内核 ]     
+ * [http://blog.csdn.net/vrix/archive/2009/06/23/4289435.aspx Ubuntu下编译android的linux内核 ]  
+ * [http://hi.baidu.com/messm/blog/item/6508e330208cfaa05fdf0e40.html 牛人内核移值 ]    
