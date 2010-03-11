@@ -1,6 +1,6 @@
 #summary My Footprint on Android
 
-[http://code.google.com/p/androidteam/wiki/AppDevelopEnvironment?ts=1268318678&updated=AppDevelopEnvironment 03/11/2010: Build Android Application Development Environment]
+[http://code.google.com/p/androidteam/wiki/AppDevelopEnvironment?ts=1268318678&updated=AppDevelopEnvironment 03/11/2010: Building Android Application Development Environment]
 
 [http://code.google.com/p/androidteam/wiki/NANDFlashPartition?ts=1268148180&updated=NANDFlashPartition 03/09/2010: NANDFlash Partition]
 
