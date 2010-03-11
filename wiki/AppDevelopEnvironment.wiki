@@ -48,7 +48,7 @@ https://dl-ssl.google.com/android/eclipse/
 === 配置ADT ===
 在Eclipse中：
  * 选择Window > Preferences...
- * 在左边的面板选择Android，然后在右侧点击Browse...并选中SDK路径，本见为：
+ * 在左边的面板选择Android，然后在右侧点击Browse...并选中SDK路径，本机为：
 {{{
 C:\Android\android-sdk-windows
 }}}
