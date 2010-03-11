@@ -1,6 +1,6 @@
-#summary Build Android Application Development Environment
+#summary Building Android Application Development Environment
 
-= Build Android Application Development Environment =
+= Building Android Application Development Environment =
  * *系统环境：Windows 7 Ultimate*
  * *Date：03/11/2010*
 
