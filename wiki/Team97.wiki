@@ -35,6 +35,7 @@
  * _add the content here_
 === Android应用开发 ===
  * [http://code.google.com/p/androidteam/wiki/AndroidDevelopmentEnvironmentBuilding?ts=1261846479&updated=AndroidDevelopmentEnvironmentBuilding&update= Android开发环境搭建]
+ * [http://code.google.com/p/androidteam/wiki/AppDevelopEnvironment?ts=1268318678&updated=AppDevelopEnvironment 搭建Android应用程序开发环境 for Windows]
 
 = Reference =
 === Android-Linux内核相关网站 ===
