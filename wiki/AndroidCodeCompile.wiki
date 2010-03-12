@@ -1,4 +1,3 @@
-
 = Android源码下载和编译的几个问题 =
  * *系统环境 Ubuntu 9.10 Linux-kernel 2.6.31-20 generic
  * *日期：2010/3/12
@@ -16,9 +15,11 @@ frameworks/policies/base/PolicyConfig.mk:22: *** No module defined for the given
 解决办法：
 /Android源码所在目录/build/tools/findleaves.sh中的第89行，
 
-　　这一句find "${@:0:$nargs}" $findargs -type f -name "$filename" -print |
+{{{　　
+这一句find "${@:0:$nargs}" $findargs -type f -name "$filename" -print |
 
-　　改为find "${@:1:$nargs-1}" $findargs -type f -name "$filename" -print |
+改为find "${@:1:$nargs-1}" $findargs -type f -name "$filename" -print |
+}}}
 
 这个错误改过了之后，执行make，又发现错误：
 {{{
