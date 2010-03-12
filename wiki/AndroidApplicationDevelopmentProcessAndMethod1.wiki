@@ -1,0 +1,68 @@
+#详细说明第一个HelloAndroid的构成和各部分的联系
+
+= 应用程序开发过程及方法1 =
+* *系统环境：Ubuntu 9.04,Kernel 2.6.28-11-generic,i686*,Eclipse
+
+  我们已经创建了第一个应用程序HelloAndroid，并且不用写任何代码运行程序就能看到程序显示出：Hello World,HelloAndroid。这还蛮神奇的呢不是吗，这到底是为什么呢，我们接下来对应用程序的开发进行研究。
+=== 一、应用程序构成 ===
+  我们首先观察Eclipse中HelloAndroid工程的目录结构，其中有src文件夹，gen文件夹，Android 1.5包，assets文件夹，res文件夹，AndroidManifest.xml文件，default.properties文件。其中src是源代码目录，其中包含了Android应用程序所需的全部程序代码，这些代码文件位于相应的包内，目前文件夹内只有HelloAndroid.java一个文件。gen目录下的R.java是ADT自动生成的，该类包含了应用程序所用到的各类资源对应的id，Android应用程序中就是通过R类来实现对资源的引用，R类就相当于Android应用程序的资源列表。Android 1.5目录下为SDK 1.5下的所有能够被应用程序使用的API。res是资源目录，存储了应用程序所用的资源，默认情况下res目录下会有drawable、layout、values三个子目录，其中drawable目录用来存放位图文件（如.png、.jpg等文件）；layout目录用来存放用户布局文件即使用XML文件格式的界面描述文件；values目录下包含了所有XML格式的参数描述文件，默认情况下会有一个string.xml（定义字符串）文件，如需要还可以定义color.xml（定义颜色）、array.xml（定义数组）等。AndroidManifest.xml是系统的控制文件，它描述了程序包含的全部变量，包括公开的应用程序组建和为每个组件的实现类，还有包含一个重要内容是Intent过滤器，这些过滤器描述了何时何种情况让Activity启动（关于各个组件的概念将在之后的wiki中给出）。
+=== 二、代码分析及其联系 ===
+==== 1.AndroidManifest.xml文件 ====
+{{{
+<?xml version="1.0" encoding="utf-8"?>
+   <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="org.example.hello"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <application android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true">
+        <activity android:name=".Hello"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+    <uses-sdk android:minSdkVersion="3" />
+
+</manifest> 
+}}}
+  第一行定义了版本和编码方式，第二行定义了我们所使用的架构，第三行定义了包名，第四五行定义了版本号和版本名。<application >标签之间定义了我们的应用程序，其中android:icon定义了应用程序的图标所使用的图片，android:label定义了应用程序名称所使用的字符串，而@drawable/icon代表所引用的图片为res/drawable/icon.png，同理@string/app_name代表所引用的字符串为res/values/string.xml中所定义的app_name的字符串内容。<activity>标签之间定义了应用程序中的Activity以及Activity能够接受的Intent，其中<intent-filter>之间即表示的Activity能够接受的Intent，android.intent.action.MAIN表示该Activity为应用程序的入口，android.intent.category.LAUNCHER表示应用程序会被显示在Home的应用程序列表中。
+==== 2.main.xml ====
+{{{
+<?xml version="1.0" encoding="utf-8"?>
+   <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="vertical"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+    >
+      <TextView  
+         android:layout_width="fill_parent" 
+         android:layout_height="wrap_content" 
+         android:text="@string/hello"
+      />
+</LinearLayout>
+}}}
+  在该布局文件中，使用了LinearLayout线性布局，从android:orientation="vertical"可知定义的布局方向是垂直的，android:layout_width="fill_parent"可知该线性布局的宽度是占满整个父控件的控件，在这里就是整个屏幕，同样android:layout_height="fill_parent"表示的是线性布局的长度也是占满了整个屏幕。<TextView/>定义了一个TextView控件，其中宽度为父控件的宽度，长度"wrap_content"是根据内容调整，android:text="@string/hello"可知TextView显示的文本内容为res/values/string.xml中定义的hello的字符串。
+==== 3.string.xml ====
+{{{
+<?xml version="1.0" encoding="utf-8"?>
+  <resources>
+     <string name="hello">Hello World, HelloAndroid!</string>
+     <string name="app_name">Hello</string>
+  </resources>
+}}}
+  可知应用程序名称引用的”app_name”的字符串内容为Hello，而在布局中TextView控件显示的文本内容为Hello World, HelloAndroid!，这就是为什么我们没有敲入代码就会在屏幕上显示出经典的Hello World的字符串来源了。
+==== 4.HelloAndroid.java ====
+{{{
+ public class HelloAndroid extends Activity {
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+    }
+ }
+}}}
+  该类继承了Activity即该类实现了一个Activtiy的定义。其中，onCreate函数在Activity创建时就被调用，函数中super.onCreate(savedInstanceState)是对基类的onCreate函数的调用，实际是获取Activity的状态。setContentView(R.layout.main)指定了用户界面，即将res/layout/main.xml定义的布局装入，这是通过R类的引用来实现的，到此，程序的界面装入，为何会显示屏幕上的内容也已经清楚啦，之后的wiki会继续研究SDK开发的过程和方法。
