@@ -6,3 +6,5 @@
   [http://code.google.com/p/androidteam/wiki/AndroidDevelopmentEnvironmentBuilding?ts=1261846479&updated=AndroidDevelopmentEnvironmentBuilding&update= Building the Android development environment]
 
   [http://code.google.com/p/androidteam/wiki/TheAnalysisOfAndroidStructure1?ts=1262147579&updated=TheAnalysisOfAndroidStructure1&update= The analysis of Android structureI]
+
+  [http://code.google.com/p/androidteam/wiki/AndroidApplicationDevelopmentProcessAndMethod1= Android应用程序开发过程及方法1]
