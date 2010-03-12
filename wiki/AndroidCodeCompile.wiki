@@ -13,12 +13,16 @@
 frameworks/policies/base/PolicyConfig.mk:22: *** No module defined for the given PRODUCT_POLICY (android.policy_phone).  
 }}}
 解决办法：
-/Android源码所在目录/build/tools/findleaves.sh中的第89行，
 
-{{{　　
-这一句find "${@:0:$nargs}" $findargs -type f -name "$filename" -print |
-
-改为find "${@:1:$nargs-1}" $findargs -type f -name "$filename" -print |
+ 在Android源码所在目录中 进入build/tools/findleaves.sh中的第89行
+　　
+这一句
+{{{
+find "${@:0:$nargs}" $findargs -type f -name "$filename" -print |
+}}}
+改为 
+{{{
+find "${@:1:$nargs-1}" $findargs -type f -name "$filename" -print |
 }}}
 
 这个错误改过了之后，执行make，又发现错误：
@@ -26,23 +30,24 @@ frameworks/policies/base/PolicyConfig.mk:22: *** No module defined for the given
 frameworks/base/tools/aidl/AST.cpp:10: error: 'fprintf' was not declared in this scope
 }}}
 解决办法：
+
 下载gcc-4.3和g++-4.3，替换最新的gcc-4.4和g++-4.4版本
-
+{{{
 sudo apt-get install g++-4.3 gcc-4.3
-
+}}}
 进入/usr/bin目录
 删除目录下对gcc-4.4 和 g++-4.4的软链接
-
+{{{
 rm gcc
 
 rm g++
-
+}}}
 建立如下链接
-
+{{{
 ln -s gcc-4.3 gcc
 
 ln -s g++-4.3 g++
-
+}}}
 执行make sdk命令 ，编译成功
 
 === END === 
