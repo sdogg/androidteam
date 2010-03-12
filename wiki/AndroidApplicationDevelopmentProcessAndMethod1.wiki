@@ -1,4 +1,4 @@
-#详细说明第一个HelloAndroid的构成和各部分的联系
+#详细说明第一个工程HelloAndroid的构成和各部分的联系
 
 = 应用程序开发过程及方法1 =
 * *系统环境：Ubuntu 9.04,Kernel 2.6.28-11-generic,i686*,Eclipse
