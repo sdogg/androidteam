@@ -86,7 +86,7 @@ chmod 777 android-sdk-linux_86/
     继续等... 
     完成后按照上一步继续安装ADT。 
 
-= 建立Andriod虚拟设备（AVD｝ =
+= 建立Andriod虚拟设备（AVD） =
 
     打开菜单“Windows”,依次选择“preferences”->“andriod”，点击“browser..”按钮，选择Andriod SDK的安装路径。设置完路径后点击ok. 
 
