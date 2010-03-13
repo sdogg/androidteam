@@ -2,7 +2,7 @@
 
 = 操作系统 =
 
-  推荐wubi安装ubuntu
+  推荐wubi安装ubuntu。
   版本：Linux9.10，内核：2.6.31-15-generic
 
 
