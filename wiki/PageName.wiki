@@ -3,7 +3,7 @@
 = 操作系统 =
 
   推荐wubi安装ubuntu。
-  版本：Linux9.10，内核：2.6.31-15-generic
+  此次安装环境ubuntu9.10，内核:2.6.31-15-generic
 
 
 = 安装jdk =
@@ -16,7 +16,7 @@ sudo apt-get install sun-java6-jdk
 {{{
 apt-get -f install
 }}}
-  出现:将会安装下列额外的软件包：
+  将会出现安装下列额外的软件包：
   odbcinst1debian1 sun-java6-bin sun-java6-jre(升级) unixodbc
   安装过程中需要你回答是否同意使用协议（终端中红蓝色的提示界面），此时按tab键至OK，再按回车即可正常安装。
 
@@ -58,7 +58,7 @@ java -version
 
 
 = 安装SDK =
-  建立一个安装程序目录
+  建立一个安装程序目录。
 {{{
 cd /home/leving
 mkdir andriod
