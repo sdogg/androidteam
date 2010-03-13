@@ -13,8 +13,9 @@
  Linux Kernel 编译过程
    * 获取Linux Kernel 源代码及补丁内
      # 内核获取地址： http://www.kernel.org/pub/linux/kernel/ v2.6/打开上述网页后，在下面的各种文件中找到linux-2.6.22.2.tar.gz 这个文件，然后下载此文件。 
-   
-
+   * 内核配置
+     # 将Linux2.6.22.2 内核源码放到工作目录的kernel 文件夹下，并解压
+       
 
 = Linux 相关 =
 
