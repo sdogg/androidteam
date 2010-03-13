@@ -4,6 +4,18 @@
    * 交叉编译工具链的获取
      # 文件准备： arm-linux-tools-20061213.tar.gz.
      # 下载地址： http://ftp.snapgear.org/pub/snapgear/tools/arm-linux/arm-linux/arm-linux -tools-20061213.tar.gz
+   * 交叉编译工具链的安装和验证
+     # 在Ubuntu (9.04) 上，首先通过将文件arm-linux-tools-20061213.tar.gz 拷贝到/Work/armlinux2006
+目录下
+     # 打开终端， cd /Work/ arm-linux2006 ，进入/Work/ arm-linux2006 目录
+     # 解压文件：sudo tar zx vf arm-linux-tools-20061213.tar.gz 解压完成后会生成一个usr 目录
+     # 解压完成后，可以看见有一个usr 目录，通过cd usr/local/bin 进入bin 目录。通过ls 可以
+查看目录下的文件信息。
+     # 增加系统环境变量，使以后能在任何地方都可以使用arm-linux-gcc 等等工具。在终端中
+输入sudo gedit /etc/environment, 在输入密码后，可以看见一个别打开的环境变量的文件。通过
+在最后的环境变量路径后（ ”号前）加一个冒号，然后输入你的安装路径,在本实验中，输入
+“/Work/arm-linux2006/usr/local/bin ”。然后关闭文件，重新启动linux 系统后，新的环境变量才
+能生效。
 
 
 = Linux 相关 =
