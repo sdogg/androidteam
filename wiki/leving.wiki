@@ -5,9 +5,11 @@
   记录下工程实践的经历
 
 == Detail ==
- * [http://www.yuanma.org/data/2007/0313/article_2419.htm S3C2410 bootloader vivi阅读笔记]
+ 
+   [:ubuntu下Andriod开发环境配置]
+
 
  
 == Reference ==
 
- * [《Andriod应用开发揭秘》、《Andriod系统原理及开发要点详解》、《JAVA核心技术》卷一]
+   [《Andriod应用开发揭秘》、《Andriod系统原理及开发要点详解》、《JAVA核心技术》卷一]
