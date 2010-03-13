@@ -1,5 +1,6 @@
 #Linux 2.6.X内核编译
    * 系统环境：ubuntu 9.04
+   * 时间：13/03/2010
  交叉编译环境的配置
    * 交叉编译工具链的获取
      # 文件准备： arm-linux-tools-20061213.tar.gz.
@@ -18,7 +19,7 @@
        # #tar xzvf linux2.6.22.2.tar.gz
        # # cd linux2.6.22.2
  详细配置见http://blog.chinaunix.net/u1/34474/showart_369449.html
-       
+    *我用以上方法成功得编译了内核
 
 
 
