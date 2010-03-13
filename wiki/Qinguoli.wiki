@@ -1,8 +1,9 @@
-#My Android Project
+#Linux 2.6.X内核编译
 
-= Android 相关 =
-
-
+ 交叉编译环境的配置
+   * 交叉编译工具链的获取
+     # 文件准备： arm-linux-tools-20061213.tar.gz.
+     # 下载地址： http://ftp.snapgear.org/pub/snapgear/tools/arm-linux/arm-linux/arm-linux -tools-20061213.tar.gz
 
 
 = Linux 相关 =
