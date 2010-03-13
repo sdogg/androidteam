@@ -17,55 +17,8 @@
      * 将Linux2.6.22.2 内核源码放到工作目录的kernel 文件夹下，并解压到/home/qinguoli/linux-2.6.22.2文件夹中
        # #tar xzvf linux2.6.22.2.tar.gz
        # # cd linux2.6.22.2
-     * 修改内核源码根目录下的Makefile 文件
-       # ARCH = arm
-       # CROSS_COMPILE=/home/qinguoli/usr/local/bin
- 修改arch/arm/plat-s3c24xx/common-smdk.c 文件，修改Nand Flash 的分区信息和Nand Flash 的硬件信息
-     * {{{static struct mtd_partition smdk_default_nand_part[] = {
-       * [0] = {
-        .name = "U-Boot-1.2.0",
-        .size = SZ_128K,
-        .offset = 0,
-       },
-       * [1] = {
-       .name = "U-Boot-1.2.0 Parameter",
-       .offset = SZ_128K,
-       .size = SZ_64K,
-      },
-      * [2] = {
-      .name = "Linux2.6.22.2 Kernel",
-      .offset = SZ_128K+SZ_64K,
-      .size = SZ_4M+(SZ_1M-SZ_128K-SZ_64K),
-      },
-      * [3] = {
-     .name = "Root-JFFS2",
-     .offset = SZ_1M * 5,
-     .size = SZ_1M * 5,
-     },
-     * [4] = {
-     .name = "Boot-Root(cramf s)",
-     .offset = SZ_1M * 10,
-     .size = SZ_1M * 10,
-     },
-    * [5] = {
-    .name = "YAFFS",
-    .offset = SZ_1M * 20,
-    .size = SZ_1M * 44,
-    }
-    /*, * [6] = {
-    .name = "S3C2410 flash partition 6",
-    .offset = SZ_1M * 24,
-    .size = SZ_1M * 24,
-    },
-   * [7] = {
-   .name = "S3C2410 flash partition 7",
-   .offset = SZ_1M * 48,
-   .size = SZ_16M,
-   }*/
-   };}}}
-= Linux 相关 =
-
-
+ 详细配置见http://blog.chinaunix.net/u1/34474/showart_369449.html
+       
 
 
 
