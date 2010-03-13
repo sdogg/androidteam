@@ -11,4 +11,4 @@
  
 == Reference ==
 
-   [《Andriod应用开发揭秘》、《Andriod系统原理及开发要点详解》、《JAVA核心技术》卷一]
+   《Andriod应用开发揭秘》、《Andriod系统原理及开发要点详解》、《JAVA核心技术》卷一
