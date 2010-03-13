@@ -44,7 +44,7 @@ CLASSPATH=.:/usr/lib/jvm/java-6-sun/lib
 java -version
 }}}
 
-  会显示系统使用的java版本(java version "1.6.0_15")
+  显示系统使用的java版本(java version "1.6.0_15")
 
 
 = 安装eclipse = 
@@ -97,7 +97,7 @@ chmod 777 android-sdk-linux_86/
    打开菜单“Windows”,依次选择“preferences”->“andriod”，点击“browser..”按钮，选择Andriod SDK的安装路径。设置完路径后点击ok.
  
   打开菜单“Windows”，点击“Andriod SDK and AVD Manager”,选择“virtual devices”,设置name(名字任意)，target选择为“andriod 2.1-api level 7”,SD Card设置size为：1024。点击creat AVD。
-选择“Install Packages”,确保“SDK Platform Andriod 2.1”存在该项中。
+  选择“Install Packages”,确保“SDK Platform Andriod 2.1”存在该项中。
 
 = 创建一个工程 =
   打开“File“->“new“->“project...“，选择“Android“文件夹下“Android project“，Next。输入Project name:HelloAndroid（任意），Build Target项选择“Andriod2.1” Application name:HelloAndroid; Package name:com.example; Create Activity:(与Project name相同),Min SDK Version:7(根据sdk版本设置)，Finish。点击Run AS按钮，选择“Andriod Application”,OK。最后的等待...
