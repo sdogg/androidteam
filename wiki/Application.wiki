@@ -1,0 +1,96 @@
+#Android开发环境搭建（ubuntu）
+= 操作系统 =
+
+    推荐wubi安装ubuntu。 
+    此次安装环境ubuntu9.10，内核:2.6.31-15-generic 
+
+= 安装jdk =
+
+    直接使用命令进行安装
+{{{
+sudo apt-get install sun-java6-jdk
+}}}
+
+    但是出现无法安装的情况.
+    根据提示切换到管理员模式下（sudo -i），
+    输入命令：
+{{{
+apt-get -f install
+}}}
+    将会出现安装下列额外的软件包： 
+    odbcinst1debian1 sun-java6-bin sun-java6-jre(升级) unixodbc 
+    安装过程中需要你回答是否同意使用协议（终端中红蓝色的提示界面），此时按tab键至OK，再按回车即可正常安装。 
+
+    安装命令:
+{{{
+sudo apt-get install sun-java6-jdk
+}}}
+    一路顺畅... 
+
+== 配置JAVA环境变量: ==
+{{{
+sudo gedit /etc/envoirment 
+}}}
+    在其中添加如下两行：
+{{{
+JAVA_HOME=/usr/lib/jvm/java-6-sun
+CLASSPATH=.:/usr/lib/jvm/java-6-sun/lib
+}}}
+    要使配置生效必须重启机器或者在命令行输入
+{{{
+. /etc/environment
+}}}
+    查看到版本信息：
+{{{
+java -version
+}}}
+    显示系统使用的java版本(java version "1.6.0_15") 
+
+= 安装eclipse =
+
+    “系统--系统管理--新立得软件包管理器“,
+    选择eclipse Extensible Tool Platform and Java IDE 
+    右键标志以便安装. 
+    等... 
+
+    安装成功后点击“应用程序--编程--eclipse”可以启动eclipse 
+
+= 安装SDK =
+
+    建立一个安装程序目录。
+{{{
+cd /home/leving
+mkdir andriod
+chmod 777 andriod
+}}}
+    下载SDK:［http://androidappdocs.appspot.com/sdk/index.html］ 
+    选择linux安装环境的android-sdk-linux_86 解压SDK:
+{{{
+tar -zxvf android-sdk_r05-linux_86.tgz
+chmod 777 android-sdk-linux_86/
+}}}
+    解压后文件夹放在/home/leving/andriod下 
+
+= 安装Eclipse插件Android Development Tools(ADT) =
+
+    运行Eclipse, 点击 Help > Install New Software > Available Software。点击“Add ..”按钮 在location输入网址http://dl-ssl.google.com/android/eclipse/（name项不管），点OK. 这时你将会看到Developer tools出现在列表中, 展开选中目录下的“Android DDMS”、“Android Development Tools”两项。 
+    点击Next按钮就开始安装了. 
+    等... 
+
+（根据eclipse版本不同可能会出现无法安装的情况，可能缺少插件（wst）,如果遇到这种情况转下一步）
+
+    下一步：点击“Add ..”按钮 在location输入网址:http://download.eclipse.org/releases/galileo penging... 
+    出现许多的选项 选择最后一项“Web, XML, and Java EE Development”下的”WST Server Adapters“，
+    点击Next。 
+    继续等... 
+    完成后按照上一步继续安装ADT。 
+
+= 建立Andriod虚拟设备（AVD｝ =
+
+    打开菜单“Windows”,依次选择“preferences”->“andriod”，点击“browser..”按钮，选择Andriod SDK的安装路径。设置完路径后点击ok. 
+
+    打开菜单“Windows”，点击“Andriod SDK and AVD Manager”,选择“virtual devices”,设置name(名字任意)，target选择为“andriod 2.1-api level 7”,SD Card设置size为：1024。点击creat AVD。 选择“Install Packages”,确保“SDK Platform Andriod 2.1”存在该项中。 
+
+= 创建一个工程 =
+
+    打开“File“->“new“->“project...“，选择“Android“文件夹下“Android project“，Next。输入Project name:HelloAndroid?，Build Target项选择“Andriod2.1” Application name:HelloAndroid?; Package name:com.example; Create Activity:(与Project name相同),Min SDK Version:7(根据sdk版本设置)，Finish。点击Run AS按钮，选择“Andriod Application”,OK。最后的等待... 
