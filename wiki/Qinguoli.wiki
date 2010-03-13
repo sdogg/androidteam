@@ -1,5 +1,5 @@
 #Linux 2.6.X内核编译
-
+   * 系统环境：ubuntu 9.04
  交叉编译环境的配置
    * 交叉编译工具链的获取
      # 文件准备： arm-linux-tools-20061213.tar.gz.
@@ -9,14 +9,60 @@
      # 打开终端， cd /Work/ arm-linux2006 ，进入/Work/ arm-linux2006 目录
      # 解压文件：sudo tar zx vf arm-linux-tools-20061213.tar.gz 解压完成后会生成一个usr 目录
      # 解压完成后，可以看见有一个usr 目录，通过cd usr/local/bin 进入bin 目录。通过ls 可以查看目录下的文件信息。
-     # 增加系统环境变量，使以后能在任何地方都可以使用arm-linux-gcc 等等工具。在终端中输入sudo gedit /etc/environment, 在输入密码后，可以看见一个别打开的环境变量的文件。通过在最后的环境变量路径后（ ”号前）加一个冒号，然后输入你的安装路径,在本实验中，输入“/Work/arm-linux2006/usr/local/bin ”。然后关闭文件，重新启动linux 系统后，新的环境变量才能生效。
+     # 增加系统环境变量，使以后能在任何地方都可以使用arm-linux-gcc 等等工具。在终端中输入sudo gedit /etc/environment, 在输入密码后，可以看见一个别打开的环境变量的文件。通过在最后的环境变量路径后（ ”号前）加一个冒号，然后输入你的安装路径,在本实验中，输入“/home/qinguoli/usr/local/bin ”。然后关闭文件，重新启动linux 系统后，新的环境变量才能生效。
 
  获取Linux Kernel 源代码及补丁内
     * 内核获取地址： http://www.kernel.org/pub/linux/kernel/ v2.6/打开上述网页后，在下面的各种文件中找到linux-2.6.22.2.tar.gz 这个文件，然后下载此文件。 
  内核配置
-     * 将Linux2.6.22.2 内核源码放到工作目录的kernel 文件夹下，并解压
+     * 将Linux2.6.22.2 内核源码放到工作目录的kernel 文件夹下，并解压到/home/qinguoli/linux-2.6.22.2文件夹中
        # #tar xzvf linux2.6.22.2.tar.gz
        # # cd linux2.6.22.2
+     * 修改内核源码根目录下的Makefile 文件
+       # ARCH = arm
+       # CROSS_COMPILE=/home/qinguoli/usr/local/bin
+ 修改arch/arm/plat-s3c24xx/common-smdk.c 文件，修改Nand Flash 的分区信息和Nand Flash 的硬件信息
+     * {{{static struct mtd_partition smdk_default_nand_part[] = {
+[0] = {
+.name = "U-Boot-1.2.0",
+.size = SZ_128K,
+.offset = 0,
+},
+[1] = {
+.name = "U-Boot-1.2.0 Parameter",
+.offset = SZ_128K,
+.size = SZ_64K,
+},
+[2] = {
+.name = "Linux2.6.22.2 Kernel",
+.offset = SZ_128K+SZ_64K,
+.size = SZ_4M+(SZ_1M-SZ_128K-SZ_64K),
+},
+[3] = {
+.name = "Root-JFFS2",
+.offset = SZ_1M * 5,
+.size = SZ_1M * 5,
+},
+[4] = {
+.name = "Boot-Root(cramf s)",
+.offset = SZ_1M * 10,
+.size = SZ_1M * 10,
+},
+[5] = {
+.name = "YAFFS",
+.offset = SZ_1M * 20,
+.size = SZ_1M * 44,
+}
+/*, [6] = {
+.name = "S3C2410 flash partition 6",
+.offset = SZ_1M * 24,
+.size = SZ_1M * 24,
+},
+[7] = {
+.name = "S3C2410 flash partition 7",
+.offset = SZ_1M * 48,
+.size = SZ_16M,
+}*/
+};}}}
 = Linux 相关 =
 
 
