@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#the introduction of LCD.
 
 = LCD 相关介绍 =
 == LCD概述 ==
