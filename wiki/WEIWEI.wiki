@@ -7,6 +7,8 @@
 
 *[http://code.google.com/p/androidteam/wiki/AndroidCodeCompile Android源码编译的几个问题]
 
+*[http://code.google.com/p/androidteam/wiki/AndroidtFileSystemAnalysis Android系统及根文件目录分析]
+
 == Ubuntu相关 ==
 
 *[http://code.google.com/p/androidteam/wiki/UbuntuGrubStart  WUBI安装ubuntu GRUB手动引导启动方法]
