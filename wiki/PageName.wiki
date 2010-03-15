@@ -1,4 +1,4 @@
-#The introduction of LCD .
+#The introduction about LCD page.
 
 = LCD 相关介绍 =
 == LCD概述 ==
