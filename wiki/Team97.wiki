@@ -30,7 +30,7 @@
  * [http://code.google.com/p/androidteam/wiki/AndroidKernelCompileAndRun?ts=1260947187&updated=AndroidKernelCompileAndRun 熟悉Android内核编译：Android内核编译和运行]
  * [http://code.google.com/p/androidteam/wiki/NANDFlashPartition?ts=1268148180&updated=NANDFlashPartition NANDFlash重分区]
 === Android文件系统 ===
- * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis1?ts=1268216948&updated=AndroidFileSystemAnalysis1 10/03/2010 Android文件系统分析（一）]
+ * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis1?ts=1268216948&updated=AndroidFileSystemAnalysis1  Android文件系统分析（一）]
 === Android驱动 ===
  * _add the content here_
 === Android应用开发 ===
