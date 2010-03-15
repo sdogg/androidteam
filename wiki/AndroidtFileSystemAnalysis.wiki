@@ -1,8 +1,9 @@
-
 = Android系统及根文件目录分析 =
 * *系统环境 Ubuntu 9.10 Linux-kernel 2.6.31-20 generic
 * *日期：2010/3/14
+
 Android系统编译完成后包含以下结果：
+
 主机工具;
 
 目标机程序；
