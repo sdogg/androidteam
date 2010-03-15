@@ -9,7 +9,7 @@
 = 公告栏 =
  * [http://code.google.com/p/androidteam/wiki/ProjectSchedule?ts=1261553685&updated=ProjectSchedule 项目进度]已更新，请大家关注 :)
 === 项目第12周(2012-3-1~2010-3-7)任务安排 ===
-  各 小组成员：
+  各小组成员：
   * 搜集Android/Linux内核移植相关资料，弄清Android/Linux内核移植需修改的文件和移植步骤；
   * 根据[http://code.google.com/p/androidteam/wiki/AndroidKernelCompileAndRun?ts=1260947187&updated=AndroidKernelCompileAndRun 这篇文章]及其它资料，熟悉Android/Linux内核编译步骤，并亲手编译Android/Linux内核（版本不限）；
   * 本周六上午9：30进入实验室，熟悉Linux内核烧写步骤并获取硬件平台相关资料。
@@ -31,6 +31,7 @@
  * [http://code.google.com/p/androidteam/wiki/NANDFlashPartition?ts=1268148180&updated=NANDFlashPartition NANDFlash重分区]
 === Android文件系统 ===
  * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis1?ts=1268216948&updated=AndroidFileSystemAnalysis1  Android文件系统分析（一）]
+ * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis2?ts=1268659603&updated=AndroidFileSystemAnalysis2  Android根文件系统启动分析]
 === Android驱动 ===
  * _add the content here_
 === Android应用开发 ===
