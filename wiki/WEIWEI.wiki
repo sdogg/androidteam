@@ -9,6 +9,7 @@
 
 *[http://code.google.com/p/androidteam/wiki/AndroidtFileSystemAnalysis Android系统及根文件目录分析]
 
+*[http://code.google.com/p/androidteam/wiki/AndroidInitAnalysis Android系统启动分析]
 == Ubuntu相关 ==
 
 *[http://code.google.com/p/androidteam/wiki/UbuntuGrubStart  WUBI安装ubuntu GRUB手动引导启动方法]
