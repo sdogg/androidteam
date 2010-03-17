@@ -10,7 +10,7 @@
 
 2）下载交叉编译工具并配置环境变量，这里要注意版本的选择问题：
 
-我开始使用的是arm-linux-gcc-3.4.1和arm-linux-tools-20061213，编译成功后发现将busybox加入到Android系统，在Android终端内对busybox无法操作，提示busybox命令不合法，查阅相关资料发现可能是交叉编译工具的选择有问题，重新下载交叉编译工具arm-2007q3-51-arm-none-linux-gnueabi-i686-pc-linux-gnu，这个版本是基于EABI的，增加了对浮点运算等方面的支持。
+我开始使用的是arm-linux-gcc-3.4.1和arm-linux-tools-20061213，编译成功后发现将busybox加入到Android系统，在Android终端内对busybox无法操作，提示busybox命令不合法，查阅相关资料发现可能是交叉编译工具的选择有问题，Android内核支持EABI，所以需要重新下载交叉编译工具arm-2007q3-51-arm-none-linux-gnueabi-i686-pc-linux-gnu，这个版本是基于EABI的，增加了对浮点运算等方面的支持。
 
 3）编译busybox，在busybox目录下执行make menuconfig命令对编译过程进行配置.  过程如下:
 {{{
