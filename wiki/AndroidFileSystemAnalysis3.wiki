@@ -652,14 +652,19 @@ lost+found
 == 三、制作自己的system.img镜像 ==
 
 1、去[http://www.aleph1.co.uk/cgi-bin/viewcvs.cgi/yaffs2/ yaffs2制作工具]这个网站下载制作yaffs2文件系统的工具
+
 2、进入utils文件夹下运行make生成mkyaffs2image工具
+
 3、将刚才从模拟器中脱出来的文件解压后放到～/workspace1目录下，进入system/app中删掉AlarmClock.apk进行试验性剪裁。
+
 4、输入命令
 {{{
 zhaoruijia@zhaoruijia-ubunut:~/work/yaffs2/utils$ ./mkyaffs2image  ~/workspace1/system system.img
 }}}
 在/utils文件夹下生成system.img
+
 5、将这个镜像文件拷贝到/home/zhaoruijia/zhaoAndroid/out/target/product/generic目录下替换原有的文件
+
 6、运行模拟器发现运行成功
 
 
