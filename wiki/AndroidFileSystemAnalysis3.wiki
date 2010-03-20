@@ -2,7 +2,7 @@
 = Introduction =
 
 == 一、busybox的安装 ==
- busybox可以自己定制也可以从网上下现成的可执行程序，我是从网上找了一个针对Android文件系统的可执行的busybox［http://benno.id.au/blog/2007/11/14/android-busybox busybox获取］，将其下载到/home/zhaoruijia/Androidsdk/android-sdk-linux_86/tools这个目录下，然后打开模拟器，接着打开一个终端进入这个目录，
+ busybox可以自己定制也可以从网上下现成的可执行程序，我是从网上找了一个针对Android文件系统的可执行的busybox[http://benno.id.au/blog/2007/11/14/android-busybox busybox获取]，将其下载到/home/zhaoruijia/Androidsdk/android-sdk-linux_86/tools这个目录下，然后打开模拟器，接着打开一个终端进入这个目录，
 
 1、将busybox可执行文件拷贝到模拟器中
 {{{
@@ -664,4 +664,3 @@ zhaoruijia@zhaoruijia-ubunut:~/work/yaffs2/utils$ ./mkyaffs2image  ~/workspace1/
 
 
 （待续）
-
