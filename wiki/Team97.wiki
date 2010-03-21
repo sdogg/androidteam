@@ -33,6 +33,7 @@
 === Android文件系统 ===
  * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis1?ts=1268216948&updated=AndroidFileSystemAnalysis1  Android文件系统分析（一）]
  * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis2?ts=1268659603&updated=AndroidFileSystemAnalysis2  Android根文件系统启动分析]
+ * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis3?ts=1269073637&updated=AndroidFileSystemAnalysis3  Android根文件系统制作方法（模拟器上运行）]
 === Android驱动 ===
  * _add the content here_
 === Android应用开发 ===
