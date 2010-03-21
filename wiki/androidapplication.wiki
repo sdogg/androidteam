@@ -3,10 +3,10 @@
 = 一个简单的图片显示程序 =
 
    制作一个最简单的图片调用程序:
-   1、新建一个android工程，比如工程名为“helloimage”.
+   *新建一个android工程，比如工程名为“helloimage”.
 
-   2、寻找一副图片（图片名必须小写，图片要求不要太大），点击helloimage->res->drawable，粘贴在drawable目录下，该目录下显示粘贴的文件.
-   3、修改代码。双击helloimage->res->layout->main.xml，
+   *寻找一副图片（图片名必须小写，图片要求不要太大），点击helloimage->res->drawable，粘贴在drawable目录下，该目录下显示粘贴的文件.
+   *修改代码。双击helloimage->res->layout->main.xml，
    去掉代码：
 {{{   
 <TextView  
@@ -21,4 +21,4 @@ android:text="@string/hello"
 android:background="@drawable/（此处输入相片名称）"
 }}}
    保存。
-   4、程序制作完成。点击"Run As..."。
+   *程序制作完成。点击"Run As..."。
