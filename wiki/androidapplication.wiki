@@ -1,6 +1,5 @@
 #labels Ansimpleapplication,ImageView
-#AndroidApplication.
-
+ 
 = 一个简单的图片显示程序 =
 == 程序开发环境 ==
    Linux ubuntu 2.6.31-15-generic #50-Ubuntu SMP Tue Nov 10 14:54:29 UTC 2009 i686 GNU/Linux
