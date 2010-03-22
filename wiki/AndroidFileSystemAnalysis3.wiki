@@ -67,6 +67,7 @@ Currently defined functions:
 
 }}}
 说明修改成功
+
 7、加载 mtdblock4 和 System filesystems
 {{{
 # mount -o remount,rw -t yaffs2 /dev/block/mtdblock4 /system
@@ -91,7 +92,7 @@ Currently defined functions:
 
 这样busybox就安装到模拟器里了，接下来我们要从模拟器中提取system.tar和data.tar这两个文件以便我们可以制作根文件系统。
 
-== 二、system.dat和data.tar文件的提取 ==
+== 二、system.tar和data.tar文件的提取 ==
 1、首先应该确认哪个目录下空间最大，因为system.tar很大如果随便进入一个目录到最后会说空间不足，所以运行
 {{{
 # df
