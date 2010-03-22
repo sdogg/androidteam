@@ -1,0 +1,36 @@
+= Android应用程序的基本组件介绍 =
+* *系统环境：Ubuntu 9.04,Kernel 2.6.28-11-generic,i686,Eclipse
+
+  与其他很多计算机平台上的应用程序不同，Android应用程序没有唯一的启动入口（如C语言中的main()函数入口），一个Android应用程序是由多个不同的组件组合而成。Android系统的基本组件包括Activity、Service、BroadcastReceiver和ContentProvider，此外还包括专门负责在基本组件之间传递消息的Intent组件。所有这些组件都必须在AndroidManifest.xml文件中声明，AndroidManifest.xml是整个Android应用程序的配置文件，它负责把各个组件有机的组合在一起。下面就对这些基本组件分别进行介绍。
+==一、Activity==
+  Activity是应用程序的表示层，应用程序中的每个屏幕显示都通过继承和扩展基类Activity来实现。Activity通过View来实现应用程序的GUI，而我们的手机用户则是通过GUI向应用程序发出指令和响应，可以这么说，一个应用程序有几个图形界面（不包括浮在界面之上的对话框或警示信息）就有几个Activity组件。
+  Activity窗口内的可见内容通过View提供，View对象继承自View类，每个View对象控制着窗口内的一个矩形空间。而View是通过什么方式放入Activity中呢，在上一个wiki中就提到了这个方法，就是Activity.setContentView()做到的（onCreate()方法中的setContentView(R.layout.main);）。
+==二、Service==
+  Service于Activity相反，没有可见的用户界面，但Service的特点是能长时间的后台运行，因此可将Service理解成是具有一段较长生命周期且没有用户界面的程序，我们为何要用到没有用户界面的程序呢，这不就是我们要能够能在后台播放音乐的播放器所需要的实现组件么，当你听音乐的同时又想去浏览网页，那么音乐播放器就不可能一直处于前台，就需要将播放音乐的任务放到后台，这样，即使音乐播放器已经不再显示了，用户仍可以听到音乐，所以我需要这样的机制-长时间在后台运行的Service。
+==三、BroadcastReceiver==
+  BroadcastReceiver是用户接受广播通知的组件，广播是一种同时通知多个对象的时间通知机制，很多时间都可能导致系统广播，比如手机所在的时区发生变化，电池电量低，用户改变系统语言设置或一个应用程序通知其他应用程序某些数据已经下载完毕。
+  为了响应不同的事件通知，应用程序可以注册不同的BroadcastReceiver，而所有的BroadcastReceiver都继承自基类BroadcastReceiver。BroadcastReceiver自身并不实现图形用户界面，但是当它收到某个通知消息后，BroadcastReceiver可以启动Activity作为响应，或者通过NotificationManager提醒用户。
+==四、ContentProvider==
+  在Android中，每个应用程序都是用自己的用户id并在自己的进程中运行，每个进程都拥有独立的进程地址空间和虚拟内存，当应用程序彼此间需要共享资源时，这样的架构必然需要一个妥善的解决方案。为此，Android提供了ContentProvider机制。
+  ContentProvider能将应用程序特定的数据提供给另一个应用程序使用，数据的存储方式可以是Android文件系统，也可以是SQLite数据库等。ContentProvider继承自类ContentProvider，并且实现了一组标准的接口。通过这组接口，其他应用程序能对数据进行读写和存储。然而，需要使用数据的应用程序并不是直接调用这组方法，而是通过调用ContentResolver对象的方法来完成的，ContentResolver对象可以与任意ContentProvider通信。
+==五、Intent==
+  在之前四种基本组件中，除了ContentProvider是通过ContentResolver激活外，其他三种组件都是由名为Intent的异步消息激活的，Intent在不同的组件之间传递消息，将一个组件的请求意图传递给另一个组件，因此Intent是个包含具体请求信息的对象，针对不同的组件，Intent所包含的消息内容有所不同，且不同组件的激活方式也有所不同。
+  Intent是一种运行时绑定机制，它能在程序运行的过程中连接两个不同的组件。Intent对象抽象地描述了要执行的操作，其描述的基本内容可以分为组件名称、Action（动作）、Data（数据）、Category（类别）、Extra（附加信息）和Flag（标志位）6部分。
+  
+  （1）组件名称是指Intent目标组件的名称，这种名称是目标组件类名和目标组件所在的应用程序的包名的组合。组件名称是一个可选项，如果在Intent消息中指明了组件名称，这就是一个显式信息，Intent会传递给指明的组件。如果组件名称没有被指定，这就是一个隐式信息，Android则会通过Intent内的其他信息和已注册的IntentFilter的比较来选择合适的目标组件。
+  
+  （2）Action描述Intent所触发动作的字符串，理论上Action可以是任何字符串，而与Android系统应用相关的Action字符串以静态字符串常量的形式定义在了Intent类中。
+  
+  （3）Data描述Intent要操作的数据URI和数据类型，有的动作需要对相应的数据进行处理。比如ACTION_CALL来讲，它的数据可以是一个tel://格式的电话号码URI。
+  
+  （4）Category是对被请求组件的额外描述信息，Android也在Intent类中定义了一组静态字符串常量表示Intent不同的类别。
+  讲了Intent，不得不提IntentFilter，每个IntentFilter描述注册了它的组件所能响应的Intent请求的能力。一个显示信息只要通过组件名称就能找到目标组件，而一个隐式组件请求要能够传递给目标组件，必须通过Action、Data以及Category三个方面的检查，如果任何一方不匹配，Android都不会将该隐式Intent传递给目标组件。
+  
+  （1）动作测试：一条intent-filter元素中至少应该包含一个`<action>`，否则任何Intent请求都不能和该intent-filter匹配。如果Intent请求或intent-filter中没有说明具体的Action类型，那么将通过以下两个准则处理：I.如果intent-filter中没有包含任何Action类型，那么无论什么Intent请求都无法和这条intent-filter匹配。II.如果Intent请求中没有设定Action类型，那么只要intent-filter中包含有Action类型，这个Intent请求就将被顺利的通过intent-filter的行为测试。
+  
+  （2）类别测试：只有当Intent请求中所有的Category与某一个IntentFilter的`<category>`完全匹配时，才会让该Intent请求通过测试，IntentFilter中多余的{{{<category>}}}声明并不会导致匹配失败。一个没有指定任何类别测试的IntentFilter仅仅只会匹配没有设置类别的Intent请求。
+  
+  （3）数据测试：URI被分成三部分来进行匹配：scheme、authority和path。其中，用setData()设定的Intent请求的URI数据类型和scheme必须与IntentFilter中所指定的一致。若IntentFilter中还指定了authority或path，它们也需要相匹配才会通过测试。
+以上就是对Android应用程序中的基本组件的介绍，其具体的使用方法会在以后介绍程序开发过程的wiki中进行详细的介绍。
+
+
