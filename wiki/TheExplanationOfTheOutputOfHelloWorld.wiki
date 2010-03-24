@@ -1,5 +1,5 @@
 #labels HelloWorld,Explanation
-#HelloAndroid 程序自动生成解析
+#HelloAndroid  程序自动生成解析
 
 = 系统环境 =
 
@@ -44,4 +44,4 @@ Linux ubuntu 2.6.31-15-generic #50-Ubuntu SMP Tue Nov 10 14:54:29 UTC 2009 i686 
 
 
 = 后续分析 =
-关于字符串“＠string/hello”说明：通过实验发现：在目录res/values/strings.xml中的android:text=" "可以直接显示要输出的内容，之所以要通过＠string引用，是因为手机存储空间有限。当另外有个android:text=" "输入相同的内容后就可以通过引用，不用输入相同的内容，浪费手机存储空间。
+关于字符串“＠string/hello”说明：通过实验发现：在目录res/values/strings.xml中的android:text=" "可以直接显示要输出的内容，之所以要通过＠string引用，是因为手机存储空间有限。当另外有个android:text=" "输入相同的内容后就可以通过引用，不用输入相同的内容，节省手机存储空间。
