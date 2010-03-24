@@ -1,3 +1,4 @@
+#labels HelloWorld,Explatation
 #HelloAndroid程序自动生成解析
 
 = 系统环境 =
@@ -28,8 +29,11 @@ Linux ubuntu 2.6.31-15-generic #50-Ubuntu SMP Tue Nov 10 14:54:29 UTC 2009 i686 
 5.res资源目录。
 
 -5.1. res/drawable是给你放图片资源的
+
 -5.2. res/layout/main.xml是布局文件
+
 -5.3. res/values是给你放变量的值的
+
 --5.3.1. res/values/string.xml是string对象赋值的一个例子
 
 
