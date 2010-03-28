@@ -20,6 +20,9 @@ Homepage for Team Members:
 2009年12月14日——12月19日  项目启动，知识储备阶段，熟悉并建立Android相关的开发环境。
 
 
+2010年3月25日——3月28日    移植Android系统到博创s3c2410上初步成功，可以在开发板上运启动Android进入系统界面
+
+
 == 项目计划安排 ==
 
 *[http://photo.163.com/photo/hgwei1/?u=hgwei1#m=2&ai=193680364&pi=5625753618&p=1  项目进度安排Gannt图]
