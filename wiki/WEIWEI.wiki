@@ -16,5 +16,6 @@
 
 *[http://code.google.com/p/androidteam/wiki/UbuntuGrubStart  WUBI安装ubuntu GRUB手动引导启动方法]
 
+*[http://code.google.com/p/androidteam/wiki/PortingAndroidFileSystem 移植Android根文件系统到博创S3C2410开发板]
 
 == Linux内核学习 ==
