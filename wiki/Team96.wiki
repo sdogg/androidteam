@@ -12,7 +12,7 @@ Homepage for Team Members:
 [http://code.google.com/p/androidteam/wiki/bluehawk 杨绍文]
 [http://code.google.com/p/androidteam/wiki/leving 李伟]
 
-== 项目进度 ==
+== 项目进度（已更新） ==
 
 2009年12月7日——12月12日   项目开题阶段，对项目进行调研，撰写开题报告。
   
