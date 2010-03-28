@@ -23,3 +23,14 @@ Homepage for Team Members:
 == 项目计划安排 ==
 
 *[http://photo.163.com/photo/hgwei1/?u=hgwei1#m=2&ai=193680364&pi=5625753618&p=1  项目进度安排Gannt图]
+
+== Android移植相关资料 ==
+
+*[http://www.am82.com/houzan/archives/2772 ARM开发板如何挂载NFS开发环境的方法步骤]
+*[http://blog.csdn.net/colorant/archive/2008/02/27/2124992.aspx Android Kernel Porting 的简单总结文档]
+*[http://blog.csdn.net/lingdxuyan/archive/2009/12/25/5075508.aspx 移植Linux2.6.24.7到博创2410S之：LCD]
+*[http://blog.chinaunix.net/u2/69999/showart_2036954.html 移植Android 到mini2440]
+*[http://blog.csdn.net/java211/archive/2009/02/02/3857595.aspx  将Android移植到FS2410开发板上]
+*[http://blog.chinaunix.net/u2/78837/article_94746.html 移植U－Boot.1.2.0到博创2410－S（S3C2410A）]
+*[http://blog.chinaunix.net/u2/78837/showart_1182778.html 移植Linux2.6.22.2到博创2410-S(s3c2410A)（网卡AX88796移植）]
+*[http://blog.chinaunix.net/u2/78837/showart_1182778.html 移植Linux2.6.22.2到博创2410-S(s3c2410A)]
