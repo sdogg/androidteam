@@ -155,11 +155,14 @@ Device Drivers  --->
 == LCD测试 ==
 重新烧写内核映像后，用NFS服务挂载Android的根文件系统，启动后首先发现LCD屏幕上显示了Linux的企鹅logo，之后当挂载根文件系统时，在屏幕上会显示字符提示： 
 {{{
-A N D R O I D_
+
+                                  A N D R O I D_
+
 }}}
 说明开始了Android系统的引导程序，之后会出现Android的滚动条，大概等待三四分钟就可以进入到Android的系统，可以显示Android的系统界面。
 
-不过目前进入系统会显示No Service，而且没有键盘和触摸屏驱动，无法对Android的各种功能进行操作，minicom上会提示一些错误信息：
+== 遗留问题 ==
+目前进入系统会显示No Service，而且没有键盘和触摸屏驱动，无法对Android的各种功能进行操作，minicom上会提示一些log信息：
 {{{
 #binder:release 1571:1576 transaction 1212 in, still active
 binder:send failed reply for transaction 1212 to 1858:1858
@@ -175,7 +178,55 @@ binder:1505:1918 transaction failed 29189,size 168-0
 #android_power_suspend:503627634000
 android sleep state 0->2 at 503627634000
 active wake lock PowerManagerService
+之后的提示信息：
+binder: 1505:1519 transaction failed 29189, size 168-0
+rild invoked oom-killer: gfp_mask=0x1201d2, order=0, oomkilladj=-16
+[<c002d348>] (dump_stack+0x0/0x14) from [<c006b088>]
+(oom_kill_process+0x5c/0x198)
+[<c006b02c>] (oom_kill_process+0x0/0x198) from [<c006b5a0>]
+(out_of_memory+0x194/0x1e0)
+[<c006b40c>] (out_of_memory+0x0/0x1e0) from [<c006d7c8>]
+(__alloc_pages+0x26c/0x2f0)
+[<c006d55c>] (__alloc_pages+0x0/0x2f0) from [<c006a7b8>]
+(filemap_fault+0x284/0x3bc)
+[<c006a534>] (filemap_fault+0x0/0x3bc) from [<c00752b8>]
+(__do_fault+0x74/0x400)[<c0075244>] (__do_fault+0x0/0x400) from [<c0076230>]
+(handle_mm_fault+0x2d8/0x608)
+[<c0075f58>] (handle_mm_fault+0x0/0x608) from [<c002f3b4>]
+(do_page_fault+0xe4/0x230)
+[<c002f2d0>] (do_page_fault+0x0/0x230) from [<c002f5a0>]
+(do_translation_fault+0x18/0x80)
+[<c002f588>] (do_translation_fault+0x0/0x80) from [<c00281e8>]
+(do_PrefetchAbort+0x18/0x1c)
+ r5:b0015b04 r4:ffffffff
+[<c00281d0>] (do_PrefetchAbort+0x0/0x1c) from [<c0028960>]
+(ret_from_exception+0x0/0x10)
+Exception stack(0xc09b7fb0 to 0xc09b7ff8)
+7fa0:                                     afe075cb a9c01f17 afe075cb 0000005f
+7fc0: 00000208 b0015b04 afe041dc afe0215c afe0636c 0ec0047a a9c01f17 b00162ac
+7fe0: b0009999 beb80bec b0000dc8 b00099a6 80000030 ffffffff
+Mem-info:
+DMA per-cpu:
+CPU    0: hi:   18, btch:   3 usd:  12
+Active:9992 inactive:2577 dirty:0 writeback:0 unstable:0
+ free:339 slab:873 mapped:11 pagetables:727 bounce:0
+DMA free:1356kB min:1016kB low:1268kB high:1524kB active:39968kB
+inactive:10308kB present:65024kB pages_scanned:81557 all_unreclaimable? yes
+lowmem_reserve[]: 0 0 0
+DMA: 117*4kB 7*8kB 0*16kB 0*32kB 1*64kB 0*128kB 1*256kB 1*512kB 0*1024kB
+0*2048kB 0*4096kB = 1356kB
+5334 total pagecache pages
+Swap cache: add 0, delete 0, find 0/0
+Free swap  = 0kB
+Total swap = 0kB
+Free swap:            0kB
+16384 pages of RAM
+557 free pages
+1265 reserved pages
+873 slab pages
+13340 pages shared
+0 pages swap cached
+Out of memory: kill process 2123 (app_process) score 793444352 or a child
+Killed process 2123 (app_process)
 }}}
-后面还有一些错误信息，看来Android的相关服务启动还有一定的问题，需要进一步的分析修改。
-
-
+看来Android的相关服务启动还有一定的问题，需要进一步进行分析修改。
