@@ -1,7 +1,7 @@
 #summary Android向博创S3C2410移植之LCD驱动篇
  * *系统环境 Ubuntu 9.10  RED HAT9.0 
  * *日期：2010/3/28
-= 移植Android系统到博创S3C2410之LCD驱动移植 =
+= 移植Android系统之LCD驱动移植 =
 
 博创s3c2410的LCD使用的是SHARP LQ080V3DG01，我们使用的Android内核版本是linux-2.6.25-android-1.0_r1.tar.gz，要移植LCD的驱动，需要在内核源码arch/arm/mach-s3c2410/mach-smdk2410.c里添加初始化s3c2410的LCD控制器时所需要的参数。而这些参数可以参考arch/arm/mach-s3c2410/mach-qt2410.c文件中对SHARP LQ080V3DG01型LCD控制器初始化的相关代码。
 
@@ -177,7 +177,5 @@ android sleep state 0->2 at 503627634000
 active wake lock PowerManagerService
 }}}
 后面还有一些错误信息，看来Android的相关服务启动还有一定的问题，需要进一步的分析修改。
-
-
 
 
