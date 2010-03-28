@@ -1,0 +1,183 @@
+#summary Android向博创S3C2410移植之LCD驱动篇
+ * *系统环境 Ubuntu 9.10  RED HAT9.0 
+ * *日期：2010/3/28
+= 移植Android系统到博创S3C2410之LCD驱动移植 =
+
+博创s3c2410的LCD使用的是SHARP LQ080V3DG01，我们使用的Android内核版本是linux-2.6.25-android-1.0_r1.tar.gz，要移植LCD的驱动，需要在内核源码arch/arm/mach-s3c2410/mach-smdk2410.c里添加初始化s3c2410的LCD控制器时所需要的参数。而这些参数可以参考arch/arm/mach-s3c2410/mach-qt2410.c文件中对SHARP LQ080V3DG01型LCD控制器初始化的相关代码。
+
+== 移植步骤 ==
+1．修改arch/arm/mach-s3c2410/mach-smdk2410.c文件
+
+1）添加头文件
+{{{
+#include <asm/arch/fb.h>
+}}}
+2）添加初始化s3c2410的LCD控制器时所需的参数
+{{{
+参考linux2.6.25内核arch/arm/mach-s3c2410/mach-qt2410.c文件中对SHARP LQ080V3DG01型LCD控制器初始化的相关代码，添加如下代码：
+/*Configuration for 640x480 SHARP LQ080V3DG01 */
+
+static struct s3c2410fb_display qt2410_lcd_cfg __initdata = {
+
+/* lcd configuration registers */
+
+.lcdcon5 = S3C2410_LCDCON5_FRM565 |
+
+S3C2410_LCDCON5_INVVLINE |
+
+S3C2410_LCDCON5_INVVFRAME |
+
+S3C2410_LCDCON5_PWREN |
+
+S3C2410_LCDCON5_HWSWP,
+
+/* LCD type */
+
+.type = S3C2410_LCDCON1_TFT,
+
+/* Screen size */
+
+.width = 640,
+
+.height = 480,
+
+/* Screen info */                       
+
+.xres = 640,
+
+.yres = 480,
+
+.bpp = 16,
+
+.pixclock = 40000, 
+
+.left_margin = 44,                            
+
+.right_margin = 116,                            
+
+.hsync_len = 96,                               
+
+.upper_margin = 19,                            
+
+.lower_margin = 11,                            
+
+.vsync_len = 15,                              
+
+};
+
+//LCD driver info
+
+static struct s3c2410fb_mach_info qt2410_lcd_info __initdata = {
+
+.displays = &qt2410_lcd_cfg,     /* attached diplays info */
+
+.num_displays = 1,            /* number of defined displays */                
+
+.default_display = 0,                         
+
+/* GPIOs */
+
+.gpccon = 0xaa8002a8,
+
+.gpccon_mask = 0xffc003fc,
+
+.gpcup = 0xf81e,
+
+.gpcup_mask = 0xf81e,
+
+.gpdcon = 0xaa80aaa0,
+
+.gpdcon_mask = 0xffc0fff0,
+
+.gpdup = 0xf8fc,
+
+.gpdup_mask = 0xf8fc,
+
+/* lpc3600 control register */
+
+.lpcsel = ((0xCE6) & ~7) | 1<<4,
+
+};
+}}}
+3）添加LCD控制器的寄存器参数设置函数
+{{{
+查找smdk2410_init，添加如下代码：
+static void __init smdk2410_init(void)
+{
+	platform_add_devices(smdk2410_devices, ARRAY_SIZE(smdk2410_devices));
+	s3c24xx_fb_set_platdata(&qt2410_lcd_info);//设置LCD控制器的寄存器参数 
+	smdk_machine_init();
+}
+}}}
+
+2.配置内核
+{{{
+输入make menuconfig
+添加如下选项：
+Device Drivers  --->  
+
+   Graphics support  --->    
+
+      Display device support  ---> 
+
+         <*> Display panel/monitor support 
+
+      <*> Support for frame buffer devices 
+
+         <*> S3C2410 LCD framebuffer support  
+
+      Console display driver support  --->               
+
+         <*> Framebuffer Console support             
+
+         [*]   Framebuffer Console Rotation        
+
+         [*] Select compiled-in fonts               
+
+         [*]   VGA 8x8 font                    
+
+         [*]   VGA 8x16 font                   
+
+         [*]   Mini 4x6 font 
+
+         [*] Sparc console 8x16 font           
+
+      [*] Bootup logo  --->                       
+
+         --- Bootup logo
+
+         [*]   Standard 224-color Linux logo   
+}}}
+以上都是必须选择的，其他相关选项也可以选择
+
+重新编译，生成zImage映像
+
+== LCD测试 ==
+重新烧写内核映像后，用NFS服务挂载Android的根文件系统，启动后首先发现LCD屏幕上显示了Linux的企鹅logo，之后当挂载根文件系统时，在屏幕上会显示字符提示： 
+{{{
+A N D R O I D_
+}}}
+说明开始了Android系统的引导程序，之后会出现Android的滚动条，大概等待三四分钟就可以进入到Android的系统，可以显示Android的系统界面。
+
+不过目前进入系统会显示No Service，而且没有键盘和触摸屏驱动，无法对Android的各种功能进行操作，minicom上会提示一些错误信息：
+{{{
+#binder:release 1571:1576 transaction 1212 in, still active
+binder:send failed reply for transaction 1212 to 1858:1858
+init :untracked pid 1849 exited
+init :untracked pid 1839 exited
+init :untracked pid 1812 exited
+init :untracked pid 1828 exited
+init :untracked pid 1858 exited
+init :untracked pid 1785 exited
+init :untracked pid 1792 exited
+binder:1505:1918 transaction failed 29189,size 168-0
+过一段时间没有操作的话，系统会进入挂起状态，然后再自动加载
+#android_power_suspend:503627634000
+android sleep state 0->2 at 503627634000
+active wake lock PowerManagerService
+}}}
+后面还有一些错误信息，看来Android的相关服务启动还有一定的问题，需要进一步的分析修改。
+
+
+
+
