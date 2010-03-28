@@ -85,9 +85,9 @@ mount 192.168.0.10:/arm2410s /mnt
 首先烧写前面编译好的VIVI和内核映像zImage，烧写完毕后进入RED HAT，打开终端，将Android根文件系统放到NFS共享文件夹下，输入minicom命令，进入VIVI
 {{{
 设置NFS方式配置参数：
-param set linux command line is: "console=ttySAC0 root=nfs nfsroot=192.168.0.121:/arm2410s/root ip=192.168.0.115:192.168.0.121:192.168.0.254:255.255.255.0:123:eth0:off init=/init"
+param set linux_cmd_line "console=ttySAC0 root=nfs nfsroot=192.168.0.121:/arm2410s/root ip=192.168.0.115:192.168.0.121:192.168.0.254:255.255.255.0:123:eth0:off init=/init"
 其中 设置根文件系统启动方式为NFS方式，192.168.0.121为主机地址，/arm2410s/root为根文件系统路径
-192.168.0.115是开发板ip地址，192.168.0.254是主机网关地址，255.255.255.0是子网掩码，123是主机名称，eth0是网卡， init 设置文件系统启动执行根目录下的init初始化文件
+192.168.0.115是开发板ip地址，192.168.0.254是主机网关地址，255.255.255.0是子网掩码，123是主机名称，eth0是网卡， init= 设置为文件系统启动执行根目录下的init初始化文件
 param save 保存设置
 重启VIVI后输入
 vivi>boot
