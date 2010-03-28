@@ -1,0 +1,276 @@
+#Android向博创S3C2410移植之根文件系统篇
+ * *系统环境 Red Hat9.0 vm虚拟机  博创S3C2410开发板
+ * *日期：2010/3/26
+
+= 移植Android根文件系统到博创S3C2410 =
+
+== 准备工作 ==
+
+根据杨扬同学的wiki，对VIVI的flash分区进行修改，扩大了内核分区的容量，使用内核版本linux-2.6.25-android-1.0_r1.tar.gz，详细的配置可以见如下两篇文章:
+
+[http://blog.chinaunix.net/u2/78837/showart_1182778.html 移植Linux2.6.22.2到博创2410-S(s3c2410A)]
+
+[http://blog.csdn.net/java211/archive/2009/02/02/3857595.aspx 将Android移植到FS2410开发板]
+
+第二篇文章主要参考其中对Android内核的配置部分
+
+== 网卡驱动的移植 ==
+
+Android的根文件系统有30M左右，而我们修改的VIVI是不支持网卡驱动的，所以可以采取两种解决方法：
+
+1）重新修改VIVI源码，使其支持博创所配网卡AX88796，或者移植U-Boot到2410开发板，因为U-Boot原生支持tftp和nfs，可以方便烧写根文件系统。
+
+2）采用nfs网络挂载根文件系统，需要Android内核支持博创网卡AX88796。
+
+这里我们采取第二种方法，对Android内核源码进行修改，使其支持博创网卡AX88796，具体方法参见下面这篇文章：
+
+[http://blog.chinaunix.net/u2/78837/showart_1182778.html 移植Linux2.6.22.2到博创2410-S(s3c2410A)（包括AX88796移植）]
+
+可以直接参考上面这篇文章的驱动移植方法，经过本人测试发现可以修改成功。
+
+如果想移植U-Boot到博创2410，可以参考下面这篇文章：
+
+[http://blog.chinaunix.net/u2/78837/article_94746.html 移植U－Boot.1.2.0到博创2410－S（S3C2410A）]
+
+移植好网卡驱动后，可以开始进行nfs的设置了，这里是在VM虚拟机，RED HAT9.0环境下设置
+
+具体设置包括了对RED HAT下主机网络的配置，防火墙的设置，NFS服务器的设置等，具体方法可以参考博创2410实验指导书
+————1.4 建立嵌入式Linux开发环境
+
+配置好NFS服务后，可以在宿主机目录下输入命令，测试是否成功：
+{{{
+mount 192.168.0.10:/arm2410s /mnt
+}}}
+192.168.0.10 应为主机的IP 地址
+
+然后到/mnt/目录下看是否可以列出/arm2410s 目录下的所有文件和目录，可以的话说明mount 成功，NFS 配置成功。
+
+== Android根文件系统的选择 ==
+
+我开始用busybox工具从Android模拟器中将其根文件系统打包输出，具体方法如下：
+
+打开Android模拟器，输入如下命令：
+{{{
+ # adb shell
+ # busybox tar -czf system.tar.gz /system
+ # busybox tar -czf data.tar.gz /data
+ # busybox tar -czf etc.tar.gz /etc
+ # busybox tar -czf sbin.tar.gz /sbin
+ # exit
+将system data etc sbin 目录打包
+
+ $ ./adb pull /system.tar.gz ./
+ $ ./adb pull /data.tar.gz ./
+ $ ./adb pull /etc.tar.gz ./
+ $ ./adb pull /sbin.tar.gz ./
+ $ ./adb pull /init ./
+这样可以在当前目录下输出打包的Android根文件系统的system，data，etc，sbin目录和init可执行文件
+
+建立根文件目录：
+ $ mkdir root
+ $ cd root
+ $ mkdir cache data dev proc root sdcard system
+
+ 把之前的几个打包文件解压缩到此，并把 init文件拷贝过来
+修改init.rc启动脚本，去掉除了mount tmpfs tmpfs /sqlite_stmt_journals size=4m之外的所有mount命令，因为其他的mount命令都是用于启动模拟器的。
+}}}
+这种方式做好的根文件系统却不能挂载到开发板上，每次挂载都显示内核找不到启动文件init，还不知道具体的原因，现在给出一个网上做好的根文件系统，下载地址如下：
+
+[http://d.namipan.com/d/b64ce43b2388e5e1f66af18149824b98cd13b926c4921f02 Android根文件系统]
+
+这个版本的根文件系统没有启动脚本，可以加上自己制作的init.rc启动脚本
+
+== 使用NFS服务挂载根文件系统 ==
+
+首先烧写前面编译好的VIVI和内核映像zImage，烧写完毕后进入RED HAT，打开终端，将Android根文件系统放到NFS共享文件夹下，输入minicom命令，进入VIVI
+{{{
+设置NFS方式配置参数：
+param set linux command line is: "console=ttySAC0 root=nfs nfsroot=192.168.0.121:/arm2410s/root ip=192.168.0.115:192.168.0.121:192.168.0.254:255.255.255.0:123:eth0:off init=/init"
+其中 设置根文件系统启动方式为NFS方式，192.168.0.121为主机地址，/arm2410s/root为根文件系统路径
+192.168.0.115是开发板ip地址，192.168.0.254是主机网关地址，255.255.255.0是子网掩码，123是主机名称，eth0是网卡， init 设置文件系统启动执行根目录下的init初始化文件
+param save 保存设置
+重启VIVI后输入
+vivi>boot
+发现可以成功挂载Android的根文件系统
+启动log信息如下：
+VIVI version 0.1.4 (root@BC) (gcc version 2.95.2 20000516 (release) [Rebel.com]) #0.1.4 ?. 3.. 16 17:23:56 CST 2010
+MMU table base address = 0x33DFC000
+Succeed memory mapping.
+NAND device: Manufacture ID: 0xec, Chip ID: 0x76 (Samsung K9D1208V0M)
+Found saved vivi parameters.
+Press Return to start the LINUX now, any other key for vivi
+type "help" for help.
+vivi> boot
+Copy linux kernel from 0x00030000 to 0x30008000, size = 0x00400000 ... done
+zImage magic = 0x016f2818
+Setup linux parameters at 0x30000100
+linux command line is: "console=ttySAC0 root=nfs nfsroot=192.168.0.121:/arm2410s/root ip=192.168.0.115:192.168.0.121:192.168.0.254:255.255.255.0:123:eth0:off init=/init"
+MACH_TYPE = 193
+NOW, Booting Linux......
+Uncompressing Linux.................................................................................................................. done, booting the kernel.
+Linux version 2.6.25 (weiwei@weiwei-laptop) (gcc version 4.2.1 (CodeSourcery Sourcery G++ Lite 2007q3-51)) #1 Sat Mar 27 13:08:29 CST 2010
+CPU: ARM920T [41129200] revision 0 (ARMv4T), cr=c0007177
+Machine: SMDK2410
+ATAG_INITRD is deprecated; please update your bootloader.
+Memory policy: ECC disabled, Data cache writeback
+CPU S3C2410A (id 0x32410002)
+S3C2410: core 200.000 MHz, memory 100.000 MHz, peripheral 50.000 MHz
+S3C24XX Clocks, (c) 2004 Simtec Electronics
+CLOCK: Slow mode (1.500 MHz), fast, MPLL on, UPLL on
+CPU0: D VIVT write-back cache
+CPU0: I cache: 16384 bytes, associativity 64, 32 byte lines, 8 sets
+CPU0: D cache: 16384 bytes, associativity 64, 32 byte lines, 8 sets
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 16256
+Kernel command line: console=ttySAC0 root=nfs nfsroot=192.168.0.121:/arm2410s/root ip=192.168.0.115:192.168.0.121:192.168.0.254:255.255.255.0:123:eth0:off init=/init/
+irq: clearing pending ext status 00080100
+irq: clearing subpending status 00000003
+irq: clearing subpending status 00000002
+PID hash table entries: 256 (order: 8, 1024 bytes)
+timer tcon=00000000, tcnt a2c1, tcfg 00000200,00000000, usec 00001eb8
+Console: colour dummy device 80x30
+console [ttySAC0] enabled
+Dentry cache hash table entries: 8192 (order: 3, 32768 bytes)
+Inode-cache hash table entries: 4096 (order: 2, 16384 bytes)
+Memory: 64MB = 64MB total
+Memory: 60928KB available (3288K code, 530K data, 128K init)
+Mount-cache hash table entries: 512
+CPU: Testing write buffer coherency: ok
+net_namespace: 152 bytes
+android_power_init
+android_power_init done
+NET: Registered protocol family 16
+S3C2410 Power Management, (c) 2004 Simtec Electronics
+S3C2410: Initialising architecture
+S3C24XX DMA Driver, (c) 2003-2004,2006 Simtec Electronics
+DMA channel 0 at c4800000, irq 33
+DMA channel 1 at c4800040, irq 34
+DMA channel 2 at c4800080, irq 35
+DMA channel 3 at c48000c0, irq 36
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+NET: Registered protocol family 2
+IP route cache hash table entries: 1024 (order: 0, 4096 bytes)
+TCP established hash table entries: 2048 (order: 2, 16384 bytes)
+TCP bind hash table entries: 2048 (order: 1, 8192 bytes)
+TCP: Hash tables configured (established 2048 bind 2048)
+TCP reno registered
+NetWinder Floating Point Emulator V0.97 (double precision)
+ashmem: initialized
+Installing knfsd (copyright (C) 1996 okir@monad.swb.de).
+JFFS2 version 2.2. (NAND) .. 2001-2006 Red Hat, Inc.
+fuse init (API version 7.9)
+yaffs Mar 27 2010 13:04:14 Installing.
+io scheduler noop registered
+io scheduler anticipatory registered (default)
+io scheduler deadline registered
+io scheduler cfq registered
+s3c2410-lcd s3c2410-lcd: no platform data for lcd, cannot attach
+s3c2410-lcd: probe of s3c2410-lcd failed with error -22
+lp: driver loaded but no devices found
+ppdev: user-space parallel port driver
+Serial: 8250/16550 driver $Revision: 1.90 $ 4 ports, IRQ sharing enabled
+s3c2410-uart.0: s3c2410_serial0 at MMIO 0x50000000 (irq = 70) is a S3C2410
+s3c2410-uart.1: s3c2410_serial1 at MMIO 0x50004000 (irq = 73) is a S3C2410
+s3c2410-uart.2: s3c2410_serial2 at MMIO 0x50008000 (irq = 76) is a S3C2410
+brd: module loaded
+loop: module loaded
+ne.c:v1.10 9/23/94 Donald Becker (becker@scyld.com)
+Last modified Nov 1, 2000 by Paul Gortmaker
+NE*000 ethercard probe at 0xf6100200:08:08:08:08:12:28
+eth0: NE2000 found at 0xf6100200, using IRQ 18.
+usbcore: registered new interface driver asix
+usbcore: registered new interface driver cdc_ether
+usbcore: registered new interface driver net1080
+usbcore: registered new interface driver cdc_subset
+usbcore: registered new interface driver zaurus
+Uniform Multi-Platform E-IDE driver
+ide: Assuming 50MHz system bus speed for PIO modes; override with idebus=xx
+S3C24XX NAND Driver, (c) 2004 Simtec Electronics
+s3c2410-nand s3c2410-nand: Tacls=1, 10ns Twrph0=4 40ns, Twrph1=1 10ns
+NAND device: Manufacturer ID: 0xec, Chip ID: 0x76 (Samsung NAND 64MiB 3,3V 8-bit)
+NAND_ECC_NONE selected by board driver. This is not recommended !!
+Scanning device for bad blocks
+Creating 6 MTD partitions on "NAND 64MiB 3,3V 8-bit":
+0x00000000-0x00020000 : "vivi"
+0x00020000-0x00030000 : "param"
+0x00030000-0x00430000 : "kernel"
+0x00430000-0x00730000 : "root"
+0x00730000-0x03f30000 : "user"
+0x03f30000-0x03ffc000 : "ucos"
+usbmon: debugfs is not available
+s3c2410-ohci s3c2410-ohci: S3C24XX OHCI
+s3c2410-ohci s3c2410-ohci: new USB bus registered, assigned bus number 1
+s3c2410-ohci s3c2410-ohci: irq 42, io mem 0x49000000
+usb usb1: configuration #1 chosen from 1 choice
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 2 ports detected
+mice: PS/2 mouse device common for all mice
+S3C24XX RTC, (c) 2004,2006 Simtec Electronics
+s3c2410-i2c s3c2410-i2c: slave address 0x10
+s3c2410-i2c s3c2410-i2c: bus frequency set to 390 KHz
+s3c2410-i2c s3c2410-i2c: i2c-0: S3C I2C adapter
+S3C2410 Watchdog Timer, (c) 2004 Simtec Electronics
+s3c2410-wdt s3c2410-wdt: watchdog inactive, reset disabled, irq enabled
+logger: created 64K log 'log_main'
+logger: created 64K log 'log_events'
+logger: created 64K log 'log_radio'
+TCP cubic registered
+NET: Registered protocol family 1
+NET: Registered protocol family 17
+RPC: Registered udp transport module.
+RPC: Registered tcp transport module.
+usb 1-1: new full speed USB device using s3c2410-ohci and address 2
+usb 1-1: device descriptor read/64, error -62
+usb 1-1: device descriptor read/64, error -62
+usb 1-1: new full speed USB device using s3c2410-ohci and address 3
+usb 1-1: device descriptor read/64, error -62
+usb 1-1: device descriptor read/64, error -62
+IP-Config: Complete:
+     device=eth0, addr=192.168.0.115, mask=255.255.255.0, gw=192.168.0.254,
+     host=123, domain=, nis-domain=(none),
+     bootserver=192.168.0.121, rootserver=192.168.0.121, rootpath=
+Looking up port of RPC 100003/2 on 192.168.0.121
+Looking up port of RPC 100005/1 on 192.168.0.121
+usb 1-1: new full speed USB device using s3c2410-ohci and address 4
+usb 1-1: device not accepting address 4, error -62
+usb 1-1: new full speed USB device using s3c2410-ohci and address 5
+usb 1-1: device not accepting address 5, error -62
+VFS: Mounted root (nfs filesystem).
+Freeing init memory: 128K
+init: cannot open '/initlogo.rle'
+init: cannot find '/system/bin/playmp3', disabling 'bootsound'
+init: cannot find '/system/bin/flash_image', disabling 'flash_recovery'
+sh: can't access tty; job control turned off
+# warning: `rild' uses 32-bit capabilities (legacy support in use)
+# ls -l
+-rw-r--r-- system   system        118 2010-03-10 14:51 default.prop
+-rwxr-xr-x system   system     106604 2010-03-11 14:55 init
+-rw-r--r-- system   system       1677 2010-03-06 06:08 init.goldfish.rc
+drwxrwx--x system   system            1970-01-01 00:02 data
+drwxr-xr-x root     root              1970-01-01 00:00 sys
+drwxr-xr-x system   system            2010-03-27 11:40 system
+drwxr-xr-x system   system            2010-03-27 11:40 sbin
+drwxr-xr-x root     root              1970-01-01 00:04 dev
+dr-xr-xr-x root     root              1970-01-01 00:00 proc
+-rwxr-x--- system   system       9100 2010-03-21 11:30 init.rc
+lrwxrwxrwx root     root              2010-03-27 11:54 etc -> /system/etc
+d--------- system   system            2010-03-27 11:54 sdcard
+drwxrwx--- system   cache             2010-03-27 11:54 cache
+drwxrwxrwt root     root              2010-03-27 11:54 sqlite_stmt_journals
+# cd data
+# ls -l
+drwxr-xr-x system   system            1970-01-01 00:05 tombstones
+drwxrwx--- root     root              1970-01-01 00:00 lost+found
+drwxrwx--x system   system            1970-01-01 00:01 dalvik-cache
+drwx------ root     root              1970-01-01 00:00 property
+drwxrwx--x system   system            1970-01-01 00:00 app
+drwxrwx--x system   system            1970-01-01 00:00 app-private
+drwxrwx--x system   system            1970-01-01 00:00 data
+drwxrwx--x shell    shell             1970-01-01 00:00 local
+drwxrwx--t system   misc              1970-01-01 00:00 misc
+}}}
+此时已经进入了Android的shell下，可以查看文件目录等相关信息，更多的信息就不贴出来了
+
+== 需要改进的问题 ==
+分析自己做的根文件系统和下载的根文件系统的区别，搞清为什么自己的文件系统不能挂载的原因
