@@ -43,6 +43,16 @@
  * [http://code.google.com/p/androidteam/wiki/TheBasicComponentsofTheAndroidApplication?ts=1269241448&updated=TheBasicComponentsofTheAndroidApplication Android应用程序开发过程及方法2--基本组件介绍]
 
 = Reference =
+=== Bootloader vivi ===
+ * [http://blog.csdn.net/Linux_Hunter/archive/2009/10/03/4630961.aspx 浅谈falsh分区]
+ * [http://blog.chinaunix.net/u2/69947/showart_1101212.html 移植vivi]
+=== Android Kernel ===
+ * [http://blog.chinaunix.net/u1/34474/showart.php?id=369449 移植Linux2.6.22.2到博创2410-S(源码修改)]
+ * [http://blog.chinaunix.net/u1/34474/showart_384863.html 移植Linux2.6.22.2到博创2410-S(内核配置)]
+ * [http://blog.csdn.net/java211/archive/2009/02/02/3857595.aspx 内核配置 for Android]
+=== Device Driver ===
+ * [http://blog.csdn.net/lingdxuyan/archive/2009/12/25/5075508.aspx 移植Linux2.6.24.7到博创2410S之：LCD]
+ * [http://blog.chinaunix.net/u1/34474/showart.php?id=384882 博创2410－S网卡AX88796驱动移植]
 === Android-Linux内核相关网站 ===
  * [http://code.google.com/p/androidteam/wiki/AndroidLinuxKernelDownload?ts=1260848549&updated=AndroidLinuxKernelDownload  How to get Android-linux kernel 2.6.27]
  * [http://code.google.com/p/android/downloads/list?can=1&q= Android内核下载]
