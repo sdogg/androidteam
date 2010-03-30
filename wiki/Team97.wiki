@@ -8,12 +8,14 @@
 
 = 公告栏 =
  * [http://code.google.com/p/androidteam/wiki/ProjectSchedule?ts=1261553685&updated=ProjectSchedule 项目进度]已更新，请大家关注 :)
+
 === Key Milestones ===
 ||2009-12-13||开题答辩||
 ||2009-12-16||Android及其内核下载、编译、在模拟器上运行||
 ||2010-03-09||Bootloader移植完成、Flash分区完成||
 ||2010-03-20||Android内核移植完成、根文件系统引导成功||
 ||2010-03-30||LCD驱动、网卡驱动移植完成、Android文件系统可挂载运行||
+
 === Team主页管理相关 ===
  * 各 小组成员请将自己关于本项目的学习历程、学习心得、参考资料和其它相关信息写成wiki放到自己的主页里；
  * 大家主页里的wiki由Team主页维护人员或小组成员自己选择合适的链接到Team主页上；
