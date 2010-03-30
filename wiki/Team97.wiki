@@ -7,8 +7,6 @@
 [http://code.google.com/p/androidteam/wiki/YangHomePage?ts=1260603946&updated=YangHomePage 杨扬]  [http://code.google.com/p/androidteam/wiki/LiuXiaohuiHomePage?ts=1260608543&updated=LiuXiaohuiHomePage 刘晓辉]  [http://code.google.com/p/androidteam/wiki/zhaoruijia?ts=1260628694&updated=zhaoruijia 赵瑞甲]  [http://code.google.com/p/androidteam/wiki/wuqiudong?ts=1260628778&updated=wuqiudong 吴秋冬]  [http://code.google.com/p/androidteam/wiki/liuyangboyman?ts=1260628859&updated=liuyangboyman 刘洋]
 
 = 公告栏 =
- * [http://code.google.com/p/androidteam/wiki/ProjectSchedule?ts=1261553685&updated=ProjectSchedule 项目进度]已更新，请大家关注 :)
-
 === Key Milestones ===
 ||2009-12-13||开题答辩||
 ||2009-12-16||Android及其内核下载、编译、在模拟器上运行||
@@ -24,7 +22,7 @@
 = 项目历程 =
 === 项目启动 ===
  * 项目开题
- * [http://code.google.com/p/androidteam/wiki/ProjectSchedule?ts=1261553685&updated=ProjectSchedule 项目进度(每周更新)]
+ * [http://code.google.com/p/androidteam/wiki/ProjectSchedule?ts=1261553685&updated=ProjectSchedule 项目进度安排]
 === Android初探 ===
  * [http://code.google.com/p/androidteam/wiki/AndroidSourceCodeDownload?ts=1260620626&updated=AndroidSourceCodeDownload Android源码下载]
  * [http://code.google.com/p/androidteam/wiki/AndroidCompileAndRun?ts=1260772618&updated=AndroidCompileAndRun 感受Android：Android编译并在模拟器上运行]
