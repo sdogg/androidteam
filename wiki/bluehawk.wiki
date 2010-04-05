@@ -9,17 +9,19 @@
  * [http://www.android123.com.cn/androidyizhi/ Android移植 开发]
 
 ==触摸屏驱动过程==
- *首先打一个补丁：s3c2410_touchscreen.patch（或手动修改补丁中显示相关文件的代码）
+ * 首先打一个补丁：s3c2410_touchscreen.patch（或手动修改补丁中显示相关文件的代码）
   [  s3c2410_touchscreen.patch代码]
- *修改{{{arch/arm/mach-s3c2410/mach-smdk2410.c}}}添加如下代码：
-  添加头文件： 
-  {{{#include <asm/arch/ts.h> }}}
-  添加结构体：
- {{{static struct s3c2410_ts_mach_info smdk2410_ts_cfg __initdata = { 
+ * 修改{{{arch/arm/mach-s3c2410/mach-smdk2410.c}}}添加如下代码：
+添加头文件： 
+{{{ #include <asm/arch/ts.h> }}}
+添加结构体：
+{{{ 
+static struct s3c2410_ts_mach_info smdk2410_ts_cfg __initdata = { 
         .delay = 20000, 
         .presc = 49, 
         .oversampling_shift = 2, 
-};}}}
+}; 
+}}}
 
 
 
