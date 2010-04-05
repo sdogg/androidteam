@@ -28,7 +28,15 @@
 {{{
 obj-$(CONFIG_TOUCHSCREEN_S3C2410) += s3c2410_ts.o
 }}}
-
+ * 将驱动[  s3c2410_ts.c]放置在driver/input/touchscreen/下面
+ *配置内核支持触摸屏驱动make menuconfig 配置支持触摸平驱动
+{{{
+Device Drivers  ---> 
+    Input device support  --->     
+          [*]   Touchscreens  --->                                     
+                <*>   Samsung S3C2410 touchscreen input driver                                           
+                [*]     Samsung S3C2410 touchscreen debug messages 
+}}}
 
 
 
