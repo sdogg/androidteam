@@ -17,15 +17,17 @@
       #include <asm/arch/ts.h> 
 }}}
    添加结构体：
-  {{{ 
+{{{ 
      static struct s3c2410_ts_mach_info smdk2410_ts_cfg __initdata = { 
         .delay = 20000, 
         .presc = 49, 
         .oversampling_shift = 2, 
      }; 
-  }}}
+}}}
    修改driver/input/touchscreen/Makefile,添加如下内容：
-{{{obj-$(CONFIG_TOUCHSCREEN_S3C2410) += s3c2410_ts.o}}}
+{{{
+obj-$(CONFIG_TOUCHSCREEN_S3C2410) += s3c2410_ts.o
+}}}
 
 
 
