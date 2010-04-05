@@ -13,7 +13,9 @@
   [  s3c2410_touchscreen.patch代码]
  * 修改{{{arch/arm/mach-s3c2410/mach-smdk2410.c}}}添加如下代码：
 添加头文件： 
-{{{ #include <asm/arch/ts.h> }}}
+{{{ 
+#include <asm/arch/ts.h> 
+}}}
 添加结构体：
 {{{ 
 static struct s3c2410_ts_mach_info smdk2410_ts_cfg __initdata = { 
