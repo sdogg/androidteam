@@ -10,7 +10,7 @@
 
 ==触摸屏驱动过程==
  * 首先打一个补丁：s3c2410_touchscreen.patch（或手动修改补丁中显示相关文件的代码）
-   [  s3c2410_touchscreen.patch代码]
+   [http://code.google.com/p/androidteam/wiki/s3c2410_ts_patch_code?ts=1270512750&updated=s3c2410_ts_patch_code  s3c2410_touchscreen.patch代码]
  * 修改{{{arch/arm/mach-s3c2410/mach-smdk2410.c}}}添加如下代码：
    添加头文件： 
 {{{ 
