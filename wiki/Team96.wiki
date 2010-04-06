@@ -22,7 +22,7 @@ Homepage for Team Members:
 
 2010年3月25日——3月28日    移植Android系统到博创s3c2410上初步成功，可以在开发板上启动Android进入系统界面
 
-2010年3月28日——4月6日      中期答辩
+2010年3月28日——4月6日      [http://code.google.com/p/androidteam/downloads/detail?name=Android%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%90%91%E5%8D%9A%E5%88%9B2410%E5%AE%9E%E9%AA%8C%E7%AE%B1%E4%B8%8A%E7%9A%84%E7%A7%BB%E6%A4%8D%EF%BC%88%E4%B8%AD%E6%9C%9F%E7%AD%94%E8%BE%A9%EF%BC%89.ppt&can=2&q=#makechanges 中期答辩]
 
 
 == 项目计划安排 ==
