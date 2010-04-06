@@ -28,6 +28,9 @@
 {{{
 obj-$(CONFIG_TOUCHSCREEN_S3C2410) += s3c2410_ts.o
 }}}
+  添加支持触摸屏平台代码的信息，这个找到一个名为＊smdk2410_devices[]的结构体指针数组里添加：&s3c_device_ts,然后在smdk2410_map_io函数里添加：
+{{{ set_s3c2410ts_info(&smdk2410_ts_cfg); }}}  
+
  * 在arch/arm/mach-s3c2410/include/mach/下新建ts.h文件
    ts.h文件内容如下： 
 {{{      
