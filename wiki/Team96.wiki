@@ -34,6 +34,7 @@ Homepage for Team Members:
 ===二、内核源码的修改和配置===
 
 ===三、驱动移植===
+[http://code.google.com/p/androidteam/wiki/LCDdriversForAndroidPorting 移植Android系统之LCD驱动移植]
 
 ===四、Android根文件系统制作===
 
