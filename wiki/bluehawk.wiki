@@ -16,7 +16,7 @@
 {{{ 
    #include <asm/arch/ts.h> 
 }}}
-添加结构体：
+  添加结构体：
 {{{ 
    static struct s3c2410_ts_mach_info smdk2410_ts_cfg __initdata = { 
         .delay = 20000, 
@@ -24,12 +24,12 @@
         .oversampling_shift = 2, 
    }; 
 }}}
-修改driver/input/touchscreen/Makefile,添加如下内容：
+  修改driver/input/touchscreen/Makefile,添加如下内容：
 {{{
 obj-$(CONFIG_TOUCHSCREEN_S3C2410) += s3c2410_ts.o
 }}}
  * 在arch/arm/mach-s3c2410/include/mach/下新建ts.h文件
-ts.h文件内容如下： 
+   ts.h文件内容如下： 
 {{{      
 #ifndef __ASM_ARM_S3C2410_TS_H 
 #define __ASM_ARM_S3C2410_TS_H 
