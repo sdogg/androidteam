@@ -28,7 +28,7 @@
 {{{
 obj-$(CONFIG_TOUCHSCREEN_S3C2410) += s3c2410_ts.o
 }}}
- * 将驱动[  s3c2410_ts.c]放置在driver/input/touchscreen/下面
+ * 在driver/input/touchscreen/下面创建驱动文件[http://code.google.com/p/androidteam/wiki/s3c2410_ts_code?ts=1270512980&updated=s3c2410_ts_code  s3c2410_ts.c]
  * 配置内核支持触摸屏驱动make menuconfig 配置支持触摸平驱动
 {{{
 Device Drivers  ---> 
