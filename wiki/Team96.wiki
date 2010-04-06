@@ -63,6 +63,6 @@ Homepage for Team Members:
 
  * [http://blog.chinaunix.net/u2/78837/showart_1182778.html 移植Linux2.6.22.2到博创2410-S(s3c2410A)（网卡AX88796移植）]
 
-*[http://blog.chinaunix.net/u2/78837/showart_1182778.html 移植Linux2.6.22.2到博创2410-S(s3c2410A)]
+ * [http://blog.chinaunix.net/u2/78837/showart_1182778.html 移植Linux2.6.22.2到博创2410-S(s3c2410A)]
 
  * [http://www.arm9.org.ru/viewthread.php?tid=6&extra=page%3D1 获取Android根文件系统]
