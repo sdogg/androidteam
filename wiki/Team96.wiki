@@ -27,7 +27,7 @@ Homepage for Team Members:
 
 == 项目计划安排 ==
 
- *[http://photo.163.com/photo/hgwei1/?u=hgwei1#m=2&ai=193680364&pi=5625753618&p=1  项目进度安排Gannt图]
+ *[http://photo.163.com/photo/hgwei1/?u=hgwei1#m=2&ai=193680364&pi=5625753618&p=1项目进度 ?安排Gannt图]
 
 == 移植基本步骤 ==
 
