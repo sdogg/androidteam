@@ -34,19 +34,18 @@ Homepage for Team Members:
 ===一、移植vivi====
 
 ===二、内核源码的修改和配置===
-[http://blog.chinaunix.net/u2/78837/showart_1182778.html 内核源码的修改]
-
-[http://blog.chinaunix.net/u2/78837/showart_1182782.html 内核源码的配置]
+ *[http://blog.chinaunix.net/u2/78837/showart_1182778.html 内核源码的修改]
+ *[http://blog.chinaunix.net/u2/78837/showart_1182782.html 内核源码的配置]
 
 ===三、驱动移植===
-[http://code.google.com/p/androidteam/wiki/LCDdriversForAndroidPorting 移植Android系统之LCD驱动移植]
+ *[http://code.google.com/p/androidteam/wiki/LCDdriversForAndroidPorting 移植Android系统之LCD驱动移植]
 
-[http://code.google.com/p/androidteam/wiki/bluehawk USB驱动过程&触摸屏驱动]
+ *[http://code.google.com/p/androidteam/wiki/bluehawk USB驱动过程&触摸屏驱动]
 
 ===四、Android根文件系统制作===
 
 ===五、运行Android应用程序，测试效果===
-[http://code.google.com/p/androidteam/wiki/androidapplication 一个简单的图片显示程序]
+ *[http://code.google.com/p/androidteam/wiki/androidapplication 一个简单的图片显示程序]
 
 == Android移植相关资料 ==
 
