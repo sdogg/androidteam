@@ -35,6 +35,7 @@ Homepage for Team Members:
 
 ===三、驱动移植===
 [http://code.google.com/p/androidteam/wiki/LCDdriversForAndroidPorting 移植Android系统之LCD驱动移植]
+[http://code.google.com/p/androidteam/wiki/bluehawk USB驱动过程&触摸屏驱动]
 
 ===四、Android根文件系统制作===
 
