@@ -43,7 +43,8 @@ Homepage for Team Members:
  * [http://code.google.com/p/androidteam/wiki/bluehawk USB驱动过程&触摸屏驱动]
 
 ===四、Android根文件系统制作===
-
+ * [http://code.google.com/p/androidteam/wiki/AndroidtFileSystemAnalysis Android系统及根文件目录分析]
+ * [http://code.google.com/p/androidteam/wiki/PortingAndroidFileSystem 移植Android根文件系统到博创S3C2410开发板]
 ===五、运行Android应用程序，测试效果===
  * [http://code.google.com/p/androidteam/wiki/androidapplication 一个简单的图片显示程序]
 
