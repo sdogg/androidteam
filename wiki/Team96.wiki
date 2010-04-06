@@ -31,9 +31,9 @@ Homepage for Team Members:
 
 == 移植基本步骤 ==
 
-===一、移植vivi====
+ * ===一、移植vivi====
 
-===二、内核源码的修改和配置===
+ * ===二、内核源码的修改和配置===
  * [http://blog.chinaunix.net/u2/78837/showart_1182778.html 内核源码的修改]
  * [http://blog.chinaunix.net/u2/78837/showart_1182782.html 内核源码的配置]
 
