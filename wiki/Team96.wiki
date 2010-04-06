@@ -41,6 +41,7 @@ Homepage for Team Members:
 ===四、Android根文件系统制作===
 
 ===五、运行Android应用程序，测试效果===
+[http://code.google.com/p/androidteam/wiki/androidapplication 一个简单的图片显示程序]
 
 == Android移植相关资料 ==
 
