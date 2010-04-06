@@ -38,6 +38,7 @@ Homepage for Team Members:
  * [http://blog.chinaunix.net/u2/78837/showart_1182782.html 内核源码的配置]
 
 ===三、驱动移植===
+ * [http://blog.chinaunix.net/u2/78837/showart_1182789.html 网卡驱动的移植]
  * [http://code.google.com/p/androidteam/wiki/LCDdriversForAndroidPorting 移植Android系统之LCD驱动移植]
  * [http://code.google.com/p/androidteam/wiki/bluehawk USB驱动过程&触摸屏驱动]
 
