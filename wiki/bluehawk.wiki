@@ -57,8 +57,7 @@ Device Drivers  --->
                 <*>   Samsung S3C2410 touchscreen input driver                                           
                 [*]     Samsung S3C2410 touchscreen debug messages 
 }}}
- * 然后make zImage。系统启动以后会在dev目录下产生event0 和 mouse0两个设备节点，
-   它们就是触摸屏的设备节点。
+ * 然后make zImage。系统启动以后会在dev目录下产生event0 和 mouse0两个设备节点，它们就是触摸屏的设备节点。
 
 
 
