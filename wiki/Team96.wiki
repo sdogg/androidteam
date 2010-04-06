@@ -27,42 +27,42 @@ Homepage for Team Members:
 
 == 项目计划安排 ==
 
- *[http://photo.163.com/photo/hgwei1/?u=hgwei1#m=2&ai=193680364&pi=5625753618&p=1项目进度 ?安排Gannt图]
+ * [http://photo.163.com/photo/hgwei1/?u=hgwei1#m=2&ai=193680364&pi=5625753618&p=1项目进度 安排Gannt图]
 
 == 移植基本步骤 ==
 
 ===一、移植vivi====
 
 ===二、内核源码的修改和配置===
- *[http://blog.chinaunix.net/u2/78837/showart_1182778.html 内核源码的修改]
- *[http://blog.chinaunix.net/u2/78837/showart_1182782.html 内核源码的配置]
+ * [http://blog.chinaunix.net/u2/78837/showart_1182778.html 内核源码的修改]
+ * [http://blog.chinaunix.net/u2/78837/showart_1182782.html 内核源码的配置]
 
 ===三、驱动移植===
- *[http://code.google.com/p/androidteam/wiki/LCDdriversForAndroidPorting 移植Android系统之LCD驱动移植]
+ * [http://code.google.com/p/androidteam/wiki/LCDdriversForAndroidPorting 移植Android系统之LCD驱动移植]
 
- *[http://code.google.com/p/androidteam/wiki/bluehawk USB驱动过程&触摸屏驱动]
+ * [http://code.google.com/p/androidteam/wiki/bluehawk USB驱动过程&触摸屏驱动]
 
 ===四、Android根文件系统制作===
 
 ===五、运行Android应用程序，测试效果===
- *[http://code.google.com/p/androidteam/wiki/androidapplication 一个简单的图片显示程序]
+ * [http://code.google.com/p/androidteam/wiki/androidapplication 一个简单的图片显示程序]
 
 == Android移植相关资料 ==
 
-*[http://www.am82.com/houzan/archives/2772 ARM开发板如何挂载NFS开发环境的方法步骤]
+ * [http://www.am82.com/houzan/archives/2772 ARM开发板如何挂载NFS开发环境的方法步骤]
 
-*[http://blog.csdn.net/colorant/archive/2008/02/27/2124992.aspx Android Kernel Porting 的简单总结文档]
+ * [http://blog.csdn.net/colorant/archive/2008/02/27/2124992.aspx Android Kernel Porting 的简单总结文档]
 
-*[http://blog.csdn.net/lingdxuyan/archive/2009/12/25/5075508.aspx 移植Linux2.6.24.7到博创2410S之：LCD]
+ * [http://blog.csdn.net/lingdxuyan/archive/2009/12/25/5075508.aspx 移植Linux2.6.24.7到博创2410S之：LCD]
 
-*[http://blog.chinaunix.net/u2/69999/showart_2036954.html 移植Android 到mini2440]
+ * [http://blog.chinaunix.net/u2/69999/showart_2036954.html 移植Android 到mini2440]
 
-*[http://blog.csdn.net/java211/archive/2009/02/02/3857595.aspx  将Android移植到FS2410开发板上]
+ * [http://blog.csdn.net/java211/archive/2009/02/02/3857595.aspx  将Android移植到FS2410开发板上]
 
-*[http://blog.chinaunix.net/u2/78837/article_94746.html 移植U－Boot.1.2.0到博创2410－S（S3C2410A）]
+ * [http://blog.chinaunix.net/u2/78837/article_94746.html 移植U－Boot.1.2.0到博创2410－S（S3C2410A）]
 
-*[http://blog.chinaunix.net/u2/78837/showart_1182778.html 移植Linux2.6.22.2到博创2410-S(s3c2410A)（网卡AX88796移植）]
+ * [http://blog.chinaunix.net/u2/78837/showart_1182778.html 移植Linux2.6.22.2到博创2410-S(s3c2410A)（网卡AX88796移植）]
 
 *[http://blog.chinaunix.net/u2/78837/showart_1182778.html 移植Linux2.6.22.2到博创2410-S(s3c2410A)]
 
-*[http://www.arm9.org.ru/viewthread.php?tid=6&extra=page%3D1 获取Android根文件系统]
+ * [http://www.arm9.org.ru/viewthread.php?tid=6&extra=page%3D1 获取Android根文件系统]
