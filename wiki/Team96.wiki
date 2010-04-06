@@ -27,6 +27,18 @@ Homepage for Team Members:
 
 *[http://photo.163.com/photo/hgwei1/?u=hgwei1#m=2&ai=193680364&pi=5625753618&p=1  项目进度安排Gannt图]
 
+== 移植基本步骤 ==
+
+===一、移植vivi====
+
+===二、内核源码的修改和配置===
+
+===三、驱动移植===
+
+===四、Android根文件系统制作===
+
+===五、运行Android应用程序，测试效果===
+
 == Android移植相关资料 ==
 
 *[http://www.am82.com/houzan/archives/2772 ARM开发板如何挂载NFS开发环境的方法步骤]
