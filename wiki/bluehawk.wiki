@@ -7,6 +7,75 @@
  * [http://hi.baidu.com/zjsxycli/blog/item/ee0e682181a152589922ed6a.html 移植根文件系统]
  * [http://hi.baidu.com/zkheartboy/blog/item/26dd17e989a33439b90e2d12.html 使用SkyEye仿真]
  * [http://www.android123.com.cn/androidyizhi/ Android移植 开发]
+==USB驱动过程==
+
+ * 在arch/arm/mach-s3c2410/mach-smdk2410.c中添加:
+{{{
+//usb
+
+#include <asm/arch/usb-control.h>
+
+#include <asm/arch/regs-clock.h>
+
+#include <linux/device.h>
+
+#include <linux/delay.h>
+//-------------------------------------------------usb
+
+struct s3c2410_hcd_info usb_s3c2410_info = {
+
+              .port[0] = {
+
+                     .flags = S3C_HCDFLG_USED
+
+              }
+
+};
+
+int smdk2410_usb_init(void) /* USB */
+
+{
+              unsigned long upllvalue = (0x78<<12)|(0x02<<4)|(0x03);
+
+              printk("USB Control, (c) 2006 s3c2410\n");
+
+              s3c_device_usb.dev.platform_data = &usb_s3c2410_info;
+
+              while(upllvalue!=__raw_readl(S3C2410_UPLLCON))
+
+              { __raw_writel(upllvalue,S3C2410_UPLLCON);
+
+                     mdelay(1);
+
+             }
+
+              return 0;
+
+}
+
+ * 在smdk2410_map_io函数最后添加:
+{{{
+smdk2410_usb_init();
+}}}
+ * 编译内核，选中所装驱动,配置USB鼠标键盘:
+{{{
+#make menuconfig
+Device Drivers >
+
+       USB support  --->  
+            <*> Support for Host-side USB
+
+            <*> OHCI HCD support
+
+--- USB Input Devices
+
+    <*> USB Human Interface Devices (full HID) support
+
+    [*] HID input layer support
+
+}}}
+
+
 
 ==触摸屏驱动过程==
  * 首先打一个补丁：s3c2410_touchscreen.patch（或手动修改补丁中显示相关文件的代码）
