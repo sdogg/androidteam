@@ -50,9 +50,8 @@ int smdk2410_usb_init(void) /* USB */
              }
 
               return 0;
-
 }
-
+}}}
  * 在smdk2410_map_io函数最后添加:
 {{{
 smdk2410_usb_init();
