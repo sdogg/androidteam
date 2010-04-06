@@ -7,6 +7,7 @@
  * [http://hi.baidu.com/zjsxycli/blog/item/ee0e682181a152589922ed6a.html 移植根文件系统]
  * [http://hi.baidu.com/zkheartboy/blog/item/26dd17e989a33439b90e2d12.html 使用SkyEye仿真]
  * [http://www.android123.com.cn/androidyizhi/ Android移植 开发]
+=linux-2.6.25-android 内核驱动=
 ==USB驱动过程==
 
  * 在arch/arm/mach-s3c2410/mach-smdk2410.c中添加:
