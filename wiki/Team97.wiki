@@ -31,7 +31,7 @@
  * [http://code.google.com/p/androidteam/wiki/AndroidLinuxKernelDownload?ts=1260848549&updated=AndroidLinuxKernelDownload Android内核源码下载]
  * [http://code.google.com/p/androidteam/wiki/AndroidKernelCompileAndRun?ts=1260947187&updated=AndroidKernelCompileAndRun 熟悉Android内核编译：Android内核编译和运行]
  * [http://code.google.com/p/androidteam/wiki/NANDFlashPartition?ts=1268148180&updated=NANDFlashPartition NANDFlash重分区]
- * [http://code.google.com/p/androidteam/wiki/KernelTransplantation?ts=1269090958&updated=KernelTransplantation Android内核初步移植]
+ * [http://code.google.com/p/androidteam/wiki/KernelPorting?ts=1271238757&updated=KernelPorting Android内核初步移植]
 === Android文件系统 ===
  * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis1?ts=1268216948&updated=AndroidFileSystemAnalysis1  Android文件系统分析（一）]
  * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis2?ts=1268659603&updated=AndroidFileSystemAnalysis2  Android根文件系统启动分析]
