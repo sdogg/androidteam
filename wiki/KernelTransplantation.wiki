@@ -1,6 +1,6 @@
-#summary Android Kernel Transplantation
+#summary Android Kernel Porting
 
-= Android Kernel Transplantation =
+= Android Kernel Porting =
 
  * *系统环境: Ubuntu 9.10, Kernel 2.6.31-14-generic, i686*
  * *Android Kernel Version: 2.6.25*
