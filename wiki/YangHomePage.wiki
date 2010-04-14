@@ -1,6 +1,6 @@
 #summary My Footprint on Android
 
-[http://code.google.com/p/androidteam/wiki/KernelTransplantation?ts=1269090958&updated=KernelTransplantation 03/20/2010: Android Kernel Transplantation]
+[http://code.google.com/p/androidteam/wiki/KernelTransplantation?ts=1269090958&updated=KernelTransplantation 03/20/2010: Android Kernel Porting]
 
 [http://code.google.com/p/androidteam/wiki/AppDevelopEnvironment?ts=1268318678&updated=AppDevelopEnvironment 03/11/2010: Building Android Application Development Environment]
 
