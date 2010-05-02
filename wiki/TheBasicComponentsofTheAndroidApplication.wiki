@@ -31,6 +31,3 @@
   （2）类别测试：只有当Intent请求中所有的Category与某一个IntentFilter的`<category>`完全匹配时，才会让该Intent请求通过测试，IntentFilter中多余的{{{<category>}}}声明并不会导致匹配失败。一个没有指定任何类别测试的IntentFilter仅仅只会匹配没有设置类别的Intent请求。
   
   （3）数据测试：URI被分成三部分来进行匹配：scheme、authority和path。其中，用setData()设定的Intent请求的URI数据类型和scheme必须与IntentFilter中所指定的一致。若IntentFilter中还指定了authority或path，它们也需要相匹配才会通过测试。
-以上就是对Android应用程序中的基本组件的介绍，其具体的使用方法会在以后介绍程序开发过程的wiki中进行详细的介绍。
-
-
