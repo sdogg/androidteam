@@ -1,0 +1,10 @@
+= 展示程序功能和架构讲解 =
+* *系统环境：Ubuntu 9.04,Kernel 2.6.28-11-generic,i686,Eclipse
+
+  经过几个月来对Android编程的学习，写了几个不同的实例程序，最终确定下来要在工程实践中展示的应用程序。展示程序现在开发基本完成，下面对该程序从功能和架构上进行讲解。
+== 一、 功能 ==
+    该程序功能比较简单，主要起到展示我们小组内各个成员工作的作用。程序开始运行时首先进入一个开始动画，动画是一个3D立方体不停的旋转，立方体的每面都有一张Android机器人的图片纹理，动画<br>持续时间是10s。动画结束后，进入小组成员展示界面，该界面有小组5位成员的照片，照片依次横向排列，屏幕内一次最多能看到三位成员的照片，通过拖拽图片可以移动，看到其他图片。点击每个小组成员的照片可以进入相应成员工作说明的界面，该界面对各个小组成员的工作进行了简明扼要的说明，通过返回按钮可以返回小组成员展示界面。
+== 二、 架构及其实现 ==
+    首先，程序的开头动画是通过OpenGL实现的。OpenGL(Open Graphics Library)定义了一个跨平台、跨编程语言的规格，是一个性能卓越的三维图形标准。实现这个动画用到了四个程序文件：<br>OpenGL.java、GLView.java、GLRenderer.java、GLCube.java。OpenGL只是将GLView中定义的视图类GLView装配上并用线程控制运行时间，时间到10s就跳转至小组成员展示界面。而GLView定义的视图类是装配了GLRenderer中定义的Renderer类，Renderer类是由GLSurfaceView中定义的一个专门用于渲染3D的借口。在GLRenderer构建Renderer类时，我们必须实现3个抽象方法：public vod onDrawFrame(GL10 gl){}、public void onSurfaceChanged(GL10 gl, int width, int height){}、public void onSurfaceCreated(GL10 gl, EGLConfig config)｛｝。当窗口被创建时需要调用onSurfaceCreated，所以要在里面对OpenGL做一些初始化的工作，如立方体模型的初始化，光线的定义，纹理的载入等。当窗口的大小发生改变时调用onSurfaceChanged方法，不过不管窗口的大小是否已经改变，它在程序开始时至少运行一次，所以在该方法中需要设置OpenGL场景的大小。其中glMatrixMode(GL10.GL_PROJECTION)指明了接下来的代码将影响projection matrix（投影矩阵），投影矩阵负责为场景增加透视。glLoadIdentity()近似于重置，它将所选的矩阵状态恢复成原始状态，调用glLoadIdentity()之后为场景设置透明图。最后所有的绘图操作都在onDrawFrame()方法中进行，在绘图之前，需要将屏幕清除成指定的颜色，然后变换模式坐标系。设置旋转的角度和方式，然后就可以绘制模型。而立方体模型的定义是在GLCube中实现的，立方体的每一面都是一个正方形，，由两个三角形形成，这样需要使用一个常见的OpenGL绘图模式：三角形条带，在这样的模式下，需要指定两个起点，然后每个后续的点与前两个起点一起定义一个三角形，这是生成大量几何形状来消耗图形硬件的一种快速方法。在该文件中还需要定义纹理矩阵，这个矩阵理解起来很不容易，目前仍没有充分理解它。至此开头动画就介绍完了，下一步要介绍小组成员展示界面。<br>
+    小组成员展示界面的拖动效果是由Gallery控件实现的，但需要一个容器来存放Gallery显示的图片，这里需要一个继承自BaseAdapter类的派生类来装这些图片，这个容器需要将所有要显示的图片的索引<br>存放在一个int型数组中，然后通过setImageResource方法来设置ImageView要显示的图片资源，最后将每张图片的ImageView显示在屏幕上。要对Gallery设置监听其OnItemClickListener，从而确定用户选中的是哪一张图片，当鼠标点击某个图片时，捕捉并处理该事件，即显示该图片代表的成员工作界面。<br>
+    每个小组成员都有一个工作简介界面，这个界面非常简单，一个TextView显示介绍文本，一个Button控制返回，只要对界面布局稍作修正看着美观就行了。
