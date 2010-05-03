@@ -2,7 +2,7 @@
 
 = My Android Project=
 
-*[http://code.google.com/p/androidteam/wiki/Qinguoli Linux 2.6.X 根据S3C2410配置编译]
+*[http://code.google.com/p/androidteam/wiki/Qinguoli Linux 2.6.X 根据S3C2410配置编译(一)]
 
 = Details =
 
