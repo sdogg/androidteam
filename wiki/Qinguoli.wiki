@@ -5,7 +5,7 @@
  交叉编译环境的配置
    * 交叉编译工具链的获取
      # 文件准备： arm-linux-tools-20061213.tar.gz.
-     # 下载地址： http://ftp.snapgear.org/pub/snapgear/tools/arm-linux/arm-linux/arm-linux -tools-20061213.tar.gz
+    # 下载地址： http://ftp.snapgear.org/pub/snapgear/tools/arm-linux/arm-linux/arm-linux -tools-20061213.tar.gz
    * 交叉编译工具链的安装和验证
      # 在Ubuntu (9.04) 上，首先通过将文件arm-linux-tools-20061213.tar.gz 拷贝到/Work/armlinux2006目录下
      # 打开终端， cd /Work/ arm-linux2006 ，进入/Work/ arm-linux2006 目录
