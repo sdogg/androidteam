@@ -84,7 +84,7 @@ select GENERIC_GPIO
 select ISA
 help
   Samsung S3C2410X CPU based systems, such as the Simtec Electronics
-  BAST (<http://www.simtec.co.uk/products/EB110ITX/>), the IPAQ 1940 or
+  BAST the IPAQ 1940 or
   the Samsung SMDK2410 development board (and derivatives).
 
 }}}
