@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary LCD控制器中相关寄存器介绍.
 
 =Introduction =
 
