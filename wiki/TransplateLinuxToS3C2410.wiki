@@ -73,7 +73,6 @@ static struct s3c2410_platf orm_nand smdk _nand_inf o = {
   搜索关键字 NAND_ECC_SOFT,在 s3c2410_nand_init_chip 函数里,修改NAND_ECC_SOF T为NAND_ECC_NONE
  5 增加 Yaffs2 文件系统的支持
   1)下载 Yaffs2
-
   2)解压 Yaffs2 并将其加入 Linux 内核(打补丁的方式)
 
 = Details =
