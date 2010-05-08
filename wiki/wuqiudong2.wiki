@@ -1,5 +1,4 @@
 
-
 = 触摸屏驱动移植 =
 
 
@@ -476,6 +475,6 @@ input: s3c2410 TouchScreen as /class/input/input0
 刚开始找不到触摸屏的设备文件，只知道主次设备号是13，64，后来在/dev/input/下用ls -l后查看到event0的设备号刚好也是13，64，
 于是cat event0,但是日志上显示的是乱码，
 于是再echo 8 > /proc/sys/kernel/printk，修改一下打印级别，然后按触摸屏，终端上就显示触摸处的x和y坐标了，按左下端显示为原点坐标
-
+测试成功！
 
 }}}
