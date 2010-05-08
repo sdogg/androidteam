@@ -5,6 +5,5 @@
 Add your content here.
 
 
+[http://code.google.com/p/androidteam/wiki/wuqiudong2?ts=1260620627&updated=AndroidSourceCodeDownload 04/08/2010: 触摸屏驱动移植过程]
 
-
-[ http://code.google.com/p/androidteam/wiki/wuqiudong2 04/08/2010: 触摸屏驱动移植过程]
