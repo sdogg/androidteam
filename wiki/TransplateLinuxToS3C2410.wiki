@@ -1,8 +1,8 @@
-#summary One-sentence summary of this page.
+#内核配置详解(一)
 
-= Introduction =
+= 内核配置详解 =
 
-Add your content here.
+ #将 Linux2. 6.22. 2 内核源码放到工作目录的 kerne l 文件夹下,并解压
 
 
 = Details =
