@@ -72,6 +72,7 @@ static struct s3c2410fb_mach_info qt2410_biglcd_cfg __initdata = {
  static void __init smdk2410_init(void)
 {
         s3c24xx_fb_set_platdata(&qt2410_biglcd_cfg);
+        //将 s3c2410_mach_info  添加到  platform_device  结构体中  
 	platform_add_devices(smdk2410_devices, ARRAY_SIZE(smdk2410_devices));
 	smdk_machine_init();
 }
