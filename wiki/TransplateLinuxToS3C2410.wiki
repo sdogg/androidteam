@@ -20,6 +20,7 @@
              CROSS_COMPILE = /home/qinguoli/usr/local/bin/arm-linux-
 
    }}}
+
  # 修改 arch/arm/plat-s3c24xx/common-smdk.c文件,修改 Nand Flash 的分
 区信息和 Nand Flash 的硬件信息
     {{{static struct mtd_partition smdk _default_nand_part[] = {
