@@ -15,9 +15,9 @@
            #          -e s/ppc.*/powerpc/ -e s/mips.*/mips/ )
            ......
 
-           ARCH    = arm
+             ARCH    = arm
 
-           CROSS_COMPILE = /home/qinguoli/usr/local/bin/arm-linux-
+             CROSS_COMPILE = /home/qinguoli/usr/local/bin/arm-linux-
 
    }}}
     
