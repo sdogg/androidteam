@@ -7,8 +7,9 @@
 
 = 步骤 =
    * 添加头文件
-      #include <asm/arch/fb.h>
+   {{{   #include <asm/arch/fb.h>   }}}
    * LCD初始化参数的设置
+   {{{
       static struct s3c2410fb_display qt2410_lcd_cfg[] __initdata = {
 	{
 		/* Configuration for 640x480 SHARP LQ080V3DG01 */
@@ -51,6 +52,8 @@ static struct s3c2410fb_mach_info qt2410_biglcd_cfg __initdata = {
 
     	.lpcsel        = ((0xCE6) & ~7) | 1<<4, 
 };
+
+ }}}
 
    * 打开LCD初始化
    * 添加设置函数使得参数生效
