@@ -7,6 +7,50 @@
 
 = 步骤 =
    * 添加头文件
+      #include <asm/arch/fb.h>
    * LCD初始化参数的设置
+      static struct s3c2410fb_display qt2410_lcd_cfg[] __initdata = {
+	{
+		/* Configuration for 640x480 SHARP LQ080V3DG01 */
+		.lcdcon5 = S3C2410_LCDCON5_FRM565 |
+			   S3C2410_LCDCON5_INVVLINE |
+			   S3C2410_LCDCON5_INVVFRAME |
+			   S3C2410_LCDCON5_PWREN |
+			   S3C2410_LCDCON5_HWSWP,
+
+		.type		= S3C2410_LCDCON1_TFT,
+		.width		= 640,
+		.height		= 480,
+
+		.pixclock	= 40000, /* HCLK/4 */
+		.xres		= 640,
+		.yres		= 480,
+		.bpp		= 16,
+		.left_margin	= 44,
+		.right_margin	= 116,
+		.hsync_len	= 96,
+		.upper_margin	= 19,
+		.lower_margin	= 11,
+		.vsync_len	= 15,
+	},
+};
+   /* Configuration for 640x480 SHARP LQ080V3DG01 */
+static struct s3c2410fb_mach_info qt2410_biglcd_cfg __initdata = {
+     	.displays 	= qt2410_lcd_cfg,
+	.num_displays 	= ARRAY_SIZE(qt2410_lcd_cfg),
+	
+	.default_display = 0,
+    	.gpccon=    0xaa8002a8,
+    	.gpccon_mask=   0xffc003fc,
+    	.gpcup=     0xf81e,
+    	.gpcup_mask=    0xf81e,
+   	 .gpdcon=    0xaa80aaa0,
+   	 .gpdcon_mask=   0xffc0fff0,
+    	.gpdup=     0xf8fc,
+    	.gpdup_mask=    0xf8fc,   
+
+    	.lpcsel        = ((0xCE6) & ~7) | 1<<4, 
+};
+
    * 打开LCD初始化
    * 添加设置函数使得参数生效
