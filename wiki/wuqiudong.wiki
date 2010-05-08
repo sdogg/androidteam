@@ -12,4 +12,4 @@ Add your content here.  Format your content with:
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
 
-[http://androidteam.googlecode.com/files/ts.txt 04/08/2010: 触摸屏驱动移植过程]
+[ 04/08/2010: 触摸屏驱动移植过程]
