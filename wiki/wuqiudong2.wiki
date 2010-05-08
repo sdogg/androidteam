@@ -1,13 +1,11 @@
 #summary One-sentence summary of this page.
 
-= Introduction =
+= 触摸屏驱动移植 =
 
 Add your content here.
 
 
-= Details =
-
-Add your content here.  Format your content with:
+{{{
  * 在 linux2.6.25 中没有提供 s3c2410 的驱动，所以我们要新建驱动文件，从网上下载s3c2410_ts.c与s3c2410_ts.h两个文件,
 s3c2410_ts.c内容如下：
 #include <linux/delay.h>
@@ -480,3 +478,4 @@ input: s3c2410 TouchScreen as /class/input/input0
 于是再echo 8 > /proc/sys/kernel/printk，修改一下打印级别，然后按触摸屏，终端上就显示触摸处的x和y坐标了，按左下端显示为原点坐标
 
 
+}}}
