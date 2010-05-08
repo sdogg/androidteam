@@ -15,9 +15,10 @@
            #          -e s/ppc.*/powerpc/ -e s/mips.*/mips/ )
            ......
            ARCH    = arm
+
            CROSS_COMPILE = /home/qinguoli/usr/local/bin/arm-linux-
 
-}}}
+   }}}
     
 = Details =
 
