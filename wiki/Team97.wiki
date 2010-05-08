@@ -37,7 +37,8 @@
  * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis2?ts=1268659603&updated=AndroidFileSystemAnalysis2  Android根文件系统启动分析]
  * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis3?ts=1269073637&updated=AndroidFileSystemAnalysis3  Android根文件系统制作方法（模拟器上运行）]
 === Android驱动 ===
- * _add the content here_
+ * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis2?ts=1268659603&updated=AndroidFileSystemAnalysis2  触摸屏驱动移植过程]
+
 === Android应用开发 ===
  * [http://code.google.com/p/androidteam/wiki/AndroidDevelopmentEnvironmentBuilding?ts=1261846479&updated=AndroidDevelopmentEnvironmentBuilding&update= Android开发环境搭建]
  * [http://code.google.com/p/androidteam/wiki/AppDevelopEnvironment?ts=1268318678&updated=AppDevelopEnvironment 搭建Android应用程序开发环境 for Windows]
