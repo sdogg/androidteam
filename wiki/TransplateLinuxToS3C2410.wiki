@@ -14,6 +14,7 @@
            #          -e s/s390x/s390/ -e s/parisc64/parisc/ \
            #          -e s/ppc.*/powerpc/ -e s/mips.*/mips/ )
            ......
+
            ARCH    = arm
 
            CROSS_COMPILE = /home/qinguoli/usr/local/bin/arm-linux-
