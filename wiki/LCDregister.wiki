@@ -2,8 +2,9 @@
 
 =LCD移植相关的寄存器 =
 
-Add your content here.
-
+ S3C2410中LCD控制器的相关寄存器介绍
 
 = Details =
   * 关于LCD相关的寄存器的含义 可以在Downloads中下载我上传的 LCD Controller 中文手册   是中文的 其中有对个寄存器的详细介绍  
+  *  时序中VSYNC 、HSYNC 、VBPD 、VFPD 、 VSPW 、HSPW 、 HBPD 、 HFPD等之间的关系 参考如下连接
+  *  http://www.dzjs.net/html/qianrushixitong/2009/0701/3839.html
