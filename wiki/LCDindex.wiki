@@ -14,4 +14,4 @@ Add your content here.
 
 [http://code.google.com/p/androidteam/wiki/LCDstep?ts=1260620681&updated=LCDstep 5/4/2010: LCD移植步骤]
 
-[http://code.google.com/p/androidteam/wiki/LCDanylsis ?ts=1260620681&updated=LCDanylsis  15/4/2010: LCD模型分析]
+[http://code.google.com/p/androidteam/wiki/LCDanylsis?ts=1260620691&updated=LCDanylsis  15/4/2010: LCD模型分析]
