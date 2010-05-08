@@ -79,14 +79,7 @@ static struct s3c2410_platf orm_nand smdk _nand_inf o = {
  
  1)修改 arch/arm/目录下的Kconfig文件,增加ISA总线支持,使其在make menuconfig时出现 NE2000 的网卡配置选项。
 {{{修改如下：
-config ARCH_S3C2410
-bool "Samsung S3C2410S3C2412,S3C2413,S3C2440,S3C2442,S3C2443"
-select GENERIC_GPIO
-select ISA
-help
-  Samsung S3C2410X CPU based systems,such as the Simtec Electronics
-  BAST the IPAQ 1940 or
-  the Samsung SMDK2410 development board (and derivatives).
+
 
 }}}
   
