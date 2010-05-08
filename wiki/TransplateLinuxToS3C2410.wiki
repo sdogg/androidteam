@@ -8,18 +8,10 @@
     进入内核解压后的目录
  # 修改内核源码根目录下的 Makefile 文 件
     * vi Makefile
-      修改Makefile
-    {{{ #SUBARCH := $(shell uname -m | sed -e s/i.86/i386/ -e s/sun4u/sparc64/ \
-           #          -e s/arm.*/arm/ -e s/sa110/arm/ \
-           #          -e s/s390x/s390/ -e s/parisc64/parisc/ \
-           #          -e s/ppc.*/powerpc/ -e s/mips.*/mips/ )
-           ......
-
-             ARCH    = arm
-
-             CROSS_COMPILE = /home/qinguoli/usr/local/bin/arm-linux-
-
-   }}}
+      修改Makefile,修改ARCH和CROSS_COMPILE 如下：
+      ARCH    = arm
+   
+      CROSS_COMPILE = /home/qinguoli/usr/local/bin/arm-linux-
 
  # 修改 arch/arm/plat-s3c24xx/common-smdk.c文件,修改 Nand Flash 的分
 区信息和 Nand Flash 的硬件信息
