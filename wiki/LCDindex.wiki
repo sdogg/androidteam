@@ -8,3 +8,4 @@ Add your content here.
 = Details =
 
 [http://code.google.com/p/androidteam/wiki/PageName?ts=1260620680&updated=PageName 12/12/2009: LCD简介]
+[http://code.google.com/p/androidteam/wiki/LCDregister?ts=1260620680&updated=LCDregister 12/12/2009: 与LCD移植相关的S3C2410X控制器中相应的寄存器介绍]
