@@ -67,7 +67,14 @@ static struct s3c2410_platf orm_nand smdk _nand_inf o = {
 
  };
 }}}
-    
+ 4 修改drivers/mtd/nand/s3c2410.c,去掉nand flash的ECC
+
+  这个内核是通过 U-BOOT 写到 Nand Flash 的, U-BOOT 通过的软件 ECC 算法产生 ECC
+校验码, 这与内核校验的 ECC 码不一样 , 内核中的 ECC 码是由 S3C2410 中 Nand Flash 控制
+器产生的。所以,在这里选择禁止内核 ECC 校验。
+  搜索关键字 NAND_ECC_SOFT,在 s3c2410_nand_init_chip 函数里,修改
+NAND_ECC_SOF T 为 NAND_ECC_NONE
+
 = Details =
 
 Add your content here.  Format your content with:
