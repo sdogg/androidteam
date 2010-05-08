@@ -8,4 +8,4 @@ Add your content here.
 = Details =
 
 Add your content here.  Format your content with:
-haohala
+ * 在 linux2.6.25 中没有提供 s3c2410 的驱动，所以我们要新建驱动文件，从网上下载s3c2410_ts.c与s3c2410_ts.h两个文件,
