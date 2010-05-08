@@ -1,6 +1,7 @@
 #summary One-sentence summary of this page.
 
 = Introduction =
+{{{
 
 s3c2410触摸屏驱动(2.6内核)分析 
 
@@ -335,3 +336,8 @@ static int __init s3c2410ts_probe(struct device *dev)
 
     return 0;
 }
+
+
+
+
+}}}
