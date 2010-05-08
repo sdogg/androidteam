@@ -1,6 +1,6 @@
 #summary One-sentence summary of this page.
 
-= Introduction =
+=LCD移植相关的寄存器 =
 
 Add your content here.
 
@@ -8,6 +8,6 @@ Add your content here.
 = Details =
 
 Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
+  * 与LCD驱动相关的寄存器简介
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
