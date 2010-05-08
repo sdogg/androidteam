@@ -38,6 +38,7 @@
  * [http://code.google.com/p/androidteam/wiki/AndroidFileSystemAnalysis3?ts=1269073637&updated=AndroidFileSystemAnalysis3  Android根文件系统制作方法（模拟器上运行）]
 === Android驱动 ===
  * [http://code.google.com/p/androidteam/wiki/wuqiudong2?ts=1260620627&updated=AndroidSourceCodeDownload  触摸屏驱动移植过程]
+ * [http://code.google.com/p/androidteam/wiki/wuqiudong3?ts=1260620628&updated=AndroidSourceCodeDownload  触摸屏驱动移植过程]
 
 === Android应用开发 ===
  * [http://code.google.com/p/androidteam/wiki/AndroidDevelopmentEnvironmentBuilding?ts=1261846479&updated=AndroidDevelopmentEnvironmentBuilding&update= Android开发环境搭建]
