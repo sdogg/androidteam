@@ -5,5 +5,5 @@
    移植中与LCD相关的寄存器介绍
 = Details =
   * 关于LCD相关的寄存器的含义 可以在Downloads中下载 LCD Controller 中文手册  其中有对LCD控制器中每个寄存器的详细介绍  
-  *  信号如VSYNC 、HSYNC 、VBPD 、VFPD 、 VSPW 、HSPW 、 HBPD 、 HFPD等之间的关系 参考如下链接
+  *  信号如VSYNC 、HSYNC 、VBPD 、VFPD 、 VSPW 、HSPW 、 HBPD 、 HFPD等之间的关系 参考如下链接中TFT屏时序分析
   *  http://www.dzjs.net/html/qianrushixitong/2009/0701/3839.html
