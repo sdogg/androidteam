@@ -6,6 +6,4 @@ Add your content here.
 
 
 = Details =
-
-Add your content here.  Format your content with:
   * 关于LCD相关的寄存器的含义 可以在Downloads中下载我上传的 LCD Controller 中文手册   是中文的 其中有对个寄存器的详细介绍  
