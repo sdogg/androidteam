@@ -76,3 +76,4 @@ static struct s3c2410fb_mach_info qt2410_biglcd_cfg __initdata = {
 	smdk_machine_init();
 }
 }}}
+   * 编译内核
