@@ -6,7 +6,9 @@
     * tar xzvf linux2.6.22.2.tar.gz
     * cd linux2.6.22.2
     进入内核解压后的目录
-
+ # 修改内核源码根目录下的 Makefile 文 件
+    * vi Makefile
+    
 = Details =
 
 Add your content here.  Format your content with:
