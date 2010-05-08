@@ -3,7 +3,7 @@
 = 内核配置详解 =
 
  # 将 Linux2. 6.22. 2 内核源码放到工作目录的 kerne l 文件夹下,并解压
-   *{{{#tar xzvf linux2.6.22.2.tar.gz}}}
+   {{{#tar xzvf linux2.6.22.2.tar.gz}}}
 
 
 = Details =
