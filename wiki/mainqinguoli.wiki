@@ -3,7 +3,7 @@
 = My Android Project=
 *[http://code.google.com/p/androidteam/wiki/Qinguoli 移植Linux 2.6.22 到博创S3C2410环境配置]
 
-*[http://code.google.com/p/androidteam/wiki/Qinguoli 移植Linux 2.6.22 到博创S3C2410(一)]
+*http://code.google.com/p/androidteam/wiki/TransplateLinuxToS3C2410?ts=1273306657&updated=TransplateLinuxToS3C2410 移植Linux 2.6.22 到博创S3C2410(一)]
 
 *[http://code.google.com/p/androidteam/wiki/Qinguoli 移植Linux 2.6.22 到博创S3C2410(二)]
  
