@@ -12,4 +12,4 @@ Add your content here.
 
 [http://code.google.com/p/androidteam/wiki/LCDregister?ts=1260620678&updated=LCDregister 25/3/2010: 与LCD移植相关的S3C2410X控制器中相应的寄存器介绍]
 
-[http://code.google.com/p/androidteam/wiki/LCDstep?ts=1260620681&updated=LCDstep 25/3/2010: LCD移植步骤]
+[http://code.google.com/p/androidteam/wiki/LCDstep?ts=1260620681&updated=LCDstep 5/4/2010: LCD移植步骤]
