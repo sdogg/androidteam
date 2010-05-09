@@ -62,6 +62,11 @@ static struct resource s3c_lcd_resource[] = {
 
 };
 }}}
+struct resource结构实际上描述了该设备占用的硬件资源（如地址空间，中断号等s），s3c_lcd_resource描述了内存空间和中断分配情况
+
+从上面可以看出我们通过填写platform_device描述了s3c2410中lcd的情况
+ * 再看 platform_driver
+  
 
  
   
