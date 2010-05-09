@@ -8,5 +8,10 @@ LCD驱动流程实现分析.
 = Details =
    我们已经分析了一个platfrom设备的表示， 即就是要填充连个结构体 platfrom_device和platfrom_driver 下面我们着重看s3c2410的lcd驱动的流程 
 * LCD流程分析
+   驱动入口   /drivers/vedio/s3c2410fb.c中  有这样的代码
+{{{
+module_init(s3c2410fb_init);
+module_exit(s3c2410fb_cleanup);
+}}}
  
  
