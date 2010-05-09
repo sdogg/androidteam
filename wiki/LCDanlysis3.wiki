@@ -170,3 +170,31 @@ struct s3c2410fb_mach_info {
 	unsigned long	lpcsel;
 };
 }}}
+{{{
+/* LCD description */
+struct s3c2410fb_display {
+	/* LCD type */
+	unsigned type;
+
+	/* Screen size */
+	unsigned short width;
+	unsigned short height;
+
+	/* Screen info */
+	unsigned short xres;
+	unsigned short yres;
+	unsigned short bpp;
+
+	unsigned pixclock;		/* pixclock in picoseconds */
+	unsigned short left_margin;  /* value in pixels (TFT) or HCLKs (STN) */
+	unsigned short right_margin; /* value in pixels (TFT) or HCLKs (STN) */
+	unsigned short hsync_len;    /* value in pixels (TFT) or HCLKs (STN) */
+	unsigned short upper_margin;	/* value in lines (TFT) or 0 (STN) */
+	unsigned short lower_margin;	/* value in lines (TFT) or 0 (STN) */
+	unsigned short vsync_len;	/* value in lines (TFT) or 0 (STN) */
+
+	/* lcd configuration registers */
+	unsigned long	lcdcon5;
+};
+}}}
+看到这个结构体应该不陌生  觉得我们在 lcd驱动移植步骤的第二步 就是填充了这个结构体 
