@@ -216,4 +216,4 @@ dealloc_fb:
 	return ret;
 }
 }}}
-我们在讲解了framebuffer后 会在重新分析该代码的实现
+我们在介绍了framebuffer相关知识后 会在重新分析该代码的实现
