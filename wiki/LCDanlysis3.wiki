@@ -146,4 +146,27 @@ struct s3c2410fb_info {
 	u32			pseudo_pal[16];
 };
 }}}
- *  s3c2410fb_mach_info 结构体     
+ *  s3c2410fb_mach_info 结构体      kernel/include/asm-arm/arch-s3c2410/fb.h   
+   从字面上我们不难看出 和具体的硬件有关  结构体定义如下：
+{{{
+struct s3c2410fb_mach_info {
+
+	struct s3c2410fb_display *displays;	/* attached diplays info */
+	unsigned num_displays;			/* number of defined displays */
+	unsigned default_display;
+
+	/* GPIOs */
+
+	unsigned long	gpcup;
+	unsigned long	gpcup_mask;
+	unsigned long	gpccon;
+	unsigned long	gpccon_mask;
+	unsigned long	gpdup;
+	unsigned long	gpdup_mask;
+	unsigned long	gpdcon;
+	unsigned long	gpdcon_mask;
+
+	/* lpc3600 control register */
+	unsigned long	lpcsel;
+};
+}}}
