@@ -1,4 +1,4 @@
-基于2.6.25内核的LCD驱动程序分析结构体platfrom_device和platfrom_driver.
+#summary 基于2.6.25内核的LCD驱动程序分析结构体platfrom_device和platfrom_driver.
 
 = Introduction =
 
