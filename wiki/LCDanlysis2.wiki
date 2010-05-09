@@ -28,7 +28,7 @@ int __init s3c2410fb_init(void)
 }}}
 在上面的代码中 我们可以看到主要调用了platform_driver_register(&s3c2410fb_driver)函数  简单的
 说就是调用platform_driver_register要将向内核注册一个platform设备的驱动 毫无疑问 这个设备是s3c2410中lcd，通过platform_driver_register函数注册该设备的过程中，它会回调s3c2410fb_driver中的s3c2410fb_probe函数
-这样我们这个流程就清楚了  过程如下：
+  这样我们这个流程就清楚了  过程如下：
 {{{
   module_init() --->
               s3c2410fb_init----->
