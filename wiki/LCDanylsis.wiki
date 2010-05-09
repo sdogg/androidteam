@@ -20,7 +20,7 @@ platform_device 和 platform_driver
 };
   }}}
   该结构一个重要的元素是resource，该元素存入了最为重要的设备资源信息，定义在kernel\include\linux\ioport.h中，定义如下：
- {{{
+{{{
  struct resource {
 	resource_size_t start;
 	resource_size_t end;
@@ -30,7 +30,7 @@ platform_device 和 platform_driver
 };
 }}}
  下面我们以s3c2410的lcd为例来具体讲解下 
-  在 arch/arm/plat-s3c24xx/devs.c中 可以看到填写 lcd的代码 如下：
+ 在 arch/arm/plat-s3c24xx/devs.c中 可以看到填写 lcd的代码 如下：
 {{{
 static u64 s3c_device_lcd_dmamask = 0xffffffffUL;
 
