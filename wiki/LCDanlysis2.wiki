@@ -33,5 +33,6 @@ int __init s3c2410fb_init(void)
   module_init() --->
               s3c2410fb_init----->
                        platfrom_driver_register()---->
-                                   s3c2410fb_driver---->s3c2410fb_probe
+                                      s3c2410fb_driver---->
+                                                          s3c2410fb_probe
 }}}                    
