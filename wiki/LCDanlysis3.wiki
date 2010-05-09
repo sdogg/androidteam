@@ -145,6 +145,5 @@ struct s3c2410fb_info {
 	u32			palette_buffer[256];
 	u32			pseudo_pal[16];
 };
-
 }}}
-   
+ *  s3c2410fb_mach_info 结构体     
