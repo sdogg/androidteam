@@ -35,4 +35,184 @@ int __init s3c2410fb_init(void)
                        platfrom_driver_register()---->
                                       s3c2410fb_driver---->
                                                           s3c2410fb_probe
-}}}                 
+}}}        
+在s3c2410fb_probe 里面LCD驱动主要做的工作是填充结构体 struct fb_info 并使用register_framebuffer（）函数在系统中进行注册 
+* s3c2410fb_probe 函数代码
+{{{
+static int __init s3c24xxfb_probe(struct platform_device *pdev,
+				  enum s3c_drv_type drv_type)
+{
+	struct s3c2410fb_info *info;
+	struct s3c2410fb_display *display;
+	struct fb_info *fbinfo;
+	struct s3c2410fb_mach_info *mach_info;
+	struct resource *res;
+	int ret;
+	int irq;
+	int i;
+	int size;
+	u32 lcdcon1;
+
+	mach_info = pdev->dev.platform_data;
+	if (mach_info == NULL) {
+		dev_err(&pdev->dev,
+			"no platform data for lcd, cannot attach\n");
+		return -EINVAL;
+	}
+
+	if (mach_info->default_display >= mach_info->num_displays) {
+		dev_err(&pdev->dev, "default is %d but only %d displays\n",
+			mach_info->default_display, mach_info->num_displays);
+		return -EINVAL;
+	}
+
+	display = mach_info->displays + mach_info->default_display;
+
+	irq = platform_get_irq(pdev, 0);
+	if (irq < 0) {
+		dev_err(&pdev->dev, "no irq for device\n");
+		return -ENOENT;
+	}
+
+	fbinfo = framebuffer_alloc(sizeof(struct s3c2410fb_info), &pdev->dev);
+	if (!fbinfo)
+		return -ENOMEM;
+
+	platform_set_drvdata(pdev, fbinfo);
+
+	info = fbinfo->par;
+	info->dev = &pdev->dev;
+	info->drv_type = drv_type;
+
+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	if (res == NULL) {
+		dev_err(&pdev->dev, "failed to get memory registers\n");
+		ret = -ENXIO;
+		goto dealloc_fb;
+	}
+
+	size = (res->end - res->start) + 1;
+	info->mem = request_mem_region(res->start, size, pdev->name);
+	if (info->mem == NULL) {
+		dev_err(&pdev->dev, "failed to get memory region\n");
+		ret = -ENOENT;
+		goto dealloc_fb;
+	}
+
+	info->io = ioremap(res->start, size);
+	if (info->io == NULL) {
+		dev_err(&pdev->dev, "ioremap() of registers failed\n");
+		ret = -ENXIO;
+		goto release_mem;
+	}
+
+	info->irq_base = info->io + ((drv_type == DRV_S3C2412) ? S3C2412_LCDINTBASE : S3C2410_LCDINTBASE);
+
+	dprintk("devinit\n");
+
+	strcpy(fbinfo->fix.id, driver_name);
+
+	/* Stop the video */
+	lcdcon1 = readl(info->io + S3C2410_LCDCON1);
+	writel(lcdcon1 & ~S3C2410_LCDCON1_ENVID, info->io + S3C2410_LCDCON1);
+
+	fbinfo->fix.type	    = FB_TYPE_PACKED_PIXELS;
+	fbinfo->fix.type_aux	    = 0;
+	fbinfo->fix.xpanstep	    = 0;
+	fbinfo->fix.ypanstep	    = 0;
+	fbinfo->fix.ywrapstep	    = 0;
+	fbinfo->fix.accel	    = FB_ACCEL_NONE;
+
+	fbinfo->var.nonstd	    = 0;
+	fbinfo->var.activate	    = FB_ACTIVATE_NOW;
+	fbinfo->var.accel_flags     = 0;
+	fbinfo->var.vmode	    = FB_VMODE_NONINTERLACED;
+
+	fbinfo->fbops		    = &s3c2410fb_ops;
+	fbinfo->flags		    = FBINFO_FLAG_DEFAULT;
+	fbinfo->pseudo_palette      = &info->pseudo_pal;
+
+	for (i = 0; i < 256; i++)
+		info->palette_buffer[i] = PALETTE_BUFF_CLEAR;
+
+	ret = request_irq(irq, s3c2410fb_irq, IRQF_DISABLED, pdev->name, info);
+	if (ret) {
+		dev_err(&pdev->dev, "cannot get irq %d - err %d\n", irq, ret);
+		ret = -EBUSY;
+		goto release_regs;
+	}
+
+	info->clk = clk_get(NULL, "lcd");
+	if (!info->clk || IS_ERR(info->clk)) {
+		printk(KERN_ERR "failed to get lcd clock source\n");
+		ret = -ENOENT;
+		goto release_irq;
+	}
+
+	clk_enable(info->clk);
+	dprintk("got and enabled clock\n");
+
+	msleep(1);
+
+	/* find maximum required memory size for display */
+	for (i = 0; i < mach_info->num_displays; i++) {
+		unsigned long smem_len = mach_info->displays[i].xres;
+
+		smem_len *= mach_info->displays[i].yres;
+		smem_len *= mach_info->displays[i].bpp;
+		smem_len >>= 3;
+		if (fbinfo->fix.smem_len < smem_len)
+			fbinfo->fix.smem_len = smem_len;
+	}
+
+	/* Initialize video memory */
+	ret = s3c2410fb_map_video_memory(fbinfo);
+	if (ret) {
+		printk(KERN_ERR "Failed to allocate video RAM: %d\n", ret);
+		ret = -ENOMEM;
+		goto release_clock;
+	}
+
+	dprintk("got video memory\n");
+
+	fbinfo->var.xres = display->xres;
+	fbinfo->var.yres = display->yres;
+	fbinfo->var.bits_per_pixel = display->bpp;
+
+	s3c2410fb_init_registers(fbinfo);
+
+	s3c2410fb_check_var(&fbinfo->var, fbinfo);
+
+	ret = register_framebuffer(fbinfo);
+	if (ret < 0) {
+		printk(KERN_ERR "Failed to register framebuffer device: %d\n",
+			ret);
+		goto free_video_memory;
+	}
+
+	/* create device files */
+	device_create_file(&pdev->dev, &dev_attr_debug);
+
+	printk(KERN_INFO "fb%d: %s frame buffer device\n",
+		fbinfo->node, fbinfo->fix.id);
+
+	return 0;
+
+free_video_memory:
+	s3c2410fb_unmap_video_memory(fbinfo);
+release_clock:
+	clk_disable(info->clk);
+	clk_put(info->clk);
+release_irq:
+	free_irq(irq, info);
+release_regs:
+	iounmap(info->io);
+release_mem:
+	release_resource(info->mem);
+	kfree(info->mem);
+dealloc_fb:
+	platform_set_drvdata(pdev, NULL);
+	framebuffer_release(fbinfo);
+	return ret;
+}
+}}}
