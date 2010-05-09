@@ -1,13 +1,9 @@
-#summary One-sentence summary of this page.
+基于2.6.15内核的LCD驱动程序分析1.
 
 = Introduction =
 
-Add your content here.
+platform_device 和 platform_driver
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
