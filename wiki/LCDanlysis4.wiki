@@ -3,8 +3,11 @@
 = Introduction =
 我们接着介绍framebuffer 在下面着重介绍struct file_operations 和 struct fb_ops .
 
+
+= Details =
+
  * struct fb_ops    在 kernel/include/linux/fb.h中
-  struct fb_ops 结构包含在fb_info结构中,指向驱动设备工作所需的函数集。fb_ops结构中包含了很多涵数指针   定义如下 
+  struct fb_ops 结构包含在fb_info结构中,指向驱动设备工作所需的函数集。fb_ops结构中包含了很多涵数指针  fb_ops是底层操作的抽象  定义如下 
 {{{
 struct fb_ops {
 	/* open/release and usage marking */
@@ -78,4 +81,25 @@ struct fb_ops {
 			    struct fb_var_screeninfo *var);
 };
 }}}
-= Details =
+ * struct file_operations 
+   对于struct file_operation 我们在熟悉不过了 
+   file_operations是提供给上层系统调用的接口，可以直接调用.
+
+static const struct file_operations fb_fops = {
+	.owner =	THIS_MODULE,
+	.read =		fb_read,
+	.write =	fb_write,
+	.ioctl =	fb_ioctl,
+#ifdef CONFIG_COMPAT
+	.compat_ioctl = fb_compat_ioctl,
+#endif
+	.mmap =		fb_mmap,
+	.open =		fb_open,
+	.release =	fb_release,
+#ifdef HAVE_ARCH_FB_UNMAPPED_AREA
+	.get_unmapped_area = get_fb_unmapped_area,
+#endif
+#ifdef CONFIG_FB_DEFERRED_IO
+	.fsync =	fb_deferred_io_fsync,
+#endif
+};
