@@ -82,9 +82,7 @@ struct fb_ops {
 };
 }}}
  * struct file_operations 
-   对于struct file_operation 我们在熟悉不过了 
-   file_operations是提供给上层系统调用的接口，可以直接调用.
-
+   对于struct file_operation 我们在熟悉不过了 file_operations是提供给上层系统调用的接口，可以直接调用.
 {{{
 static const struct file_operations fb_fops = {
 	.owner =	THIS_MODULE,
