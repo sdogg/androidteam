@@ -17,3 +17,5 @@ Add your content here.
 [http://code.google.com/p/androidteam/wiki/LCDanylsis?ts=1260620691&updated=LCDanylsis  15/4/2010: LCD驱动中platform_device和platform_driver分析]
 
 [http://code.google.com/p/androidteam/wiki/LCDanlysis2?ts=1260620692&updated=LCDanlysis2  25/4/2010: LCD流程分析]
+
+[http://code.google.com/p/androidteam/wiki/LCDanlysis2?ts=1260620692&updated=LCDanlysis2  30/4/2010: Framebuffer介绍]
