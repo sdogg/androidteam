@@ -10,4 +10,4 @@ framebuffer相关知识.
     帧缓冲（framebuffer）是Linux为显示设备提供的一个接口，把显存抽象后的一种设备，他允许上层应用程序在图形模式下直接对显示缓冲区进行读写操作。这种操作是抽象的，统一的。用户不必关心物理显存的位置、换页机制等等具体细节。这些都是由Framebuffer设备驱动来完成的。
     Linux为了开发FrameBuffer程序的方便，使用了分层结构。fbmem.c处于Framebuffer设备驱动技术的中心位置。它为上层应用程序提供系统调用，也为下一层的特定硬件驱动提供接口；那些底层硬件驱动需要用到这儿的接口来向系统内核注册它们自己
   * http://www.dzjs.net/upimg/userup/0907/01102110Y24.jpg  
-  上面的链接处为framebuffer的框架
+                        framebuffer的框架
