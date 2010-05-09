@@ -29,8 +29,39 @@ platform_device 和 platform_driver
 	struct resource *parent, *sibling, *child;
 };
 }}}
- 下面我们以lcd为例来具体讲解下 
- 
+ 下面我们以s3c2410的lcd为例来具体讲解下 
+  在 arch/arm/plat-s3c24xx/devs.c中 可以看到填写 lcd的代码 如下：
+{{{
+static u64 s3c_device_lcd_dmamask = 0xffffffffUL;
+
+struct platform_device s3c_device_lcd = {
+	.name		  = "s3c2410-lcd",
+	.id		  = -1,
+	.num_resources	  = ARRAY_SIZE(s3c_lcd_resource),
+	.resource	  = s3c_lcd_resource,
+	.dev              = {
+		.dma_mask		= &s3c_device_lcd_dmamask,
+		.coherent_dma_mask	= 0xffffffffUL
+	}
+};
+}}}
+{{{
+/* LCD Controller */
+
+static struct resource s3c_lcd_resource[] = {
+	[0] = {
+		.start = S3C24XX_PA_LCD,
+		.end   = S3C24XX_PA_LCD + S3C24XX_SZ_LCD - 1,
+		.flags = IORESOURCE_MEM,
+	},
+	[1] = {
+		.start = IRQ_LCD,
+		.end   = IRQ_LCD,
+		.flags = IORESOURCE_IRQ,
+	}
+
+};
+}}}
 
  
   
