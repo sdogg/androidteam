@@ -37,7 +37,7 @@ int __init s3c2410fb_init(void)
                                                           s3c2410fb_probe
 }}}        
 在s3c2410fb_probe 里面LCD驱动主要做的工作是填充结构体 struct fb_info 并使用register_framebuffer（）函数在系统中进行注册 
-* s3c2410fb_probe 函数代码
+ * s3c2410fb_probe 函数代码
 {{{
 static int __init s3c24xxfb_probe(struct platform_device *pdev,
 				  enum s3c_drv_type drv_type)
