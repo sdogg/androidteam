@@ -103,4 +103,26 @@ struct fb_var_screeninfo {
 	__u32 reserved[5];		/* Reserved for future compatibility */
 };
 }}}
- * fb_fix_screeninfo 结构体   
+ * fb_fix_screeninfo 结构体   kernel/include/linux/fb.h 
+   fb_fix_screeninfo中记录用户不能修改的显示控制器的参数，如屏幕缓冲区的 物理地址，长度。当对帧缓冲设备进行映射操作的时候，就是从fb_fix_screeninfo中取得缓冲区物理地址的  结构体如下：
+{{{
+struct fb_fix_screeninfo {
+	char id[16];			/* identification string eg "TT Builtin" */
+	unsigned long smem_start;	/* Start of frame buffer mem */
+					/* (physical address) */
+	__u32 smem_len;			/* Length of frame buffer mem */
+	__u32 type;			/* see FB_TYPE_*		*/
+	__u32 type_aux;			/* Interleave for interleaved Planes */
+	__u32 visual;			/* see FB_VISUAL_*		*/ 
+	__u16 xpanstep;			/* zero if no hardware panning  */
+	__u16 ypanstep;			/* zero if no hardware panning  */
+	__u16 ywrapstep;		/* zero if no hardware ywrap    */
+	__u32 line_length;		/* length of a line in bytes    */
+	unsigned long mmio_start;	/* Start of Memory Mapped I/O   */
+					/* (physical address) */
+	__u32 mmio_len;			/* Length of Memory Mapped I/O  */
+	__u32 accel;			/* Indicate to driver which	*/
+					/*  specific chip/card we have	*/
+	__u16 reserved[3];		/* Reserved for future compatibility */
+};
+}}}
