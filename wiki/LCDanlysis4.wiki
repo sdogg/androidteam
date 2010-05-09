@@ -3,7 +3,7 @@
 = Introduction =
 我们接着介绍framebuffer 在下面着重介绍struct file_operations 和 struct fb_ops .
 
-* struct fb_ops    在 kernel/include/linux/fb.h中
+ * struct fb_ops    在 kernel/include/linux/fb.h中
   struct fb_ops 结构包含在fb_info结构中,指向驱动设备工作所需的函数集。fb_ops结构中包含了很多涵数指针   定义如下 
 {{{
 struct fb_ops {
