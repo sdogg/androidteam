@@ -13,5 +13,18 @@ LCD驱动流程实现分析.
 module_init(s3c2410fb_init);
 module_exit(s3c2410fb_cleanup);
 }}}
+  根据驱动模型 我们知道  加载时调用 s3c2410fb_init 函数  注销时调用 s3c2410fb_cleanup 函数 
+  我们主要分析 加载时的情况 s3c2410fb_init函数实现如下：
+{{{
+int __init s3c2410fb_init(void)
+{
+	int ret = platform_driver_register(&s3c2410fb_driver);
+
+	if (ret == 0)
+		ret = platform_driver_register(&s3c2412fb_driver);;
+
+	return ret;
+}
+}}}
  
  
