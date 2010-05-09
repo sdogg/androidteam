@@ -11,10 +11,11 @@ framebuffer相关知识.
     Linux为了开发FrameBuffer程序的方便，使用了分层结构。fbmem.c处于Framebuffer设备驱动技术的中心位置。它为上层应用程序提供系统调用，也为下一层的特定硬件驱动提供接口；那些底层硬件驱动需要用到这儿的接口来向系统内核注册它们自己  其中文件s3c2410fb.c就是特定硬件驱动(针对s3c2410芯片的),fbmem.c就是沟通应用层跟s3c2410fb.c的桥梁
   http://www.dzjs.net/upimg/userup/0907/01102110Y24.jpg  
  * framebuffer中主要结构体介绍
-    结构体fb_info   位于 kernel/include/linux/fb.h
+    结构体fb_info   位于 kernel/include/linux/fb.h ，fb_info中纪录了帧缓冲设备的全部信息，包括设备的设置参数，状态以及操作函数指针。每一个帧缓冲设备都必须对应一个fb_info结构 还记得在 s3c2410fb_probe 这个函数吗  在这个函数中我们所作的主要工作就是填充结构体 fb_info 结构体 
 {{{
 struct fb_info {
 	int node;
+       //其中node成员域标示了特定的FrameBuffer，实际上也就是一个FrameBuffer设备的次设备号
 	int flags;
 	struct fb_var_screeninfo var;	/* Current var */
 	struct fb_fix_screeninfo fix;	/* Current fix */
@@ -59,3 +60,4 @@ struct fb_info {
 	void *par;	
 };
 }}}
+* 
