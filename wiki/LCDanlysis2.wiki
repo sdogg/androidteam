@@ -1,4 +1,4 @@
-LCD驱动流程分析.
+#summary LCD驱动流程分析.
 
 = Introduction =
 
