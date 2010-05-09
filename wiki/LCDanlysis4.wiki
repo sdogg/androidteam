@@ -3,5 +3,79 @@
 = Introduction =
 我们接着介绍framebuffer 在下面着重介绍struct file_operations 和 struct fb_ops .
 
+* struct fb_ops    在 kernel/include/linux/fb.h中
+  struct fb_ops 结构包含在fb_info结构中,指向驱动设备工作所需的函数集。fb_ops结构中包含了很多涵数指针   定义如下 
+{{{
+struct fb_ops {
+	/* open/release and usage marking */
+	struct module *owner;
+	int (*fb_open)(struct fb_info *info, int user);
+	int (*fb_release)(struct fb_info *info, int user);
 
+	/* For framebuffers with strange non linear layouts or that do not
+	 * work with normal memory mapped access
+	 */
+	ssize_t (*fb_read)(struct fb_info *info, char __user *buf,
+			   size_t count, loff_t *ppos);
+	ssize_t (*fb_write)(struct fb_info *info, const char __user *buf,
+			    size_t count, loff_t *ppos);
+
+	/* checks var and eventually tweaks it to something supported,
+	 * DO NOT MODIFY PAR */
+	int (*fb_check_var)(struct fb_var_screeninfo *var, struct fb_info *info);
+
+	/* set the video mode according to info->var */
+	int (*fb_set_par)(struct fb_info *info);
+
+	/* set color register */
+	int (*fb_setcolreg)(unsigned regno, unsigned red, unsigned green,
+			    unsigned blue, unsigned transp, struct fb_info *info);
+
+	/* set color registers in batch */
+	int (*fb_setcmap)(struct fb_cmap *cmap, struct fb_info *info);
+
+	/* blank display */
+	int (*fb_blank)(int blank, struct fb_info *info);
+
+	/* pan display */
+	int (*fb_pan_display)(struct fb_var_screeninfo *var, struct fb_info *info);
+
+	/* Draws a rectangle */
+	void (*fb_fillrect) (struct fb_info *info, const struct fb_fillrect *rect);
+	/* Copy data from area to another */
+	void (*fb_copyarea) (struct fb_info *info, const struct fb_copyarea *region);
+	/* Draws a image to the display */
+	void (*fb_imageblit) (struct fb_info *info, const struct fb_image *image);
+
+	/* Draws cursor */
+	int (*fb_cursor) (struct fb_info *info, struct fb_cursor *cursor);
+
+	/* Rotates the display */
+	void (*fb_rotate)(struct fb_info *info, int angle);
+
+	/* wait for blit idle, optional */
+	int (*fb_sync)(struct fb_info *info);
+
+	/* perform fb specific ioctl (optional) */
+	int (*fb_ioctl)(struct fb_info *info, unsigned int cmd,
+			unsigned long arg);
+
+	/* Handle 32bit compat ioctl (optional) */
+	int (*fb_compat_ioctl)(struct fb_info *info, unsigned cmd,
+			unsigned long arg);
+
+	/* perform fb specific mmap */
+	int (*fb_mmap)(struct fb_info *info, struct vm_area_struct *vma);
+
+	/* save current hardware state */
+	void (*fb_save_state)(struct fb_info *info);
+
+	/* restore saved state */
+	void (*fb_restore_state)(struct fb_info *info);
+
+	/* get capability given var */
+	void (*fb_get_caps)(struct fb_info *info, struct fb_blit_caps *caps,
+			    struct fb_var_screeninfo *var);
+};
+}}}
 = Details =
