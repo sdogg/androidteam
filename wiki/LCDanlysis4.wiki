@@ -1,7 +1,7 @@
 #summary struct file_operations and struct fb_ops  .
 
 = Introduction =
-struct file_operations and struct fb_ops difference .
+我们接着介绍framebuffer 在下面着重介绍struct file_operations 和 struct fb_ops .
 
 
 = Details =
