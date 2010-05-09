@@ -126,7 +126,7 @@ struct fb_fix_screeninfo {
 	__u16 reserved[3];		/* Reserved for future compatibility */
 };
 }}}
-*  s3c2410fb_info 结构体  drivers/vedio/s3c2410fb.h   结构体如下：
+ * s3c2410fb_info 结构体  drivers/vedio/s3c2410fb.h   结构体如下：
 {{{
 struct s3c2410fb_info {
 	struct device		*dev;
