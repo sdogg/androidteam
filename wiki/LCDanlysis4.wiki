@@ -85,6 +85,7 @@ struct fb_ops {
    对于struct file_operation 我们在熟悉不过了 
    file_operations是提供给上层系统调用的接口，可以直接调用.
 
+{{{
 static const struct file_operations fb_fops = {
 	.owner =	THIS_MODULE,
 	.read =		fb_read,
@@ -103,3 +104,4 @@ static const struct file_operations fb_fops = {
 	.fsync =	fb_deferred_io_fsync,
 #endif
 };
+}}}
