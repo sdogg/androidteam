@@ -6,3 +6,5 @@ platfrom_device  fb_info   s3c2410fb_info   s3c2410fb_mach_info 之间是怎么�
 register_framebuffer()是如何实现注册的.
 
 = Details =
+
+ * platform_device   fb_info   s3c2410fb_info  s3c2410fb_mach_info 之间的关系
