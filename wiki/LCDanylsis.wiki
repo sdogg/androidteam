@@ -7,7 +7,7 @@ platform_device 和 platform_driver
 
 = Details =
 从2.6版本开始引入了platform这个概念, platform可以理解为一种设备类型，就像字符设备、块设备、网络设备一样，为了向内核添加一个platform设备，应该填写两个数据结构 一个为platform_device 另一个为platform_driver 
- * 先来介绍platform_device 
+ *先来介绍platform_device 
   platform_device 定义在文件 kernel\include\linux\platform_device.h 中  
   定义如下：
   {{{
