@@ -21,3 +21,5 @@ Add your content here.
 [http://code.google.com/p/androidteam/wiki/LCDanlysis3?ts=1260620693&updated=LCDanlysis3  30/4/2010: Framebuffer介绍]
 
 [http://code.google.com/p/androidteam/wiki/LCDanlysis4?ts=1260620693&updated=LCDanlysis4  30/4/2010: Framebuffer介绍2]
+
+[http://code.google.com/p/androidteam/wiki/LCDanlysis5?ts=1260620695&updated=LCDanlysis5  30/4/2010: Framebuffer介绍3]
