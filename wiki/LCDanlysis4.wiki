@@ -162,3 +162,33 @@ static struct fb_ops s3c2410fb_ops = {
    如果我们定义了fb_XXX_XXX 方法，用户程序就可以使用FBIOXXXX宏的ioctl()操作来操作硬件。
 }}}
   * http://www.dzjs.net/upimg/userup/0907/0110225R322.jpg
+  怎么将一个设备文件 也就是dev目录下的文件和file_operation关联起来呢 ？ 从上图中 我们可以知道是通过
+register_chrdev()函数注册实现的   kernel/drivers/vedio/fbmem.c  实现如下
+{{{
+fbmem_init(void)
+{
+	create_proc_read_entry("fb", 0, NULL, fbmem_read_proc, NULL);
+
+	if (register_chrdev(FB_MAJOR,"fb",&fb_fops))
+		printk("unable to get major %d for fb devs\n", FB_MAJOR);
+
+	fb_class = class_create(THIS_MODULE, "graphics");
+	if (IS_ERR(fb_class)) {
+		printk(KERN_WARNING "Unable to create fb class; errno = %ld\n", PTR_ERR(fb_class));
+		fb_class = NULL;
+	}
+	return 0;
+}
+
+#ifdef MODULE
+module_init(fbmem_init);
+static void __exit
+fbmem_exit(void)
+{
+	remove_proc_entry("fb", NULL);
+	class_destroy(fb_class);
+	unregister_chrdev(FB_MAJOR, "fb");
+}
+
+module_exit(fbmem_exit);
+}}}
