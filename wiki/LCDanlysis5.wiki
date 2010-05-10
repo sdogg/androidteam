@@ -134,3 +134,4 @@ register_framebuffer(struct fb_info *fb_info)
 	return 0;
 }
 }}}
+当FrameBuffer驱动进行注册的时候，它将驱动的fb_info结构体记录到全局数组registered_fb中，并动态建立设备节点，进行设备的初始化。
