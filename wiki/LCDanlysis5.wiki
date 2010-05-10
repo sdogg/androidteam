@@ -2,12 +2,7 @@
 
 = Introduction =
 
-Add your content here.
-
+platfrom_device  fb_info   s3c2410fb_info   s3c2410fb_mach_info 之间是怎么关联的.
+register_framebuffer()是如何实现注册的.
 
 = Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
