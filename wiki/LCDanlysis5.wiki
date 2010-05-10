@@ -8,3 +8,72 @@ register_framebuffer()是如何实现注册的.
 = Details =
 
  * platform_device   fb_info   s3c2410fb_info  s3c2410fb_mach_info 之间的关系
+
+ {{{
+       platform_device  ---------------- s3c2410fb_mach_info 
+    
+        mach_info= pdev->dev.platform_data  
+
+       其中 mach_info 为s3c2410fb_info类型的指针   
+        其实mach_info中存放的是LCD的初始化时所用的值
+        pdev 为结构体platform_device类 型的指针
+        还记得我们在驱动移植步骤中的第二步就是填充结构体 mach_info 
+       然后 调用  s3c24xx_fb_set_platdata(&qt2410_biglcd_cfg); 就是将 platform_device同mach_info联系起来
+}}}
+
+{{{
+         fb_info---------------------s3c2410fb 
+           
+            info = fbinfo->par 
+            info->fb = fbinfo
+       其中 info 为 结构体s3c2410fb_info类型的指针
+             fbinfo为结构体fb_info类型的指针
+}}}
+
+{{{   
+          platform_device -------------- fb_info
+          
+         pdev->dev.driver_data ＝ fbinfo  
+       其中 pdev为 结构体platform_device类型的指针
+             fbinfo为结构体 fb_info 类型的指针
+}}}
+  
+{{{
+        platform_device  ------------ platform_driver
+        这个在前面介绍着两个结构体的时候都说过了 是通过 name属性相互关联起来的
+}}}
+    这样所有的主要结构体都串起来了  
+ *  总结一下 如下图 ：
+{{{
+     结构体platform_driver
+
+              |               
+              | 
+              | 通过name 相互关联 
+              | 
+              | 
+              | 
+   结构体 platform_device {}                  结构体 s3c2410fb_mach_info     |                                                        |
+              |                                          |
+              |                                          |
+              |                                          |
+              |                                          |
+              |                                          |
+              |                                          |
+              |       上面两个通过dev. platform_data关联  |
+              |--------------- 结构体device---------------|        
+ dev.data将上下|                                          |
+ 两个结构体关联 |                                          |
+              |                                          |
+              |                                          |
+              |                                          |
+              |                                          |
+              |                                          |
+              |                                          |
+              |                                          |
+              |                                          |
+              |       你中有我  我中有你                      |
+    结构体 fb_info---------------------------- 结构体 s3c2410fb
+
+    
+     
