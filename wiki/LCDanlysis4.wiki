@@ -6,6 +6,61 @@
 
 = Details =
 
+* struct file_operations 
+   对于struct file_operation 我们在熟悉不过了 file_operations是提供给上层系统调用的接口，可以直接调用. 定义在 kernel/include/linux/fs.h 中  定义如下：
+{{{
+struct file_operations {
+	struct module *owner;
+	loff_t (*llseek) (struct file *, loff_t, int);
+	ssize_t (*read) (struct file *, char __user *, size_t, loff_t *);
+	ssize_t (*write) (struct file *, const char __user *, size_t, loff_t *);
+	ssize_t (*aio_read) (struct kiocb *, const struct iovec *, unsigned long, loff_t);
+	ssize_t (*aio_write) (struct kiocb *, const struct iovec *, unsigned long, loff_t);
+	int (*readdir) (struct file *, void *, filldir_t);
+	unsigned int (*poll) (struct file *, struct poll_table_struct *);
+	int (*ioctl) (struct inode *, struct file *, unsigned int, unsigned long);
+	long (*unlocked_ioctl) (struct file *, unsigned int, unsigned long);
+	long (*compat_ioctl) (struct file *, unsigned int, unsigned long);
+	int (*mmap) (struct file *, struct vm_area_struct *);
+	int (*open) (struct inode *, struct file *);
+	int (*flush) (struct file *, fl_owner_t id);
+	int (*release) (struct inode *, struct file *);
+	int (*fsync) (struct file *, struct dentry *, int datasync);
+	int (*aio_fsync) (struct kiocb *, int datasync);
+	int (*fasync) (int, struct file *, int);
+	int (*lock) (struct file *, int, struct file_lock *);
+	ssize_t (*sendpage) (struct file *, struct page *, int, size_t, loff_t *, int);
+	unsigned long (*get_unmapped_area)(struct file *, unsigned long, unsigned long, unsigned long, unsigned long);
+	int (*check_flags)(int);
+	int (*dir_notify)(struct file *filp, unsigned long arg);
+	int (*flock) (struct file *, int, struct file_lock *);
+	ssize_t (*splice_write)(struct pipe_inode_info *, struct file *, loff_t *, size_t, unsigned int);
+	ssize_t (*splice_read)(struct file *, loff_t *, struct pipe_inode_info *, size_t, unsigned int);
+	int (*setlease)(struct file *, long, struct file_lock **);
+};
+
+}}}
+对于LCD来说 该结构体的填充   位于kernel/drivers/vedio/fbmem.c中  代码如下：
+{{{
+static const struct file_operations fb_fops = {
+	.owner =	THIS_MODULE,
+	.read =		fb_read,
+	.write =	fb_write,
+	.ioctl =	fb_ioctl,
+#ifdef CONFIG_COMPAT
+	.compat_ioctl = fb_compat_ioctl,
+#endif
+	.mmap =		fb_mmap,
+	.open =		fb_open,
+	.release =	fb_release,
+#ifdef HAVE_ARCH_FB_UNMAPPED_AREA
+	.get_unmapped_area = get_fb_unmapped_area,
+#endif
+#ifdef CONFIG_FB_DEFERRED_IO
+	.fsync =	fb_deferred_io_fsync,
+#endif
+};
+}}}
  * struct fb_ops    在 kernel/include/linux/fb.h中
   struct fb_ops 结构包含在fb_info结构中,指向驱动设备工作所需的函数集。fb_ops结构中包含了很多涵数指针  fb_ops是底层操作的抽象  定义如下 
 {{{
@@ -81,25 +136,16 @@ struct fb_ops {
 			    struct fb_var_screeninfo *var);
 };
 }}}
- * struct file_operations 
-   对于struct file_operation 我们在熟悉不过了 file_operations是提供给上层系统调用的接口，可以直接调用.
+对于lcd来说 该结构体的填充位于kernel/drivers/vedio/s3c2410fb.c 中  代码如下：
 {{{
-static const struct file_operations fb_fops = {
-	.owner =	THIS_MODULE,
-	.read =		fb_read,
-	.write =	fb_write,
-	.ioctl =	fb_ioctl,
-#ifdef CONFIG_COMPAT
-	.compat_ioctl = fb_compat_ioctl,
-#endif
-	.mmap =		fb_mmap,
-	.open =		fb_open,
-	.release =	fb_release,
-#ifdef HAVE_ARCH_FB_UNMAPPED_AREA
-	.get_unmapped_area = get_fb_unmapped_area,
-#endif
-#ifdef CONFIG_FB_DEFERRED_IO
-	.fsync =	fb_deferred_io_fsync,
-#endif
+static struct fb_ops s3c2410fb_ops = {
+	.owner		= THIS_MODULE,
+	.fb_check_var	= s3c2410fb_check_var,
+	.fb_set_par	= s3c2410fb_set_par,
+	.fb_blank	= s3c2410fb_blank,
+	.fb_setcolreg	= s3c2410fb_setcolreg,
+	.fb_fillrect	= cfb_fillrect,
+	.fb_copyarea	= cfb_copyarea,
+	.fb_imageblit	= cfb_imageblit,
 };
 }}}
