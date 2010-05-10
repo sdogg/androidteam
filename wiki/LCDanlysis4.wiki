@@ -149,3 +149,15 @@ static struct fb_ops s3c2410fb_ops = {
 	.fb_imageblit	= cfb_imageblit,
 };
 }}}
+ * 两个结构体之间的关系 
+{{{
+   用户应用程序通过ioctl()系统调用操作硬件，fb_ops 中的函数就用于支持这些操作。
+   ioctl()系统调用在文件fbmem.c中实现，通过观察可以发现ioctl()命令与fb_ops’s 中函数的关系:
+   FBIOGET_VSCREENINFO fb_get_var
+   FBIOPUT_VSCREENINFO fb_set_var
+   FBIOGET_FSCREENINFO fb_get_fix
+   FBIOPUTCMAP fb_set_cmap
+   FBIOGETCMAP fb_get_cmap
+   FBIOPAN_DISPLAY fb_pan_display
+   如果我们定义了fb_XXX_XXX 方法，用户程序就可以使用FBIOXXXX宏的ioctl()操作来操作硬件。
+}}}
