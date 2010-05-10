@@ -74,6 +74,8 @@ register_framebuffer()是如何实现注册的.
               |                                          |
               |       你中有我  我中有你                      |
     结构体 fb_info---------------------------- 结构体 s3c2410fb
+}}}
+ *  分析 register_framebuffer()函数的实现   
+   http://www.dzjs.net/upimg/userup/0907/01102110Y24.jpg  
 
-    
-     
+   fbmem.c实现了Linux FrameBuffer的中间层，任何一个FrameBuffer驱动，在系统初始化时，必须向fbmem.c注册，即需要调用register_framebuffer()函数，在这个过程中，设备驱动的信息将会存放入名称为registered_fb数组中，这个数组定义为struct fb_info *registered_fb[FB_MAX]、int num_registered_fb;它是类型为fb_info的数组，另外num_register_fb则存放了注册过的设备数量
