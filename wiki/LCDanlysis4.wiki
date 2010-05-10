@@ -161,3 +161,4 @@ static struct fb_ops s3c2410fb_ops = {
    FBIOPAN_DISPLAY fb_pan_display
    如果我们定义了fb_XXX_XXX 方法，用户程序就可以使用FBIOXXXX宏的ioctl()操作来操作硬件。
 }}}
+  * http://www.dzjs.net/upimg/userup/0907/0110225R322.jpg
