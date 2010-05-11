@@ -13,6 +13,23 @@ static struct platform_device *smdk2410_devices[] __initdata = {
 };
 }}}
 
+ 4）修改网卡驱动的主要文件drivers/net/ne.c。
+
+a、添加头文件和定义
+{{{ 添加以下头文件
+#include <linux/irq.h>
+#include <asm/arch-s3c2410/map.h>
+#include <asm/arch-s3c2410/regs-mem.h>
+#include <asm/arch-s3c2410/irqs.h>
+#include <asm/arch-s3c2410/hardware.h>
+#include <asm/arch-s3c2410/regs-gpio.h>
+#define AX88796_BASE (vAX88796_BASE+0x200)
+#define AX88796_IRQ IRQ_EINT2
+#define pAX88796_BASE S3C2410_PA_ISA_NET
+#define vAX88796_BASE S3C2410_VA_ISA_NET
+#define EXTINT_OFF (IRQ_EINT4 - 4)
+}}}
+
 = Details =
 
 Add your content here.  Format your content with:
