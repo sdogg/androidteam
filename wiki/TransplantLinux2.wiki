@@ -15,8 +15,10 @@ static struct platform_device *smdk2410_devices[] __initdata = {
 
  4）修改网卡驱动的主要文件drivers/net/ne.c。
 
+
+{{{ 
 a、添加头文件和定义
-{{{ 添加以下头文件
+添加以下头文件
 #include <linux/irq.h>
 #include <asm/arch-s3c2410/map.h>
 #include <asm/arch-s3c2410/regs-mem.h>
