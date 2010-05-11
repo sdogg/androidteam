@@ -78,16 +78,8 @@ static struct s3c2410_platf orm_nand smdk _nand_inf o = {
  6、博创 2410-S 所配网卡 AX88796(NE200 0兼容网卡)驱动的移植。
  
  1)修改 arch/arm/目录下的Kconfig文件,增加ISA总线支持,使其在make menuconfig时出现 NE2000 的网卡配置选项。
- 修改如下：
-config ARCH_S3C2410
-bool "Samsung S3C2410 , S3C2412 , S3C2413 , S3C2440 , S3C2442 , S3C2443"
-select GENERIC_GPIO
-select ISA
-help
-  Samsung S3C2410X CPU based systems, such as the Simtec Electronics
-  BAST (<http://www.simtec.co.uk/products/EB110ITX/>), the IPAQ 1940 or
-  the Samsung SMDK2410 development board (and derivatives).
-
+ 选择ISA：
+ select ISA
 
   
 = Details =
