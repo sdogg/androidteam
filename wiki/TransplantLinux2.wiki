@@ -317,7 +317,10 @@ Network File Systems -->
 --- Provide NFS server over TCP support
 [*] Root file system on NFS
 保存退出，产生.config 文件。
-
+}}}
+8、编译内核
+{{{
+#make zImage
 }}}
 = Details =
 
