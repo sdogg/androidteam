@@ -37,6 +37,30 @@ bad_clone_list[] __initdata 中增加AX88796 的MAC 地址前三位（不一定�
 {"AX88796", "NE2000-compatible", {0x08, 0x08, 0x08}},
 }}}
 
+{{{
+b、确保定义总线宽度为16 位
+将
+#if defined(CONFIG_PLAT_MAPPI)
+# define DCR_VAL 0x4b
+#elif defined(CONFIG_PLAT_OAKS32R) || \
+defined(CONFIG_TOSHIBA_RBTX4927) || defined(CONFIG_TOSHIBA_RBTX4938)
+# define DCR_VAL 0x48 /* 8-bit mode */
+#else
+# define DCR_VAL 0x49
+#endif
+修改为
+#if 0
+#if defined(CONFIG_PLAT_MAPPI)
+# define DCR_VAL 0x4b
+#elif defined(CONFIG_PLAT_OAKS32R) || \
+defined(CONFIG_TOSHIBA_RBTX4927) || defined(CONFIG_TOSHIBA_RBTX4938)
+# define DCR_VAL 0x48 /* 8-bit mode */
+#else
+#endif
+#endif
+# define DCR_VAL 0x49
+}}}
+
 = Details =
 
 Add your content here.  Format your content with:
