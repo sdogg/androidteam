@@ -24,49 +24,49 @@ init：
 （9）执行链表中带有“early-init”触发的的命令。
 （10）遍历/sys文件夹，是内核产生设备添加事件（为了自动 产生设备节点)。
 （11）初始化属性系统，并导入初始化属性文件。
-（12）从属性系统中得到ro.debuggable，若为1，則初始化keychord監聽。
-（13）打開console,如果cmdline中沒有指定console則打開默認的/dev/console。
-（14）讀取/initlogo.rle（一張565 rle 壓縮的位圖），如果成功則在/dev/graphics/fb0顯示Logo,如果失敗則將/dev/tty0設為TEXT模式并打開/dev/tty0,輸出文本“ANDROID”字樣。
-（15）判斷cmdline 中的參數，并设置属性系统中的参数:
-         1、 如果 bootmode為
-         - factory,設置ro.factorytest值為1
-         - factory2,設置ro.factorytest值為2
-         - 其他的設ro.factorytest值為0
-       2、如果有serialno参数，則設置ro.serialno，否則為""
-       3、如果有bootmod参数，則設置ro.bootmod，否則為"unknown"
-       4、如果有baseband参数，則設置ro.baseband，否則為"unknown"
-       5、如果有carrier参数，則設置ro.carrier，否則為"unknown"
-       6、如果有bootloader参数，則設置ro.bootloader，否則為"unknown"
-       7、通过全局变量（前面从/proc/cpuinfo中提取的）設置ro.hardware和ro.version。
-（16）執行所有触发标识为init的action。
-（17）開始property服務，讀取一些property文件，這一動作必須在前面那些ro.foo設置后做，以便/data/local.prop不能干預到他們。
+（12）从属性系统中得到ro.debuggable，若为1，則初始化keychord监听。
+（13）打开console,如果cmdline中沒有指定console則打开默认的/dev/console。
+（14）读取/initlogo.rle（一章565 rle 压缩的位图），如果成功则在/dev/graphics/fb0显示Logo,如果失败则將/dev/tty0设置TEXT模式并打开/dev/tty0,输出文本“ANDROID”字样。
+（15）判断cmdline 中的参数，并设置属性系统中的参数:
+         1、 如果 bootmode为
+         - factory,设置ro.factorytest值为1
+         - factory2,设置ro.factorytest值为2
+         - 其他的设ro.factorytest值为0
+       2、如果有serialno参数，则设置ro.serialno，否则为""
+       3、如果有bootmod参数，则设置ro.bootmod，否则为"unknown"
+       4、如果有baseband参数，则设置ro.baseband，否则为"unknown"
+       5、如果有carrier参数，则设置ro.carrier，否则为"unknown"
+       6、如果有bootloader参数，则设置ro.bootloader，否则为"unknown"
+       7、通过全局变量（前面从/proc/cpuinfo中提取的）否则ro.hardware和ro.version。
+（16执行所有触发标识为init的action。
+（17）开始property服务，读取一些property文件，这一动作必须在前面那些ro.foo设置后做，以便/data/local.prop不能干欲到他们。
       - /system/build.prop
       - /system/default.prop
       - /data/local.prop
-      - 在讀取默認的property后讀取presistent propertie，在/data/property中
-（18）為sigchld handler創建信號機制。
-（19）確認所有初始化工作完成：
+      - 在读取默认的property后读取presistent propertie，在/data/property中
+（18）为sigchld handler创建信号机制。
+（19）确认所有初始化工作完成：
           device_fd(device init 完成)
           property_set_fd(property server start 完成)
-          signal_recv_fd (信號機制建立)
-（20） 執行所有触发标识为early-boot的action
-（21） 執行所有触发标识为boot的action
-（22）基于當前property狀態，執行所有触发标识为property的action
-（23）注冊輪詢事件:
+          signal_recv_fd (信信号机制建立)
+（20） 执行所有触发标识为early-boot的action
+（21）执行所有触发标识为boot的action
+（22）基于当前property状态，执行所有触发标识为property的action
+（23）注册轮循事件:
            - device_fd
            - property_set_fd
            -signal_recv_fd
-           -如果有keychord，則注冊keychord_fd
+           -如果有keychord，則注册keychord_fd
 （24）如果支持BOOTCHART,則初始化BOOTCHART
-（25）進入主進程循環:
-      - 重置輪詢事件的接受狀態，revents為0
-      - 查詢action隊列，并执行。
-      - 重啟需要重啟的服务
-      - 輪詢注冊的事件
-          - 如果signal_recv_fd的revents為POLLIN，則得到一個信號，獲取并處理
-          - 如果device_fd的revents為POLLIN,調用handle_device_fd
-          - 如果property_fd的revents為POLLIN,調用handle_property_set_fd
-          - 如果keychord_fd的revents為POLLIN,調用handle_keychord
+（25）进入主进程循环:
+      - 重置循环事件的接受状态，revents为0
+      - 查询action队列，并执行。
+      - 重启需要重启的服务
+      - 轮循注册的事件
+          - 如果signal_recv_fd的revents为POLLIN，則得到一个信号，获取并处理
+          - 如果device_fd的revents为POLLIN,调用handle_device_fd
+          - 如果property_fd的revents为POLLIN,调用handle_property_set_fd
+          - 如果keychord_fd的revents为POLLIN,调用handle_keychord
 
 
 }}}
