@@ -1,9 +1,17 @@
-#summary One-sentence summary of this page.
+#以下配置供选择，不一定要做
 
-= Introduction =
+= 详细配置（二） =
 
-Add your content here.
+ 3)取消LCD 的初始化，不然启动时会有出错信息
 
+{{{static struct platform_device *smdk2410_devices[] __initdata = {
+&s3c_device_usb,
+// &s3c_device_lcd,
+&s3c_device_wdt,
+&s3c_device_i2c,
+&s3c_device_iis,
+};
+}}}
 
 = Details =
 
