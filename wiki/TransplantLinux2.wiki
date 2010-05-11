@@ -321,6 +321,7 @@ Network File Systems -->
 8、编译内核
 {{{
 #make zImage
+成功编译成zImage,将它烧写到S3C2410，成功启动，移植成功。
 }}}
 = Details =
 
