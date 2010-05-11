@@ -9,7 +9,7 @@
 
 *[http://code.google.com/p/androidteam/wiki/Transplantuboot?ts=1273560906&updated=Transplantuboot 移植U-boot 到S3C2410]
 
-*[http://code.google.com/p/androidteam/wiki/FileSystem?ts=1273561303&updated=FileSystem 如何构建根文件系统]
+*[http://code.google.com/p/androidteam/wiki/FileSystem?ts=1273561303&updated=FileSystem Android根文件系统启动过程]
 = Details =
 
 Add your content here.  Format your content with:
