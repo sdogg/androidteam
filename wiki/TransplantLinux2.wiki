@@ -61,6 +61,48 @@ defined(CONFIG_TOSHIBA_RBTX4927) || defined(CONFIG_TOSHIBA_RBTX4938)
 # define DCR_VAL 0x49
 }}}
 
+{{{
+c、在do_ne_probe 函数中增加配置总线参数、基地址和中断的语句（其参数参考刘淼的
+书）
+static int __init do_ne_probe(struct net_device *dev)
+{
+unsigned long base_addr = dev->base_addr;
+#ifdef NEEDS_PORTLIST
+int orig_irq = dev->irq;
+#endif
+
+static int once=0;
+if (once) {
+return -ENXIO;
+}
+unsigned int value;
+value = __raw_readl(S3C2410_BWSCON);
+value &= ~(S3C2410_BWSCON_WS2|S3C2410_BWSCON_ST2|S3C2410_BWSCON_DW2_32);
+value |= (S3C2410_BWSCON_ST2|S3C2410_BWSCON_DW2_16);
+__raw_writel(value, S3C2410_BWSCON);
+value=0;
+value =
+(S3C2410_BANKCON_Tacs4|S3C2410_BANKCON_Tcos4|S3C2410_BANKCON_Tacc14|S3C2410_BANKCON
+_Tcoh4|S3C2410_BANKCON_Tcah4|S3C2410_BANKCON_Tacp6|S3C2410_BANKCON_PMCnorm);
+__raw_writel(value,S3C2410_BANKCON2);
+set_irq_type(AX88796_IRQ,IRQ_TYPE_LEVEL_LOW );
+s3c2410_gpio_cfgpin(S3C2410_GPF2, S3C2410_GPF2_EINT2);
+s3c2410_gpio_pullup(S3C2410_GPF2, 0);
+if(base_addr==0){
+dev->base_addr = base_addr = AX88796_BASE ;
+dev->irq = AX88796_IRQ;
+once++;
+}
+
+SET_MODULE_OWNER(dev);
+/* First check any supplied i/o locations. User knows best. <cough> */
+if (base_addr > 0x1ff) /* Check a single specified location. */
+return ne_probe1(dev, base_addr);
+
+else if (base_addr != 0) /* Don't probe at all. */
+return -ENXIO;
+}}}
+
 = Details =
 
 Add your content here.  Format your content with:
