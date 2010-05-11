@@ -103,6 +103,111 @@ else if (base_addr != 0) /* Don't probe at all. */
 return -ENXIO;
 }}}
 
+{{{
+d、修改ne_probe1 函数
+增加自定义的网卡MAC 地址（这个地址可以自行修改，但是MAC 也有一定的规则，最重要
+的是千万不要把它配置为广播或组播地址， 请参考网络的相关书籍）：
+static int __init ne_probe1(struct net_device *dev, unsigned long ioaddr)
+{
+int i;
+unsigned char ne_defethaddr[]={0x08,0x08,0x08,0x08,0x12,0x27,0};//tekkaman
+unsigned char SA_prom[32];
+int wordlength = 2;
+......
+增加网卡MAC 地址的配置语句，屏蔽通过EEPROM 配置网卡的语句
+......
+struct {unsigned char value, offset; } program_seq[] =
+{
+{E8390_NODMA+E8390_PAGE0+E8390_STOP, E8390_CMD}, /* Select page 0*/
+{0x48, EN0_DCFG}, /* Set byte-wide (0x48) access. */
+{0x00, EN0_RCNTLO}, /* Clear the count regs. */
+{0x00, EN0_RCNTHI},
+{0x00, EN0_IMR}, /* Mask completion irq. */
+{0xFF, EN0_ISR},
+{E8390_RXOFF, EN0_RXCR}, /* 0x20 Set to monitor */
+{E8390_TXOFF, EN0_TXCR}, /* 0x02 and loopback mode. */
+{32, EN0_RCNTLO},
+{0x00, EN0_RCNTHI},
+{0x00, EN0_RSARLO}, /* DMA starting at 0x0000. */
+{0x00, EN0_RSARHI},
+{E8390_RREAD+E8390_START, E8390_CMD},
+};
+for (i = 0; i < sizeof(program_seq)/sizeof(program_seq[0]); i++)
+outb_p(program_seq[i].value, ioaddr + program_seq[i].offset);
+}
+{
+unsigned char *ep;
+ep = (unsigned char * ) &ne_defethaddr[0];
+ne_defethaddr[5]++;
+for(i=0;i<6;i++) {
+SA_prom[i] = ep[i];
+}
+SA_prom[14] = SA_prom[15]=0x57;
+wordlength =2;
+}
+#if 0 
+for(i = 0; i < 32 /*sizeof(SA_prom)*/; i+=2) {
+SA_prom[i] = inb(ioaddr + NE_DATAPORT);
+SA_prom[i+1] = inb(ioaddr + NE_DATAPORT);
+if (SA_prom[i] != SA_prom[i+1])
+wordlength = 1;
+if (wordlength == 2)
+{
+#if 0 
+for (i = 0; i < 16; i++)
+SA_prom[i] = SA_prom[i+i];
+/* We must set the 8390 for word mode. */
+outb_p(DCR_VAL, ioaddr + EN0_DCFG);
+start_page = NESM_START_PG;
+/*
+* Realtek RTL8019AS datasheet says that the PSTOP register
+* shouldn't exceed 0x60 in 8-bit mode.
+* This chip can be identified by reading the signature from
+* the remote byte count registers (otherwise write-only)...
+*/
+if ((DCR_VAL & 0x01) == 0 && /* 8-bit mode */
+inb(ioaddr + EN0_RCNTLO) == 0x50 &&
+inb(ioaddr + EN0_RCNTHI) == 0x70)
+stop_page = 0x60;
+else
+stop_page = NESM_STOP_PG;
+#endif 
+outb_p(0x49, ioaddr + EN0_DCFG);
+start_page = NESM_START_PG;
+stop_page = NESM_STOP_PG;
+} else {
+start_page = NE1SM_START_PG;
+stop_page = NE1SM_STOP_PG;
+}
+......
+屏蔽自定检测中断号的语句(参考刘淼的书)：
+......
+#if 0 
+if (dev->irq < 2)
+{
+unsigned long cookie = probe_irq_on();
+outb_p(0x50, ioaddr + EN0_IMR); /* Enable one interrupt. */
+outb_p(0x00, ioaddr + EN0_RCNTLO);
+outb_p(0x00, ioaddr + EN0_RCNTHI);
+outb_p(E8390_RREAD+E8390_START, ioaddr); /* Trigger it... */
+mdelay(10); /* wait 10ms for interrupt to propagate */
+outb_p(0x00, ioaddr + EN0_IMR); /* Mask it again. */
+dev->irq = probe_irq_off(cookie);
+if (ei_debug > 2)
+printk(" autoirq is %d\n", dev->irq);
+} else if (dev->irq == 2)
+/* Fixup for users that don't know that IRQ 2 is really IRQ 9,
+or don't know which one to set. */
+dev->irq = 9;
+#endif 
+if (! dev->irq) {
+printk(" failed to detect IRQ line.\n");
+ret = -EAGAIN;
+goto err_out;
+}
+AX88697 的移植到此结束！
+}}}
+
 = Details =
 
 Add your content here.  Format your content with:
