@@ -8,8 +8,6 @@ init程序源码在Android官方 源码的system/core/init中，main在init.c里
 init： 
 （1）安装SIGCHLD信号 。（如果父进程不等待子进程结束，子进程将成为僵尸进程（zombie）从而占用系统资源。因此需要对SIGCHLD信号做出处理，回收僵尸进程的资源，避免造成不必要的资源浪费。
 （2）对umask进行清零。
-    何为umask，请看
-http://www.szstudy.cn/showArticle/53978.shtml
 
 （3）为root fs建立必要的文件夹，并挂载适当的分区。
     /dev （tmpfs）
