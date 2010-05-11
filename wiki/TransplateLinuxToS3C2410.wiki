@@ -91,6 +91,20 @@ static struct s3c2410_platf orm_nand smdk _nand_inf o = {
 #define S3C2410_SZ_ISA_NET SZ_1M
 }}}
 
+（3）修改arch/arm/mach-s3c2410 文件夹下的mach-smdk2410.c 文件。在smdk2410_iodesc
+中加入AX88796 的地址信息。
+
+{{{
+static struct map_desc smdk2410_iodesc[] __initdata = {
+/* nothing here yet */
+{
+.virtual = S3C2410_VA_ISA_NET,
+.pfn = S3C2410_PA_ISA_NET,
+.length = S3C2410_SZ_ISA_NET,
+.type = MT_DEVICE,
+}
+};
+以下}}}
   
 = Details =
 
