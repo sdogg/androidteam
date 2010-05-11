@@ -30,6 +30,11 @@ a、添加头文件和定义
 #define pAX88796_BASE S3C2410_PA_ISA_NET
 #define vAX88796_BASE S3C2410_VA_ISA_NET
 #define EXTINT_OFF (IRQ_EINT4 - 4)
+
+......
+在static struct { const char *name8, *name16; unsigned char SAprefix[4];}
+bad_clone_list[] __initdata 中增加AX88796 的MAC 地址前三位（不一定需要） :
+{"AX88796", "NE2000-compatible", {0x08, 0x08, 0x08}},
 }}}
 
 = Details =
