@@ -82,6 +82,12 @@ static struct s3c2410_platf orm_nand smdk _nand_inf o = {
  选择ISA：
  select ISA
 
+（2）修改include/asm-arm/arch-s3c2410 文件夹下的map.h 文件。加入AX88796 的地址映射
+加入一下代码：
+{{{#define S3C2410_VA_ISA_NET S3C2410_ADDR(0x02100000)
+#define S3C2410_PA_ISA_NET __phys_to_pfn(0x10000000)
+#define S3C2410_SZ_ISA_NET SZ_1M}}}
+
   
 = Details =
 
