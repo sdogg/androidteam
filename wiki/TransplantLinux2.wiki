@@ -208,6 +208,13 @@ goto err_out;
 AX88697 的移植到此结束！
 }}}
 
+7、配置内核
+在配置内核前，先拷贝s3c2410 开发板的默认配置到内核根目录下，以简化配置过程
+
+{{{
+
+# cp arch/arm/conf igs/s3c2410_def config .config
+# make menuconf ig}}}
 = Details =
 
 Add your content here.  Format your content with:
