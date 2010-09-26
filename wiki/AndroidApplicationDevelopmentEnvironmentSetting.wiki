@@ -1,33 +1,21 @@
 #labels AndroidSDK
-
-= Android开发环境的搭建 =
+= Android2.2开发环境的搭建 =
 
 在开始之前，你需要先准备以下作业环境以及程序：
- * 1，操作系统：Microsoft Windows XP/Microsoft Windows Vista操作系统或Mac OS X 10.4.8或更新
-的版本（硬件必须是x86的版本）或Linux
-我是在Windows XP上安装的，下面的安装步骤也都是基于此安装的。。。
- * 2，Ａｎｄｒｉｏｄ插件：Android SDK 1.0r2以上（可以在Ｄｏｗｎｌｏａｄｓ里面下载），在download
-里面下载android-sdk-windows-1.5_r3.zip，解压
- * 3，Java Development Kit（JDK）v6.0以上（我已经安装），并设置环境变量。
- * 4，在download里面下载eclipse-java-europa-winter-win32.zip，解压
- * 5，打开eclipse，在help中，点软件更新，然后find and install，then search for new features 
-to install，then new romote site，enter Android Plugin for name，https://dl-
-ssl.google.com/android/eclipse/  for URL，then OK。
- * 6，勾上Android Plugin，此下两个（即ADT和DDMS）同时被勾上，然后安装即可。
+ * 1：操作系统：XP/Vista/win7操作系统或Mac OS X 10.4.8或更新的版本（硬件必须是x86的版本）或Linux
+我是在win7上安装的，下面的安装步骤也都是基于此安装的...
+ * 2：在开始之前需要准备好JDK6.0（及以上版本），eclipse，android SDK和ADT。
+    JDK下载地址：http://www.java.net/download/jdk6/6u10/promoted/b32/binaries/jdk-6u10-rc2-bin-b32-windows-i586-p-12_sep_2008.exe
 
- * 7，补充：我以前配置Ｊ２ＭＥ的环境的时候装过j2sdk-1_4_2_19-windows-i586-p.exe，我一开始用的是
-自己下载的eclipse 3.3，弄了两天，在连上插件的网址以后，总是提示安装错误，显示提示需要
-org.eclipse.gef，我下载了解压放到相应目录下以后，又提示缺少org.eclipse.wst.sse.core我又下载
-安装了以后，结果还是一个提示需要这个，我重启eclipse和电脑之后，都无果。
-我当时也在Downloads里面下了ADT-0.9.1.zip，本地安装，和用网址链接安装提示错误一样。。。不
-知道其他人是不是也是这个。。
-我就用在Downloads里面下
-载的eclipse-java-europa-winter-win32.zip，解压以后，提示j2sdk-1_4_2_19版本太低，不支持，我
-就把j2sdk-1_4_2_19删了，把环境变量也一起删了，然后用eclipse-java-europa-winter-win32中的
-eclipse，重复上述安装插件的步骤，再安装，就成功了。
-    昨天我弄完去吃饭了，还没有跑hello，昨天试了一下新建一个Anriod Project的时候让输入
-Min SDK version,这个不知道从哪儿查看，所以也没有hello一下试试。
-每个人的机子装的软件不同，可能会有细微的差异。
+    eclipse下载地址：http://www.eclipse.org/downloads/
 
-如果觉得我说的不够清楚，这儿有一个视频，大家可以参考按这个装，
-http://www.boobooke.com/v/bbk2635/
+    Android SDK和最新ADT下载地址：http://hi.baidu.com/tdskee/blog/item/ae7c831354fcaa8e6538db9a.html
+ * 3：OK！准备工作已做好，我们现在开始安装。首先安装JDK，不会安装和配置环境变量的自己在网上找，很简单...
+ * 4：解压eclipse，运行eclipse.exe。把android插件集成到eclipse里，点击help菜单下的install new software，选择安装刚才下载的ADT。注意：安装之前先把网卡禁止，不然安装会很慢，安装之后就可以把网卡开启了。
+ * 5：安装完之后配置ADT路径，因为ADT还不知道SDK在哪。点击window下preferences，选Android，你的SDK解压到哪就把路径配置到哪就行了
+ * 6：运行SDK，安装android2.2 API。注意，在此之前，需要先把android2.2 的API压缩包下下来，要不然更新太慢了。下载地址：https://dl-ssl.google.com/android/repository/android-2.2_r02-windows.zip  
+在SDK文件夹里新建一个temp文件夹，把压缩包放在里面就行。正常更新，这样就直接安装而不会下载了。
+ * 7：OK！到这里我们的准备工作就都结束了。下面开始我的第一个程序，helloworld。
+   首先创建AVD，eclipse界面上会看到AVD图标，点击运行，点击NEW新建一个Virtual Devices. Name就是手机的名字，我写的是Myphone，target就选择Android 2.2。SD Card我填的是512M，点creat AVD。点击start运行模拟器，过程会很慢，不要关闭，一直等到出现待机界面为止。
+	OK，模拟器已启动，还挺漂亮，和真机界面是一样的。下面开始创建第一个程序。在eclipse里File-New-Project-Android Project然后next，工程名字随便起，例如HelloWorld，application name 填 hello world，包名也随便取，例如study.android，最后finish。
+	最后run一下吧，在运行之前要配置一下，新建一个配置，工程选刚才建立的HelloWorld，Target选Myphone，最后run一下，看看模拟器屏幕上是不是已经出现文字了。好了，第一个helloworld程序已运行结束，准备去吃晚饭，有什么问题大家及时交流，共同进步。
