@@ -17,5 +17,5 @@
 在SDK文件夹里新建一个temp文件夹，把压缩包放在里面就行。正常更新，这样就直接安装而不会下载了。
  * 7：OK！到这里我们的准备工作就都结束了。下面开始我的第一个程序，helloworld。
    首先创建AVD，eclipse界面上会看到AVD图标，点击运行，点击NEW新建一个Virtual Devices. Name就是手机的名字，我写的是Myphone，target就选择Android 2.2。SD Card我填的是512M，点creat AVD。点击start运行模拟器，过程会很慢，不要关闭，一直等到出现待机界面为止。
-	OK，模拟器已启动，还挺漂亮，和真机界面是一样的。下面开始创建第一个程序。在eclipse里File-New-Project-Android Project然后next，工程名字随便起，例如HelloWorld，application name 填 hello world，包名也随便取，例如study.android，最后finish。
+	OK，模拟器已启动，还挺漂亮，和真机界面是一样的。下面开始创建第一个程序。在eclipse里File-New-Project-Android Project然后next，工程名字随便起，例如HelloWorld，application name 填 hello world，包名也随便取，例如cn.ustc，最后finish。
 	最后run一下吧，在运行之前要配置一下，新建一个配置，工程选刚才建立的HelloWorld，Target选Myphone，最后run一下，看看模拟器屏幕上是不是已经出现文字了。好了，第一个helloworld程序已运行结束，准备去吃晚饭，有什么问题大家及时交流，共同进步。
