@@ -1,4 +1,3 @@
-#summary One-sentence summary of this page.
 #labels 游戏进展
 
 = Introduction =
