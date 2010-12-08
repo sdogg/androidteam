@@ -6,7 +6,8 @@
 
 ==现阶段任务==
 
- * 学会维护本主页，参考资源为：
-   # 学长的主页[http://code.google.com/p/androidteam/wiki/Team97 Team97]
-   # Wiki的语法在[http://code.google.com/p/support/wiki/WikiSyntax WikiSyntax]可以查到
+ * 学会维护本主页，本主页维护为组内成员轮流维护，一周换一次。每周的维护人员需要发布本周的task。
+   * 参考资源为：
+     # 学长的主页[http://code.google.com/p/androidteam/wiki/Team97 Team97]
+     # Wiki的语法在[http://code.google.com/p/support/wiki/WikiSyntax WikiSyntax]可以查到
  * 去查看issues的第一个任务管理[http://code.google.com/p/androidteam/issues/detail?id=18 Tasks of 15th week]
