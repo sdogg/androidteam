@@ -1,5 +1,3 @@
-
 = 基于Android的汉语学习游戏软件的设计与实现=
 
-Add your content here.
-
+12月7日答辩通过。
