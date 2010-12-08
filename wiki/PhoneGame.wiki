@@ -1,3 +1,12 @@
 = 基于Android的汉语学习游戏软件的设计与实现=
-=公告=
-12月7日答辩通过。
+==公告栏==
+===Key Milestones===
+
+||2010-12-7||开题答辩通过||
+
+==现阶段任务==
+
+ * 学会维护本主页，参考资源为：
+   # 学长的主页[http://code.google.com/p/androidteam/wiki/Team97 Team97]
+   # Wiki的语法在WikiSyntax可以查到
+ * 去查看issues的第一个任务管理[http://code.google.com/p/androidteam/issues/detail?id=18 Tasks of 15th week]
