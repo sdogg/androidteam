@@ -8,5 +8,5 @@
 
  * 学会维护本主页，参考资源为：
    # 学长的主页[http://code.google.com/p/androidteam/wiki/Team97 Team97]
-   # Wiki的语法在WikiSyntax 可以查到
+   # Wiki的语法在 WikiSyntax 可以查到
  * 去查看issues的第一个任务管理[http://code.google.com/p/androidteam/issues/detail?id=18 Tasks of 15th week]
