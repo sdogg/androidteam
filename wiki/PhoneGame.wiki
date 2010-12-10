@@ -11,3 +11,5 @@
      # 学长的主页[http://code.google.com/p/androidteam/wiki/Team97 Team97]
      # Wiki的语法在[http://code.google.com/p/support/wiki/WikiSyntax WikiSyntax]可以查到
  * 去查看issues的第一个任务管理[http://code.google.com/p/androidteam/issues/detail?id=18 Tasks of 15th week]
+==任务完成情况==
+[http://androidteam.googlecode.com/files/MovingCharacter.rar 按键使汉字消失]
