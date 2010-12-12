@@ -12,7 +12,7 @@
      # 学长的主页[http://code.google.com/p/androidteam/wiki/Team97 Team97]
      # Wiki的语法在[http://code.google.com/p/support/wiki/WikiSyntax WikiSyntax]可以查到
 ==16周任务==
- * 写一个线程，实现一个汉字的下落，按键按下时，通过结束线程的方式实现汉字的消失 
+ * 因为根据我们讨论达成的一致意见是游戏的核心功能模块肯定是用多线程来实现，所以本周的任务是写一个线程，实现一个汉字的下落，按键按下时，通过结束线程的方式实现汉字的消失 
 ==Tasks for our project==
 [http://code.google.com/p/androidteam/wiki/TasksPhoneGame?ts=1292083387&updated=TasksPhoneGame 任务链接页]
 ==Reference && Resource==
