@@ -13,3 +13,4 @@
      # Wiki的语法在[http://code.google.com/p/support/wiki/WikiSyntax WikiSyntax]可以查到
 ==Tasks for our project==
 [http://code.google.com/p/androidteam/wiki/TasksPhoneGame?ts=1292083387&updated=TasksPhoneGame 任务链接页]
+==项目历程==
