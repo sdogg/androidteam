@@ -15,3 +15,4 @@
 [http://code.google.com/p/androidteam/wiki/TasksPhoneGame?ts=1292083387&updated=TasksPhoneGame 任务链接页]
 ==Reference && Resource==
    [http://anywayiwillgo.blog.163.com/blog/static/165867439201091111830293/ Android shell 系统命令]
+   [http://www.cmd100.com/bbs/forum.php China Mobile Developer]
