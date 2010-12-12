@@ -1,7 +1,7 @@
 
 
-
-= Details =
+= 项目跟进 =
 
 
   * 15th week's code
+     ====[http://androidteam.googlecode.com/files/MovingCharacter.rar 实现了按键监听下落汉字]
