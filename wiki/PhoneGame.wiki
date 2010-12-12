@@ -1,8 +1,9 @@
 = 基于Android的汉语学习游戏软件的设计与实现=
+*指导老师*[http://staff.ustc.edu.cn/~mengning/ 孟宁] *组员* [http://code.google.com/p/androidteam/wiki/ZznPGhome 张忠楠] [http://code.google.com/p/androidteam/wiki/WwPGhome 吴旺] [http://code.google.com/p/androidteam/wiki/ZygPGhome 张永刚]
 =公告栏=
 ==Key Milestones==
 
-||2010-12-7||开题答辩通过||
+||2010-12-7||开题答辩通过||[http://androidteam.googlecode.com/files/kaiti.ppt 开题PPT] [http://androidteam.googlecode.com/files/%E5%BC%80%E9%A2%98%E6%8A%A5%E5%91%8A.doc 开题报告]||
 
 ==本周任务==
 
