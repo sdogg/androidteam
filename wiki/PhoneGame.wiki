@@ -5,12 +5,14 @@
 
 ||2010-12-7||开题答辩通过||[http://androidteam.googlecode.com/files/kaiti.ppt 开题PPT] [http://androidteam.googlecode.com/files/%E5%BC%80%E9%A2%98%E6%8A%A5%E5%91%8A.doc 开题报告]||
 
-==本周任务==
+==15周任务==
 
  * 学会维护本主页，本主页维护为组内成员轮流维护，一周换一次。每周的维护人员需要发布本周的task。
    * 参考资源为：
      # 学长的主页[http://code.google.com/p/androidteam/wiki/Team97 Team97]
      # Wiki的语法在[http://code.google.com/p/support/wiki/WikiSyntax WikiSyntax]可以查到
+==16周任务==
+ * 用线程实现
 ==Tasks for our project==
 [http://code.google.com/p/androidteam/wiki/TasksPhoneGame?ts=1292083387&updated=TasksPhoneGame 任务链接页]
 ==Reference && Resource==
