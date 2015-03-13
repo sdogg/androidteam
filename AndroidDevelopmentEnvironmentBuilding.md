@@ -1,0 +1,62 @@
+#The way to build the Android development environment.
+
+# Android开发环境搭建 #
+系统环境：Ubuntu 9.04,Kernel 2.6.28-11-generic,i686
+
+
+### 一、 JDK ###
+> ubuntu下安装JDK在此省略，本机安装的JDK 1.5.0\_18。安装并配置好环境变量后进入下一步。
+### 二、安装Eclipse ###
+> Eclipse将作为我们的IDE（据说创建Android的谷歌开发人员也使用它），点击以下网址：http://www.eclipse.org/downloads/ 进入Eclipse下载页面，选择Eclipse IDE for Java Developers（选择Linux 32bit）下载，如下载至/home/liuxiaohui/work下，然后到此目录下用
+```
+tar -xzvf eclipse-java-galileo-SR1-linux-gtk.tar.gz
+```
+> 解压生成eclipse文件夹，打开文件夹双击eclipse可执行文件就可以直接使用，但这样每次使用都需要到该路径下，为了方便可以将它加至菜单项中：点击 系统->首选项->主菜单，在对话框中选择新建项目，在新的对话框中名称自取，命令选择选择eclipse可执行文件即可，这样到eclipse的快捷方式就出现在应用程序的编程选项中了，为了更加方便可以将该快捷方式拖至桌面。
+### 三、安装SDK ###
+> 点击以下网址：http://androidappdocs.appspot.com/sdk/index.html 进入下载页面，选择Linux对应的android-sdk\_r04-linux\_86.tgz下载，如至/home/liuxiaohui/work下，仍然在该路径下用tar -xzvf命令解压，则在该路径下解压出android-sdk-linux\_86文件夹（之前我曾将SDK解压至usr/local下，但后来用eclipse安装ADT插件时会出错，是因为安装过程中所需要自动下载的Android API会被写入SDK的安装目录中，而eclipse是没有权限往usr/local下写数据的，所以会一直无法安装成功，不注意看还不会发现这些API没有装上，但后面我以为都安装完成后创建工程会一直报An SDK Target must be specified.的错误，郁闷阿）。然后为了能使用android-sdk-linux\_86/tools下的工具，我们要在~/.bashrc中将该路径加入到环境变量PATH中。
+```
+export PATH=$PATH:/home/liuxiaohui/work/android-sdk-linux_86/tools
+```
+### 四、 安装ADT（Android Development Tools）插件 ###
+> 运行Eclipse，选择help->Install New Software,在跳出的对话框中选择Add，在Add Site中Name：ADT，Location:https://dl-ssl.google.com/Android/eclipse ，点击OK，选择出现的软件，点next，接受协议直到安装成功。这时Eclipse会建议你重启，重启即可。重启之后，选择Windows Preference，在Android选项中设置SDK Location为SDK的安装目录：/home/liuxiaohui/work/android-sdk-linux\_86/tools。
+### 五、 创建AVD（Android Virtual Device） ###
+> > 打开一个新的终端，切换到/home/liuxiaohui/work/android-sdk-linux\_86/tools路径下，先执行
+```
+$android list
+```
+
+> 会出现
+```
+Available Android targets:
+id: 1 or "android-2"
+     Name: Android 1.1
+     Type: Platform
+     API level: 2
+     Revision: 1
+     Skins: HVGA (default), HVGA-P, QVGA-P, QVGA-L, HVGA-L
+id: 2 or "android-3"
+     Name: Android 1.5
+     Type: Platform
+     API level: 3
+     Revision: 1
+     Skins: HVGA (default), HVGA-P, QVGA-P, QVGA-L, HVGA-L
+id: 3 or "android-4"
+     Name: Android 1.6
+     Type: Platform
+     API level: 4
+     Revision: 1
+     Skins: HVGA (default), WVGA854, WVGA800, QVGA
+id: 4 or "android-5"
+     Name: Android 2.0
+     Type: Platform
+     API level: 5
+     Revision: 1
+     Skins: WQVGA400, HVGA (default), WVGA854, WQVGA432, WVGA800, QVGA
+```
+> 然后执行
+```
+android create avd --target 2 --name my_avd
+```
+> 创建一个名字为my\_avd的应用Android 1.5 platform的虚拟设备（提示你是否创建custom hardware profile默认选择NO即可）。一切大功告成，接下来我们就做第一个Android的工程吧。
+### 六、 创建一个Android工程 ###
+> 运行Elipse，选择File->new->project，选择Android project，在跳出的对话框中做以下输入。Project name:HelloAndroid; Application name:Hello,Android; Package name:org.example.hello; Create Activity:Hello。注意，不知是不是我eclipse版本的问题，中间选择Build Target的部分只显示了一小部分，只能通过鼠标拖拽选择Android 1.5。一切OK就选择Finish。然后在左侧的Package Explorer中右键单击HelloAndroid项目，选择Run AS->Android Applicatio，然后就可以等待Android模拟器启动并显示你的程序了，虽然等待的时间不短，但看到Hello，Android的出现，是不是很开心呢:)

@@ -1,0 +1,22 @@
+# Android2.2开发环境的搭建 #
+
+在开始之前，你需要先准备以下作业环境以及程序：
+  * 1：操作系统：XP/Vista/win7操作系统或Mac OS X 10.4.8或更新的版本（硬件必须是x86的版本）或Linux
+我是在win7上安装的，下面的安装步骤也都是基于此安装的...
+  * 2：在开始之前需要准备好JDK6.0（及以上版本），eclipse，android SDK和ADT。
+> > JDK下载地址：http://www.java.net/download/jdk6/6u10/promoted/b32/binaries/jdk-6u10-rc2-bin-b32-windows-i586-p-12_sep_2008.exe
+
+
+> eclipse下载地址：http://www.eclipse.org/downloads/
+
+> Android SDK和最新ADT下载地址：http://hi.baidu.com/tdskee/blog/item/ae7c831354fcaa8e6538db9a.html
+  * 3：OK！准备工作已做好，我们现在开始安装。首先安装JDK，不会安装和配置环境变量的自己在网上找，很简单...
+  * 4：解压eclipse，运行eclipse.exe。把android插件集成到eclipse里，点击help菜单下的install new software，选择安装刚才下载的ADT。注意：安装之前先把网卡禁止，不然安装会很慢，安装之后就可以把网卡开启了。
+  * 5：安装完之后配置ADT路径，因为ADT还不知道SDK在哪。点击window下preferences，选Android，你的SDK解压到哪就把路径配置到哪就行了
+  * 6：运行SDK，安装android2.2 API。注意，在此之前，需要先把android2.2 的API压缩包下下来，要不然更新太慢了。下载地址：https://dl-ssl.google.com/android/repository/android-2.2_r02-windows.zip
+在SDK文件夹里新建一个temp文件夹，把压缩包放在里面就行。正常更新，这样就直接安装而不会下载了。
+  * 7：OK！到这里我们的准备工作就都结束了。下面开始我的第一个程序，helloworld。
+> > 首先创建AVD，eclipse界面上会看到AVD图标，点击运行，点击NEW新建一个Virtual Devices. Name就是手机的名字，我写的是Myphone，target就选择Android 2.2。SD Card我填的是512M，点creat AVD。点击start运行模拟器，过程会很慢，不要关闭，一直等到出现待机界面为止。
+
+> OK，模拟器已启动，还挺漂亮，和真机界面是一样的。下面开始创建第一个程序。在eclipse里File-New-Project-Android Project然后next，工程名字随便起，例如HelloWorld，application name 填 hello world，包名也随便取，例如cn.ustc，最后finish。
+> 最后run一下吧，在运行之前要配置一下，新建一个配置，工程选刚才建立的HelloWorld，Target选Myphone，最后run一下，看看模拟器屏幕上是不是已经出现文字了。好了，第一个helloworld程序已运行结束，准备去吃晚饭，有什么问题大家及时交流，共同进步。

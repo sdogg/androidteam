@@ -1,0 +1,123 @@
+# Android系统及根文件目录分析 #
+系统环境 Ubuntu 9.10 Linux-kernel 2.6.31-20 generic
+日期：2010/3/14
+
+Android系统编译完成后包含以下结果：
+
+主机工具;
+
+目标机程序；
+
+目标机映像文件；
+
+目标机Linux内核（需要单独编译）；
+
+编译完成Android系统后，生成的结果全部在根目录的out目录中，原始的各个工程不会改动。
+
+out目录的结构如下所示：
+```
+out/
+|--host                       [主机内容]
+|  |--common                  [主机的通用内容]
+|  |  |--obj
+|  |--linux-x86               [编译所生成的主机Linux上运行的工具]
+|     |--bin
+|     |--framework
+|     |--lib
+|     |--obj
+|--target                     [目标机内容]
+   |--common                  [目标机的通用内容]
+   |  |--R
+   |  |--docs
+   |  |--obj
+   |--product                 [目标机的产品目录]
+      |--generic
+                 
+out/target/product/generic中存放目标产品，默认情况下作为目标产品的名称
+out/target/product/generic
+|--android-info.txt
+|--clean_steps.mk
+|--data                   [数据目录]
+|--obj                    [中间目标文件记录]
+|  |--APPS                [Java应用程序包]
+|  |--ETC                 [运行时配置文件]
+|  |--EXECUTABLES         [可执行程序]
+|  |--KEYCHARS            
+|  |--NOTICE.html
+|  |--NOTICE.html.gz
+|  |--NOTICE_FILES
+|  |--PACKAGING
+|  |--SHARED_LIBRARIES    [动态库（共享库）]
+|  |--STATIC_LIBRARIES    [静态库（归档文件）]
+|  |--include
+|  |--lib
+|--previous_build_config.mk
+|--ramdisk.img            [根文件系统映像]
+|--root                   [根文件系统目录]
+|--symbols                [符号的目录]
+|--system                 [主文件系统目录]
+|--system.img             [主文件系统映像]
+|--userdata-qemu.img      [QEMU的数据映像]
+|--userdata.img           [数据映像]
+```
+其中root、system、data三个目录分别是目标根文件系统，主文件系统和数据文件系统的目录，后缀名为.img的文件分别为它们所对应的映像文件。
+
+Android系统启动后，可以用ls -l 命令查看系统根目录：
+```
+# ls -l
+drwxrwxrwt root     root              2010-03-12 19:26 sqlite_stmt_journals
+drwxrwx--- system   cache             2010-03-12 12:22 cache
+d--------- system   system            2010-03-12 19:26 sdcard
+lrwxrwxrwx root     root              2010-03-12 19:26 etc -> /system/etc
+drwxr-xr-x root     root              2010-03-12 10:38 system
+drwxr-xr-x root     root              1970-01-01 08:00 sys
+drwxr-x--- root     root              1970-01-01 08:00 sbin
+dr-xr-xr-x root     root              1970-01-01 08:00 proc
+-rwxr-x--- root     root         9075 1970-01-01 08:00 init.rc
+-rwxr-x--- root     root         1677 1970-01-01 08:00 init.goldfish.rc
+-rwxr-x--- root     root       106568 1970-01-01 08:00 init
+-rw-r--r-- root     root          118 1970-01-01 08:00 default.prop
+drwxrwx--x system   system            2010-03-12 12:22 data
+drwx------ root     root              1970-01-01 08:00 root
+drwxr-xr-x root     root              2010-03-12 19:26 dev
+```
+sqlite\_stmt\_journals:一个根目录下的tmpfs文件系统，用于存放临时文件数据。
+
+cache ： 是缓存临时文件夹，据说是除了T-mobile的OTA更新外，别无用处。
+
+sdcard：是SD卡中的FAT32文件系统挂载的目录
+
+etc  ：指向 /system/etc ，配置文件存放目录
+
+system ：是一个很重要的目录，系统中的大部分东西都在这里
+
+sys ：用于挂载 sysfs文件系统。 在设备模型中,sysfs文件系统用来表示设备的结构.将设备的层次结构形象的反应到用户空间中.用户空间可以修改sysfs中的文件属性来修改设备的属性值
+
+sbin： 只放了一个用于调试的adbd程序。
+
+proc ：/proc 文件系统下的多种文件提供的系统信息不是针对某个特定进程的，而是能够在整个系统范围的上下文中使用。
+
+data ：存放用户安装的软件以及各种数据。
+
+root ：什么都没有。
+
+dev ：设备节点文件的存放地。
+
+Android根目录中主要文件夹与目标系统的out/target/product/generic/root内容相对应，此外etc,proc等目录是在启动后建立的，system映像被挂载到根文件系统的system目录下，data映像被挂接到根文件系统的data目录中。
+
+对于Android根文件系统的获取，赵瑞甲同学的wiki中已经讲述的很清楚，ramdisk.img是模拟器的文件系统，将ramdisk.img复制一份到任何其他目录下，将其名称改为ramdisk.img.gz，并使用命令
+```
+gunzip ramdisk.img.gz
+```
+然后新建一个文件夹，叫ramdisk吧，进入，输入命令
+```
+cpio -i -F ../ramdisk.img
+```
+这下，就能看见并操作ramdisk里面的内容了。
+
+根据自己的需要对里面的内容修改之后，可以使用下列命令重新打包成镜像
+```
+cpio -i -t -F ../ramdisk.img > list
+cpio -o -H newc -O lk.img < list　
+```
+当前目录下生成的lk.img就是我们的新镜像了。

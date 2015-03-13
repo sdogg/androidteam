@@ -1,0 +1,6 @@
+# Meeting Minutes #
+MEMO: _会议应包括上周每人完成的工作或加深的理解，以及接下来每人要完成的工作或努力方向及日程安排_
+
+Add Meeting Minutes here.
+
+[会议通知历史记录](http://code.google.com/p/androidteam/issues/detail?id=2)

@@ -1,0 +1,122 @@
+# 为Android系统添加Busybox工具 #
+  * **系统环境 Ubuntu 9.10 Linux-kernel 2.6.31-20 generic
+  ***日期：2010/3/17
+
+> busybox是一个集成了一百多个最常用linux命令和工具的软件，集成了一个http服务器和一个telnet服务器,Android系 统中自带的toolbox工具(/system/bin)比较简单，对于一些命令如find等支持的不好，可以Android系统中加入busybox，就可以使用常见的Linux命令，同时通过busybox可以定制Android的根文件系统。
+
+具体步骤：
+
+1）下载busybox源码，我用的版本是busybox-1.16.0
+
+2）下载交叉编译工具并配置环境变量，这里要注意版本的选择问题：
+
+我开始使用的是arm-linux-gcc-3.4.1和arm-linux-tools-20061213，编译成功后发现将busybox加入到Android系统，在Android终端内对busybox无法操作，提示busybox命令不合法，查阅相关资料发现可能是交叉编译工具的选择有问题，Android内核支持EABI，所以需要重新下载交叉编译工具arm-2007q3-51-arm-none-linux-gnueabi-i686-pc-linux-gnu，这个版本是基于EABI的，增加了对浮点运算等方面的支持。
+
+3）编译busybox，在busybox目录下执行make menuconfig命令对编译过程进行配置.  过程如下:
+```
+     Busybox Settings -> Build Options ->
+
+     [*] Build BusyBox as a static binary (no shared libs) 这个要选上，因上这样子编译出来的busyBox才是可以独立运行的。
+
+     (/home/weiwei/embedded/arm-2007q3/bin/arm-none-linux-gnueabi-) Cross Compiler prefex 这是交叉编译器的"路径+前缀"，要根据具体的情况来设置。
+
+     Busybox Settings -> Installation Options->
+
+     [*] Don’t use /usr        这样子编译出来的busybox才不会安装到你主机的/usr目录下。一定要选上。
+```
+执行make ，期间可能会报错，根据编译的错误不同可以在menuconfig中对相应的内容进行设置，比如我编译的时候会报错显示：
+```
+make error route.o * 1
+```
+可以进入menuconfig 设置
+```
+ Networking Utilities  ---> 
+ 关闭 编译route 的选项
+```
+make 结束后，会生成busybox的可执行文件。
+
+3）制作新的ramdisk.img
+
+ramdisk.img中存放了Android的根文件系统，为了在Android终端中使用busybox工具而不要每次配置环境变量，需要对Android根文件系统下的启动脚本init.rc进行改写，将busybox的存放路径放入全局环境变量中。
+
+由于Android模拟器系统每次启动时都会自动加载ramdisk.img作为根文件系统，加载system.img和userdata.img作为主文件系统和用户数据文件系统，所以更改了启动脚本后，需要重新对ramdisk.img打包，生成新的根文件映像。
+
+具体步骤如下：
+```
+将ramdisk.img复制到其他目录，名称改为ramdisk.img.gz，解压到当前目录
+gunzip ramdisk.img.gz 
+
+新建文件夹ramdisk，进入该文件夹
+执行 cpio -i -F ../ramdisk.img
+此时在ramdisk文件夹下可以看到从ramdisk.img中解包出来的根文件系统目录和相关内容
+修改init.rc的相关内容
+# setup the global environment
+    export PATH /data/busybox/bin:/sbin:/system/sbin:/system/bin:/system/xbin
+    export LD_LIBRARY_PATH /system/lib
+    export ANDROID_BOOTLOGO 1
+    export ANDROID_ROOT /system
+    export ANDROID_ASSETS /system/app
+    export ANDROID_DATA /data
+    export EXTERNAL_STORAGE /sdcard
+    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar
+    export HOME /
+这里在PATH中添加了busybox在Android下的存放路径data/busybox/bin，同时增加变量HOME作为测试，看启动脚本是否成功修改。
+
+重新生成新的映像
+执行 cpio --i -t -F ../ramdisk.img > list
+    cpio -o -H newc -O rd_busybox.img < list
+现在可以看到生成了新的映像rd_busybox.img
+
+用模拟器挂载新的映像
+执行 emulator -ramdisk rd_busybox.img @weiAVD01 & 其中-ramdisk参数表示指定映像文件，后面是模拟器的名称
+```
+4）启动模拟器后，装载busybox到Android中去
+```
+执行 adb push busybox /data/busybox/bin  在busybox安装目录下将busybox可执行文件加入到Android系统的data/busybox/bin中
+
+adb shell 
+进入Android终端
+
+cd data/busybox/bin
+ls -l 
+-rwxrwxrwx root     root      1809684 2010-03-17 00:44 busybox
+发现busybox已经放在该目录下
+
+更改busybox权限为可执行
+chmod 777 busybox
+
+执行busybox，可以查看版本信息和相关的命令
+# busybox
+BusyBox v1.16.0 (2010-03-17 00:42:04 CST) multi-call binary.
+Copyright (C) 1998-2009 Erik Andersen, Rob Landley, Denys Vlasenko
+and others. Licensed under GPLv2.
+See source distribution for full notice.
+.......... 省略相关内容
+
+可以查看启动脚本的环境变量是否被修改了
+执行 export 
+# export
+ANDROID_ASSETS
+ANDROID_BOOTLOGO
+ANDROID_DATA
+ANDROID_PROPERTY_WORKSPACE
+ANDROID_ROOT
+BOOTCLASSPATH
+EXTERNAL_STORAGE
+HOME
+LD_LIBRARY_PATH
+PATH
+PWD
+发现测试的HOME变量已经存在
+```
+现在可以使用busybox的相关命令和功能了
+
+例如  进入根目录下查找init.rc文件
+```
+# busybox find . -name init.rc
+./init.rc
+```
+
+存在问题：不能执行./busybox --install -s 命令安装常见的命令，因为Android系统中的的根目录和/sbin目录权限是只读的
+
+> 对于如何利用busybox定制Android的文件系统，还需要进一步的研究

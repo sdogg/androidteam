@@ -1,0 +1,143 @@
+# Get Android Source Code #
+
+> for detailed information, refer to [Android Open Source Project ---> Get source](http://source.android.com/download)
+
+  * **系统环境: Ubuntu 9.10, Kernel 2.6.31-14-generic, i686**
+  * **网络环境: 学生公寓B区 中国电信宽带接入**
+  * **Date： 12/12/2009**
+
+### 安装必要的软件包 ###
+
+  * 安装git-core, gnupg, sun-java5-jdk, flex, bison, gperf, libsdl-dev, libesd0-dev, libwxgtk2.6-dev, build-essential, zip, curl, libncurses5-dev, zlib1g-dev
+```
+$ sudo apt-get install git-core gnupg sun-java5-jdk flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential zip curl libncurses5-dev zlib1g-dev
+```
+> 本机当前源没有Package: sun-java5-jdk，为安装sun-java5-jdk，将当前源替换为以下Ubuntu 9.04的源
+```
+deb http://run.hit.edu.cn/ubuntu/ jaunty main restricted universe multiverse
+deb-src http://run.hit.edu.cn/ubuntu/ jaunty main restricted universe multiverse
+deb http://run.hit.edu.cn/ubuntu/ jaunty-updates main restricted universe multiverse
+deb-src http://run.hit.edu.cn/ubuntu/ jaunty-updates main restricted universe multiverse
+deb http://run.hit.edu.cn/ubuntu/ jaunty-backports main restricted universe multiverse
+deb-src http://run.hit.edu.cn/ubuntu/ jaunty-backports main restricted universe multiverse
+deb http://run.hit.edu.cn/ubuntu/ jaunty-security main restricted universe multiverse
+deb-src http://run.hit.edu.cn/ubuntu/ jaunty-security main restricted universe multiverse
+```
+> 然后
+```
+$ sudo apt-get update
+$ sudo apt-get install sun-java5-jdk
+```
+> 安装sun-java5-jdk后，换回Ubuntu 9.10的源。
+> 若希望系统使用sun-java5-jdk，首先获得root权限并使用命令
+```
+# update-alternatives --config java
+```
+> 然后，选择"/usr/lib/jvm/java-1.5.0-sun/jre/bin/java"这一项，使系统使用sun-java5-jdk。
+> 可以用命令
+```
+$ java -version
+```
+> 查看系统当前使用的java版本
+
+  * 安装Valgrind: a tool that will help you find memory leaks, stack corruption, array bounds overflows, etc.
+```
+$ sudo apt-get install valgrind
+```
+
+  * 安装新版libreadline
+```
+$ sudo apt-get install lib32readline5-dev
+```
+> 本机源无此Package, and Android Open Source Project says: 'Intrepid (8.10) users may need a newer version of libreadline'.
+> 在网上只搜到了用于amd64平台的lib32readline5-dev.deb包。
+> [这里有readline5的源代码](http://packages.debian.org/zh-cn/source/etch/readline5)，可以编译出lib32readline5-dev，有兴趣的可以试一下。笔者目前没有装lib32readline5-dev。(但是，可以使用$sudo apt-get install libreadline5-dev 安装libreadline5-dev。它与lib32readline5-dev 一样？笔者装了libreadline5-dev，目前不知道这是干嘛用的。)
+
+### 安装Repo ###
+
+> For more information about Repo, see [Using Repo and Git](http://source.android.com/download/using-repo).
+  * 在用户主目录新建bin目录。
+```
+$ cd ~
+$ mkdir bin
+```
+  * 将该目录添加进PATH环境变量(在~/.bashrc末添加一行"PTAH=$PATH:$HOME/bin"，重新开个终端即可)
+  * 下载Repo脚本(下载完后可以用编辑器打开这个脚本爽一下)
+```
+$ curl http://android.git.kernel.org/repo >~/bin/repo
+```
+  * 给Repo脚本加上可执行权限
+```
+$ chmod +x ~/bin/repo
+```
+
+#### 初始化Repo客户端 ####
+
+> 输入
+```
+$ cd ~
+$ mkdir yangdroid; cd yangdroid
+```
+> 下载Repo，下列命令将在"下载Android源码阶段"下载Android master version
+```
+$ repo init -u git://android.git.kernel.org/platform/manifest.git
+```
+> 下载其他版本的Android用-b选项，如
+```
+$ repo init -u git://android.git.kernel.org/platform/manifest.git -b cupcake
+```
+> 在提示符后输入用户名和Email(推荐使用gmail)。
+
+#### 下载Android源码 ####
+
+> 输入
+```
+$ repo sync
+```
+> 下载完后，Android源码将存放于~/yangdroid目录。
+
+### Verifying Git Tags ###
+
+> 输入
+```
+$ gpg --import
+```
+> 粘贴下列Key至终端，回车并按Ctrl-D将Key导入GnuPG key database。
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.2.2 (GNU/Linux)
+
+mQGiBEnnWD4RBACt9/h4v9xnnGDou13y3dvOx6/t43LPPIxeJ8eX9WB+8LLuROSV
+lFhpHawsVAcFlmi7f7jdSRF+OvtZL9ShPKdLfwBJMNkU66/TZmPewS4m782ndtw7
+8tR1cXb197Ob8kOfQB3A9yk2XZ4ei4ZC3i6wVdqHLRxABdncwu5hOF9KXwCgkxMD
+u4PVgChaAJzTYJ1EG+UYBIUEAJmfearb0qRAN7dEoff0FeXsEaUA6U90sEoVks0Z
+wNj96SA8BL+a1OoEUUfpMhiHyLuQSftxisJxTh+2QclzDviDyaTrkANjdYY7p2cq
+/HMdOY7LJlHaqtXmZxXjjtw5Uc2QG8UY8aziU3IE9nTjSwCXeJnuyvoizl9/I1S5
+jU5SA/9WwIps4SC84ielIXiGWEqq6i6/sk4I9q1YemZF2XVVKnmI1F4iCMtNKsR4
+MGSa1gA8s4iQbsKNWPgp7M3a51JCVCu6l/8zTpA+uUGapw4tWCp4o0dpIvDPBEa9
+b/aF/ygcR8mh5hgUfpF9IpXdknOsbKCvM9lSSfRciETykZc4wrRCVGhlIEFuZHJv
+aWQgT3BlbiBTb3VyY2UgUHJvamVjdCA8aW5pdGlhbC1jb250cmlidXRpb25AYW5k
+cm9pZC5jb20+iGAEExECACAFAknnWD4CGwMGCwkIBwMCBBUCCAMEFgIDAQIeAQIX
+gAAKCRDorT+BmrEOeNr+AJ42Xy6tEW7r3KzrJxnRX8mij9z8tgCdFfQYiHpYngkI
+2t09Ed+9Bm4gmEO5Ag0ESedYRBAIAKVW1JcMBWvV/0Bo9WiByJ9WJ5swMN36/vAl
+QN4mWRhfzDOk/Rosdb0csAO/l8Kz0gKQPOfObtyYjvI8JMC3rmi+LIvSUT9806Up
+hisyEmmHv6U8gUb/xHLIanXGxwhYzjgeuAXVCsv+EvoPIHbY4L/KvP5x+oCJIDbk
+C2b1TvVk9PryzmE4BPIQL/NtgR1oLWm/uWR9zRUFtBnE411aMAN3qnAHBBMZzKMX
+LWBGWE0znfRrnczI5p49i2YZJAjyX1P2WzmScK49CV82dzLo71MnrF6fj+Udtb5+
+OgTg7Cow+8PRaTkJEW5Y2JIZpnRUq0CYxAmHYX79EMKHDSThf/8AAwUIAJPWsB/M
+pK+KMs/s3r6nJrnYLTfdZhtmQXimpoDMJg1zxmL8UfNUKiQZ6esoAWtDgpqt7Y7s
+KZ8laHRARonte394hidZzM5nb6hQvpPjt2OlPRsyqVxw4c/KsjADtAuKW9/d8phb
+N8bTyOJo856qg4oOEzKG9eeF7oaZTYBy33BTL0408sEBxiMior6b8LrZrAhkqDjA
+vUXRwm/fFKgpsOysxC6xi553CxBUCH2omNV6Ka1LNMwzSp9ILz8jEGqmUtkBszwo
+G1S8fXgE0Lq3cdDM/GJ4QXP/p6LiwNF99faDMTV3+2SAOGvytOX6KjKVzKOSsfJQ
+hN0DlsIw8hqJc0WISQQYEQIACQUCSedYRAIbDAAKCRDorT+BmrEOeCUOAJ9qmR0l
+EXzeoxcdoafxqf6gZlJZlACgkWF7wi2YLW3Oa+jv2QSTlrx4KLM=
+=Wi5D
+-----END PGP PUBLIC KEY BLOCK-----
+```
+
+### END ###
+
+
+  * for other platforms, such as Ubuntu Linux (64-bit x86), Mac OS, and Other Linux, see
+> [Android Open Source Project ---> Get source](http://source.android.com/download)

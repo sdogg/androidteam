@@ -1,0 +1,71 @@
+# Android 文件系统分析 #
+  * **系统环境: ubuntu9.10**
+  * **Date： 03/09/2010**
+
+
+> 将Android源码编译后会在`/home/zhaoruijia/zhaoAndroid/out/target/product/generic`目录下发现编译后生成的3个镜像文件：system.img,ramdisk.img,userdata.img，其中system.img包括了主要的包、库等文件，userdata.img包括了一些用户数据，模拟器加载这3个映像文件后，会把 system和data分别加载到ramdisk文件系统中的system和data目录下ramdisk.img是模拟器的文件系统，我们可以通过输入:
+```
+zhaoruijia@zhaoruijia-ubunut:~$ androidemu 
+zhaoruijia@zhaoruijia-ubunut:~$ adb shell
+```
+```
+# ls
+sqlite_stmt_journals
+config
+cache
+sdcard
+d
+etc
+system
+sys
+sbin
+proc
+init.rc
+init.goldfish.rc
+init
+default.prop
+data
+root
+dev
+```
+> 观察到在模拟器的shell里根文件系统结构，如果要进行内核移植，根文件系统是必不可少的，目前有两种方法获得一个根文件系统，一种方法是将模拟器中的文件系统通过打包的方式拖出来，然后以此为基础通过busybox重新定制一个根文件系统，还有一种方法就是我们可以把ramdisk.img里的所有文件复制出来，system.img和userdata.img分别解压到ramdisk文件系统中的system和data目录下，这里由于Android源码编译后除了生成system.img，userdata.img之外还生成system和 data文件夹，因此不需要解压它们。只需将他们拷贝出来即可，然后使用网络文件系统方式挂载Android文件系统，具体步骤如下：
+1、将ramdisk.img复制到/home/zhaoruijia/workspace1目录下并将其名称改为ramdisk.img.gz
+```
+ zhaoruijia@zhaoruijia-ubunut:~/workspace1$ mv ramdisk.img ramdisk.img.gz
+```
+并使用命令
+```
+zhaoruijia@zhaoruijia-ubunut:~/workspace1$ gunzip ramdisk.img.gz 
+zhaoruijia@zhaoruijia-ubunut:~/workspace1$ ls
+ramdisk  ramdisk.img
+```
+
+2、新建一个ramdisk文件夹然后输入如下：
+```
+zhaoruijia@zhaoruijia-ubunut:~/workspace1$ mkdir ramdisk
+zhaoruijia@zhaoruijia-ubunut:~/workspace1$ cd ramdisk
+zhaoruijia@zhaoruijia-ubunut:~/workspace1/ramdisk$ cpio -i -F /home/zhaoruijia/workspace1/ramdisk.img
+494 块
+```
+
+3、然后把Android源码编译后生成的system和data里的文件复制到 ramdisk/system和 ramdisk/data下。这样就得到一个文件系统了。
+```
+zhaoruijia@zhaoruijia-ubunut:~/workspace1/ramdisk$ ls -l
+总用量 152
+drwxrwx--x  2 zhaoruijia zhaoruijia   4096 2010-03-10 17:42 data
+-rw-r--r--  1 zhaoruijia zhaoruijia    118 2010-03-10 17:42 default.prop
+drwxr-xr-x  2 zhaoruijia zhaoruijia   4096 2010-03-10 17:42 dev
+-rwxr-x---  1 zhaoruijia zhaoruijia 103184 2010-03-10 17:42 init
+-rwxr-x---  1 zhaoruijia zhaoruijia   1677 2010-03-10 17:42 init.goldfish.rc
+-rwxr-x---  1 zhaoruijia zhaoruijia  12215 2010-03-10 17:42 init.rc
+drwxr-xr-x  2 zhaoruijia zhaoruijia   4096 2010-03-10 17:42 proc
+drwxr-x---  2 zhaoruijia zhaoruijia   4096 2010-03-10 17:42 sbin
+drwxr-xr-x  2 zhaoruijia zhaoruijia   4096 2010-03-10 17:42 sys
+drwxr-xr-x 10 zhaoruijia zhaoruijia   4096 2010-03-10 17:52 system
+```
+
+4、我们要使用网络文件系统方式挂载Android文件系统因此，我们需要建立/nfsroot目录，再建立/nfsroot/Androidfs目录，把刚才的Android文件系统改名为Androidfs，并链接到/nfsroot/Androidfs
+
+5、Android内核挂载/nfsroot/Androidfs之后，根据init.rc,init.goldfish.rc来初始化并装载系统库、程序等直到开机完成。init.rc脚本包括了文件系统初始化、装载的许多过程。至于具体启动过程我会在下一篇文章中结合init.c源码来分析。
+
+**遗留问题：**由于内核移植没有成功能否通过网络文件系统方式挂载还是未知数，本文只是一个参考，个人更看好从模拟器中获得根文件系统后通过busybox定制，做到后面再看了

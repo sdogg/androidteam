@@ -1,0 +1,33 @@
+# How to get Android-linux kernel 2.6.27 #
+
+  * 系统环境：ubuntu 9.04
+  * 网络环境：宿舍电信宽带
+
+## 获得内核 ##
+> 通过访问内核官方网站http://android.git.kernel.org/可以看到获得内核方式为：
+```
+To clone one of these trees, install
+git, and run:
+git clone git://android.git.kernel.org/ + project path.
+
+```
+我们将_**+ project path.**_改为_**/kernel/common.git**_,然后
+  1. cd ~
+```
+zhaoruijia@zhaoruijia-ubuntu:~$ git clone git://android.git.kernel.org/kernel/common.git
+```
+  1. 
+```
+remote: Counting objects: 1372880, done.
+remote: Compressing objects: 100% (224708/224708), done.
+remote: Total 1372880 (delta 1141248), reused 1370095 (delta 1138685)
+Receiving objects: 100% (1372880/1372880), 296.32 MiB | 37 KiB/s, done.
+Resolving deltas: 100% (1141248/1141248), done.
+Checking out files: 100% (24451/24451), done.
+zhaoruijia@zhaoruijia-ubuntu:~$
+```
+  1. 下载后查看makefile发现获得内核为2.6.27内核，与我们所下载sourcecode相对应，内核编译方面的文档可以参考_**README**_里面的方法
+
+## 遗留问题 ##
+
+> 如果要往模拟器上移植听说需要下载goldfish版本内核才可以，本人没有实验

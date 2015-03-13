@@ -1,0 +1,134 @@
+# Linux操作系统分析课程(2009秋) #
+
+这是与[XiangLan Chen （陈香兰）](http://staff.ustc.edu.cn/~xlanchen)老师主讲的Linux操作系统分析(2009秋)课程相关的一些资料.
+
+# 实验课时间安排 #
+没有组队的同学抓紧组队,2009/12/05前把名单学号发给我.3-4人一组.组队好之后再发project-1的报告.
+
+时间:（14周二(12.1)Project-1，15周二(12.8)Project-2&Project-3，16周二(12.15)Project-4，19周二(1.5)Project-6 & 答疑）18：15-22：00
+
+地点:明德楼308实验室
+
+# Start Pointers #
+
+  * [Linux源代码中的makefile分析](LinuxMakefileAnalysis.md)
+    * [配置内核过程](LinuxKernelConfig.md)
+    * [入口点的问题](LinuxKernelMakefileStartPoint.md)
+    * [编译生成内核目标文件的过程](LinuxKernelCompiling.md)
+  * [linux启动分析](KernelStartUp.md)
+  * [Linux2.6.X内核编译移植过程指南v0.9（pdf file）](http://androidteam.googlecode.com/files/Linux2.6.X_compile_procedure_v0.9.pdf)
+  * [EXT2文件系统分析](Ext2FileSystem.md)
+  * [ppt review(课件概要)](http://staff.ustc.edu.cn/~mengning/ulk/ppt_review.doc)
+# 作业及实验Project #
+共交3～4次作业（手写）;Project分组3～4人一组,每组每个project提交一份实验报告（参照给定格式）.
+  * Project-6(提交时间2010/01/09前)参照模板 [doc格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project6_GroupX_V1.0.0_20091214.doc),[pdf格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project6_GroupX_V1.0.0_20091214.pdf)  （未提交报告的小组：Group16 Group17）
+    * 课件中insmod char\_dev.o应该为insmod char\_dev.ko
+    * 虚拟字符驱动   [课堂举例的参考](http://staff.ustc.edu.cn/~mengning/ulk/virtual_char_device.rar.tgz)，[tar.gz文件](http://staff.ustc.edu.cn/~mengning/ulk/virtual_char_device.tar.gz)
+```
+模拟一个字符设备，提供字符设备驱动
+在Linux 2.6环境中，动态加载虚拟字符驱动模块
+编写一个应用程序，对虚拟字符设备驱动进行读写
+```
+  * ~~作业三(提交时间2009年12月29日)~~[参考答案](ReferencedKey3.md)（批改完成，未交作业名单：孙俊 李超 率治国，部分同学的作业没有在实验课上（A308）取走，请到A302来取）
+```
+(8 memory.ppt)
+Linux的页框管理采用什么算法？简述该算法。
+Linux中的slab算法的用途是什么？简述该算法。
+什么是非连续内存区？
+(9-2 program execute.ppt)
+什么是线性区？列举4种最常见的线性区。
+Linux如何描述进程的地址空间？
+```
+  * Project-5(提交时间2009/12/27前)，（未提交报告的小组：无,其中Group22提交的是模板未完成实验报告）
+    * 定时器。[TimerExample](TimerExample.md) 参照模板[doc格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project5_GroupX_V1.0.0_20091214.doc),[pdf格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project5_GroupX_V1.0.0_20091214.pdf)
+    * 在用户态编写一个程序，该程序设定一个定时器，在时间到期的时候做出某种可观察的响应（方法不限）
+    * 分析你的程序的实际执行借助了内核的哪些机制
+    * 提交实验与分析报告
+  * Project-4(提交时间2009/12/21前)，（未提交报告的小组：无）
+    * 以下六选一(6 syscall.ppt文件中) **（注意：不管选择哪一个都需要提交pdf或doc文档用来说明您的分析结果或者实验编程过程和结果，如有代码等资料可打包(打包文件命名参照pdf或doc文档的命名格式)，但pdf或doc文档不得打包，谢谢配合）** 参照模板[doc格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project4_GroupX_V1.0.0_20091214.doc),[pdf格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project4_GroupX_V1.0.0_20091214.pdf)
+    * 分析中断、异常和系统调用的代码(三个题目)，提交分析报告
+    * 采用某种方法截获一个中断，例如键盘中断
+    * 采用某种方法制造缺页异常
+    * 自己编写一个系统调用
+  * ~~作业二:提交时间2009年12月14日~~ [参考答案](ReferencedKey.md)，（批改完成，未交作业名单：孙俊）
+```
+(3.ppt文件中)
+i386实模式下是如何解决20位地址空间和16位段寄存器之间的不匹配问题的？
+i386保护模式下的段寄存器的内容与实模式下段寄存器的内容一样么？如何解释？
+__USER_CS、 __USER_DS的值分别是多少？它们分别对应GDT表中的哪一项？RPL分别是多少，对应Linux的哪个级别（用户级还是内核级）？
+供参考：DPL：Descriptor Privilege Level,CPL:Current Privilege Level,RPL:Requested Privilege Level;RPL保存在段选择子最后2位，DPL保存在段描述符中2位，如果段选择子放入%CS字段中，则称为CPL。（感谢陈昊同学）
+(4.3 task.ppt文件中)
+Linux为什么要引入pidhash表？
+在传统的UNIX系统中，创建子进程时会复制父进程的所有资源，代价比较高，现代UNIX系统中引入了哪几项技术来解决这个问题？
+Linux2.4.18中，名词解释：
+epoch
+基本时间片
+Linux2.6.26中，名词解释：
+CFS
+Linux2.6.17中，名词解释：
+双队列
+(5 interrupt.ppt文件中)
+名词解释：故障和陷阱
+```
+  * Project-3(提交时间2009/12/18前)，（未提交报告的小组：Group24 袁萌萌 张葛）
+    * 进程的创建 (4.2 task.ppt文件中)
+    * 使用C语言编写一段用户程序，调用fork创建一个子进程，然后让子进程和父进程分别输出fork的返回值。目的：从用户态体验进程的创建.[参考代码(tar.gz格式)](http://staff.ustc.edu.cn/~mengning/ulk/fork.tar.gz)(需要修改make.h中的路径以成功编译)
+    * 对Linux中进程的创建进行分析，提交分析报告.参照模板[doc格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project3_GroupX_V1.0.0_20091207.doc),[pdf格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project3_GroupX_V1.0.0_20091207.pdf)
+  * Project-2(提交时间2009/12/18前)，（未提交报告的小组：Group24 袁萌萌 张葛）
+    * 对Linux2.6.26的进程切换过程进行分析(4.1 task.ppt文件中)，提交分析报告.参照模板[doc格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project2_GroupX_V1.0.0_20091201.doc),[pdf格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project2_GroupX_V1.0.0_20091201.pdf)
+  * Project-1(提交时间2009/12/06)（未提交报告的小组：Group2，Group24，袁萌萌 张葛,另外Group14文件损坏）
+    * 基于x86体系结构分析linux-2.6.26的启动过程,参照模板[doc格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project1_GroupX_V1.0.0_20091201.doc),[pdf格式文件](http://staff.ustc.edu.cn/~mengning/ulk/Project1_GroupX_V1.0.0_20091201.pdf)
+    * 仅考虑32位体系结构
+    * 不考虑多核多处理器
+  * ~~第一次作业(提交时间2009/11/30)包含~~ (批改完成，未交作业同学名单：孙俊 顾俊) ：
+    * 1.ppt最后的作业:([参考答案](ULKHomework1.md))
+```
+C语言中堆栈的作用是什么？
+为什么要有内核态与用户态的区别？
+```
+    * GNU Tools (pdf文件中)
+```
+使用nm 列出可执行文件test 的符号，与test.o 进行比较
+能否查看源代码？
+找到Linux 中所有的makefile，分析它们的功能、相互关系。
+比较hello
+找到Linux 中的链接描述文件并分析.
+```
+## 实验分组 ##
+
+  * Group1: 软设三班    黎超 SA09225394  嵌入式三班  张晓东 SA09225488  软设二班   朱勇洪 SA09225174
+  * Group2: 孙 哲 SA09225482  孙 华 SA09225360 廖福荣 SA09225411
+  * Group3: 王丹宁 SA09225187刘健   SA09225485梅世飞 SA09225409战蕾蕾 SA09225249
+  * Group4: 顾俊 SA163 阳兵 SA452 周奕 SA173 孙卫伟 SA406
+  * Group5: 苏丁：　SA09225492 软件设计3班 孙宏亮：SA09225448 软件设计3班 王家庆：SA09225421 嵌入式3班 段振兴：SA09925457 软件设计3班
+  * Group6: SG09225048 尹宗仁；SA09225124 王瑞；SA09225057 田童媛；SA09225046 董玮
+  * Group7: 朱勇SA09225455 吕晓勇SA09225185 黄波 SA09225458
+  * Group8: 俞帆SA09225358   朱斌SA09225338 杨洁SA09225055  张静SA09225190
+  * Group9: 陈晨  SA09225148，单忠  SA09225292 ，高劲春 SA09225438
+  * Group10: SA09225036 刘道伟 SG09225049 张颖 SA09225250 刘颖 SA09225143 张敏
+  * Group11: 胡晓亮SA09225454 罗葳SA09225408 於锦涛SA09225369 钱大浩（SA09225150）
+  * Group12: SA09225223   雷双红   软设2班   SA09225004   刘磊     软设1班   SA09225005   陶海成   软设1班   SA09225216   田琨玮   软设2班
+  * Group13: 吴勇辛 SA09225304 童锁   SA09225343 张炳恋 SA09225038 李伟   SA09225168
+  * Group14: SA09225027 袁玉敏SA09225068 程路遥SA09225225 邹龑
+  * Group15: SA09225204 周伟 软2SA09225169 张磊 软2SA09225200 苏循进 软2
+  * Group16: SA09225122率治国 SA09225096安晓微（选课名单中无此人） SA09225443郑海员
+  * Group17: SA09225151  詹松 SA09225161 袁 SA09225205   曹裕行
+  * Group18: SA09225379尹秀城，SA09225412孙晓青，SA09225388方群，SA09225359岳岭
+  * Group19: 邹延迪 SA09225419 王鑫毅 SA09225024
+  * Group20: SA09225026 杨夏SA09225050 何洋洋SA09225051 陈昊
+  * Group21: 李超 SA09225141李华丰 SA09225100吴俊鹏 SA09225251陈斌 SA09225229
+  * Group22: 张小强SA09225146  李博SA09225018  尹海华SA09225053 张国华SA09225117
+  * Group23: SA09225056  张杰SA09225265  章凡SA09225149  纪坤
+  * Group24: 王俊丰 SA09225431
+  * Group25:    尹存(SG09225038)     孙俊(SG09225021)  郭锟(SA09225286)
+
+
+
+
+
+# References #
+  * Linux虚拟机环境[(VMware Player 2.5.2 & Ubuntu 8.04 Image)](http://code.google.com/p/vmware-ubuntu/)
+  * [GNU-tools-Introduction.pdf](http://androidteam.googlecode.com/files/GNU-tools-Introduction.pdf)
+  * [Make的执行过程](MakeExecuteProcess.md)
+  * [链接描述文件ld script](LinkerDescrpitonScript.md)
+  * [Linux 信号signal处理机制](http://www.cnblogs.com/xiedan/archive/2009/10/20/1587120.html)

@@ -1,0 +1,84 @@
+# Linux Kernel Makefile入口点问题 #
+
+默认的Makefile的入口点是第一条规则。而Linux内核的Makefile的第一条规则是这样的：
+
+除去上面一长串赋值语句，来到：
+```
+PHONY := _all
+_all:
+
+```
+是一条空规则。奇怪的是，下面不远处有如下规则：
+
+```
+ifeq ($(KBUILD_EXTMOD),)
+_all: all
+else
+_all: modules
+endif
+
+```
+也就是说目标_all被写了两遍。_
+
+原因如下：一般Makefile是不允许一个目标被重复写两遍的，如：
+
+```
+a:
+    echo a1
+a:
+    echo a2
+```
+
+这种情况会生成一条警告，说一条规则将被忽略。但如果第一条规则是一条空规则则是可以的，如：
+```
+
+a:
+a:
+    echo a2
+```
+
+而且还有如下用法：
+```
+
+b:
+    echo b
+a:
+    echo a
+```
+
+此Makefile如果直接make将会执行echo b，因为这是第一条规则，会被当成默认规则。但如果写成下面的样子：
+
+```
+a:
+b:
+    echo b
+a:
+    echo a
+```
+
+由于第一条空规则的存在，echo a会被当成默认规则执行。因此Linux内核中的Makefile的_all可以做如下解释：_
+
+真正的入口点是:
+```
+# If building an external module we do not care about the all: rule
+# but instead _all depend on modules
+ifeq ($(KBUILD_EXTMOD),)
+_all: all
+else
+_all: modules
+endif
+```
+
+这不必保证这几行代码是第一条规则，之前还可以插入任何内容，只需要保证空规则
+
+```
+PHONY := _all
+_all:
+
+```
+是整个文件的第一条规则，正真入口点处的规则便会被当成默认规则被执行。
+文章出处：[DIY部落](http://www.diybl.com/course/6_system/linux/Linuxjs/200896/139654.html)
+
+## References ##
+
+  * [Linux内核源代码中的Makefile分析](LinuxMakefileAnalysis.md)

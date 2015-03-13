@@ -1,0 +1,114 @@
+#内核配置详解(一)
+
+## 内核配置具体步骤 ##
+
+  1. 将 Linux2. 6.22. 2 内核源码放到工作目录的 kerne l 文件夹下,并解压
+> > tar xzvf linux2.6.22.2.tar.gz
+
+
+> cd linux2.6.22.2
+> 进入内核解压后的目录
+> 2 修改内核源码根目录下的 Makefile 文 件
+> > vi Makefile
+> > 修改Makefile,修改ARCH和CROSS\_COMPILE 如下
+> > ARCH    = arm
+> > CROSS\_COMPILE = /home/qinguoli/usr/local/bin/arm-linux-
+
+> 3 修改 arch/arm/plat-s3c24xx/common-smdk.c文件,修改 Nand Flash 的分区信息和 Nand Flash 的硬件信息
+```
+    static struct mtd_partition smdk _default_nand_part[] = {
+ [0] = {
+  .name = "U-Boot-1.2.0",
+  .size  = SZ_128K,
+  .offset = 0,
+ },
+[1] = {
+  .name = "U-Boot-1.2.0 Parameter",
+  .offset = SZ_128K,
+  .size = SZ_64K,
+ },
+    [2] = {
+  .name = "Linux2.6.22.2 Kernel",
+  .offset = SZ_128K+SZ_64K,
+  .size = SZ_4M+(SZ_1M-SZ_128K-SZ_64K),
+ },
+    [3] = {
+   .name = "Root-JFFS2",
+  .offset = SZ_1M * 5,
+  .size = SZ_1M * 5,
+ },
+    [4] = { .name = "Boot-Root(cramf s)",
+.offset = SZ_1M * 10,
+.size = SZ_1M * 10,
+},
+   [5] = {
+ .name = "YAFFS",
+.offset = SZ_1M * 20,
+.size = SZ_1M * 44,
+}
+ /*, [6] = {
+ .name = "S3C2410 flash partition 6",
+ .offset = SZ_1M * 24,
+   .size = SZ_1M * 24,
+   },
+   [7] = {
+  .name = "S3C2410 flash partition 7",
+    .offset = SZ_1M * 48,
+    .size = SZ_16M,
+   }
+ */
+
+  ......
+static struct s3c2410_platf orm_nand smdk _nand_inf o = {
+    .tacls      = 0,
+                                       7
+.twrph0     = 30,
+.twrph1     = 0,
+.nr_sets = ARRAY_SIZE(smdk_nand_sets),
+.sets    = smdk _nand_sets, };
+
+ };
+```
+> 4 修改drivers/mtd/nand/s3c2410.c,去掉nand flash的ECC
+
+> 这个内核是通过 U-BOOT 写到 Nand Flash 的, U-BOOT 通过的软件 ECC 算法产生 ECC校验码, 这与内核校验的 ECC 码不一样 , 内核中的 ECC 码是由 S3C2410 中 Nand Flash 控制器产生的。所以,在这里选择禁止内核 ECC 校验。
+> 搜索关键字 NAND\_ECC\_SOFT,在 s3c2410\_nand\_init\_chip 函数里,修改NAND\_ECC\_SOF T为NAND\_ECC\_NONE
+> 5 增加 Yaffs2 文件系统的支持
+
+  1. 下载 Yaffs2
+> 2) 解压 Yaffs2 并将其加入 Linux 内核(打补丁的方式)
+
+> 6、博创 2410-S 所配网卡 AX88796(NE200 0兼容网卡)驱动的移植。
+
+  1. 修改 arch/arm/目录下的Kconfig文件,增加ISA总线支持,使其在make menuconfig时出现 NE2000 的网卡配置选项。
+> 选择ISA：
+> select ISA
+
+（2）修改include/asm-arm/arch-s3c2410 文件夹下的map.h 文件。加入AX88796 的地址映射
+加入一下代码：
+
+```
+#define S3C2410_VA_ISA_NET S3C2410_ADDR(0x02100000)
+#define S3C2410_PA_ISA_NET __phys_to_pfn(0x10000000)
+#define S3C2410_SZ_ISA_NET SZ_1M
+```
+
+（3）修改arch/arm/mach-s3c2410 文件夹下的mach-smdk2410.c 文件。在smdk2410\_iodesc
+中加入AX88796 的地址信息。
+static struct map_desc smdk2410_iodesc[] __initdata = {
+/* nothing here yet */
+{
+.virtual = S3C2410_VA_ISA_NET,
+.pfn = S3C2410_PA_ISA_NET,
+.length = S3C2410_SZ_ISA_NET,
+.type = MT_DEVICE,
+}
+};
+以下}}}
+  
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages```

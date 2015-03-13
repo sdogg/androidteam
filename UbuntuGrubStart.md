@@ -1,0 +1,30 @@
+# WUBI安装方式通过grub命令行方式进入系统的方法 #
+
+电脑上装了windows 7 和 ubuntu两个系统，由于是WUBI安装的ubuntu，所以在更新系统或者内核后经常会破坏grub.cfg文件，导致不能进入系统，进入了grub命令行模式。
+经过一段时间摸索，可以在命令行模式下手动引导进入系统，过程如下：
+```
+grub> ls     #查看所有的硬盘和分区信息
+grub> ls (hd0,x)/    #一般都是一块硬盘，所以为hd0，后面的x是你安装ubuntu的分区号，显示该盘下的目录
+grub> insmod ntfs    #加载ntfs模块，因为WUBI将ubuntu安装到了我分的ntfs盘上
+grub> set root=(hd0,x)   #这里(hd0,x)是找到的ubuntu分区
+grub> ls $Boot    #找到BOOT分区的UUID号，下一步要用到
+grub> search --no-floppy --fs-uuid --set UUID    #这里的UUID是上步中找到的
+grub> loopback loop0 /ubuntu/disks/root.disk   #设loop0,WUBI将ubuntu安装成了一个root.disk文件
+grub> set root=(loop0)   #重设root
+grub> linux /boot/vmlinuz....(tab键补全) root=/dev/sdax loop=/ubuntu/disks/root.disk to   quiet splash   #加载内核，其中sdax的x是开始找到的分区号(hd0,x)
+grub> initrd /boot/initrd.img.....(tab键补全)    
+grub> boot
+```
+
+
+回车后就可以进入系统了，进入终端修复grub引导文件
+```
+#update-grub2
+#reboot
+```
+
+不知道大家这样可以不，我这样修复是可以的，但是在网上看到很多这样的情况修复都不成功，每次再重启时还是不能自动引导，都要这样输命令的话太麻烦了，后来看到一个方法，感觉应该会有用：
+
+**[WUBI方式安装ubuntu不能引导启动的解决方法](http://blog.csdn.net/Martin_peng/archive/2009/11/14/4809415.aspx)**
+
+但是这个方法还是有点问题的，在那个grub.cfg文件里的menuentry "Ubuntu, Linux 2.6.31-14-generic"是默认在旧的内核下启动的，升级了内核后是不是可以手动更改这里的配置呢？如果不能更改，那每次都会默认从旧内核启动，更新起来还是很麻烦阿！

@@ -1,0 +1,105 @@
+# Android Compilation and Running in its Emulator #
+
+  * **系统环境: Ubuntu 9.10, Kernel 2.6.31-14-generic, i686**
+  * **Date： 12/14/2009**
+
+### 编译环境准备 ###
+
+> 这里强调java环境的准备。
+  * 首先，安装sun-java5-jdk。用$ sudo apt-get install sun-java5-jdk 或者[从SUN下载](http://java.sun.com/javase/downloads/index_jdk5.jsp)后安装均可。
+  * 然后，添加
+```
+export JAVA_HOME=/usr/lib/jvm/java-1.5.0-sun-1.5.0.19
+```
+> 至~/.bashrc。我的~/.bashrc中还有以下与java相关的两行，是以前配置eclipse时加上的，不知编译Android需不需要。
+```
+export PATH=$PATH:$JAVA_HOME/bin
+export CLASSPATH=$JAVA_HOME/lib
+```
+  * 用$ java -version查看系统使用的java版本，本机为
+```
+java version "1.5.0_19"
+Java(TM) 2 Runtime Environment, Standard Edition (build 1.5.0_19-b02)
+Java HotSpot(TM) Client VM (build 1.5.0_19-b02, mixed mode, sharing)
+```
+> 若不是java version "1.5.x\_xx"，可用# update-alternatives --config java更改之。
+
+### 编译Android ###
+
+> 进入Andriod源码根目录，$ make即可。本机为
+```
+$ cd ~/yangdroid
+$ make
+```
+
+> about 2 hours later......
+
+### 在模拟器上运行Android ###
+
+> 在~/bin下编写名为androidemu的脚本文件，内容如下
+```
+#!/bin/bash
+
+export ANDROID_JAVA_HOME=$JAVA_HOME
+export ANDROID_PRODUCT_OUT=/home/yang/yangdroid/out/target/product/generic
+# PATH for Android emulator
+export PATH=$PATH:/home/yang/yangdroid/out/host/linux-x86/bin
+
+# start the emulator with debug info
+emulator -debug-init
+
+exit 0
+```
+> 保存并加上可执行权限($ chmod +x androidemu)。打开终端输入$ androidemu即可启动Android模拟器。
+
+  * debug info from Android emulator
+```
+yang@FallenAngel:~$ androidemu 
+emulator: found Android build root: /home/yang/yangdroid
+emulator: found Android build out:  /home/yang/yangdroid/out/target/product/generic
+emulator:     locking user data image at /home/yang/yangdroid/out/target/product/generic/userdata-qemu.img
+emulator: selecting default skin name 'HVGA'
+emulator: autoconfig: -skin HVGA
+emulator: autoconfig: -skindir /home/yang/yangdroid/development/emulator/skins
+emulator: keyset loaded from: /home/yang/.android/default.keyset
+emulator: trying to load skin file '/home/yang/yangdroid/development/emulator/skins/HVGA/layout'
+emulator: skin network speed: 'full'
+emulator: skin network delay: 'none'
+emulator: no SD Card image at '/home/yang/yangdroid/out/target/product/generic/sdcard.img'
+emulator: registered 'boot-properties' qemud service
+emulator: registered 'boot-properties' qemud service
+emulator: Adding boot property: 'qemu.sf.lcd_density' = '160'
+emulator: Adding boot property: 'dalvik.vm.heapsize' = '16m'
+emulator: argv[00] = "emulator"
+emulator: argv[01] = "-kernel"
+emulator: argv[02] = "/home/yang/yangdroid/prebuilt/android-arm/kernel/kernel-qemu"
+emulator: argv[03] = "-initrd"
+emulator: argv[04] = "/home/yang/yangdroid/out/target/product/generic/ramdisk.img"
+emulator: argv[05] = "-nand"
+emulator: argv[06] = "system,size=0x4200000,initfile=/home/yang/yangdroid/out/target/product/generic/system.img"
+emulator: argv[07] = "-nand"
+emulator: argv[08] = "userdata,size=0x4200000,file=/home/yang/yangdroid/out/target/product/generic/userdata-qemu.img"
+emulator: argv[09] = "-nand"
+emulator: argv[10] = "cache,size=0x4200000"
+emulator: argv[11] = "-serial"
+emulator: argv[12] = "android-kmsg"
+emulator: argv[13] = "-serial"
+emulator: argv[14] = "android-qemud"
+emulator: argv[15] = "-append"
+emulator: argv[16] = "qemu=1 console=ttyS0 android.checkjni=1 android.qemud=ttyS1 android.ndns=2"
+emulator: argv[17] = "-m"
+emulator: argv[18] = "96"
+emulator: argv[19] = "-clock"
+emulator: argv[20] = "unix"
+emulator: mapping 'system' NAND image to /tmp/android/emulator-Hyfsvw
+emulator: mapping 'cache' NAND image to /tmp/android/emulator-KspfZf
+emulator: using 'esd' audio input backend
+emulator: using 'esd' audio output backend
+emulator: control console listening on port 5554, ADB on port 5555
+emulator: can't connect to ADB server: Connection refused
+emulator: ping program: /home/yang/yangdroid/out/host/linux-x86/bin/ddms
+emulator: ping command: /home/yang/yangdroid/out/host/linux-x86/bin/ddms ping emulator 1.12
+```
+> 这个debug info显示了emulator加载Android所用到镜像的位置和配置参数等信息。通过这个我们可以大致了解运行Android需要哪些文件...... :)
+
+### END ###

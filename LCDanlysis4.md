@@ -1,0 +1,191 @@
+# Introduction #
+我们接着介绍framebuffer 在下面着重介绍struct file\_operations 和 struct fb\_ops .
+
+
+# Details #
+
+  * struct file\_operations
+> > 对于struct file\_operation 我们在熟悉不过了 file\_operations是提供给上层系统调用的接口，可以直接调用. 定义在 kernel/include/linux/fs.h 中  定义如下：
+```
+struct file_operations {
+	struct module *owner;
+	loff_t (*llseek) (struct file *, loff_t, int);
+	ssize_t (*read) (struct file *, char __user *, size_t, loff_t *);
+	ssize_t (*write) (struct file *, const char __user *, size_t, loff_t *);
+	ssize_t (*aio_read) (struct kiocb *, const struct iovec *, unsigned long, loff_t);
+	ssize_t (*aio_write) (struct kiocb *, const struct iovec *, unsigned long, loff_t);
+	int (*readdir) (struct file *, void *, filldir_t);
+	unsigned int (*poll) (struct file *, struct poll_table_struct *);
+	int (*ioctl) (struct inode *, struct file *, unsigned int, unsigned long);
+	long (*unlocked_ioctl) (struct file *, unsigned int, unsigned long);
+	long (*compat_ioctl) (struct file *, unsigned int, unsigned long);
+	int (*mmap) (struct file *, struct vm_area_struct *);
+	int (*open) (struct inode *, struct file *);
+	int (*flush) (struct file *, fl_owner_t id);
+	int (*release) (struct inode *, struct file *);
+	int (*fsync) (struct file *, struct dentry *, int datasync);
+	int (*aio_fsync) (struct kiocb *, int datasync);
+	int (*fasync) (int, struct file *, int);
+	int (*lock) (struct file *, int, struct file_lock *);
+	ssize_t (*sendpage) (struct file *, struct page *, int, size_t, loff_t *, int);
+	unsigned long (*get_unmapped_area)(struct file *, unsigned long, unsigned long, unsigned long, unsigned long);
+	int (*check_flags)(int);
+	int (*dir_notify)(struct file *filp, unsigned long arg);
+	int (*flock) (struct file *, int, struct file_lock *);
+	ssize_t (*splice_write)(struct pipe_inode_info *, struct file *, loff_t *, size_t, unsigned int);
+	ssize_t (*splice_read)(struct file *, loff_t *, struct pipe_inode_info *, size_t, unsigned int);
+	int (*setlease)(struct file *, long, struct file_lock **);
+};
+
+```
+> > 对于LCD来说 该结构体的填充   位于kernel/drivers/vedio/fbmem.c中  代码如下：
+```
+static const struct file_operations fb_fops = {
+	.owner =	THIS_MODULE,
+	.read =		fb_read,
+	.write =	fb_write,
+	.ioctl =	fb_ioctl,
+#ifdef CONFIG_COMPAT
+	.compat_ioctl = fb_compat_ioctl,
+#endif
+	.mmap =		fb_mmap,
+	.open =		fb_open,
+	.release =	fb_release,
+#ifdef HAVE_ARCH_FB_UNMAPPED_AREA
+	.get_unmapped_area = get_fb_unmapped_area,
+#endif
+#ifdef CONFIG_FB_DEFERRED_IO
+	.fsync =	fb_deferred_io_fsync,
+#endif
+};
+```
+  * struct fb\_ops    在 kernel/include/linux/fb.h中
+> > struct fb\_ops 结构包含在fb\_info结构中,指向驱动设备工作所需的函数集。fb\_ops结构中包含了很多涵数指针  fb\_ops是底层操作的抽象  定义如下
+```
+struct fb_ops {
+	/* open/release and usage marking */
+	struct module *owner;
+	int (*fb_open)(struct fb_info *info, int user);
+	int (*fb_release)(struct fb_info *info, int user);
+
+	/* For framebuffers with strange non linear layouts or that do not
+	 * work with normal memory mapped access
+	 */
+	ssize_t (*fb_read)(struct fb_info *info, char __user *buf,
+			   size_t count, loff_t *ppos);
+	ssize_t (*fb_write)(struct fb_info *info, const char __user *buf,
+			    size_t count, loff_t *ppos);
+
+	/* checks var and eventually tweaks it to something supported,
+	 * DO NOT MODIFY PAR */
+	int (*fb_check_var)(struct fb_var_screeninfo *var, struct fb_info *info);
+
+	/* set the video mode according to info->var */
+	int (*fb_set_par)(struct fb_info *info);
+
+	/* set color register */
+	int (*fb_setcolreg)(unsigned regno, unsigned red, unsigned green,
+			    unsigned blue, unsigned transp, struct fb_info *info);
+
+	/* set color registers in batch */
+	int (*fb_setcmap)(struct fb_cmap *cmap, struct fb_info *info);
+
+	/* blank display */
+	int (*fb_blank)(int blank, struct fb_info *info);
+
+	/* pan display */
+	int (*fb_pan_display)(struct fb_var_screeninfo *var, struct fb_info *info);
+
+	/* Draws a rectangle */
+	void (*fb_fillrect) (struct fb_info *info, const struct fb_fillrect *rect);
+	/* Copy data from area to another */
+	void (*fb_copyarea) (struct fb_info *info, const struct fb_copyarea *region);
+	/* Draws a image to the display */
+	void (*fb_imageblit) (struct fb_info *info, const struct fb_image *image);
+
+	/* Draws cursor */
+	int (*fb_cursor) (struct fb_info *info, struct fb_cursor *cursor);
+
+	/* Rotates the display */
+	void (*fb_rotate)(struct fb_info *info, int angle);
+
+	/* wait for blit idle, optional */
+	int (*fb_sync)(struct fb_info *info);
+
+	/* perform fb specific ioctl (optional) */
+	int (*fb_ioctl)(struct fb_info *info, unsigned int cmd,
+			unsigned long arg);
+
+	/* Handle 32bit compat ioctl (optional) */
+	int (*fb_compat_ioctl)(struct fb_info *info, unsigned cmd,
+			unsigned long arg);
+
+	/* perform fb specific mmap */
+	int (*fb_mmap)(struct fb_info *info, struct vm_area_struct *vma);
+
+	/* save current hardware state */
+	void (*fb_save_state)(struct fb_info *info);
+
+	/* restore saved state */
+	void (*fb_restore_state)(struct fb_info *info);
+
+	/* get capability given var */
+	void (*fb_get_caps)(struct fb_info *info, struct fb_blit_caps *caps,
+			    struct fb_var_screeninfo *var);
+};
+```
+> > 对于LCD来说 该结构体的填充位于kernel/drivers/vedio/s3c2410fb.c 中  代码如下：
+```
+static struct fb_ops s3c2410fb_ops = {
+	.owner		= THIS_MODULE,
+	.fb_check_var	= s3c2410fb_check_var,
+	.fb_set_par	= s3c2410fb_set_par,
+	.fb_blank	= s3c2410fb_blank,
+	.fb_setcolreg	= s3c2410fb_setcolreg,
+	.fb_fillrect	= cfb_fillrect,
+	.fb_copyarea	= cfb_copyarea,
+	.fb_imageblit	= cfb_imageblit,
+};
+```
+  * 两个结构体之间的关系
+```
+   用户应用程序通过ioctl()系统调用操作硬件，fb_ops 中的函数就用于支持这些操作。
+   ioctl()系统调用在文件fbmem.c中实现，通过观察可以发现ioctl()命令与fb_ops’s 中函数的关系:
+   FBIOGET_VSCREENINFO fb_get_var
+   FBIOPUT_VSCREENINFO fb_set_var
+   FBIOGET_FSCREENINFO fb_get_fix
+   FBIOPUTCMAP fb_set_cmap
+   FBIOGETCMAP fb_get_cmap
+   FBIOPAN_DISPLAY fb_pan_display
+   如果我们定义了fb_XXX_XXX 方法，用户程序就可以使用FBIOXXXX宏的ioctl()操作来操作硬件。
+```
+    * ![http://www.dzjs.net/upimg/userup/0907/0110225R322.jpg](http://www.dzjs.net/upimg/userup/0907/0110225R322.jpg)
+> > 怎么将一个设备文件 也就是dev目录下的文件和file\_operation关联起来呢 ？ 从上图中 我们可以知道是通过register\_chrdev()函数注册实现的  位于kernel/drivers/vedio/fbmem.c中  实现如下
+```
+fbmem_init(void)
+{
+	create_proc_read_entry("fb", 0, NULL, fbmem_read_proc, NULL);
+
+	if (register_chrdev(FB_MAJOR,"fb",&fb_fops))
+		printk("unable to get major %d for fb devs\n", FB_MAJOR);
+
+	fb_class = class_create(THIS_MODULE, "graphics");
+	if (IS_ERR(fb_class)) {
+		printk(KERN_WARNING "Unable to create fb class; errno = %ld\n", PTR_ERR(fb_class));
+		fb_class = NULL;
+	}
+	return 0;
+}
+
+#ifdef MODULE
+module_init(fbmem_init);
+static void __exit
+fbmem_exit(void)
+{
+	remove_proc_entry("fb", NULL);
+	class_destroy(fb_class);
+	unregister_chrdev(FB_MAJOR, "fb");
+}
+
+module_exit(fbmem_exit);
+```

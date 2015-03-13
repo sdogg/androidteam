@@ -1,0 +1,15 @@
+## Introduction ##
+
+> 记录下工程实践的经历
+
+## Detail ##
+
+[Android开发环境搭建（in ubuntu）](http://code.google.com/p/androidteam/wiki/ApplicationDevelopEnvironmentInUbuntu?ts=1268491349&updated=ApplicationDevelopEnvironmentInUbuntu:)
+
+[一个简单的图片显示程序](http://code.google.com/p/androidteam/wiki/androidapplication)
+
+[HelloWOrld程序输出解析](http://code.google.com/p/androidteam/wiki/TheExplanationOfTheOutputOfHelloWorld?ts=1269438060&updated=TheExplanationOfTheOutputOfHelloWorld)
+
+## Reference ##
+
+> 《Andriod应用开发揭秘》、《Andriod系统原理及开发要点详解》、《JAVA核心技术》卷一

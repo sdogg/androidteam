@@ -1,0 +1,201 @@
+# Step by step,Get Android Source based on [VMware Player 2.5.2 & Ubuntu 8.04 Image](http://code.google.com/p/vmware-ubuntu/) #
+首先，你要确认您的VMware Player 2.5.2 & Ubuntu 8.04 Image运行之后可以正常连接互联网。然后再执行以下步骤。
+  * set up your Linux development environment
+```
+#必备的开发环境和工具
+sw2@sw2-desktop:~$ sudo apt-get install git-core gnupg sun-java5-jdk flex bison gperf libsdl-dev libesd0-dev libwxgtk2.6-dev build-essential zip curl libncurses5-dev zlib1g-dev
+...
+#一个开发工具，可以帮助找出memory leaks, stack corruption, array bounds overflows, etc.
+sw2@sw2-desktop:~$ sudo apt-get install valgrind
+...
+#为什么lib32readline5-dev不存在？？？
+sw2@sw2-desktop:~$ sudo apt-get install lib32readline5-dev
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+E: Couldn't find package lib32readline5-dev
+```
+  * Installing Repo
+**修改.bashrc文件后需要重新打开shell窗口才会生效**
+```
+sw2@sw2-desktop:~$ cd ~
+sw2@sw2-desktop:~$ mkdir bin
+sw2@sw2-desktop:~$ gedit .bashrc
+#在.bashrc文件末尾加上export PATH=$PATH:/home/sw2/bin然后保存，并重新打开shell控制窗口
+sw2@sw2-desktop:~$ echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/sw2/bin
+#从上面可以看到/home/sw2/bin已经在PATH目录中了
+
+#下载repo
+sw2@sw2-desktop:~$ curl http://android.git.kernel.org/repo >~/bin/repo
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 17211    0 17211    0     0   4662      0 --:--:--  0:00:03 --:--:-- 17736
+sw2@sw2-desktop:~$ chmod a+x ~/bin/repo
+```
+  * Initializing a Repo client
+```
+sw2@sw2-desktop:~$ mkdir mydroid
+sw2@sw2-desktop:~$ cd mydroid
+sw2@sw2-desktop:~/mydroid$ repo init -u git://android.git.kernel.org/platform/manifest.git –b cupcake
+#
+#后面加上–b cupcake选项后 
+#可以全速下载！（我的2M带宽的电信ADSL不到一个小时下完） -cupcake是下载 
+#cupcake版本，如果不加的话，下载的是master版本，master版本属于开发测试版 
+#本，很多功能还不稳定。完全下载下来解压后是1.8G,比master版本小一点。master版本大约2.1G
+#
+gpg: keyring `/home/sw2/.repoconfig/gnupg/secring.gpg' created
+gpg: keyring `/home/sw2/.repoconfig/gnupg/pubring.gpg' created
+gpg: /home/sw2/.repoconfig/gnupg/trustdb.gpg: trustdb created
+gpg: key 920F5C65: public key "Repo Maintainer <repo@android.kernel.org>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+
+Getting repo ...
+...   #省略大量输出信息
+Your Name  [sw2]: #输出您的名字
+Your Email [sw2@sw2-desktop.(none)]: 输入您的google账号
+
+Your identity is: 您的名字 <您的google账号>
+is this correct [yes/no]? yes
+
+Testing colorized output (for 'repo diff', 'repo status'):
+  black    red      green    yellow   blue     magenta   cyan     white 
+  bold     dim      ul       reverse 
+Enable color display in this user account (y/n)? y
+
+repo initialized in /home/sw2/mydroid
+
+
+```
+  * Repo configuration changes for Android Dev Phone(未验证)
+
+Note: the download of the kernel source files is only needed if you want to compile the kernel by your own. You can also skip this configuration change and use the prebuilt kernel which is part of the dream-open project. It is possible that this prebuilt kernel is not the latest version
+
+It is possible to download the source at this point, but we need to make some changes to retrieve specific source for the Android Dev Phone (internally called Dream).
+
+Inside the .repo directory (within mydroid) you need to create a local\_manifest.xml. This file containsa description of the three extra project needed for the Dev Phone. The contents of the local\_manifest.xml
+```
+<?xml version="1.0" encoding="UTF-8"?>
+ <manifest>
+  <project path="kernel" name="kernel/msm" revision="refs/heads/android-msm-2.6.27"/>
+ </manifest>
+```
+With the local\_manifest.xml in place it is time to get the source code.
+
+  * 获取源代码文件
+可能下载过程中会遇到git://android.git.kernel.org.............: errno=Connection refused
+....
+fatal: unable to connect a socket(connection refused)的问题，原因是您所在的intranet封掉了Git的端口。直接使用电信或移动的宽带接入则不会出现该问题。出现该问题有一些[解决方法...](http://blog.csdn.net/truewell/archive/2009/08/19/4462225.aspx)
+```
+sw2@sw2-desktop:~/mydroid$ repo sync
+#需要很长时间的下载过程
+...
+Syncing work tree: 100% (142/142), done.  
+
+sw2@sw2-desktop:~/mydroid$ 
+
+```
+  * Verifying Git Tags
+```
+#导入PGP PUBLIC KEY
+sw2@sw2-desktop:~/mydroid$ gpg --import  #输入enter，然后拷贝KEY如下
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.2.2 (GNU/Linux)
+
+mQGiBEnnWD4RBACt9/h4v9xnnGDou13y3dvOx6/t43LPPIxeJ8eX9WB+8LLuROSV
+lFhpHawsVAcFlmi7f7jdSRF+OvtZL9ShPKdLfwBJMNkU66/TZmPewS4m782ndtw7
+8tR1cXb197Ob8kOfQB3A9yk2XZ4ei4ZC3i6wVdqHLRxABdncwu5hOF9KXwCgkxMD
+u4PVgChaAJzTYJ1EG+UYBIUEAJmfearb0qRAN7dEoff0FeXsEaUA6U90sEoVks0Z
+wNj96SA8BL+a1OoEUUfpMhiHyLuQSftxisJxTh+2QclzDviDyaTrkANjdYY7p2cq
+/HMdOY7LJlHaqtXmZxXjjtw5Uc2QG8UY8aziU3IE9nTjSwCXeJnuyvoizl9/I1S5
+jU5SA/9WwIps4SC84ielIXiGWEqq6i6/sk4I9q1YemZF2XVVKnmI1F4iCMtNKsR4
+MGSa1gA8s4iQbsKNWPgp7M3a51JCVCu6l/8zTpA+uUGapw4tWCp4o0dpIvDPBEa9
+b/aF/ygcR8mh5hgUfpF9IpXdknOsbKCvM9lSSfRciETykZc4wrRCVGhlIEFuZHJv
+aWQgT3BlbiBTb3VyY2UgUHJvamVjdCA8aW5pdGlhbC1jb250cmlidXRpb25AYW5k
+cm9pZC5jb20+iGAEExECACAFAknnWD4CGwMGCwkIBwMCBBUCCAMEFgIDAQIeAQIX
+gAAKCRDorT+BmrEOeNr+AJ42Xy6tEW7r3KzrJxnRX8mij9z8tgCdFfQYiHpYngkI
+2t09Ed+9Bm4gmEO5Ag0ESedYRBAIAKVW1JcMBWvV/0Bo9WiByJ9WJ5swMN36/vAl
+QN4mWRhfzDOk/Rosdb0csAO/l8Kz0gKQPOfObtyYjvI8JMC3rmi+LIvSUT9806Up
+hisyEmmHv6U8gUb/xHLIanXGxwhYzjgeuAXVCsv+EvoPIHbY4L/KvP5x+oCJIDbk
+C2b1TvVk9PryzmE4BPIQL/NtgR1oLWm/uWR9zRUFtBnE411aMAN3qnAHBBMZzKMX
+LWBGWE0znfRrnczI5p49i2YZJAjyX1P2WzmScK49CV82dzLo71MnrF6fj+Udtb5+
+OgTg7Cow+8PRaTkJEW5Y2JIZpnRUq0CYxAmHYX79EMKHDSThf/8AAwUIAJPWsB/M
+pK+KMs/s3r6nJrnYLTfdZhtmQXimpoDMJg1zxmL8UfNUKiQZ6esoAWtDgpqt7Y7s
+KZ8laHRARonte394hidZzM5nb6hQvpPjt2OlPRsyqVxw4c/KsjADtAuKW9/d8phb
+N8bTyOJo856qg4oOEzKG9eeF7oaZTYBy33BTL0408sEBxiMior6b8LrZrAhkqDjA
+vUXRwm/fFKgpsOysxC6xi553CxBUCH2omNV6Ka1LNMwzSp9ILz8jEGqmUtkBszwo
+G1S8fXgE0Lq3cdDM/GJ4QXP/p6LiwNF99faDMTV3+2SAOGvytOX6KjKVzKOSsfJQ
+hN0DlsIw8hqJc0WISQQYEQIACQUCSedYRAIbDAAKCRDorT+BmrEOeCUOAJ9qmR0l
+EXzeoxcdoafxqf6gZlJZlACgkWF7wi2YLW3Oa+jv2QSTlrx4KLM=
+=Wi5D
+-----END PGP PUBLIC KEY BLOCK----- #输入Control+D
+gpg: key 9AB10E78: public key "The Android Open Source Project <initial-contribution@android.com>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+#
+#After importing the keys, you can verify any tag with   $ git tag -v tagname
+#验证development目录下的tagname:android-1.5
+#
+sw2@sw2-desktop:~/mydroid/frameworks$ cd ../development/
+sw2@sw2-desktop:~/mydroid/development$ git tag
+android-1.0
+android-1.5
+android-1.5r2
+android-1.5r3
+android-1.5r4
+android-1.6_r1
+android-1.6_r1.1
+android-1.6_r1.2
+android-1.6_r1.3
+android-1.6_r1.4
+android-sdk-1.5-pre
+android-sdk-1.5_r1
+android-sdk-1.5_r3
+android-sdk-1.6-docs_r1
+android-sdk-1.6_r1
+android-sdk-tools_r2
+sw2@sw2-desktop:~/mydroid/development$ git tag -v android-1.5
+object 42c230dd91c73413d4d538e7a68639816cf83f32
+type commit
+tag android-1.5
+tagger android-build SharedAccount <android-build@google.com> 1240602560 -0700
+
+Android 1.5 release
+gpg: Signature made Sat 25 Apr 2009 03:49:21 AM CST using DSA key ID 9AB10E78
+gpg: Good signature from "The Android Open Source Project <initial-contribution@android.com>"
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 4340 D135 70EF 945E 8381  0964 E8AD 3F81 9AB1 0E78
+
+```
+若是没有签署者的公钥，会报告类似下面这样的错误：
+```
+gpg: Signature made Wed Sep 13 02:08:25 2006 PDT using DSA key ID F3119B9A
+gpg: Can't check signature: public key not found
+error: could not verify the tag 'tagname'
+```
+  * Building the code
+```
+sw2@sw2-desktop:~$ cd mydroid/
+sw2@sw2-desktop:~/mydroid$ make
+...
+target SharedLib: libwnndict (out/target/product/generic/obj/SHARED_LIBRARIES/libwnndict_intermediates/LINKED/libwnndict.so)
+target Non-prelinked: libwnndict (out/target/product/generic/symbols/system/lib/libwnndict.so)
+target Strip: libwnndict (out/target/product/generic/obj/lib/libwnndict.so)
+Generated: (out/target/product/generic/android-info.txt)
+Target system fs image: out/target/product/generic/obj/PACKAGING/systemimage_unopt_intermediates/system.img
+Install system fs image: out/target/product/generic/system.img
+Target ram disk: out/target/product/generic/ramdisk.img
+Target userdata fs image: out/target/product/generic/userdata.img
+Installed file list: out/target/product/generic/installed-files.txt
+sw2@sw2-desktop:~/mydroid$ 
+```
+  * [Android编译后的文件结构](http://www.eoeandroid.com/thread-1174-1-1.html)
+几个以img为结尾的文件是几个目标映像文件，其中ramdisk是作为内存盘的根文件系统映像，system.img是主要文件系统的映像，这是一个比较大的文件，data.img是数据内容映像。这几个image文件是运行时真正需要的文件。
+命令行中输入[emulator](emulator.md) -options 进入[模拟器](emulator.md)。
+
+## Next Step ##
+  * [How to use Android Emulator?](emulator.md)
+## References ##
+  * [building-android-15-getting-the-source(include Kernel source)](http://www.johandekoning.nl/index.php/2009/06/07/building-android-15-getting-the-source/)

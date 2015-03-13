@@ -1,0 +1,121 @@
+# system.img分析 #
+_lizhijie86su,;mail:lzj86825@163.com_
+
+### 从结果找原因，从system.img开始 ###
+Makefile line627
+```
+# The installed image, which may be optimized or unoptimized.
+#
+INSTALLED_SYSTEMIMAGE := $(PRODUCT_OUT)/system.img
+```
+
+Makefile line662
+```
+$(INSTALLED_SYSTEMIMAGE): $(BUILT_SYSTEMIMAGE) $(RECOVERY_FROM_BOOT_PATCH) | $(ACP)
+	@echo "Install system fs image: $@"
+	$(copy-file-to-target)
+	$(hide) $(call assert-max-file-size,$@ $(RECOVERY_FROM_BOOT_PATCH),$(BOARD_SYSTEMIMAGE_MAX_SIZE),yaffs)
+```
+
+这里之实现了一个功能，将$^ copy to a dir,之后我们会发现把system.img从一个中间目录复制到/generic目录。
+
+然后找BUILT\_STSYEM 和RECOVERY\_FROM\_BOOT\_PATCH，这里先不管后者。
+Makefile line636
+```
+ifdef with_dexpreopt
+  # This file will set BUILT_SYSTEMIMAGE and SYSTEMIMAGE_SOURCE_DIR
+  include build/tools/dexpreopt/Config.mk
+else
+  BUILT_SYSTEMIMAGE := $(BUILT_SYSTEMIMAGE_UNOPT)
+  SYSTEMIMAGE_SOURCE_DIR := $(TARGET_OUT)
+endif
+```
+
+选择系统是优化的还是非优化（UNOPTIMIZED）的。如果是非优化的，(优化的暂时没有考虑！)
+Makefile line590
+```
+# -----------------------------------------------------------------
+# system yaffs image
+#
+# First, the "unoptimized" image, which contains .apk/.jar files
+# that contain regular, unoptimized/unverified .dex entries.
+#
+systemimage_unopt_intermediates := \
+	$(call intermediates-dir-for,PACKAGING,systemimage_unopt)
+BUILT_SYSTEMIMAGE_UNOPT := $(systemimage_unopt_intermediates)/system.img
+```
+
+这里的system.img不是/generic目录下面我们看到的那个system.img，而是另一个中间目录下的，但是是同一个文件。一开始看到的复制就是把/media/disk/mydroid/out/target/product/generic/obj/PACKAGING/systemimage\_unopt\_intermediates目录下面的system.img复制到/generic目录下。
+
+### 现在，知道了system.img的来历，然后要分析它是一个什么东西，里面包含什么？？ ###
+Makefile line624
+```
+$(BUILT_SYSTEMIMAGE_UNOPT): $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_MKUSERFS)
+	$(call build-systemimage-target,$@)
+```
+
+这里调用了build-systemimg-target
+Makefile line605
+```
+ifeq ($(TARGET_USERIMAGES_USE_EXT2),true)
+## generate an ext2 image
+# $(1): output file
+define build-systemimage-target
+    @echo "Target system fs image: $(1)"
+    $(call build-userimage-ext2-target,$(TARGET_OUT),$(1),system,)
+endef
+
+else # TARGET_USERIMAGES_USE_EXT2 != true
+
+## generate a yaffs2 image
+# $(1): output file
+define build-systemimage-target
+    @echo "Target system fs image: $(1)"
+    @mkdir -p $(dir $(1))
+    ＊$(hide) $(MKYAFFS2) -f $(TARGET_OUT) $(1)＊
+endef
+endif # TARGET_USERIMAGES_USE_EXT2
+```
+
+找不到TARGET\_USERIMAGES\_USE\_EXT2的定义！！！不过从上面的分析可以推断出应该是yaffs2文件系统。
+
+其中MKYAFFS2：（core/config.mk line161）
+```
+MKYAFFS2 := $(HOST_OUT_EXECUTABLES)/mkyaffs2image$(HOST_EXECUTABLE_SUFFIX)
+```
+定义MKYAFFS2是目录/media/disk/mydroid/out/host/linux-x86/bin下的一个可执行文件mkyaffs2image，运行这个程序可得到如下信息：
+```
+lzj@lzj-laptop:/media/disk/mydroid/out/host/linux-x86/bin$ ./mkyaffs2image 
+mkyaffs2image: image building tool for YAFFS2 built Nov 13 2009
+usage: mkyaffs2image [-f] dir image_file [convert]
+           -f         fix file stat (mods, user, group) for device
+           dir        the directory tree to be converted
+           image_file the output file to hold the image
+           'convert'  produce a big-endian image from a little-endian machine
+
+```
+得知这个程序可以生成yaffs2的文件系统映像。并且也清楚了上面＊$(hide) $(MKYAFFS2) -f $(TARGET\_OUT) $(1)＊的功能，把TARGET\_OUT目录转变成yaffs2格式并输出成/media/disk/mydroid/out/target/product/generic/obj/PACKAGING/systemimage\_unopt\_intermediates/system.img(也就是我们最终在/generic目录下看到的那个system.img)。
+
+到现在已经差不多知道system.img的产生过程，要弄清楚system.img里面的内容，就要分析TARGET\_OUT目录的内容了。
+（想用mount把system.img挂载到linux下面看看里面什么东西，却不支持yaffs和yaffs2文件系统！！！）
+
+下一步：分析TARGET\_OUT
+在build/core/envsetup.sh文件（line205）中找到了TARGET\_OUT的定义：
+```
+TARGET_OUT := $(PRODUCT_OUT)/system
+```
+也就是/media/disk/mydroid/out/target/product/generic目录下的system目录。
+```
+lzj@lzj-laptop:/media/disk/mydroid/out/target/product/generic/system$ tree -L 1
+.
+|-- app
+|-- bin
+|-- build.prop
+|-- etc
+|-- fonts
+|-- framework
+|-- lib
+|-- usr
+`-- xbin
+```
+现在一切都明白了，我们最终看到的system.img文件是该目录下的system目录的一个映像，类似于linux的根文件系统的映像，放着android的应用程序，配置文件，字体等。

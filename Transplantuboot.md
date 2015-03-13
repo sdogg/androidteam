@@ -1,0 +1,412 @@
+#U-boot的移植.
+
+# 移植U-boot的详细步骤 #
+
+```
+1）u-boot版本1.1.3，gcc version 3.3.3 (DENX ELDK 3.1.1 3.3.3-9)
+
+2）在Makefile中加入
+bks2410_config : unconfig
+ @./mkconfig $(@:_config=) arm arm920t bks2410 NULL s3c24x0
+我把我的板子起名叫bks2410，可以依自己的喜好修改
+
+3）建立board/bks2410目录，拷贝board/smdk2410下的文件到board/bks2410目录，将smdk2410.c更名为bks2410.c
+
+4）cp include/configs/smdk2410.h include/configs/bks2410.h
+
+5）将arm-linux-gcc的目录加入到PATH环境变量中，我的是目录/opt/eldk/usr/bin:/opt/eldk/bin
+
+6）测试编译能否成功：
+make bks2410_config
+make all ARCH=arm
+生成u-boot.bin就OK了
+
+7）依照你自己开发板的内存地址分配情况修改board/bks2410/memsetup.S文件，我的程序：
+#include <config.h>
+#include <version.h>
+
+#define BWSCON 0x48000000
+
+/* BWSCON */
+#define DW8    (0x0)
+#define DW16    (0x1)
+#define DW32    (0x2)
+#define WAIT    (0x1<<2)
+#define UBLB    (0x1<<3)
+
+#define B1_BWSCON    (DW32)
+#define B2_BWSCON    (DW16)
+#define B3_BWSCON    (DW16 + WAIT + UBLB)
+#define B4_BWSCON    (DW16)
+#define B5_BWSCON    (DW16)
+#define B6_BWSCON    (DW32)
+#define B7_BWSCON    (DW32)
+
+/* BANK0CON */
+#if 0
+#define B0_Tacs    0x0 /*  0clk */
+#define B0_Tcos    0x0 /*  0clk */
+#define B0_Tacc    0x7 /* 14clk */
+#define B0_Tcoh    0x0 /*  0clk */
+#define B0_Tah    0x0 /*  0clk */
+#define B0_Tacp    0x0
+#define B0_PMC    0x0 /* normal */
+#endif
+
+#define B0_Tacs    0x3 /*  0clk */
+#define B0_Tcos    0x3 /*  0clk */
+#define B0_Tacc    0x7 /* 14clk */
+#define B0_Tcoh    0x3 /*  0clk */
+#define B0_Tah    0x3 /*  0clk */
+#define B0_Tacp    0x1
+#define B0_PMC    0x0 /* normal */
+
+/* BANK1CON */
+#if 0
+#define B1_Tacs    0x0 /*  0clk */
+#define B1_Tcos    0x0 /*  0clk */
+#define B1_Tacc    0x7 /* 14clk */
+#define B1_Tcoh    0x0 /*  0clk */
+#define B1_Tah    0x0 /*  0clk */
+#define B1_Tacp    0x0
+#define B1_PMC    0x0
+#endif
+
+#define B1_Tacs    0x3 /*  0clk */
+#define B1_Tcos    0x3 /*  0clk */
+#define B1_Tacc    0x7 /* 14clk */
+#define B1_Tcoh    0x3 /*  0clk */
+#define B1_Tah    0x3 /*  0clk */
+#define B1_Tacp    0x3
+#define B1_PMC    0x0
+
+#define B2_Tacs    0x0
+#define B2_Tcos    0x0
+#define B2_Tacc    0x7
+#define B2_Tcoh    0x0
+#define B2_Tah    0x0
+#define B2_Tacp    0x0
+#define B2_PMC    0x0
+
+#if 0
+#define B3_Tacs    0x0 /*  0clk */
+#define B3_Tcos    0x3 /*  4clk */
+#define B3_Tacc    0x7 /* 14clk */
+#define B3_Tcoh    0x1 /*  1clk */
+#define B3_Tah    0x0 /*  0clk */
+#define B3_Tacp    0x3     /*  6clk */
+#define B3_PMC    0x0 /* normal */
+#endif
+
+#define B3_Tacs    0x0 /*  0clk */
+#define B3_Tcos    0x0 /*  4clk */
+#define B3_Tacc    0x7 /* 14clk */
+#define B3_Tcoh    0x0 /*  1clk */
+#define B3_Tah    0x0 /*  0clk */
+#define B3_Tacp    0x0     /*  6clk */
+#define B3_PMC    0x0 /* normal */
+
+#define B4_Tacs    0x0 /*  0clk */
+#define B4_Tcos    0x0 /*  0clk */
+#define B4_Tacc    0x7 /* 14clk */
+#define B4_Tcoh    0x0 /*  0clk */
+#define B4_Tah    0x0 /*  0clk */
+#define B4_Tacp    0x0
+#define B4_PMC    0x0 /* normal */
+
+#define B5_Tacs    0x0 /*  0clk */
+#define B5_Tcos    0x0 /*  0clk */
+#define B5_Tacc    0x7 /* 14clk */
+#define B5_Tcoh    0x0 /*  0clk */
+#define B5_Tah    0x0 /*  0clk */
+#define B5_Tacp    0x0
+#define B5_PMC    0x0 /* normal */
+
+#define B6_MT    0x3 /* SDRAM */
+#define B6_Trcd     0x1
+#define B6_SCAN    0x1 /* 9bit */
+
+#define B7_MT    0x3 /* SDRAM */
+#define B7_Trcd    0x1 /* 3clk */
+#define B7_SCAN    0x1 /* 9bit */
+
+/* REFRESH parameter */
+#define REFEN    0x1 /* Refresh enable */
+#define TREFMD    0x0 /* CBR(CAS before RAS)/Auto refresh */
+#define Trp    0x0 /* 2clk */
+#define Trc    0x3 /* 7clk */
+#define Tchr    0x2 /* 3clk */
+#define REFCNT    1113 /* period=15.6us, HCLK=60Mhz, (2048+1-15.6*60) */
+/**************************************/
+
+_TEXT_BASE:
+ .word TEXT_BASE
+
+.globl memsetup
+memsetup:
+ /* memory control configuration */
+ /* make r0 relative the current location so that it */
+ /* reads SMRDATA out of FLASH rather than memory ! */
+ adr     r0, SMRDATA
+ /*ldr r1, _TEXT_BASE*/
+ /*sub r0, r0, r1*/
+ ldr r1, =BWSCON /* Bus Width Status Controller */
+ add     r2, r0, #13*4
+0:
+ ldr     r3, [r0], #4
+ str     r3, [r1], #4
+ cmp     r2, r0
+ bne     0b
+
+ /* everything is fine now */
+ mov pc, lr
+
+ .ltorg
+/* the literal pools origin */
+
+SMRDATA:
+    .word (0+(B1_BWSCON<<4)+(B2_BWSCON<<8)+(B3_BWSCON<<12)+(B4_BWSCON<<16)+(B5_BWSCON<<20)+(B6_BWSCON<<24)+(B7_BWSCON<<28))
+    .word ((B0_Tacs<<13)+(B0_Tcos<<11)+(B0_Tacc<<8)+(B0_Tcoh<<6)+(B0_Tah<<4)+(B0_Tacp<<2)+(B0_PMC))
+    .word ((B1_Tacs<<13)+(B1_Tcos<<11)+(B1_Tacc<<8)+(B1_Tcoh<<6)+(B1_Tah<<4)+(B1_Tacp<<2)+(B1_PMC))
+    .word ((B2_Tacs<<13)+(B2_Tcos<<11)+(B2_Tacc<<8)+(B2_Tcoh<<6)+(B2_Tah<<4)+(B2_Tacp<<2)+(B2_PMC))
+    .word 0x1f7c/*((B3_Tacs<<13)+(B3_Tcos<<11)+(B3_Tacc<<8)+(B3_Tcoh<<6)+(B3_Tah<<4)+(B3_Tacp<<2)+(B3_PMC))*/
+    .word ((B4_Tacs<<13)+(B4_Tcos<<11)+(B4_Tacc<<8)+(B4_Tcoh<<6)+(B4_Tah<<4)+(B4_Tacp<<2)+(B4_PMC))
+    .word ((B5_Tacs<<13)+(B5_Tcos<<11)+(B5_Tacc<<8)+(B5_Tcoh<<6)+(B5_Tah<<4)+(B5_Tacp<<2)+(B5_PMC))
+    .word ((B6_MT<<15)+(B6_Trcd<<2)+(B6_SCAN))
+    .word ((B7_MT<<15)+(B7_Trcd<<2)+(B7_SCAN))
+    .word ((REFEN<<23)+(TREFMD<<22)+(Trp<<20)+(Trc<<18)+(Tchr<<16)+REFCNT)
+    .word 0x31
+    .word 0x30
+    .word 0x30
+    
+8）在board/bks2410加入NAND Flash读函数，建立nand_read.c，加入如下内容(copy from vivi)：
+#include <config.h>
+
+#define __REGb(x) (*(volatile unsigned char *)(x))
+#define __REGi(x) (*(volatile unsigned int *)(x))
+#define NF_BASE  0x4e000000
+#define NFCONF  __REGi(NF_BASE + 0x0)
+#define NFCMD  __REGb(NF_BASE + 0x4)
+#define NFADDR  __REGb(NF_BASE + 0x8)
+#define NFDATA  __REGb(NF_BASE + 0xc)
+#define NFSTAT  __REGb(NF_BASE + 0x10)
+
+#define BUSY 1
+inline void wait_idle(void) {
+    int i;
+
+    while(!(NFSTAT & BUSY))
+      for(i=0; i<10; i++);
+}
+
+#define NAND_SECTOR_SIZE 512
+#define NAND_BLOCK_MASK  (NAND_SECTOR_SIZE - 1)
+
+/* low level nand read function */
+int
+nand_read_ll(unsigned char *buf, unsigned long start_addr, int size)
+{
+    int i, j;
+
+    if ((start_addr & NAND_BLOCK_MASK) || (size & NAND_BLOCK_MASK)) {
+        return -1; /* invalid alignment */
+    }
+
+    /* chip Enable */
+    NFCONF &= ~0x800;
+    for(i=0; i<10; i++);
+
+    for(i=start_addr; i < (start_addr + size);) {
+      /* READ0 */
+      NFCMD = 0;
+
+      /* Write Address */
+      NFADDR = i & 0xff;
+      NFADDR = (i >> 9) & 0xff;
+      NFADDR = (i >> 17) & 0xff;
+      NFADDR = (i >> 25) & 0xff;
+
+      wait_idle();
+
+      for(j=0; j < NAND_SECTOR_SIZE; j++, i++) {
+ *buf = (NFDATA & 0xff);
+ buf++;
+      }
+    }
+
+    /* chip Disable */
+    NFCONF |= 0x800; /* chip disable */
+
+    return 0;
+}
+
+9）修改board/bks2410/Makefile为
+OBJS := bks2410.o flash.o nand_read.o
+
+10）修改cpu/arm920t/start.S文件
+在ldr pc, _start_armboot之前加入：
+#ifdef CONFIG_S3C2410_NAND_BOOT
+  bl    copy_myself
+  
+  @ jump to ram
+  ldr   r1, =on_the_ram
+  add  pc, r1, #0
+  nop
+  nop
+  1:    b     1b          @ infinite loop
+  
+on_the_ram:
+#endif
+
+在_start_armboot: .word start_armboot之后加入：
+#ifdef CONFIG_S3C2410_NAND_BOOT
+copy_myself:
+  mov r10, lr
+@ reset NAND
+  mov r1, #NAND_CTL_BASE
+  ldr   r2, =0xf830           @ initial value
+  str   r2, [r1, #oNFCONF]
+  ldr   r2, [r1, #oNFCONF]
+  bic  r2, r2, #0x800              @ enable chip
+  str   r2, [r1, #oNFCONF]
+  mov r2, #0xff         @ RESET command
+  strb r2, [r1, #oNFCMD]
+  mov r3, #0                   @ wait
+
+1:add  r3, r3, #0x1
+  cmp r3, #0xa
+  blt   1b
+2:ldr   r2, [r1, #oNFSTAT]      @ wait ready
+  tst    r2, #0x1
+  beq  2b
+  ldr   r2, [r1, #oNFCONF]
+  orr  r2, r2, #0x800              @ disable chip
+  str   r2, [r1, #oNFCONF]
+
+@ get read to call C functions (for nand_read())
+  ldr   sp, DW_STACK_START       @ setup stack pointer
+  mov fp, #0                    @ no previous frame, so fp=0
+
+@ copy vivi to RAM
+  ldr   r0, =UBOOT_RAM_BASE
+  mov     r1, #0x0
+  mov r2, #0x20000
+  bl    nand_read_ll
+  tst    r0, #0x0
+  beq  ok_nand_read
+
+#ifdef CONFIG_DEBUG_LL
+  bad_nand_read:
+  ldr   r0, STR_FAIL
+  ldr   r1, SerBase
+  bl    PrintWord
+1:b     1b          @ infinite loop
+  #endif
+
+ok_nand_read:
+#ifdef CONFIG_DEBUG_LL
+  ldr   r0, STR_OK
+  ldr   r1, SerBase
+  bl    PrintWord
+#endif
+
+@ verify
+  mov r0, #0
+  ldr   r1, =UBOOT_RAM_BASE
+  mov r2, #0x400     @ 4 bytes * 1024 = 4K-bytes
+go_next:
+  ldr   r3, [r0], #4
+  ldr   r4, [r1], #4
+  teq   r3, r4
+  bne  notmatch
+  subs r2, r2, #4
+  beq  done_nand_read
+  bne  go_next
+
+notmatch:
+#ifdef CONFIG_DEBUG_LL
+  sub  r0, r0, #4
+  ldr   r1, SerBase
+  bl    PrintHexWord
+  ldr   r0, STR_FAIL
+  ldr   r1, SerBase
+  bl    PrintWord
+#endif
+1:b     1b
+done_nand_read:
+#ifdef CONFIG_DEBUG_LL
+  ldr   r0, STR_OK
+  ldr   r1, SerBase
+  bl    PrintWord
+#endif
+  mov pc, r10
+@ clear memory
+@ r0: start address
+@ r1: length
+  mem_clear:
+  mov r2, #0
+  mov r3, r2
+  mov r4, r2
+  mov r5, r2
+  mov r6, r2
+  mov r7, r2
+  mov r8, r2
+  mov r9, r2
+
+clear_loop:
+  stmia      r0!, {r2-r9}
+  subs r1, r1, #(8 * 4)
+  bne  clear_loop
+  mov pc, lr
+
+#endif @ CONFIG_S3C2410_NAND_BOOT
+
+在文件的最后加入：
+   .align     2
+DW_STACK_START:
+ .word      STACK_BASE+STACK_SIZE-4
+
+11）修改include/configs/bks2410.h文件，添加如下内容：
+/*
+ * Nandflash Boot
+ */
+#define CONFIG_S3C2410_NAND_BOOT 1
+#define STACK_BASE    0x33f00000
+#define STACK_SIZE    0x8000
+#define UBOOT_RAM_BASE    0x33f80000
+/* NAND Flash Controller */
+#define NAND_CTL_BASE            0x4E000000
+#define bINT_CTL(Nb)        __REG(INT_CTL_BASE + (Nb))
+/* Offset */
+#define oNFCONF               0x00
+#define oNFCMD                0x04
+#define oNFADDR               0x08
+#define oNFDATA               0x0c
+#define oNFSTAT               0x10
+#define oNFECC                0x14
+
+12）重新编译u-boot
+make all ARCH=arm
+
+13）通过jtag将u-boot烧写到flash中就可以从NAND flash启动了
+
+
+我的u-boot启动信息：
+
+U-Boot 1.1.3 (May  6 2006 - 18:13:59)
+
+U-Boot code: 33F80000 -> 33F967C4  BSS: -> 33F9AAAC
+RAM Configuration:
+Bank #0: 30000000 64 MB
+Flash: 512 kB
+*** Warning - bad CRC, using default environment
+
+
+```
+
+# Details #
+
+Add your content here.  Format your content with:
+  * Text in **bold** or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages

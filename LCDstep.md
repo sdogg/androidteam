@@ -1,0 +1,78 @@
+# LCD移植步骤 #
+
+> 详细说明了移植修改部分
+
+
+# 步骤 #
+  * 添加头文件
+> > ` #include <asm/arch/fb.h>   `
+
+  * LCD初始化参数的设置
+```
+      static struct s3c2410fb_display qt2410_lcd_cfg[] __initdata = {
+	{
+		/* Configuration for 640x480 SHARP LQ080V3DG01 */
+		.lcdcon5 = S3C2410_LCDCON5_FRM565 |
+			   S3C2410_LCDCON5_INVVLINE |
+			   S3C2410_LCDCON5_INVVFRAME |
+			   S3C2410_LCDCON5_PWREN |
+			   S3C2410_LCDCON5_HWSWP,
+
+		.type		= S3C2410_LCDCON1_TFT,
+		.width		= 640,
+		.height		= 480,
+
+		.pixclock	= 40000, /* HCLK/4 */
+		.xres		= 640,
+		.yres		= 480,
+		.bpp		= 16,
+		.left_margin	= 44,
+		.right_margin	= 116,
+		.hsync_len	= 96,
+		.upper_margin	= 19,
+		.lower_margin	= 11,
+		.vsync_len	= 15,
+	},
+};
+   /* Configuration for 640x480 SHARP LQ080V3DG01 */
+static struct s3c2410fb_mach_info qt2410_biglcd_cfg __initdata = {
+     	.displays 	= qt2410_lcd_cfg,
+	.num_displays 	= ARRAY_SIZE(qt2410_lcd_cfg),
+	
+	.default_display = 0,
+    	.gpccon=    0xaa8002a8,
+    	.gpccon_mask=   0xffc003fc,
+    	.gpcup=     0xf81e,
+    	.gpcup_mask=    0xf81e,
+   	 .gpdcon=    0xaa80aaa0,
+   	 .gpdcon_mask=   0xffc0fff0,
+    	.gpdup=     0xf8fc,
+    	.gpdup_mask=    0xf8fc,   
+
+    	.lpcsel        = ((0xCE6) & ~7) | 1<<4, 
+};
+
+```
+
+  * 打开LCD初始化
+```
+ static struct platform_device *smdk2410_devices[] __initdata = {
+	&s3c_device_usb,
+	&s3c_device_lcd, //将LCD设备放入数组中
+	&s3c_device_wdt,
+	&s3c_device_i2c,
+	&s3c_device_iis,
+};
+```
+
+  * 添加设置函数使得参数生效
+```
+ static void __init smdk2410_init(void)
+{
+        s3c24xx_fb_set_platdata(&qt2410_biglcd_cfg);
+        //将 s3c2410_mach_info  添加到  platform_device  结构体中  
+	platform_add_devices(smdk2410_devices, ARRAY_SIZE(smdk2410_devices));
+	smdk_machine_init();
+}
+```
+  * 编译内核

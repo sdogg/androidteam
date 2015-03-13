@@ -1,0 +1,102 @@
+# Introduction #
+
+platform\_device 和 platform\_driver
+
+
+# Details #
+从2.6版本开始引入了platform这个概念, platform可以理解为一种设备类型，就像字符设备、块设备、网络设备一样，为了向内核添加一个platform设备，应该填写两个数据结构 一个为platform\_device 另一个为platform\_driver
+  * 先来介绍platform\_device
+platform\_device 定义在文件 kernel\include\linux\platform\_device.h 中
+> > 定义如下：
+```
+  struct platform_device {
+	const char	* name;
+	int		id;
+	struct device	dev;
+	u32		num_resources;
+	struct resource	* resource;
+};
+```
+> > 该结构一个重要的元素是resource，该元素存入了最为重要的设备资源信息，定义在kernel\include\linux\ioport.h中，定义如下：
+```
+ struct resource {
+	resource_size_t start;
+	resource_size_t end;
+	const char *name;
+	unsigned long flags;
+	struct resource *parent, *sibling, *child;
+};
+```
+
+> 下面我们以s3c2410的lcd为例来具体讲解下
+> 在 arch/arm/plat-s3c24xx/devs.c中 可以看到填写 lcd的代码 如下：
+```
+static u64 s3c_device_lcd_dmamask = 0xffffffffUL;
+
+struct platform_device s3c_device_lcd = {
+	.name		  = "s3c2410-lcd",
+	.id		  = -1,
+	.num_resources	  = ARRAY_SIZE(s3c_lcd_resource),
+	.resource	  = s3c_lcd_resource,
+	.dev              = {
+		.dma_mask		= &s3c_device_lcd_dmamask,
+		.coherent_dma_mask	= 0xffffffffUL
+	}
+};
+```
+```
+/* LCD Controller */
+
+static struct resource s3c_lcd_resource[] = {
+	[0] = {
+		.start = S3C24XX_PA_LCD,
+		.end   = S3C24XX_PA_LCD + S3C24XX_SZ_LCD - 1,
+		.flags = IORESOURCE_MEM,
+	},
+	[1] = {
+		.start = IRQ_LCD,
+		.end   = IRQ_LCD,
+		.flags = IORESOURCE_IRQ,
+	}
+
+};
+```
+struct resource结构实际上描述了该设备占用的硬件资源（如地址空间，中断号等s），s3c\_lcd\_resource描述了内存空间和中断分配情况
+
+从上面可以看出我们通过填写platform\_device描述了s3c2410中lcd的情况
+  * 再看 platform\_driver
+platform\_deiver 定义在文件 kernel\include\linux\platform\_device.h 中   定义如下：
+```
+struct platform_driver {
+	int (*probe)(struct platform_device *);
+	int (*remove)(struct platform_device *);
+	void (*shutdown)(struct platform_device *);
+	int (*suspend)(struct platform_device *, pm_message_t state);
+	int (*suspend_late)(struct platform_device *, pm_message_t state);
+	int (*resume_early)(struct platform_device *);
+	int (*resume)(struct platform_device *);
+	struct device_driver driver;
+};
+```
+s3c2410中lcd的platfrom\_driver 在那里填充的呢？
+在/drivers/vedio/s3c2410fb.c中实现 代码如下：
+```
+static struct platform_driver s3c2410fb_driver = {
+	.probe		= s3c2410fb_probe,
+	.remove		= s3c2410fb_remove,
+	.suspend	= s3c2410fb_suspend,
+	.resume		= s3c2410fb_resume,
+	.driver		= {
+		.name	= "s3c2410-lcd",
+		.owner	= THIS_MODULE,
+	},
+};
+```
+可以看到该platform设备的驱动函数有s3c2410fb\_probe、s3c2410fb\_remove等等
+这样一个platfrom设备的两部分数据结构都填充完成了
+```
+ 要特别注意一点 s3c_device_lcd 结构体中的 name域 和 s3c2410fb_driver 的driver成员变量
+ 中的name域的名字必须一致 ，这样 platfrom_device 才能和 platfrom_driver关联起来 只有这
+ 样将来才能注册成功 才能回调 函数 s3c2410fb_probe  哈哈
+```
+

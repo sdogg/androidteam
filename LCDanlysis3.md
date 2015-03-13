@@ -1,0 +1,198 @@
+# Introduction #
+
+framebuffer相关知识.
+
+
+# Details #
+  * framebuffer简介
+> > 帧缓冲（framebuffer）是Linux为显示设备提供的一个接口，把显存抽象后的一种设备，他允许上层应用程序在图形模式下直接对显示缓冲区进行读写操作。这种操作是抽象的，统一的。用户不必关心物理显存的位置、换页机制等等具体细节。这些都是由Framebuffer设备驱动来完成的。
+> > Linux为了开发FrameBuffer程序的方便，使用了分层结构。fbmem.c处于Framebuffer设备驱动技术的中心位置。它为上层应用程序提供系统调用，也为下一层的特定硬件驱动提供接口；那些底层硬件驱动需要用到这儿的接口来向系统内核注册它们自己  其中文件s3c2410fb.c就是特定硬件驱动(针对s3c2410芯片的),fbmem.c就是沟通应用层跟s3c2410fb.c的桥梁
+> > ![http://www.dzjs.net/upimg/userup/0907/01102110Y24.jpg](http://www.dzjs.net/upimg/userup/0907/01102110Y24.jpg)
+  * framebuffer中主要结构体介绍
+> > 结构体fb\_info   位于 kernel/include/linux/fb.h ，fb\_info中纪录了帧缓冲设备的全部信息，包括设备的设置参数，状态以及操作函数指针。每一个帧缓冲设备都必须对应一个fb\_info结构 还记得在 s3c2410fb\_probe 这个函数吗  在这个函数中我们所作的主要工作就是填充结构体 fb\_info 结构体
+```
+struct fb_info {
+	int node;
+       //其中node成员域标示了特定的FrameBuffer，实际上也就是一个FrameBuffer设备的次设备号
+	int flags;
+	struct fb_var_screeninfo var;	/* Current var */
+	struct fb_fix_screeninfo fix;	/* Current fix */
+	struct fb_monspecs monspecs;	/* Current Monitor specs */
+	struct work_struct queue;	/* Framebuffer event queue */
+	struct fb_pixmap pixmap;	/* Image hardware mapper */
+	struct fb_pixmap sprite;	/* Cursor hardware mapper */
+	struct fb_cmap cmap;		/* Current cmap */
+	struct list_head modelist;      /* mode list */
+	struct fb_videomode *mode;	/* current mode */
+
+#ifdef CONFIG_FB_BACKLIGHT
+	/* assigned backlight device */
+	/* set before framebuffer registration, 
+	   remove after unregister */
+	struct backlight_device *bl_dev;
+
+	/* Backlight level curve */
+	struct mutex bl_curve_mutex;	
+	u8 bl_curve[FB_BACKLIGHT_LEVELS];
+#endif
+#ifdef CONFIG_FB_DEFERRED_IO
+	struct delayed_work deferred_work;
+	struct fb_deferred_io *fbdefio;
+#endif
+
+	struct fb_ops *fbops;
+       //fbops为指向底层操作的函数的指针
+	struct device *device;		/* This is the parent */
+	struct device *dev;		/* This is this fb device */
+	int class_flag;                    /* private sysfs flags */
+#ifdef CONFIG_FB_TILEBLITTING
+	struct fb_tile_ops *tileops;    /* Tile Blitting */
+#endif
+	char __iomem *screen_base;	/* Virtual address */
+	unsigned long screen_size;	/* Amount of ioremapped VRAM or 0 */ 
+	void *pseudo_palette;		/* Fake palette of 16 colors */ 
+#define FBINFO_STATE_RUNNING	0
+#define FBINFO_STATE_SUSPENDED	1
+	u32 state;			/* Hardware state i.e suspend */
+	void *fbcon_par;                /* fbcon use-only private area */
+	/* From here on everything is device dependent */
+	void *par;	
+};
+```
+  * fb\_var\_screeninfo 结构体
+> > fb\_var\_screeninfo结构体成员记录用户可修改的显示控制器参数，包括屏幕分辨率和每个像素点的比特数  fb\_var\_screeninfo中的xres定义屏幕一行有多少个点, yres定义屏幕一列有多少个点,bits\_per\_pixel定义每个点用多少个字节表示  定义如下：
+```
+struct fb_var_screeninfo {
+	__u32 xres;			/* visible resolution		*/
+	__u32 yres;
+	__u32 xres_virtual;		/* virtual resolution		*/
+	__u32 yres_virtual;
+	__u32 xoffset;			/* offset from virtual to visible */
+	__u32 yoffset;			/* resolution			*/
+
+	__u32 bits_per_pixel;		/* guess what			*/
+	__u32 grayscale;		/* != 0 Graylevels instead of colors */
+
+	struct fb_bitfield red;		/* bitfield in fb mem if true color, */
+	struct fb_bitfield green;	/* else only length is significant */
+	struct fb_bitfield blue;
+	struct fb_bitfield transp;	/* transparency			*/	
+
+	__u32 nonstd;			/* != 0 Non standard pixel format */
+
+	__u32 activate;			/* see FB_ACTIVATE_*		*/
+
+	__u32 height;			/* height of picture in mm    */
+	__u32 width;			/* width of picture in mm     */
+
+	__u32 accel_flags;		/* (OBSOLETE) see fb_info.flags */
+
+	/* Timing: All values in pixclocks, except pixclock (of course) */
+	__u32 pixclock;			/* pixel clock in ps (pico seconds) */
+	__u32 left_margin;		/* time from sync to picture	*/
+	__u32 right_margin;		/* time from picture to sync	*/
+	__u32 upper_margin;		/* time from sync to picture	*/
+	__u32 lower_margin;
+	__u32 hsync_len;		/* length of horizontal sync	*/
+	__u32 vsync_len;		/* length of vertical sync	*/
+	__u32 sync;			/* see FB_SYNC_*		*/
+	__u32 vmode;			/* see FB_VMODE_*		*/
+	__u32 rotate;			/* angle we rotate counter clockwise */
+	__u32 reserved[5];		/* Reserved for future compatibility */
+};
+```
+  * fb\_fix\_screeninfo 结构体   kernel/include/linux/fb.h
+> > fb\_fix\_screeninfo中记录用户不能修改的显示控制器的参数，如屏幕缓冲区的 物理地址，长度。当对帧缓冲设备进行映射操作的时候，就是从fb\_fix\_screeninfo中取得缓冲区物理地址的  结构体如下：
+```
+struct fb_fix_screeninfo {
+	char id[16];			/* identification string eg "TT Builtin" */
+	unsigned long smem_start;	/* Start of frame buffer mem */
+					/* (physical address) */
+	__u32 smem_len;			/* Length of frame buffer mem */
+	__u32 type;			/* see FB_TYPE_*		*/
+	__u32 type_aux;			/* Interleave for interleaved Planes */
+	__u32 visual;			/* see FB_VISUAL_*		*/ 
+	__u16 xpanstep;			/* zero if no hardware panning  */
+	__u16 ypanstep;			/* zero if no hardware panning  */
+	__u16 ywrapstep;		/* zero if no hardware ywrap    */
+	__u32 line_length;		/* length of a line in bytes    */
+	unsigned long mmio_start;	/* Start of Memory Mapped I/O   */
+					/* (physical address) */
+	__u32 mmio_len;			/* Length of Memory Mapped I/O  */
+	__u32 accel;			/* Indicate to driver which	*/
+					/*  specific chip/card we have	*/
+	__u16 reserved[3];		/* Reserved for future compatibility */
+};
+```
+  * s3c2410fb\_info 结构体  drivers/vedio/s3c2410fb.h   结构体如下：
+```
+struct s3c2410fb_info {
+	struct device		*dev;
+	struct clk		*clk;
+
+	struct resource		*mem;
+	void __iomem		*io;
+	void __iomem		*irq_base;
+
+	enum s3c_drv_type	drv_type;
+	struct s3c2410fb_hw	regs;
+
+	unsigned int		palette_ready;
+
+	/* keep these registers in case we need to re-write palette */
+	u32			palette_buffer[256];
+	u32			pseudo_pal[16];
+};
+```
+  * s3c2410fb\_mach\_info 结构体      kernel/include/asm-arm/arch-s3c2410/fb.h
+> > 从字面上我们不难看出 和具体的硬件有关  结构体定义如下：
+```
+struct s3c2410fb_mach_info {
+
+	struct s3c2410fb_display *displays;	/* attached diplays info */
+	unsigned num_displays;			/* number of defined displays */
+	unsigned default_display;
+
+	/* GPIOs */
+
+	unsigned long	gpcup;
+	unsigned long	gpcup_mask;
+	unsigned long	gpccon;
+	unsigned long	gpccon_mask;
+	unsigned long	gpdup;
+	unsigned long	gpdup_mask;
+	unsigned long	gpdcon;
+	unsigned long	gpdcon_mask;
+
+	/* lpc3600 control register */
+	unsigned long	lpcsel;
+};
+```
+```
+/* LCD description */
+struct s3c2410fb_display {
+	/* LCD type */
+	unsigned type;
+
+	/* Screen size */
+	unsigned short width;
+	unsigned short height;
+
+	/* Screen info */
+	unsigned short xres;
+	unsigned short yres;
+	unsigned short bpp;
+
+	unsigned pixclock;		/* pixclock in picoseconds */
+	unsigned short left_margin;  /* value in pixels (TFT) or HCLKs (STN) */
+	unsigned short right_margin; /* value in pixels (TFT) or HCLKs (STN) */
+	unsigned short hsync_len;    /* value in pixels (TFT) or HCLKs (STN) */
+	unsigned short upper_margin;	/* value in lines (TFT) or 0 (STN) */
+	unsigned short lower_margin;	/* value in lines (TFT) or 0 (STN) */
+	unsigned short vsync_len;	/* value in lines (TFT) or 0 (STN) */
+
+	/* lcd configuration registers */
+	unsigned long	lcdcon5;
+};
+```
+看到这个结构体应该不陌生  我们在lcd驱动移植步骤的第二步 就是填充了这个结构体 这个结构体和具体的硬件有关

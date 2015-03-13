@@ -1,0 +1,671 @@
+# Introduction #
+
+## 一、busybox的安装 ##
+> busybox可以自己定制也可以从网上下现成的可执行程序，我是从网上找了一个针对Android文件系统的可执行的busybox[busybox获取](http://benno.id.au/blog/2007/11/14/android-busybox)，将其下载到/home/zhaoruijia/Androidsdk/android-sdk-linux\_86/tools这个目录下，然后打开模拟器，接着打开一个终端进入这个目录，
+
+1、将busybox可执行文件拷贝到模拟器中
+```
+zhaoruijia@zhaoruijia-ubunut:~/Androidsdk/android-sdk-linux_86/tools$ adb push busybox /data/local/busybox
+```
+2、运行模拟器的shell以便我们可以用到模拟器的命令
+```
+zhaoruijia@zhaoruijia-ubunut:~/Androidsdk/android-sdk-linux_86/tools$ adb shell
+```
+3、让自己成为su用户
+```
+# su
+```
+4、
+```
+# cd /data/local
+# ls
+busybox
+tmp
+```
+5、改变busybox的权限以便任何人都可以读取和执行，但是只有拥有者才能修改
+```
+chmod 755 busybox
+```
+6、运行busybox脚本
+```
+# ./busybox
+BusyBox v1.15.3 (2009-12-13 23:28:29 CET) multi-call binary
+Copyright (C) 1998-2008 Erik Andersen, Rob Landley, Denys Vlasenko
+and others. Licensed under GPLv2.
+See source distribution for full notice.
+
+Usage: busybox [function] [arguments]...
+   or: function [arguments]...
+
+	BusyBox is a multi-call binary that combines many common Unix
+	utilities into a single executable.  Most people will create a
+	link to busybox for each function they wish to use and BusyBox
+	will act like whatever it was invoked as!
+
+Currently defined functions:
+	[, [[, arping, ash, awk, basename, bbconfig, bunzip2, bzcat, bzip2,
+	cat, catv, chattr, chgrp, chmod, chown, chroot, chrt, cksum, clear,
+	cmp, cp, cpio, cut, date, dc, dd, depmod, devmem, df, diff, dirname,
+	dmesg, dnsd, dnsdomainname, dos2unix, du, echo, egrep, env, ether-wake,
+	expr, false, fbset, fbsplash, fdisk, fgrep, find, fold, free,
+	freeramdisk, fsck, fuser, getopt, grep, gunzip, gzip, head, hexdump,
+	hostname, ifconfig, insmod, install, ip, ipaddr, ipcalc, iplink,
+	iproute, iprule, iptunnel, kill, killall, killall5, last, length, less,
+	ln, losetup, ls, lsattr, lsmod, md5sum, mkdir, mkdosfs, mkfifo,
+	mkfs.vfat, mknod, mkswap, mktemp, modprobe, more, mount, mountpoint,
+	mv, nc, netstat, nice, nmeter, nohup, nslookup, od, patch, pidof, ping,
+	pipe_progress, printenv, printf, ps, pscan, pwd, rdev, readlink,
+	realpath, renice, reset, resize, rm, rmdir, rmmod, route, sed, seq,
+	setconsole, setlogcons, setsid, sh, sha1sum, showkey, sleep, sort,
+	split, stat, strings, stty, sum, swapoff, swapon, switch_root, sync,
+	sysctl, tac, tail, tar, tcpsvd, tee, telnet, telnetd, test, tftp, time,
+	top, touch, tr, traceroute, true, tty, tunctl, udpsvd, umount, uname,
+	uncompress, uniq, unix2dos, unzip, uptime, usleep, uudecode, uuencode,
+	vi, watch, wc, wget, which, who, whoami, xargs, yes, zcat
+
+
+```
+说明修改成功
+
+7、加载 mtdblock4 和 System filesystems
+```
+# mount -o remount,rw -t yaffs2 /dev/block/mtdblock4 /system
+```
+8、将busybox可执行文件拷贝到xbin目录下
+```
+# /data/local/busybox cp /data/local/busybox /system/xbin
+```
+9、将busybox可执行文件拷贝到bin目录下
+```
+# /data/local/busybox cp /data/local/busybox /system/bin
+```
+10、进入到xbin目录下进行安装
+```
+# cd /system/xbin
+# busybox --install .
+```
+11、卸载mtdblock4 和 System filesystems这两个以后不再用了
+```
+# mount -o ro,remount -t yaffs2 /dev/block/mtdblock4 /system
+```
+
+这样busybox就安装到模拟器里了，接下来我们要从模拟器中提取system.tar和data.tar这两个文件以便我们可以制作根文件系统。
+
+## 二、system.tar和data.tar文件的提取 ##
+1、首先应该确认哪个目录下空间最大，因为system.tar很大如果随便进入一个目录到最后会说空间不足，所以运行
+```
+# df
+/dev: 47084K total, 0K used, 47084K available (block size 4096)
+/sqlite_stmt_journals: 4096K total, 0K used, 4096K available (block size 4096)
+/system: 65536K total, 56768K used, 8768K available (block size 4096)
+/data: 65536K total, 19396K used, 46140K available (block size 4096)
+/cache: 65536K total, 1156K used, 64380K available (block size 4096)
+```
+可以看到/cache这个目录空间最大所以我们进入这个空间
+2、进入这个目录并打包
+```
+# cd /cache
+# busybox tar cvf system.tar /system
+system/lib/libopencore_downloadreg.so
+system/lib/invoke_mock_media_player.so
+system/lib/libwebcore.so
+system/lib/libreference-ril.so
+system/lib/libexpat.so
+system/lib/libxml2wbxml.so
+system/lib/libcutils.so
+system/lib/libopencore_streaming.so
+system/lib/libicuuc.so
+system/lib/libomx_avcenc_sharedlibrary.so
+system/lib/libicudata.so
+system/lib/libnetutils.so
+system/lib/libreference-cdma-sms.so
+system/lib/libm.so
+system/lib/libaudioflinger.so
+system/lib/libGLESv2.so
+system/lib/libsystem_server.so
+system/lib/libomx_sharedlibrary.so
+system/lib/libnativehelper.so
+system/lib/libssl.so
+system/lib/libaudiopolicygeneric.so
+system/lib/libz.so
+system/lib/libpvrtsptunicast_streamingreg.so
+system/lib/libttssynthproxy.so
+system/lib/libdrm1_jni.so
+system/lib/libsrec_jni.so
+system/lib/libopencore_player.so
+system/lib/libopencore_download.so
+system/lib/libbinder.so
+system/lib/libopencore_author.so
+system/lib/libEGL.so
+system/lib/libttspico.so
+system/lib/libopencore_net_support.so
+system/lib/libomx_m4venc_sharedlibrary.so
+system/lib/libstagefright_omx.so
+system/lib/libstagefright.so
+system/lib/libpvrtspunicast_streamingreg.so
+system/lib/libui.so
+system/lib/libdbus.so
+system/lib/libFFTEm.so
+system/lib/libaes.so
+system/lib/libpvrtsptunicast_streaming.so
+system/lib/libGLESv1_CM.so
+system/lib/libopencore_mp4local.so
+system/lib/libmediaplayerservice.so
+system/lib/libthread_db.so
+system/lib/libjni_pinyinime.so
+system/lib/libsqlite.so
+system/lib/libicui18n.so
+system/lib/libskia.so
+system/lib/egl/
+system/lib/egl/libGLES_android.so
+system/lib/libomx_amrdec_sharedlibrary.so
+system/lib/liblog.so
+system/lib/libhardware.so
+system/lib/libcameraservice.so
+system/lib/libstdc++.so
+system/lib/libopencore_rtsp.so
+system/lib/libsurfaceflinger.so
+system/lib/libpvrtspunicast_streaming.so
+system/lib/libomx_aacdec_sharedlibrary.so
+system/lib/libctest.so
+system/lib/libhardware_legacy.so
+system/lib/libandroid_runtime.so
+system/lib/libc_debug.so
+system/lib/libcrypto.so
+system/lib/libdl.so
+system/lib/libsonivox.so
+system/lib/libemoji.so
+system/build.prop
+system/xbin/
+system/xbin/zcat
+system/xbin/yes
+system/xbin/xargs
+system/xbin/whoami
+system/xbin/who
+system/xbin/which
+system/xbin/wget
+system/xbin/wc
+system/xbin/watch
+system/xbin/vi
+system/xbin/uuencode
+system/xbin/uudecode
+system/xbin/usleep
+system/xbin/uptime
+system/xbin/unzip
+system/xbin/unix2dos
+system/xbin/uniq
+system/xbin/uncompress
+system/xbin/uname
+system/xbin/umount
+system/xbin/udpsvd
+system/xbin/tunctl
+system/xbin/tty
+system/xbin/true
+system/xbin/traceroute
+system/xbin/tr
+system/xbin/touch
+system/xbin/top
+system/xbin/time
+system/xbin/tftp
+system/xbin/test
+system/xbin/telnetd
+system/xbin/telnet
+system/xbin/tee
+system/xbin/tcpsvd
+system/xbin/tar
+system/xbin/tail
+system/xbin/tac
+system/xbin/sysctl
+system/xbin/sync
+system/xbin/switch_root
+system/xbin/swapon
+system/xbin/swapoff
+system/xbin/sum
+system/xbin/stty
+system/xbin/strings
+system/xbin/stat
+system/xbin/split
+system/xbin/sort
+system/xbin/sleep
+system/xbin/showkey
+system/xbin/sha1sum
+system/xbin/sh
+system/xbin/setsid
+system/xbin/setlogcons
+system/xbin/setconsole
+system/xbin/seq
+system/xbin/sed
+system/xbin/route
+system/xbin/rmmod
+system/xbin/rmdir
+system/xbin/rm
+system/xbin/resize
+system/xbin/reset
+system/xbin/renice
+system/xbin/realpath
+system/xbin/readlink
+system/xbin/rdev
+system/xbin/pwd
+system/xbin/pscan
+system/xbin/ps
+system/xbin/printf
+system/xbin/printenv
+system/xbin/pipe_progress
+system/xbin/ping
+system/xbin/pidof
+system/xbin/patch
+system/xbin/od
+system/xbin/nslookup
+system/xbin/nohup
+system/xbin/nmeter
+system/xbin/nice
+system/xbin/netstat
+system/xbin/mv
+system/xbin/mountpoint
+system/xbin/mount
+system/xbin/more
+system/xbin/modprobe
+system/xbin/mktemp
+system/xbin/mkswap
+system/xbin/mknod
+system/xbin/mkfs.vfat
+system/xbin/mkfifo
+system/xbin/mkdosfs
+system/xbin/mkdir
+system/xbin/md5sum
+system/xbin/lsmod
+system/xbin/lsattr
+system/xbin/ls
+system/xbin/losetup
+system/xbin/ln
+system/xbin/less
+system/xbin/length
+system/xbin/last
+system/xbin/killall5
+system/xbin/killall
+system/xbin/kill
+system/xbin/iptunnel
+system/xbin/iprule
+system/xbin/iproute
+system/xbin/iplink
+system/xbin/ipcalc
+system/xbin/ipaddr
+system/xbin/ip
+system/xbin/install
+system/xbin/insmod
+system/xbin/ifconfig
+system/xbin/hostname
+system/xbin/hexdump
+system/xbin/head
+system/xbin/gzip
+system/xbin/gunzip
+system/xbin/grep
+system/xbin/getopt
+system/xbin/fuser
+system/xbin/fsck
+system/xbin/freeramdisk
+system/xbin/free
+system/xbin/fold
+system/xbin/find
+system/xbin/fgrep
+system/xbin/fdisk
+system/xbin/fbsplash
+system/xbin/fbset
+system/xbin/false
+system/xbin/expr
+system/xbin/ether-wake
+system/xbin/env
+system/xbin/egrep
+system/xbin/echo
+system/xbin/du
+system/xbin/dos2unix
+system/xbin/dnsdomainname
+system/xbin/dnsd
+system/xbin/dmesg
+system/xbin/dirname
+system/xbin/diff
+system/xbin/df
+system/xbin/devmem
+system/xbin/depmod
+system/xbin/dd
+system/xbin/dc
+system/xbin/date
+system/xbin/cut
+system/xbin/cpio
+system/xbin/cp
+system/xbin/cmp
+system/xbin/clear
+system/xbin/cksum
+system/xbin/chrt
+system/xbin/chroot
+system/xbin/chown
+system/xbin/chmod
+system/xbin/chgrp
+system/xbin/chattr
+system/xbin/catv
+system/xbin/cat
+system/xbin/bzip2
+system/xbin/bzcat
+system/xbin/bunzip2
+system/xbin/bbconfig
+system/xbin/basename
+system/xbin/awk
+system/xbin/ash
+system/xbin/arping
+system/xbin/[[
+system/xbin/[
+system/xbin/busybox
+system/xbin/librank
+system/xbin/showslab
+system/xbin/scp
+system/xbin/cpueater
+system/xbin/dexdump
+system/xbin/procrank
+system/xbin/su
+system/xbin/nc
+system/xbin/crasher
+system/xbin/add-property-tag
+system/xbin/showmap
+system/xbin/opcontrol
+system/xbin/latencytop
+system/xbin/dbus-monitor
+system/xbin/netperf
+system/xbin/tcpdump
+system/xbin/check-lost+found
+system/xbin/oprofiled
+system/xbin/timeinfo
+system/xbin/daemonize
+system/xbin/dbus-send
+system/xbin/ssh
+system/xbin/netserver
+system/xbin/btool
+system/xbin/strace
+system/xbin/procmem
+system/xbin/sqlite3
+system/etc/
+system/etc/NOTICE.html.gz
+system/etc/pvplayer.cfg
+system/etc/dbus.conf
+system/etc/apns-conf.xml
+system/etc/event-log-tags
+system/etc/bookmarks.xml
+system/etc/ppp/
+system/etc/ppp/ip-up-vpn
+system/etc/dhcpcd/
+system/etc/dhcpcd/dhcpcd-hooks/
+system/etc/dhcpcd/dhcpcd-hooks/95-configured
+system/etc/dhcpcd/dhcpcd-hooks/20-dns.conf
+system/etc/dhcpcd/dhcpcd-hooks/01-test
+system/etc/dhcpcd/dhcpcd-run-hooks
+system/etc/hosts
+system/etc/vold.conf
+system/etc/init.goldfish.sh
+system/etc/permissions/
+system/etc/permissions/platform.xml
+system/etc/permissions/required_hardware.xml
+system/etc/security/
+system/etc/security/otacerts.zip
+system/etc/security/cacerts.bks
+system/bin/
+system/bin/busybox
+system/bin/mv
+system/bin/pm
+system/bin/top
+system/bin/system_server
+system/bin/mkdir
+system/bin/ping
+system/bin/ime
+system/bin/lsmod
+system/bin/dumpstate
+system/bin/surfaceflinger
+system/bin/chown
+system/bin/schedtop
+system/bin/mount
+system/bin/bmgr
+system/bin/watchprops
+system/bin/rmdir
+system/bin/reboot
+system/bin/renice
+system/bin/ls
+system/bin/keystore_cli
+system/bin/cmp
+system/bin/fsck_msdos
+system/bin/ln
+system/bin/input
+system/bin/applypatch
+system/bin/dumpcrash
+system/bin/log
+system/bin/setprop
+system/bin/dalvikvm
+system/bin/dumpsys
+system/bin/debuggerd
+system/bin/sh
+system/bin/flash_image
+system/bin/cat
+system/bin/netstat
+system/bin/smd
+system/bin/newfs_msdos
+system/bin/svc
+system/bin/recovery
+system/bin/dhcpcd
+system/bin/dexopt
+system/bin/chmod
+system/bin/hd
+system/bin/notify
+system/bin/netcfg
+system/bin/printenv
+system/bin/sync
+system/bin/service
+system/bin/ifconfig
+system/bin/ioctl
+system/bin/sleep
+system/bin/vmstat
+system/bin/servicemanager
+system/bin/installd
+system/bin/dvz
+system/bin/sdutil
+system/bin/am
+system/bin/gzip
+system/bin/racoon
+system/bin/setconsole
+system/bin/route
+system/bin/rmmod
+system/bin/qemud
+system/bin/id
+system/bin/insmod
+system/bin/updater
+system/bin/mediaserver
+system/bin/kill
+system/bin/date
+system/bin/dmesg
+system/bin/toolbox
+system/bin/df
+system/bin/monkey
+system/bin/getevent
+system/bin/rild
+system/bin/start
+system/bin/dd
+system/bin/umount
+system/bin/bugreport
+system/bin/dbus-daemon
+system/bin/bootanimation
+system/bin/check_prereq
+system/bin/applypatch_static
+system/bin/iptables
+system/bin/showlease
+system/bin/schedtest
+system/bin/logwrapper
+system/bin/iftop
+system/bin/wipe
+system/bin/sendevent
+system/bin/linker
+system/bin/stop
+system/bin/ps
+system/bin/getprop
+system/bin/gdbserver
+system/bin/rm
+system/bin/radiooptions
+system/bin/vold
+system/bin/keystore
+system/bin/logcat
+system/bin/pppd
+system/bin/qemu-props
+system/bin/app_process
+system/bin/mtpd
+system/framework/
+system/framework/framework.jar
+system/framework/android.policy.jar
+system/framework/ime.jar
+system/framework/javax.obex.jar
+system/framework/svc.jar
+system/framework/framework-res.apk
+system/framework/core.jar
+system/framework/framework-tests.jar
+system/framework/services.jar
+system/framework/pm.jar
+system/framework/monkey.jar
+system/framework/android.test.runner.jar
+system/framework/ext.jar
+system/framework/bmgr.jar
+system/framework/am.jar
+system/framework/input.jar
+system/fonts/
+system/fonts/DroidSansMono.ttf
+system/fonts/Clockopia.ttf
+system/fonts/DroidSerif-Regular.ttf
+system/fonts/DroidSans-Bold.ttf
+system/fonts/DroidSansFallback.ttf
+system/fonts/DroidSerif-Italic.ttf
+system/fonts/DroidSerif-BoldItalic.ttf
+system/fonts/DroidSerif-Bold.ttf
+system/fonts/DroidSans.ttf
+system/usr/
+system/usr/keylayout/
+system/usr/keylayout/AVRCP.kl
+system/usr/keylayout/qwerty.kl
+system/usr/keylayout/tuttle2.kl
+system/usr/share/
+system/usr/share/bmd/
+system/usr/share/bmd/RFFstd_501.bmd
+system/usr/share/bmd/RFFspeed_501.bmd
+system/usr/share/zoneinfo/
+system/usr/share/zoneinfo/zoneinfo.idx
+system/usr/share/zoneinfo/zoneinfo.version
+system/usr/share/zoneinfo/zoneinfo.dat
+system/usr/keychars/
+system/usr/keychars/qwerty.kcm.bin
+system/usr/keychars/qwerty2.kcm.bin
+system/usr/keychars/tuttle2.kcm.bin
+system/usr/srec/
+system/usr/srec/config/
+system/usr/srec/config/en.us/
+system/usr/srec/config/en.us/baseline8k.par
+system/usr/srec/config/en.us/baseline.par
+system/usr/srec/config/en.us/models/
+system/usr/srec/config/en.us/models/generic11.lda
+system/usr/srec/config/en.us/models/generic11_m.swimdl
+system/usr/srec/config/en.us/models/generic11_f.swimdl
+system/usr/srec/config/en.us/models/generic8_f.swimdl
+system/usr/srec/config/en.us/models/generic8.lda
+system/usr/srec/config/en.us/models/generic8_m.swimdl
+system/usr/srec/config/en.us/models/generic.swiarb
+system/usr/srec/config/en.us/baseline11k.par
+system/usr/srec/config/en.us/g2p/
+system/usr/srec/config/en.us/g2p/en-US-ttp.data
+system/usr/srec/config/en.us/grammars/
+system/usr/srec/config/en.us/grammars/VoiceDialer.g2g
+system/usr/srec/config/en.us/dictionary/
+system/usr/srec/config/en.us/dictionary/enroll.ok
+system/usr/srec/config/en.us/dictionary/cmu6plus.ok.zip
+system/usr/srec/config/en.us/dictionary/basic.ok
+system/app/
+system/app/UserDictionaryProvider.apk
+system/app/Calendar.apk
+system/app/Development.apk
+system/app/SoundRecorder.apk
+system/app/SettingsProvider.apk
+system/app/GlobalSearch.apk
+system/app/Gallery.apk
+system/app/CalendarProvider.apk
+system/app/HTMLViewer.apk
+system/app/VpnServices.apk
+system/app/AccountAndSyncSettings.apk
+system/app/Music.apk
+system/app/SpareParts.apk
+system/app/Browser.apk
+system/app/Contacts.apk
+system/app/GoogleSearch.apk
+system/app/Mms.apk
+system/app/DrmProvider.apk
+system/app/DownloadProvider.apk
+system/app/Phone.apk
+system/app/ContactsProvider.apk
+system/app/CertInstaller.apk
+system/app/TelephonyProvider.apk
+system/app/Term.apk
+system/app/TtsService.apk
+system/app/Calculator.apk
+system/app/Launcher.apk
+system/app/Bluetooth.apk
+system/app/AlarmClock.apk
+system/app/LatinIME.apk
+system/app/PicoTts.apk
+system/app/Email.apk
+system/app/Camera.apk
+system/app/PackageInstaller.apk
+system/app/MediaProvider.apk
+system/app/Settings.apk
+system/app/ApplicationsProvider.apk
+system/lost+found/
+#
+# ls
+system.tar
+lost+found
+# 
+```
+接着输入
+```
+# busybox tar cvf /data.tar /data
+```
+3、将tarball文件从模拟器中拖出来
+```
+# adb pull system.tar /system.tar
+# adb pull data.tar /data.ta
+```
+4、新建一个文件夹android\_rootfs
+```
+# mkdir android_rootfs
+# cd android_rootfs
+```
+5、将system.tar和data.tar解压到此目录下
+```
+# tar xf ~/android/system.tar
+```
+6、将ramdisk.img解压到android\_rootfs目录下
+```
+# cp ramdisk.img ramdisk.gz
+# gunzip ramdisk.gz
+# cd android_rootfs
+# cpio -iv < ../ramdisk
+```
+
+## 三、制作自己的system.img镜像 ##
+
+1、去[yaffs2制作工具](http://www.aleph1.co.uk/cgi-bin/viewcvs.cgi/yaffs2/)这个网站下载制作yaffs2文件系统的工具
+
+2、进入utils文件夹下运行make生成mkyaffs2image工具
+
+3、将刚才从模拟器中脱出来的文件解压后放到～/workspace1目录下，进入system/app中删掉AlarmClock.apk进行试验性剪裁。
+
+4、输入命令
+```
+zhaoruijia@zhaoruijia-ubunut:~/work/yaffs2/utils$ ./mkyaffs2image  ~/workspace1/system system.img
+```
+在/utils文件夹下生成system.img
+
+5、将这个镜像文件拷贝到/home/zhaoruijia/zhaoAndroid/out/target/product/generic目录下替换原有的文件
+
+6、运行模拟器发现运行成功
+
+
+（待续）
